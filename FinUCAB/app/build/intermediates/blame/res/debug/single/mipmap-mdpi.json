@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Aquiles\\FinUCAB\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\ic_launcher_round.png",
+        "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Aquiles\\FinUCAB\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Aquiles\\FinUCAB\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\ic_flecha.png",
+        "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Aquiles\\FinUCAB\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\ic_flecha.png"
+    },
+    {
+        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Aquiles\\FinUCAB\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\ic_launcher.png",
+        "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Aquiles\\FinUCAB\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
+    }
+]
