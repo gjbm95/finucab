@@ -696,10 +696,10 @@
     <string name="app_name">FinUCAB</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
     <string name="bottom_sheet_behavior" translatable="false">android.support.design.widget.BottomSheetBehavior</string>
-    <string name="budget">Budget</string>
+    <string name="budget"> Presupuestos</string>
     <string name="categoria">Categoría</string>
     <string name="categoria_prompt">Indique la Categoria</string>
-    <string name="category">Category</string>
+    <string name="category"> Categorias</string>
     <string name="character_counter_pattern" translatable="false">%1$d / %2$d</string>
     <string name="forgot_password">¿Olvidó su contraseña?</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -716,11 +716,14 @@
     <string name="path_password_eye_mask_strike_through" translatable="false">M2,4.27 L19.73,22 L22.27,19.46 L4.54,1.73 L4.54,1 L23,1 L23,23 L1,23 L1,4.27 Z</string>
     <string name="path_password_eye_mask_visible" translatable="false">M2,4.27 L2,4.27 L4.54,1.73 L4.54,1.73 L4.54,1 L23,1 L23,23 L1,23 L1,4.27 Z</string>
     <string name="path_password_strike_through" translatable="false">M3.27,4.27 L19.74,20.74</string>
-    <string name="payment">Pagos</string>
+    <string name="payment"> Pagos</string>
+    <string name="pays"> Pagos</string>
     <string name="recurrente">Recurrente</string>
     <string name="search_menu_title">Search</string>
+    <string name="settings"> Configuracion</string>
     <string name="sign_in">Ingresar</string>
     <string name="sign_up">Registrarse</string>
+    <string name="singout"> Cerrar Sesion</string>
     <string name="status_bar_notification_info_overflow">999+</string>
     <string name="title_activity_pre">Pre</string>
     <string name="titulo_tab_ganancias">GANANCIAS</string>
@@ -737,7 +740,7 @@
         <item name="android:windowEnterAnimation">@anim/design_bottom_sheet_slide_in</item>
         <item name="android:windowExitAnimation">@anim/design_bottom_sheet_slide_out</item>
     </style>
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
         
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>

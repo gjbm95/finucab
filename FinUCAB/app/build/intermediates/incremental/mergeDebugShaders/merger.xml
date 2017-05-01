@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="C:\Users\Oswaldo\Documents\AndroidStudoProjects\Aquiles\FinUCAB\FinUCAB\app\src\main\shaders"/></dataSet><dataSet config="debug"><source path="C:\Users\Oswaldo\Documents\AndroidStudoProjects\Aquiles\FinUCAB\FinUCAB\app\src\debug\shaders"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="C:\FinUCAB(Karen)\FinUCAB\app\src\main\shaders"/></dataSet><dataSet config="debug"><source path="C:\FinUCAB(Karen)\FinUCAB\app\src\debug\shaders"/></dataSet></merger>
