@@ -1,0 +1,101 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\FinUCAB(Karen)\FinUCAB\app\src\main\AndroidManifest.xml:2:1-23:12
+	package
+		ADDED from C:\FinUCAB(Karen)\FinUCAB\app\src\main\AndroidManifest.xml:3:5-35
+		INJECTED from C:\FinUCAB(Karen)\FinUCAB\app\src\main\AndroidManifest.xml
+		INJECTED from C:\FinUCAB(Karen)\FinUCAB\app\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from C:\FinUCAB(Karen)\FinUCAB\app\src\main\AndroidManifest.xml
+		INJECTED from C:\FinUCAB(Karen)\FinUCAB\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\FinUCAB(Karen)\FinUCAB\app\src\main\AndroidManifest.xml:2:11-69
+	android:versionCode
+		INJECTED from C:\FinUCAB(Karen)\FinUCAB\app\src\main\AndroidManifest.xml
+		INJECTED from C:\FinUCAB(Karen)\FinUCAB\app\src\main\AndroidManifest.xml
+application
+ADDED from C:\FinUCAB(Karen)\FinUCAB\app\src\main\AndroidManifest.xml:5:5-21:19
+MERGED from [com.android.support:design:25.3.1] C:\Users\Junior\.android\build-cache\db275bfa44eef075a834d3b7c6cc31b29b67b919\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\Junior\.android\build-cache\eb5d5070fc894083c51fb88af2525637b506d1ca\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\Junior\.android\build-cache\134c14e83dce9e750d1f57626e39f5ba3c9ee1b3\output\AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\Junior\.android\build-cache\b5cad16ba6ba200c6fb237901c60afda865a1690\output\AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:transition:25.3.1] C:\Users\Junior\.android\build-cache\6989c466d5c1b048329e99962c882cf6462c1e28\output\AndroidManifest.xml:26:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Junior\.android\build-cache\c8436a5f9a295b3f3d2149741f89617ca4607600\output\AndroidManifest.xml:9:5-20
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\Junior\.android\build-cache\e9827643fd96375a9d28f389c63110d8562226fa\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\Junior\.android\build-cache\322ffd6430bdf6221455a144094bb96a89d3bb9b\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\Junior\.android\build-cache\a0a5d7c80695a1a8ab6f326436bbd1ec9dd8a81e\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\Junior\.android\build-cache\a35c57cc5ee19719971675408f363ce0defe1cf6\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\Junior\.android\build-cache\f4265fb43aff705449dd23d70d80240800915443\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\Junior\.android\build-cache\214ca87743c25024e077c0ed14954064ed24b398\output\AndroidManifest.xml:29:5-20
+	android:label
+		ADDED from C:\FinUCAB(Karen)\FinUCAB\app\src\main\AndroidManifest.xml:8:9-41
+	android:supportsRtl
+		ADDED from C:\FinUCAB(Karen)\FinUCAB\app\src\main\AndroidManifest.xml:10:9-35
+	android:roundIcon
+		ADDED from C:\FinUCAB(Karen)\FinUCAB\app\src\main\AndroidManifest.xml:9:9-42
+	android:allowBackup
+		ADDED from C:\FinUCAB(Karen)\FinUCAB\app\src\main\AndroidManifest.xml:6:9-35
+	android:icon
+		ADDED from C:\FinUCAB(Karen)\FinUCAB\app\src\main\AndroidManifest.xml:7:9-37
+	android:theme
+		ADDED from C:\FinUCAB(Karen)\FinUCAB\app\src\main\AndroidManifest.xml:11:9-40
+activity#com.ucab.fin.finucab.activity.LoginActivity
+ADDED from C:\FinUCAB(Karen)\FinUCAB\app\src\main\AndroidManifest.xml:12:9-18:20
+	android:name
+		ADDED from C:\FinUCAB(Karen)\FinUCAB\app\src\main\AndroidManifest.xml:12:19-57
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from C:\FinUCAB(Karen)\FinUCAB\app\src\main\AndroidManifest.xml:13:13-17:29
+action#android.intent.action.MAIN
+ADDED from C:\FinUCAB(Karen)\FinUCAB\app\src\main\AndroidManifest.xml:14:17-69
+	android:name
+		ADDED from C:\FinUCAB(Karen)\FinUCAB\app\src\main\AndroidManifest.xml:14:25-66
+category#android.intent.category.LAUNCHER
+ADDED from C:\FinUCAB(Karen)\FinUCAB\app\src\main\AndroidManifest.xml:16:17-77
+	android:name
+		ADDED from C:\FinUCAB(Karen)\FinUCAB\app\src\main\AndroidManifest.xml:16:27-74
+activity#com.ucab.fin.finucab.activity.MainActivity
+ADDED from C:\FinUCAB(Karen)\FinUCAB\app\src\main\AndroidManifest.xml:19:9-20:63
+	android:icon
+		ADDED from C:\FinUCAB(Karen)\FinUCAB\app\src\main\AndroidManifest.xml:20:19-51
+	android:name
+		ADDED from C:\FinUCAB(Karen)\FinUCAB\app\src\main\AndroidManifest.xml:19:19-56
+uses-sdk
+INJECTED from C:\FinUCAB(Karen)\FinUCAB\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.android.support:design:25.3.1] C:\Users\Junior\.android\build-cache\db275bfa44eef075a834d3b7c6cc31b29b67b919\output\AndroidManifest.xml:21:5-23:62
+MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\Junior\.android\build-cache\eb5d5070fc894083c51fb88af2525637b506d1ca\output\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\Junior\.android\build-cache\134c14e83dce9e750d1f57626e39f5ba3c9ee1b3\output\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\Junior\.android\build-cache\b5cad16ba6ba200c6fb237901c60afda865a1690\output\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:transition:25.3.1] C:\Users\Junior\.android\build-cache\6989c466d5c1b048329e99962c882cf6462c1e28\output\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Junior\.android\build-cache\c8436a5f9a295b3f3d2149741f89617ca4607600\output\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\Junior\.android\build-cache\e9827643fd96375a9d28f389c63110d8562226fa\output\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\Junior\.android\build-cache\322ffd6430bdf6221455a144094bb96a89d3bb9b\output\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\Junior\.android\build-cache\a0a5d7c80695a1a8ab6f326436bbd1ec9dd8a81e\output\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\Junior\.android\build-cache\a35c57cc5ee19719971675408f363ce0defe1cf6\output\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:recyclerview-v7:25.3.1] C:\Users\Junior\.android\build-cache\a20bff0c8ccdf597b47eb46331b996e91f9638b0\output\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\Junior\.android\build-cache\f4265fb43aff705449dd23d70d80240800915443\output\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\Junior\.android\build-cache\214ca87743c25024e077c0ed14954064ed24b398\output\AndroidManifest.xml:21:5-23:58
+	tools:overrideLibrary
+		ADDED from [com.android.support:design:25.3.1] C:\Users\Junior\.android\build-cache\db275bfa44eef075a834d3b7c6cc31b29b67b919\output\AndroidManifest.xml:23:9-59
+	android:targetSdkVersion
+		INJECTED from C:\FinUCAB(Karen)\FinUCAB\app\src\main\AndroidManifest.xml
+		INJECTED from C:\FinUCAB(Karen)\FinUCAB\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\FinUCAB(Karen)\FinUCAB\app\src\main\AndroidManifest.xml
+		INJECTED from C:\FinUCAB(Karen)\FinUCAB\app\src\main\AndroidManifest.xml
+meta-data#android.support.VERSION
+ADDED from [com.android.support:design:25.3.1] C:\Users\Junior\.android\build-cache\db275bfa44eef075a834d3b7c6cc31b29b67b919\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\Junior\.android\build-cache\eb5d5070fc894083c51fb88af2525637b506d1ca\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\Junior\.android\build-cache\134c14e83dce9e750d1f57626e39f5ba3c9ee1b3\output\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\Junior\.android\build-cache\b5cad16ba6ba200c6fb237901c60afda865a1690\output\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:transition:25.3.1] C:\Users\Junior\.android\build-cache\6989c466d5c1b048329e99962c882cf6462c1e28\output\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\Junior\.android\build-cache\e9827643fd96375a9d28f389c63110d8562226fa\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\Junior\.android\build-cache\322ffd6430bdf6221455a144094bb96a89d3bb9b\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\Junior\.android\build-cache\a0a5d7c80695a1a8ab6f326436bbd1ec9dd8a81e\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\Junior\.android\build-cache\a35c57cc5ee19719971675408f363ce0defe1cf6\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:recyclerview-v7:25.3.1] C:\Users\Junior\.android\build-cache\a20bff0c8ccdf597b47eb46331b996e91f9638b0\output\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\Junior\.android\build-cache\f4265fb43aff705449dd23d70d80240800915443\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\Junior\.android\build-cache\214ca87743c25024e077c0ed14954064ed24b398\output\AndroidManifest.xml:25:5-27:34
+	android:value
+		ADDED from [com.android.support:design:25.3.1] C:\Users\Junior\.android\build-cache\db275bfa44eef075a834d3b7c6cc31b29b67b919\output\AndroidManifest.xml:27:9-31
+	android:name
+		ADDED from [com.android.support:design:25.3.1] C:\Users\Junior\.android\build-cache\db275bfa44eef075a834d3b7c6cc31b29b67b919\output\AndroidManifest.xml:26:9-47
