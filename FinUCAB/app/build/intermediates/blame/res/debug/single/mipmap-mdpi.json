@@ -1,13 +1,5 @@
 [
     {
-        "merged": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\money.png",
-        "source": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\money.png"
-    },
-    {
-        "merged": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\ic_launcher.png",
-        "source": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
-    },
-    {
         "merged": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\icono.png",
         "source": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\icono.png"
     },
@@ -16,8 +8,72 @@
         "source": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\user.png"
     },
     {
+        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\money.png",
+        "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\money.png"
+    },
+    {
+        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\presupuesto.png",
+        "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\presupuesto.png"
+    },
+    {
+        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\ic_launcher_round.png",
+        "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\configuracion.png",
+        "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\configuracion.png"
+    },
+    {
+        "merged": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\logo2.png",
+        "source": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\logo2.png"
+    },
+    {
+        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\settings.png",
+        "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\settings.png"
+    },
+    {
+        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\salir.png",
+        "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\salir.png"
+    },
+    {
+        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\logo2.png",
+        "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\logo2.png"
+    },
+    {
+        "merged": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\presupuesto.png",
+        "source": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\presupuesto.png"
+    },
+    {
+        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\check.png",
+        "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\check.png"
+    },
+    {
+        "merged": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\indicador.png",
+        "source": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\indicador.png"
+    },
+    {
+        "merged": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\logoh.png",
+        "source": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\logoh.png"
+    },
+    {
+        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\indicador.png",
+        "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\indicador.png"
+    },
+    {
+        "merged": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\money.png",
+        "source": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\money.png"
+    },
+    {
+        "merged": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\ic_launcher.png",
+        "source": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
+    },
+    {
         "merged": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\ic_launcher_round.png",
         "source": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\ic_flecha.png",
+        "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\ic_flecha.png"
     },
     {
         "merged": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\salir.png",
@@ -28,31 +84,31 @@
         "source": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\ic_flecha.png"
     },
     {
-        "merged": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\settings.png",
-        "source": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\settings.png"
+        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\icono.png",
+        "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\icono.png"
     },
     {
-        "merged": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\logo2.png",
-        "source": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\logo2.png"
+        "merged": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\settings.png",
+        "source": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\settings.png"
     },
     {
         "merged": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\configuracion.png",
         "source": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\configuracion.png"
     },
     {
+        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\user.png",
+        "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\user.png"
+    },
+    {
         "merged": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\check.png",
         "source": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\check.png"
     },
     {
-        "merged": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\presupuesto.png",
-        "source": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\presupuesto.png"
+        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\logoh.png",
+        "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\logoh.png"
     },
     {
-        "merged": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\indicador.png",
-        "source": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\indicador.png"
-    },
-    {
-        "merged": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\logoh.png",
-        "source": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\logoh.png"
+        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\ic_launcher.png",
+        "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
     }
 ]
