@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ucab.fin.finucab.R;
-import com.ucab.fin.finucab.activity.MainActivity;
 
 import android.graphics.Color;
 
@@ -38,7 +37,7 @@ public class BudgetFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.budget_fragment, container, false);
-        //((MainActivity) getActivity()).setTitle("Presupuesto");
+
         if (savedInstanceState == null) {
             insertarTabs(container);
 
@@ -57,12 +56,11 @@ public class BudgetFragment extends Fragment {
         appBar = (AppBarLayout) padre.findViewById(R.id.appbar);
         pestanas = new TabLayout(getActivity());
         pestanas.setTabTextColors(Color.parseColor("#000000"), Color.parseColor("#000000"));
-        pestanas.setSelectedTabIndicatorColor(Color.parseColor("#000000"));
         appBar.addView(pestanas);
     }
 
     private void poblarViewPager(ViewPager viewPager) {
-        AdaptadorSecciones adapter = new AdaptadorSecciones(getChildFragmentManager());
+        AdaptadorSecciones adapter = new AdaptadorSecciones(getFragmentManager());
         adapter.addFragment(new TotalFragment(), getString(R.string.titulo_tab_total));
         adapter.addFragment(new GananciasFragment(), getString(R.string.titulo_tab_ganancias));
         adapter.addFragment(new GastosFragment(), getString(R.string.titulo_tab_gastos));

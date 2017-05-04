@@ -19,29 +19,30 @@
     <string name="titulo_tab_ganancias">GANANCIAS</string>
     <string name="titulo_tab_gastos">GASTOS</string>
     <string name="title_activity_pre">Pre</string>
-    /////////////////////////////////// STRING USADO EN AGREGAR PRESUPUESTO//////////////////////////////////
+    /////////////////////////////////// STRING USADO EN AGREGAR
+    PRESUPUESTO//////////////////////////////////
+    //////// TEXT VIEW Y BUTTONS ////////////
     <string name="nombrePresupuesto">Nombre del Presupuesto</string>
     <string name="categoria">Categoría</string>
     <string name="monto">Monto</string>
     <string name="unico">Único</string>
     <string name="recurrente">Recurrente</string>
     <string name="meses">¿Cada cuántos meses?</string>
-    <string name="aceptar">Aceptar</string>
-    <!--///////////// EDIT TEXT /////////////-->
+    <string name="agregar">Agregar</string>
+    ///////////// EDIT TEXT /////////////
     <string name="indiqueNombre">Indique el nombre del Presupuesto</string>
     <string name="indiqueCategoria">Indique la Categoria</string>
     <string name="indiqueMonto">Indique el Monto</string>
     <string name="indiqueMeses">Indique los meses de recurrencia</string>
-    <!--////////////// SPINNER /////////////-->
+    ////////////// SPINNER /////////////
     <string name="categoria_prompt">Indique la Categoria</string>
-    <string-array name="categoryArray">
+    <string-array name="categoria_arrays">
         <item>-</item>
         <item>Libreria</item>
         <item>Restaurant</item>
         <item>Sueldo</item>
         <item>Supermercado</item>
     </string-array>
-    <!--MENU DE PRESUPUESTO-->
-    <string name="opcionEliminar">Eliminar</string>
-    <string name="opcionModificar">Modificar</string>
+
+
 </resources>

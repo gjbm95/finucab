@@ -7,13 +7,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ucab.fin.finucab.R;
-import com.ucab.fin.finucab.domain.Presupuesto;
 
 import java.util.List;
 
 /**
  * Created by Somebody on 4/22/2017.
  */
+
 
 public class PresupuestoAdapter extends RecyclerView.Adapter<PresupuestoAdapter.PresupuestoViewHolder> {
 
@@ -31,14 +31,12 @@ public class PresupuestoAdapter extends RecyclerView.Adapter<PresupuestoAdapter.
     }
 
     @Override
-    public void onBindViewHolder( final PresupuestoViewHolder PresupuestoViewHolder, int i)
+    public void onBindViewHolder(PresupuestoViewHolder PresupuestoViewHolder, int i)
     {
         Presupuesto Pi = PresupuestoList.get(i);
-        PresupuestoViewHolder.nameTextView.setText(Pi.get_nombre());
-        PresupuestoViewHolder.amountTextView.setText(( Pi.get_monto().toString()));
-        PresupuestoViewHolder.catergoryTextView.setText(Pi.get_categoria());
-        PresupuestoViewHolder.monthTextView.setText("Cada "+ Pi.get_duracion() +" meses");
-        PresupuestoViewHolder.itemView.setLongClickable(true);
+        PresupuestoViewHolder.tvName.setText(Pi.getName());
+        PresupuestoViewHolder.tvFname.setText(( Pi.getFname().toString()));
+        PresupuestoViewHolder.tvEmail.setText(Pi.getEmail());
     }
 
     @Override
@@ -50,19 +48,16 @@ public class PresupuestoAdapter extends RecyclerView.Adapter<PresupuestoAdapter.
         return new PresupuestoViewHolder(itemView);
     }
 
-
-
     public class PresupuestoViewHolder extends RecyclerView.ViewHolder {
-        private TextView nameTextView;
-        private TextView amountTextView;
-        private TextView catergoryTextView;
-        private TextView monthTextView;
+        private TextView tvName;
+        private TextView tvFname;
+        private TextView tvEmail;
         public PresupuestoViewHolder(View v) {
             super(v);
-            nameTextView = (TextView) v.findViewById(R.id.nameTextView);
-            amountTextView = (TextView) v.findViewById(R.id.amountTextView);
-            catergoryTextView = (TextView) v.findViewById(R.id.categoryTextView);
-            monthTextView = (TextView) v.findViewById(R.id.monthTextView);
+            tvName = (TextView) v.findViewById(R.id.Name);
+            tvFname = (TextView) v.findViewById(R.id.Fname);
+            tvEmail = (TextView) v.findViewById(R.id.Email);
+
         }
     }
 

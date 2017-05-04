@@ -27,7 +27,13 @@ public class TotalFragment extends Fragment {
         // Required empty public constructor
     }
 
-
+    public static TotalFragment newInstance(int sectionNumber) {
+        TotalFragment fragment = new TotalFragment();
+        Bundle args = new Bundle();
+        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,7 +46,7 @@ public class TotalFragment extends Fragment {
         gastos.setText("0");
         total.setText("0");
         parentActivity = (MainActivity) getActivity();
-        fab = (FloatingActionButton) rootView.findViewById(R.id.addFloatingBtnTotal);
+        fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

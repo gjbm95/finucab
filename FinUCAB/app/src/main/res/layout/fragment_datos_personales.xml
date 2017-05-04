@@ -1,0 +1,52 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/colorBackground"
+    android:layout_height="match_parent"
+    tools:context="com.ucab.fin.finucab.fragment.DatosPersonalesFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:inputType="textEmailAddress"
+        android:background="@drawable/caja"
+
+        android:hint="Ingrese su correo electronico"
+        android:ems="10"
+        android:layout_marginTop="24dp"
+        android:id="@+id/passwordR2EditText"
+        android:layout_below="@+id/answersREditText"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:inputType="textPersonName"
+        android:hint="Ingrese su apellido"
+
+        android:text=""
+        android:ems="10"
+        android:background="@drawable/caja"
+        android:id="@+id/answersREditText"
+        android:layout_marginTop="21dp"
+        android:layout_below="@+id/questionREditText"
+        android:layout_alignLeft="@+id/passwordR2EditText"
+        android:layout_alignStart="@+id/passwordR2EditText" />
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:inputType="textPersonName"
+        android:hint="Ingrese su nombre"
+
+        android:text=""
+        android:ems="10"
+        android:background="@drawable/caja"
+        android:id="@+id/questionREditText"
+        android:layout_marginTop="44dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/answersREditText"
+        android:layout_alignStart="@+id/answersREditText" />
+</RelativeLayout>
