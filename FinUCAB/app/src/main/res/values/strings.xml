@@ -19,8 +19,7 @@
     <string name="titulo_tab_ganancias">GANANCIAS</string>
     <string name="titulo_tab_gastos">GASTOS</string>
     <string name="title_activity_pre">Pre</string>
-    <!--/////////////////////////////////// STRING USADO EN AGREGAR PRESUPUESTO//////////////////////////////////-->
-    <!--//////// TEXT VIEW Y BUTTONS ////////////-->
+    /////////////////////////////////// STRING USADO EN AGREGAR PRESUPUESTO//////////////////////////////////
     <string name="nombrePresupuesto">Nombre del Presupuesto</string>
     <string name="categoria">Categoría</string>
     <string name="monto">Monto</string>
@@ -42,6 +41,8 @@
         <item>Sueldo</item>
         <item>Supermercado</item>
     </string-array>
-
+    <!--MENU DE PRESUPUESTO-->
+    <string name="opcionEliminar">Eliminar</string>
+    <string name="opcionModificar">Modificar</string>
 
 </resources>

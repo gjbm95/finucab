@@ -24,7 +24,6 @@ public class AgregarPresupuesto_fragment extends Fragment implements CompoundBut
     EditText monthsEditText;
     RadioButton onlyRadioButton, recurrentRadioButton;
     Spinner categorySpinner;
-
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,17 +33,17 @@ public class AgregarPresupuesto_fragment extends Fragment implements CompoundBut
 
         View rootView = inflater.inflate(R.layout.fragment_agregar_presupuesto, container, false);
 
-        recurrentTextView = (TextView) rootView.findViewById(R.id.Textrecurrencia);
-        monthsEditText = (EditText) rootView.findViewById(R.id.meses);
-        onlyRadioButton = (RadioButton) rootView.findViewById(R.id.unico);
+        recurrentTextView = (TextView) rootView.findViewById(R.id.recurrentTextView);
+        monthsEditText = (EditText) rootView.findViewById(R.id.monthsEditText);
+        onlyRadioButton = (RadioButton) rootView.findViewById(R.id.onlyRadioButton);
         onlyRadioButton.setOnCheckedChangeListener(this);
-        recurrentRadioButton = (RadioButton) rootView.findViewById(R.id.recurrente);
+        recurrentRadioButton = (RadioButton) rootView.findViewById(R.id.recurrentRadioButton);
         recurrentRadioButton.setOnCheckedChangeListener(this);
 
         recurrentTextView.setVisibility(recurrentTextView.INVISIBLE);   //SE COLOCA INVISIBLE EL TEXTVIEW
         monthsEditText.setVisibility(monthsEditText.INVISIBLE);         //SE COLOCA INVISIBLE EL EDITTEXT
 
-        categorySpinner = (Spinner)rootView.findViewById(R.id.categoria);
+        categorySpinner = (Spinner)rootView.findViewById(R.id.categorySpinner);
         ArrayAdapter adapter = ArrayAdapter.createFromResource(getActivity(), R.array.categoryArray, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(adapter);

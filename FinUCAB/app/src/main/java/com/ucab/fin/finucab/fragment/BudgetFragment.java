@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ucab.fin.finucab.R;
+import com.ucab.fin.finucab.activity.MainActivity;
 
 import android.graphics.Color;
 
@@ -37,7 +38,7 @@ public class BudgetFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.budget_fragment, container, false);
-
+        //((MainActivity) getActivity()).setTitle("Presupuesto");
         if (savedInstanceState == null) {
             insertarTabs(container);
 

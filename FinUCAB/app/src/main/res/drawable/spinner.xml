@@ -21,7 +21,8 @@
             </item>
             <item>
                 <bitmap android:gravity="bottom|right"
-                    android:src="@mipmap/flecha" />
+                    android:src="@mipmap/ic_flecha" />
+
             </item>
         </layer-list>
     </item>

@@ -14,7 +14,6 @@ import java.util.List;
  * Created by Somebody on 4/22/2017.
  */
 
-
 public class PresupuestoAdapter extends RecyclerView.Adapter<PresupuestoAdapter.PresupuestoViewHolder> {
 
     private List<Presupuesto> PresupuestoList;
@@ -31,12 +30,13 @@ public class PresupuestoAdapter extends RecyclerView.Adapter<PresupuestoAdapter.
     }
 
     @Override
-    public void onBindViewHolder(PresupuestoViewHolder PresupuestoViewHolder, int i)
+    public void onBindViewHolder( final PresupuestoViewHolder PresupuestoViewHolder, int i)
     {
         Presupuesto Pi = PresupuestoList.get(i);
         PresupuestoViewHolder.tvName.setText(Pi.getName());
         PresupuestoViewHolder.tvFname.setText(( Pi.getFname().toString()));
         PresupuestoViewHolder.tvEmail.setText(Pi.getEmail());
+        PresupuestoViewHolder.itemView.setLongClickable(true);
     }
 
     @Override
