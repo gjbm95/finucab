@@ -19,7 +19,8 @@
     <string name="titulo_tab_ganancias">GANANCIAS</string>
     <string name="titulo_tab_gastos">GASTOS</string>
     <string name="title_activity_pre">Pre</string>
-    /////////////////////////////////// STRING USADO EN AGREGAR PRESUPUESTO//////////////////////////////////
+    /////////////////////////////////// STRING USADO EN AGREGAR
+    PRESUPUESTO//////////////////////////////////
     //////// TEXT VIEW Y BUTTONS ////////////
     <string name="nombrePresupuesto">Nombre del Presupuesto</string>
     <string name="categoria">Categoría</string>

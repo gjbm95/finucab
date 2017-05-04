@@ -1,166 +1,174 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#0895E0"
-    android:titleTextColor="#000">
-
-    <TextView
-        android:id="@+id/TextnombrePresupuesto"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textColor="#fff"
-        android:textSize="25sp"
-        android:text="@string/nombrePresupuesto"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        app:layout_constraintHorizontal_bias="0.144" />
-    <TextView
-        android:id="@+id/Textcategoria"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textColor="#fff"
-        android:textSize="25sp"
-        android:text="@string/categoria"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="108dp"
-        app:layout_constraintHorizontal_bias="0.058" />
-
-    <TextView
-        android:id="@+id/Textmonto"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textColor="#fff"
-        android:textSize="25sp"
-        android:text="@string/monto"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="209dp"
-        app:layout_constraintHorizontal_bias="0.051" />
-
-    <TextView
-        android:id="@+id/Textrecurrencia"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textColor="#fff"
-        android:textSize="25sp"
-        android:text="@string/meses"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="374dp"
-        app:layout_constraintHorizontal_bias="0.0"
-        />
-
-    <Spinner
-        android:id="@+id/categoria"
-        android:layout_width="295dp"
-        android:layout_height="45dp"
-        android:entries="@array/categoria_arrays"
-        android:prompt="@string/categoria_prompt"
-        android:background="@drawable/spinner"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="149dp"
-        app:layout_constraintHorizontal_bias="0.184" />
-
-    <EditText
-        android:id="@+id/nombrePresupuesto"
-        android:layout_width="295dp"
-        android:layout_height="45dp"
-        android:hint="@string/indiqueNombre"
-        android:background="@drawable/rounded_white_border"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="54dp"
-        app:layout_constraintHorizontal_bias="0.14" />
-    <EditText
-        android:id="@+id/monto"
-        android:layout_width="295dp"
-        android:layout_height="45dp"
-        android:hint="@string/indiqueMonto"
-        android:background="@drawable/rounded_white_border"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="248dp"
-        app:layout_constraintHorizontal_bias="0.179" />
-    <EditText
-        android:id="@+id/meses"
-        android:layout_width="295dp"
-        android:layout_height="45dp"
-        android:hint="@string/indiqueMeses"
-        android:background="@drawable/rounded_white_border"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="404dp"
-        app:layout_constraintHorizontal_bias="0.246"
-        />
-
-    <Button
-        android:id="@+id/agregar"
-        android:layout_width="126dp"
-        android:layout_height="0dp"
-        android:text="@string/agregar"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="458dp" />
-
-
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="156dp"
-        android:layout_height="62dp"
-        android:layout_marginTop="303dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.078"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <RadioButton
-            android:id="@+id/unico"
-            android:layout_width="140dp"
-            android:layout_height="36dp"
-            android:layout_weight="1"
-            android:text="@string/unico"
-            android:textColor="#fff"
-            android:textSize="22sp"
-            tools:layout_editor_absoluteX="32dp"
-            tools:layout_editor_absoluteY="91dp" />
-
-        <RadioButton
-            android:id="@+id/recurrente"
-            android:layout_width="wrap_content"
-            android:layout_height="38dp"
-            android:layout_weight="1"
-            android:text="@string/recurrente"
-            android:textColor="#fff"
-            android:textSize="22sp"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="309dp" />
-
-
-    </RadioGroup>
-
-</android.support.constraint.ConstraintLayout>
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0895E0"
+    android:titleTextColor="#000">
+
+    <TextView
+        android:id="@+id/TextnombrePresupuesto"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:textSize="25sp"
+        android:text="@string/nombrePresupuesto"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        app:layout_constraintHorizontal_bias="0.144" />
+    <TextView
+        android:id="@+id/Textcategoria"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:textSize="25sp"
+        android:text="@string/categoria"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="108dp"
+        app:layout_constraintHorizontal_bias="0.058" />
+
+    <TextView
+        android:id="@+id/Textmonto"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:textSize="25sp"
+        android:text="@string/monto"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="209dp"
+        app:layout_constraintHorizontal_bias="0.051" />
+
+    <TextView
+        android:id="@+id/Textrecurrencia"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:textSize="25sp"
+        android:text="@string/meses"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="374dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        />
+
+    <Spinner
+        android:id="@+id/categorySpinner"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:entries="@array/categoryArray"
+        android:prompt="@string/categoria_prompt"
+        android:background="@drawable/spinner"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="149dp"
+        app:layout_constraintHorizontal_bias="0.184" />
+
+    <EditText
+        android:id="@+id/budgetNameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:hint="@string/indiqueNombre"
+        android:background="@drawable/rounded_white_border"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="49dp"
+        app:layout_constraintHorizontal_bias="0.0" />
+    <EditText
+        android:id="@+id/amountEditText"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:hint="@string/indiqueMonto"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/rounded_white_border"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="248dp"
+        app:layout_constraintHorizontal_bias="0.179" />
+    <EditText
+        android:id="@+id/monthsEditText"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:hint="@string/indiqueMeses"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/rounded_white_border"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="404dp"
+        app:layout_constraintHorizontal_bias="0.246"
+        />
+
+    <Button
+        android:id="@+id/agregar"
+        android:layout_width="126dp"
+        android:layout_height="0dp"
+        android:text="@string/agregar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="458dp" />
+
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="156dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="303dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.078"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/unico"
+            android:layout_width="140dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:text="@string/unico"
+            android:textColor="#fff"
+            android:textSize="22sp"
+            tools:layout_editor_absoluteX="32dp"
+            tools:layout_editor_absoluteY="91dp" />
+
+        <RadioButton
+            android:id="@+id/recurrente"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:layout_weight="1"
+            android:text="@string/recurrente"
+            android:textColor="#fff"
+            android:textSize="22sp"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="309dp" />
+
+
+    </RadioGroup>
+
+</android.support.constraint.ConstraintLayout>

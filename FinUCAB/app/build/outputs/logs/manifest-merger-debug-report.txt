@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\FinUCAB\app\src\main\AndroidManifest.xml:2:1-23:12
+ADDED from C:\FinUCAB\app\src\main\AndroidManifest.xml:2:1-25:12
 	package
 		ADDED from C:\FinUCAB\app\src\main\AndroidManifest.xml:3:5-35
 		INJECTED from C:\FinUCAB\app\src\main\AndroidManifest.xml
@@ -14,7 +14,7 @@ ADDED from C:\FinUCAB\app\src\main\AndroidManifest.xml:2:1-23:12
 		INJECTED from C:\FinUCAB\app\src\main\AndroidManifest.xml
 		INJECTED from C:\FinUCAB\app\src\main\AndroidManifest.xml
 application
-ADDED from C:\FinUCAB\app\src\main\AndroidManifest.xml:5:5-21:19
+ADDED from C:\FinUCAB\app\src\main\AndroidManifest.xml:5:5-23:19
 MERGED from [com.android.support:design:25.3.1] C:\Users\Junior\.android\build-cache\db275bfa44eef075a834d3b7c6cc31b29b67b919\output\AndroidManifest.xml:29:5-20
 MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\Junior\.android\build-cache\eb5d5070fc894083c51fb88af2525637b506d1ca\output\AndroidManifest.xml:29:5-20
 MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\Junior\.android\build-cache\134c14e83dce9e750d1f57626e39f5ba3c9ee1b3\output\AndroidManifest.xml:26:5-20
@@ -54,11 +54,15 @@ ADDED from C:\FinUCAB\app\src\main\AndroidManifest.xml:16:17-77
 	android:name
 		ADDED from C:\FinUCAB\app\src\main\AndroidManifest.xml:16:27-74
 activity#com.ucab.fin.finucab.activity.MainActivity
-ADDED from C:\FinUCAB\app\src\main\AndroidManifest.xml:19:9-20:63
+ADDED from C:\FinUCAB\app\src\main\AndroidManifest.xml:19:9-21:48
 	android:icon
-		ADDED from C:\FinUCAB\app\src\main\AndroidManifest.xml:20:19-51
+		ADDED from C:\FinUCAB\app\src\main\AndroidManifest.xml:21:13-45
 	android:name
-		ADDED from C:\FinUCAB\app\src\main\AndroidManifest.xml:19:19-56
+		ADDED from C:\FinUCAB\app\src\main\AndroidManifest.xml:20:13-50
+activity#com.ucab.fin.finucab.activity.RegisterActivity
+ADDED from C:\FinUCAB\app\src\main\AndroidManifest.xml:22:9-72
+	android:name
+		ADDED from C:\FinUCAB\app\src\main\AndroidManifest.xml:22:19-60
 uses-sdk
 INJECTED from C:\FinUCAB\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [com.android.support:design:25.3.1] C:\Users\Junior\.android\build-cache\db275bfa44eef075a834d3b7c6cc31b29b67b919\output\AndroidManifest.xml:21:5-23:62

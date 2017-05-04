@@ -5,4 +5,7 @@ package com.ucab.fin.finucab.domain;
  */
 
 public class Transaccion {
+
+
+
 }
