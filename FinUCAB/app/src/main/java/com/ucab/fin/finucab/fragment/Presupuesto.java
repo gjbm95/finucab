@@ -10,6 +10,16 @@ public class Presupuesto {
     int fname;
     String email;
 
+    public Presupuesto (String name, int fname, String email){
+        this.name = name;
+        this.fname = fname;
+        this.email = email;
+    }
+
+    public Presupuesto (){
+
+    }
+
     public String getEmail() {
         return email;
     }

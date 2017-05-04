@@ -29,6 +29,7 @@
     <string name="recurrente">Recurrente</string>
     <string name="meses">¿Cada cuántos meses?</string>
     <string name="agregar">Agregar</string>
+    <string name="aceptar">Aceptar</string>
     ///////////// EDIT TEXT /////////////
     <string name="indiqueNombre">Indique el nombre del Presupuesto</string>
     <string name="indiqueCategoria">Indique la Categoria</string>
@@ -36,13 +37,15 @@
     <string name="indiqueMeses">Indique los meses de recurrencia</string>
     ////////////// SPINNER /////////////
     <string name="categoria_prompt">Indique la Categoria</string>
-    <string-array name="categoria_arrays">
+    <string-array name="categoryArray">
         <item>-</item>
         <item>Libreria</item>
         <item>Restaurant</item>
         <item>Sueldo</item>
         <item>Supermercado</item>
     </string-array>
-
+    <!--MENU DE PRESUPUESTO-->
+    <string name="opcionEliminar">Eliminar</string>
+    <string name="opcionModificar">Modificar</string>
 
 </resources>

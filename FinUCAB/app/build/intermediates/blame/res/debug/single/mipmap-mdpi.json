@@ -8,6 +8,10 @@
         "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\money.png"
     },
     {
+        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\agregar.png",
+        "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\agregar.png"
+    },
+    {
         "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\ic_flecha.png",
         "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\ic_flecha.png"
     },
