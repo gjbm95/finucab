@@ -4,23 +4,21 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.ContextMenu;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
+import com.ucab.fin.finucab.domain.Presupuesto;
 
 import java.util.ArrayList;
 
@@ -64,10 +62,6 @@ public class GastosFragment extends Fragment {
                 recycleList, new ClickListener() {
             @Override
             public void onClick(View view, final int position) {
-                //Values are passing to activity & to fragment as well
-                //Toast.makeText(getActivity(), "Single Click on position :"+position,
-                //        Toast.LENGTH_SHORT).show();
-
 
             }
 
@@ -114,14 +108,14 @@ public class GastosFragment extends Fragment {
 
     private ArrayList<Presupuesto> populatedList() {
         ArrayList<Presupuesto> listOfPersona = new ArrayList<Presupuesto>();
-        for(int i=0;i<20;i++)
-        {
+        for(int i=0;i<20;i++) {
+            float monto = 150000;
             Presupuesto pi = new Presupuesto();
-            pi.setName("Gasto "+i);
-            pi.setFname(150000);
-            pi.setEmail("Nombre Categoria");
+            pi.set_nombre("Gasto "+i);
+            pi.set_monto(monto);
+            pi.set_categoria("Nombre Categoria "+ i);
+            pi.set_duracion(i);
             listOfPersona.add(pi);
-
         }
         return listOfPersona;
     }

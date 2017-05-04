@@ -4,12 +4,12 @@
         "source": "C:\\Users\\Oswaldo\\.android\\build-cache\\1280e2832a14950715bc29491217d511a549eb47\\output\\res\\layout\\notification_template_part_chronometer.xml"
     },
     {
-        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_dialog_title_material.xml",
-        "source": "C:\\Users\\Junior\\.android\\build-cache\\eb5d5070fc894083c51fb88af2525637b506d1ca\\output\\res\\layout\\abc_dialog_title_material.xml"
-    },
-    {
         "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_bottom_navigation_item.xml",
         "source": "C:\\Users\\Junior\\.android\\build-cache\\db275bfa44eef075a834d3b7c6cc31b29b67b919\\output\\res\\layout\\design_bottom_navigation_item.xml"
+    },
+    {
+        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_dialog_title_material.xml",
+        "source": "C:\\Users\\Junior\\.android\\build-cache\\eb5d5070fc894083c51fb88af2525637b506d1ca\\output\\res\\layout\\abc_dialog_title_material.xml"
     },
     {
         "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_select_dialog_material.xml",
@@ -24,12 +24,12 @@
         "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\finucab\\FinUCAB\\app\\src\\main\\res\\layout\\nav_header_seccion.xml"
     },
     {
-        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_bottom_sheet_dialog.xml",
-        "source": "C:\\Users\\Oswaldo\\.android\\build-cache\\167d006212698f4bfd1eb320fa6c6862fb97a357\\output\\res\\layout\\design_bottom_sheet_dialog.xml"
-    },
-    {
         "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_main.xml",
         "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\finucab\\FinUCAB\\app\\src\\main\\res\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_bottom_sheet_dialog.xml",
+        "source": "C:\\Users\\Oswaldo\\.android\\build-cache\\167d006212698f4bfd1eb320fa6c6862fb97a357\\output\\res\\layout\\design_bottom_sheet_dialog.xml"
     },
     {
         "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_bar.xml",

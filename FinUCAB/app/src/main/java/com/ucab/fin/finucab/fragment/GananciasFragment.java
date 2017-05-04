@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
+import com.ucab.fin.finucab.domain.Presupuesto;
 
 import java.util.ArrayList;
 
@@ -113,10 +114,12 @@ public class GananciasFragment extends Fragment {
         ArrayList<Presupuesto> listOfPersona = new ArrayList<Presupuesto>();
         for(int i=0;i<20;i++)
         {
+            float monto = 150000;
             Presupuesto pi = new Presupuesto();
-            pi.setName("Gaanancia "+i);
-            pi.setFname(150000);
-            pi.setEmail("Nombre Categoria");
+            pi.set_nombre("Ganancia "+i);
+            pi.set_monto(monto);
+            pi.set_categoria("Nombre Categoria "+ i);
+            pi.set_duracion(i);
             listOfPersona.add(pi);
 
         }

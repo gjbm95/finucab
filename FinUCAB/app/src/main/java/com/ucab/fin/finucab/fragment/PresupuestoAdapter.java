@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ucab.fin.finucab.R;
+import com.ucab.fin.finucab.domain.Presupuesto;
 
 import java.util.List;
 
@@ -33,9 +34,10 @@ public class PresupuestoAdapter extends RecyclerView.Adapter<PresupuestoAdapter.
     public void onBindViewHolder( final PresupuestoViewHolder PresupuestoViewHolder, int i)
     {
         Presupuesto Pi = PresupuestoList.get(i);
-        PresupuestoViewHolder.tvName.setText(Pi.getName());
-        PresupuestoViewHolder.tvFname.setText(( Pi.getFname().toString()));
-        PresupuestoViewHolder.tvEmail.setText(Pi.getEmail());
+        PresupuestoViewHolder.nameTextView.setText(Pi.get_nombre());
+        PresupuestoViewHolder.amountTextView.setText(( Pi.get_monto().toString()));
+        PresupuestoViewHolder.catergoryTextView.setText(Pi.get_categoria());
+        PresupuestoViewHolder.monthTextView.setText("Cada "+ Pi.get_duracion() +" meses");
         PresupuestoViewHolder.itemView.setLongClickable(true);
     }
 
@@ -48,16 +50,19 @@ public class PresupuestoAdapter extends RecyclerView.Adapter<PresupuestoAdapter.
         return new PresupuestoViewHolder(itemView);
     }
 
+
+
     public class PresupuestoViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvName;
-        private TextView tvFname;
-        private TextView tvEmail;
+        private TextView nameTextView;
+        private TextView amountTextView;
+        private TextView catergoryTextView;
+        private TextView monthTextView;
         public PresupuestoViewHolder(View v) {
             super(v);
-            tvName = (TextView) v.findViewById(R.id.Name);
-            tvFname = (TextView) v.findViewById(R.id.Fname);
-            tvEmail = (TextView) v.findViewById(R.id.Email);
-
+            nameTextView = (TextView) v.findViewById(R.id.nameTextView);
+            amountTextView = (TextView) v.findViewById(R.id.amountTextView);
+            catergoryTextView = (TextView) v.findViewById(R.id.categoryTextView);
+            monthTextView = (TextView) v.findViewById(R.id.monthTextView);
         }
     }
 

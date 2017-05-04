@@ -9,7 +9,7 @@
     android:background="@drawable/esquinas">
 
     <TextView
-        android:id="@+id/Name"
+        android:id="@+id/nameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -21,7 +21,7 @@
         android:textStyle="bold"/>
 
     <TextView
-        android:id="@+id/Fname"
+        android:id="@+id/amountTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
@@ -35,12 +35,25 @@
         android:layout_alignParentRight="true" />
 
     <TextView
-        android:id="@+id/Email"
+        android:id="@+id/categoryTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Name"
-        android:layout_alignStart="@+id/Name"
-        android:layout_below="@+id/Name"
+        android:layout_alignLeft="@+id/nameTextView"
+        android:layout_alignStart="@+id/nameTextView"
+        android:layout_below="@+id/nameTextView"
+        android:textColor="@color/black"
+        android:text="Email"
+        android:textSize="14sp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"/>
+
+    <TextView
+        android:id="@+id/monthTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/categoryTextView"
+        android:layout_alignStart="@+id/categoryTextView"
+        android:layout_below="@+id/categoryTextView"
         android:textColor="@color/black"
         android:text="Email"
         android:textSize="14sp"
