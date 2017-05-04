@@ -1,11 +1,27 @@
 [
     {
+        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_launcher_round.png",
+        "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_launcher.png",
+        "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_flecha.png",
+        "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_flecha.png"
+    },
+    {
         "merged": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_launcher_round.png",
         "source": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.png"
     },
     {
         "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_flecha.png",
         "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_flecha.png"
+    },
+    {
+        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_launcher_round.png",
+        "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.png"
     },
     {
         "merged": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_flecha.png",
@@ -16,11 +32,27 @@
         "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.png"
     },
     {
+        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_flecha.png",
+        "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_flecha.png"
+    },
+    {
         "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_launcher.png",
         "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
     },
     {
         "merged": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_launcher.png",
         "source": "C:\\FinUCAB(Karen)\\FinUCAB\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_launcher.png",
+        "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\agregar.png",
+        "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-xxhdpi\\agregar.png"
+    },
+    {
+        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\agregar.png",
+        "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-xxhdpi\\agregar.png"
     }
 ]
