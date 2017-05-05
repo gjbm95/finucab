@@ -9,11 +9,11 @@
     <EditText
         android:layout_width="250dp"
         android:layout_height="55dp"
-        android:inputType="textEmailAddress"
         android:background="@drawable/caja"
         android:hint="Repita la contraseña"
         android:ems="10"
         android:layout_marginTop="24dp"
+        android:inputType="textPassword"
         android:id="@+id/passwordR2EditText"
         android:layout_below="@+id/answersREditText"
         android:layout_centerHorizontal="true" />
@@ -21,12 +21,12 @@
     <EditText
         android:layout_width="250dp"
         android:layout_height="55dp"
-        android:inputType="textPersonName"
         android:hint="Ingrese una contraseña"
         android:text=""
         android:ems="10"
         android:background="@drawable/caja"
         android:id="@+id/answersREditText"
+        android:inputType="textPassword"
         android:layout_marginTop="21dp"
         android:layout_below="@+id/questionREditText"
         android:layout_alignLeft="@+id/passwordR2EditText"
