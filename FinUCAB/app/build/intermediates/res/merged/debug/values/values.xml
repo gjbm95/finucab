@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:ns1="http://schemas.android.com/tools">
     <string-array name="categoryArray">
+
         <item>-</item>
+
         <item>Libreria</item>
+
         <item>Restaurant</item>
+
         <item>Sueldo</item>
+
         <item>Supermercado</item>
+
     </string-array>
     <attr format="reference" name="constraintSet"/>
     <attr format="reference" name="drawerArrowStyle"/>

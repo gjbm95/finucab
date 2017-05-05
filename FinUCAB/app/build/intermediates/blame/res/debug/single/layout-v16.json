@@ -1,5 +1,9 @@
 [
     {
+        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout-v16\\notification_template_custom_big.xml",
+        "source": "C:\\Users\\Oswaldo\\.android\\build-cache\\1280e2832a14950715bc29491217d511a549eb47\\output\\res\\layout-v16\\notification_template_custom_big.xml"
+    },
+    {
         "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout-v16\\notification_template_custom_big.xml",
         "source": "C:\\Users\\Junior\\.android\\build-cache\\eb5d5070fc894083c51fb88af2525637b506d1ca\\output\\res\\layout-v16\\notification_template_custom_big.xml"
     }

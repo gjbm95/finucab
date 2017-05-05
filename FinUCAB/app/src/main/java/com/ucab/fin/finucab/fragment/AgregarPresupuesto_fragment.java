@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.ucab.fin.finucab.R;
+import com.ucab.fin.finucab.activity.MainActivity;
 
 
 /**
@@ -24,6 +25,7 @@ public class AgregarPresupuesto_fragment extends Fragment implements CompoundBut
     EditText monthsEditText;
     RadioButton onlyRadioButton, recurrentRadioButton;
     Spinner categorySpinner;
+    MainActivity parentActivity;
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,6 +35,8 @@ public class AgregarPresupuesto_fragment extends Fragment implements CompoundBut
 
         View rootView = inflater.inflate(R.layout.fragment_agregar_presupuesto, container, false);
 
+        parentActivity = (MainActivity) getActivity();
+        parentActivity.getSupportActionBar().setTitle("Agregar Presupuesto");
         recurrentTextView = (TextView) rootView.findViewById(R.id.recurrentTextView);
         monthsEditText = (EditText) rootView.findViewById(R.id.monthsEditText);
         onlyRadioButton = (RadioButton) rootView.findViewById(R.id.onlyRadioButton);
