@@ -29,6 +29,7 @@
         <activity
             android:name="com.ucab.fin.finucab.activity.MainActivity"
             android:icon="@mipmap/indicador" />
+        <activity android:name="com.ucab.fin.finucab.activity.RegisterActivity" />
     </application>
 
 </manifest>
