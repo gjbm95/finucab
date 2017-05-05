@@ -1,23 +1,19 @@
 [
     {
-        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_bottom_sheet_slide_out.xml",
-        "source": "C:\\Users\\Oswaldo\\.android\\build-cache\\167d006212698f4bfd1eb320fa6c6862fb97a357\\output\\res\\anim\\design_bottom_sheet_slide_out.xml"
-    },
-    {
         "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_snackbar_out.xml",
         "source": "C:\\Users\\Junior\\.android\\build-cache\\db275bfa44eef075a834d3b7c6cc31b29b67b919\\output\\res\\anim\\design_snackbar_out.xml"
     },
     {
-        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_enter.xml",
-        "source": "C:\\Users\\Oswaldo\\.android\\build-cache\\1280e2832a14950715bc29491217d511a549eb47\\output\\res\\anim\\abc_popup_enter.xml"
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_bottom_sheet_slide_out.xml",
+        "source": "C:\\Users\\Junior\\.android\\build-cache\\db275bfa44eef075a834d3b7c6cc31b29b67b919\\output\\res\\anim\\design_bottom_sheet_slide_out.xml"
     },
     {
-        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_shrink_fade_out_from_bottom.xml",
-        "source": "C:\\Users\\Oswaldo\\.android\\build-cache\\1280e2832a14950715bc29491217d511a549eb47\\output\\res\\anim\\abc_shrink_fade_out_from_bottom.xml"
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_grow_fade_in_from_bottom.xml",
+        "source": "C:\\Users\\Junior\\.android\\build-cache\\eb5d5070fc894083c51fb88af2525637b506d1ca\\output\\res\\anim\\abc_grow_fade_in_from_bottom.xml"
     },
     {
-        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_out.xml",
-        "source": "C:\\Users\\Oswaldo\\.android\\build-cache\\1280e2832a14950715bc29491217d511a549eb47\\output\\res\\anim\\abc_fade_out.xml"
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_fab_out.xml",
+        "source": "C:\\Users\\Junior\\.android\\build-cache\\db275bfa44eef075a834d3b7c6cc31b29b67b919\\output\\res\\anim\\design_fab_out.xml"
     },
     {
         "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_top.xml",
@@ -28,8 +24,8 @@
         "source": "C:\\Users\\Oswaldo\\.android\\build-cache\\167d006212698f4bfd1eb320fa6c6862fb97a357\\output\\res\\anim\\design_fab_out.xml"
     },
     {
-        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_top.xml",
-        "source": "C:\\Users\\Junior\\.android\\build-cache\\eb5d5070fc894083c51fb88af2525637b506d1ca\\output\\res\\anim\\abc_slide_out_top.xml"
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_bottom.xml",
+        "source": "C:\\Users\\Junior\\.android\\build-cache\\eb5d5070fc894083c51fb88af2525637b506d1ca\\output\\res\\anim\\abc_slide_out_bottom.xml"
     },
     {
         "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_snackbar_in.xml",
@@ -38,14 +34,6 @@
     {
         "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_fab_out.xml",
         "source": "C:\\Users\\Junior\\.android\\build-cache\\db275bfa44eef075a834d3b7c6cc31b29b67b919\\output\\res\\anim\\design_fab_out.xml"
-    },
-    {
-        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_out.xml",
-        "source": "C:\\Users\\Junior\\.android\\build-cache\\eb5d5070fc894083c51fb88af2525637b506d1ca\\output\\res\\anim\\abc_fade_out.xml"
-    },
-    {
-        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_snackbar_out.xml",
-        "source": "C:\\Users\\Oswaldo\\.android\\build-cache\\167d006212698f4bfd1eb320fa6c6862fb97a357\\output\\res\\anim\\design_snackbar_out.xml"
     },
     {
         "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_grow_fade_in_from_bottom.xml",
@@ -64,12 +52,108 @@
         "source": "C:\\Users\\Junior\\.android\\build-cache\\eb5d5070fc894083c51fb88af2525637b506d1ca\\output\\res\\anim\\abc_shrink_fade_out_from_bottom.xml"
     },
     {
+        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_snackbar_in.xml",
+        "source": "C:\\Users\\Oswaldo\\.android\\build-cache\\167d006212698f4bfd1eb320fa6c6862fb97a357\\output\\res\\anim\\design_snackbar_in.xml"
+    },
+    {
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_fab_in.xml",
+        "source": "C:\\Users\\Junior\\.android\\build-cache\\db275bfa44eef075a834d3b7c6cc31b29b67b919\\output\\res\\anim\\design_fab_in.xml"
+    },
+    {
+        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_grow_fade_in_from_bottom.xml",
+        "source": "C:\\Users\\Oswaldo\\.android\\build-cache\\1280e2832a14950715bc29491217d511a549eb47\\output\\res\\anim\\abc_grow_fade_in_from_bottom.xml"
+    },
+    {
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_snackbar_out.xml",
+        "source": "C:\\Users\\Junior\\.android\\build-cache\\db275bfa44eef075a834d3b7c6cc31b29b67b919\\output\\res\\anim\\design_snackbar_out.xml"
+    },
+    {
+        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_bottom_sheet_slide_in.xml",
+        "source": "C:\\Users\\Oswaldo\\.android\\build-cache\\167d006212698f4bfd1eb320fa6c6862fb97a357\\output\\res\\anim\\design_bottom_sheet_slide_in.xml"
+    },
+    {
+        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_bottom_sheet_slide_out.xml",
+        "source": "C:\\Users\\Junior\\.android\\build-cache\\db275bfa44eef075a834d3b7c6cc31b29b67b919\\output\\res\\anim\\design_bottom_sheet_slide_out.xml"
+    },
+    {
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_bottom.xml",
+        "source": "C:\\Users\\Junior\\.android\\build-cache\\eb5d5070fc894083c51fb88af2525637b506d1ca\\output\\res\\anim\\abc_slide_in_bottom.xml"
+    },
+    {
+        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_fab_in.xml",
+        "source": "C:\\Users\\Junior\\.android\\build-cache\\db275bfa44eef075a834d3b7c6cc31b29b67b919\\output\\res\\anim\\design_fab_in.xml"
+    },
+    {
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_out.xml",
+        "source": "C:\\Users\\Junior\\.android\\build-cache\\eb5d5070fc894083c51fb88af2525637b506d1ca\\output\\res\\anim\\abc_fade_out.xml"
+    },
+    {
+        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_bottom.xml",
+        "source": "C:\\Users\\Junior\\.android\\build-cache\\eb5d5070fc894083c51fb88af2525637b506d1ca\\output\\res\\anim\\abc_slide_out_bottom.xml"
+    },
+    {
+        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_bottom_sheet_slide_in.xml",
+        "source": "C:\\Users\\Junior\\.android\\build-cache\\db275bfa44eef075a834d3b7c6cc31b29b67b919\\output\\res\\anim\\design_bottom_sheet_slide_in.xml"
+    },
+    {
+        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_in.xml",
+        "source": "C:\\Users\\Junior\\.android\\build-cache\\eb5d5070fc894083c51fb88af2525637b506d1ca\\output\\res\\anim\\abc_fade_in.xml"
+    },
+    {
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_exit.xml",
+        "source": "C:\\Users\\Junior\\.android\\build-cache\\eb5d5070fc894083c51fb88af2525637b506d1ca\\output\\res\\anim\\abc_popup_exit.xml"
+    },
+    {
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_bottom_sheet_slide_in.xml",
+        "source": "C:\\Users\\Junior\\.android\\build-cache\\db275bfa44eef075a834d3b7c6cc31b29b67b919\\output\\res\\anim\\design_bottom_sheet_slide_in.xml"
+    },
+    {
+        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_bottom_sheet_slide_out.xml",
+        "source": "C:\\Users\\Oswaldo\\.android\\build-cache\\167d006212698f4bfd1eb320fa6c6862fb97a357\\output\\res\\anim\\design_bottom_sheet_slide_out.xml"
+    },
+    {
+        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_enter.xml",
+        "source": "C:\\Users\\Oswaldo\\.android\\build-cache\\1280e2832a14950715bc29491217d511a549eb47\\output\\res\\anim\\abc_popup_enter.xml"
+    },
+    {
+        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_shrink_fade_out_from_bottom.xml",
+        "source": "C:\\Users\\Oswaldo\\.android\\build-cache\\1280e2832a14950715bc29491217d511a549eb47\\output\\res\\anim\\abc_shrink_fade_out_from_bottom.xml"
+    },
+    {
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_shrink_fade_out_from_bottom.xml",
+        "source": "C:\\Users\\Junior\\.android\\build-cache\\eb5d5070fc894083c51fb88af2525637b506d1ca\\output\\res\\anim\\abc_shrink_fade_out_from_bottom.xml"
+    },
+    {
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_top.xml",
+        "source": "C:\\Users\\Junior\\.android\\build-cache\\eb5d5070fc894083c51fb88af2525637b506d1ca\\output\\res\\anim\\abc_slide_out_top.xml"
+    },
+    {
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_enter.xml",
+        "source": "C:\\Users\\Junior\\.android\\build-cache\\eb5d5070fc894083c51fb88af2525637b506d1ca\\output\\res\\anim\\abc_popup_enter.xml"
+    },
+    {
+        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_out.xml",
+        "source": "C:\\Users\\Oswaldo\\.android\\build-cache\\1280e2832a14950715bc29491217d511a549eb47\\output\\res\\anim\\abc_fade_out.xml"
+    },
+    {
+        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_top.xml",
+        "source": "C:\\Users\\Junior\\.android\\build-cache\\eb5d5070fc894083c51fb88af2525637b506d1ca\\output\\res\\anim\\abc_slide_out_top.xml"
+    },
+    {
+        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_out.xml",
+        "source": "C:\\Users\\Junior\\.android\\build-cache\\eb5d5070fc894083c51fb88af2525637b506d1ca\\output\\res\\anim\\abc_fade_out.xml"
+    },
+    {
+        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_snackbar_out.xml",
+        "source": "C:\\Users\\Oswaldo\\.android\\build-cache\\167d006212698f4bfd1eb320fa6c6862fb97a357\\output\\res\\anim\\design_snackbar_out.xml"
+    },
+    {
         "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_top.xml",
         "source": "C:\\Users\\Oswaldo\\.android\\build-cache\\1280e2832a14950715bc29491217d511a549eb47\\output\\res\\anim\\abc_slide_out_top.xml"
     },
     {
-        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_snackbar_in.xml",
-        "source": "C:\\Users\\Oswaldo\\.android\\build-cache\\167d006212698f4bfd1eb320fa6c6862fb97a357\\output\\res\\anim\\design_snackbar_in.xml"
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_snackbar_in.xml",
+        "source": "C:\\Users\\Junior\\.android\\build-cache\\db275bfa44eef075a834d3b7c6cc31b29b67b919\\output\\res\\anim\\design_snackbar_in.xml"
     },
     {
         "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_bottom.xml",
@@ -80,20 +164,16 @@
         "source": "C:\\Users\\Oswaldo\\.android\\build-cache\\167d006212698f4bfd1eb320fa6c6862fb97a357\\output\\res\\anim\\design_fab_in.xml"
     },
     {
-        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_grow_fade_in_from_bottom.xml",
-        "source": "C:\\Users\\Oswaldo\\.android\\build-cache\\1280e2832a14950715bc29491217d511a549eb47\\output\\res\\anim\\abc_grow_fade_in_from_bottom.xml"
-    },
-    {
-        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_in.xml",
-        "source": "C:\\Users\\Oswaldo\\.android\\build-cache\\1280e2832a14950715bc29491217d511a549eb47\\output\\res\\anim\\abc_fade_in.xml"
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_top.xml",
+        "source": "C:\\Users\\Junior\\.android\\build-cache\\eb5d5070fc894083c51fb88af2525637b506d1ca\\output\\res\\anim\\abc_slide_in_top.xml"
     },
     {
         "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_top.xml",
         "source": "C:\\Users\\Oswaldo\\.android\\build-cache\\1280e2832a14950715bc29491217d511a549eb47\\output\\res\\anim\\abc_slide_in_top.xml"
     },
     {
-        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_bottom_sheet_slide_in.xml",
-        "source": "C:\\Users\\Oswaldo\\.android\\build-cache\\167d006212698f4bfd1eb320fa6c6862fb97a357\\output\\res\\anim\\design_bottom_sheet_slide_in.xml"
+        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_in.xml",
+        "source": "C:\\Users\\Oswaldo\\.android\\build-cache\\1280e2832a14950715bc29491217d511a549eb47\\output\\res\\anim\\abc_fade_in.xml"
     },
     {
         "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_enter.xml",
@@ -104,27 +184,11 @@
         "source": "C:\\Users\\Oswaldo\\.android\\build-cache\\1280e2832a14950715bc29491217d511a549eb47\\output\\res\\anim\\abc_popup_exit.xml"
     },
     {
-        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_bottom_sheet_slide_out.xml",
-        "source": "C:\\Users\\Junior\\.android\\build-cache\\db275bfa44eef075a834d3b7c6cc31b29b67b919\\output\\res\\anim\\design_bottom_sheet_slide_out.xml"
-    },
-    {
-        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_fab_in.xml",
-        "source": "C:\\Users\\Junior\\.android\\build-cache\\db275bfa44eef075a834d3b7c6cc31b29b67b919\\output\\res\\anim\\design_fab_in.xml"
-    },
-    {
-        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_bottom.xml",
-        "source": "C:\\Users\\Junior\\.android\\build-cache\\eb5d5070fc894083c51fb88af2525637b506d1ca\\output\\res\\anim\\abc_slide_out_bottom.xml"
-    },
-    {
         "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_bottom.xml",
         "source": "C:\\Users\\Oswaldo\\.android\\build-cache\\1280e2832a14950715bc29491217d511a549eb47\\output\\res\\anim\\abc_slide_in_bottom.xml"
     },
     {
-        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_bottom_sheet_slide_in.xml",
-        "source": "C:\\Users\\Junior\\.android\\build-cache\\db275bfa44eef075a834d3b7c6cc31b29b67b919\\output\\res\\anim\\design_bottom_sheet_slide_in.xml"
-    },
-    {
-        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_in.xml",
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_in.xml",
         "source": "C:\\Users\\Junior\\.android\\build-cache\\eb5d5070fc894083c51fb88af2525637b506d1ca\\output\\res\\anim\\abc_fade_in.xml"
     }
 ]
