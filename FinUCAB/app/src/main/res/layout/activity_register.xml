@@ -48,48 +48,22 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
+
     <ImageView
         android:id="@+id/onboardindImageView"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/onboarding"
+        android:layout_height="100dp"
+        app:srcCompat="@mipmap/onboarding1"
         android:layout_below="@+id/textView4"
         android:layout_centerHorizontal="true" />
-
-    <ImageView
-        android:layout_height="20dp"
-        app:srcCompat="@mipmap/circle"
-        android:id="@+id/imageView3"
-        android:layout_width="20dp"
-        android:translationX="5dp"
-        android:translationY="-1dp"
-        android:layout_alignTop="@+id/onboardindImageView"
-        android:layout_alignLeft="@+id/onboardindImageView"
-        android:layout_alignStart="@+id/onboardindImageView"
-        android:layout_marginTop="28dp" />
-
-    <TextView
-        android:text="Datos\nPersonales"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/userdataTitle"
-        android:textColor="@color/colorAccent"
-        android:textSize="12sp"
-        android:layout_marginRight="13dp"
-        android:layout_marginEnd="13dp"
-        android:translationY="10dp"
-        android:layout_below="@+id/imageView3"
-        android:layout_toLeftOf="@+id/textView4"
-        android:layout_toStartOf="@+id/textView4" />
-
 
     <fragment
         android:layout_width="match_parent"
         android:layout_height="280dp"
-        android:name="com.ucab.fin.finucab.fragment.RegisterSwapFragment"
+        android:name="com.ucab.fin.finucab.fragment.DatosPersonalesFragment"
         android:id="@+id/fragment"
         android:layout_gravity="center"
-        android:layout_marginTop="36dp"
+
         android:layout_below="@+id/onboardindImageView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
