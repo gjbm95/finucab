@@ -2,33 +2,22 @@ package com.ucab.fin.finucab.activity;
 
 import android.content.Intent;
 
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.ListView;
 
 import com.ucab.fin.finucab.R;
-import com.ucab.fin.finucab.fragment.BudgetFragment;
+import com.ucab.fin.finucab.controllers.GestionUsuarios_Controller;
 import com.ucab.fin.finucab.fragment.DatosCuentaFragment;
 import com.ucab.fin.finucab.fragment.DatosPersonalesFragment;
 import com.ucab.fin.finucab.fragment.DatosSeguridadFragment;
-import com.ucab.fin.finucab.fragment.GananciasFragment;
-import com.ucab.fin.finucab.fragment.GastosFragment;
-import com.ucab.fin.finucab.fragment.RegisterSwapFragment;
-import com.ucab.fin.finucab.fragment.TotalFragment;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -64,22 +53,31 @@ public class RegisterActivity extends AppCompatActivity {
         siguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (conteo<=3)
+                if (conteo<3)
                     conteo++;
                 else
                     conteo =1;
                 //Realizando el cambio de formulario:
                 if (conteo==1) {
-                    inicioOnboarding();
-                    activarPaso(1);
+                    if (controlValidacion(conteo))
+                    {
+                        inicioOnboarding();
+                        activarPaso(1);
+                    }
                 }
                 if (conteo==2) {
-                    inicioOnboarding();
-                    activarPaso(2);
+                    if (controlValidacion(conteo))
+                    {
+                        inicioOnboarding();
+                        activarPaso(2);
+                    }
                 }
                 if (conteo==3) {
-                    inicioOnboarding();
-                    activarPaso(3);
+                    if (controlValidacion(conteo))
+                    {
+                        inicioOnboarding();
+                        activarPaso(3);
+                    }
                 }
             }
               }
@@ -96,13 +94,14 @@ public class RegisterActivity extends AppCompatActivity {
                 if (anterior.getText().equals("CANCELAR")||anterior.getText().equals("Cancelar")) {
                     Intent home = new Intent(RegisterActivity.this, LoginActivity.class);
                     startActivity(home);
+                    GestionUsuarios_Controller.resetarVariables();
                     finish();
                 }
                 if (anterior.getText().equals("ANTERIOR")) {
                     conteo--;
-                    if(conteo!=0)
-                    activarPaso(conteo);
-                    else{
+                    if(conteo!=0) {
+                        activarPaso(conteo);
+                    }else{
                         conteo++;
                         activarPaso(conteo);
                     }
@@ -156,6 +155,32 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
+    //Se activa un tipo de validacion dependiendo del formulario donde se encuentre.
+    public boolean controlValidacion(int conteo){
+        if((conteo)==2){
+            if(GestionUsuarios_Controller.validacionEtapaDatos()==1)
+            {
+                this.conteo--;
+                return false;
+            }
+        }else if ((conteo)==3){
+            if(GestionUsuarios_Controller.validacionEtapaCuenta()==1)
+            {
+                this.conteo--;
+                return false;
+            }
+
+        } else if ((conteo)==1){
+            if(GestionUsuarios_Controller.validacionEtapaSeguridad()==1)
+            {
+                this.conteo--;
+                return false;
+            }
+        }
+
+
+        return true;
+    }
 
 
 

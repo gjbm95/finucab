@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/cuenta"
     android:background="@color/colorBackground"
     tools:context="com.ucab.fin.finucab.fragment.DatosCuentaFragment">
 
@@ -14,8 +15,8 @@
         android:ems="10"
         android:layout_marginTop="24dp"
         android:inputType="textPassword"
-        android:id="@+id/passwordR2EditText"
-        android:layout_below="@+id/answersREditText"
+        android:id="@+id/passwordtwoREditText"
+        android:layout_below="@+id/passwordREditText"
         android:layout_centerHorizontal="true" />
 
     <EditText
@@ -25,12 +26,12 @@
         android:text=""
         android:ems="10"
         android:background="@drawable/caja"
-        android:id="@+id/answersREditText"
+        android:id="@+id/passwordREditText"
         android:inputType="textPassword"
         android:layout_marginTop="21dp"
-        android:layout_below="@+id/questionREditText"
-        android:layout_alignLeft="@+id/passwordR2EditText"
-        android:layout_alignStart="@+id/passwordR2EditText" />
+        android:layout_below="@+id/usernameREditText"
+        android:layout_alignLeft="@+id/passwordtwoREditText"
+        android:layout_alignStart="@+id/passwordtwoREditText" />
 
     <EditText
         android:layout_width="250dp"
@@ -40,10 +41,10 @@
         android:text=""
         android:ems="10"
         android:background="@drawable/caja"
-        android:id="@+id/questionREditText"
+        android:id="@+id/usernameREditText"
         android:layout_marginTop="44dp"
         android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/answersREditText"
-        android:layout_alignStart="@+id/answersREditText" />
+        android:layout_alignLeft="@+id/passwordREditText"
+        android:layout_alignStart="@+id/passwordREditText" />
 
 </RelativeLayout>

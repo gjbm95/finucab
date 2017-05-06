@@ -20,6 +20,8 @@
             android:name=".activity.MainActivity"
             android:icon="@mipmap/indicador" />
         <activity android:name=".activity.RegisterActivity"></activity>
+
+
     </application>
 
 </manifest>

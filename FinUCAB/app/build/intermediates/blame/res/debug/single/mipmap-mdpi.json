@@ -1,43 +1,147 @@
 [
     {
-        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\presupuesto.png",
-        "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\presupuesto.png"
-    },
-    {
         "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\onboarding4.png",
         "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\onboarding4.png"
-    },
-    {
-        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\money.png",
-        "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\money.png"
     },
     {
         "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\logo2.png",
         "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\logo2.png"
     },
     {
+        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\ic_flecha.png",
+        "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\ic_flecha.png"
+    },
+    {
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\configuracion.png",
+        "source": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\configuracion.png"
+    },
+    {
+        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\icono.png",
+        "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\icono.png"
+    },
+    {
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\onboarding4.png",
+        "source": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\onboarding4.png"
+    },
+    {
+        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\salir.png",
+        "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\salir.png"
+    },
+    {
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\onboarding.png",
+        "source": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\onboarding.png"
+    },
+    {
+        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\onboarding.png",
+        "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\onboarding.png"
+    },
+    {
+        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\logo2.png",
+        "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\logo2.png"
+    },
+    {
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\ic_launcher_round.png",
+        "source": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\ic_launcher_round.png",
+        "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\onboarding4.png",
+        "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\onboarding4.png"
+    },
+    {
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\money.png",
+        "source": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\money.png"
+    },
+    {
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\icono.png",
+        "source": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\icono.png"
+    },
+    {
+        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\logoh.png",
+        "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\logoh.png"
+    },
+    {
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\onboarding3.png",
+        "source": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\onboarding3.png"
+    },
+    {
+        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\onboarding3.png",
+        "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\onboarding3.png"
+    },
+    {
+        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\settings.png",
+        "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\settings.png"
+    },
+    {
+        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\user.png",
+        "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\user.png"
+    },
+    {
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\settings.png",
+        "source": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\settings.png"
+    },
+    {
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\ic_launcher.png",
+        "source": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\circle.png",
+        "source": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\circle.png"
+    },
+    {
+        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\agregar.png",
+        "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\agregar.png"
+    },
+    {
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\check.png",
+        "source": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\check.png"
+    },
+    {
+        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\logoh.png",
+        "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\logoh.png"
+    },
+    {
+        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\onboarding2.png",
+        "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\onboarding2.png"
+    },
+    {
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\salir.png",
+        "source": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\salir.png"
+    },
+    {
+        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\presupuesto.png",
+        "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\presupuesto.png"
+    },
+    {
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\logoh.png",
+        "source": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\logoh.png"
+    },
+    {
+        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\money.png",
+        "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\money.png"
+    },
+    {
         "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\agregar.png",
         "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\agregar.png"
+    },
+    {
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\ic_menu.png",
+        "source": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\ic_menu.png"
     },
     {
         "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\presupuesto.png",
         "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\presupuesto.png"
     },
     {
-        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\ic_flecha.png",
-        "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\ic_flecha.png"
-    },
-    {
-        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\ic_launcher_round.png",
-        "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
-    },
-    {
         "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\configuracion.png",
         "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\configuracion.png"
     },
     {
-        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\icono.png",
-        "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\icono.png"
+        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\ic_launcher_round.png",
+        "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
     },
     {
         "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\circle.png",
@@ -48,8 +152,8 @@
         "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\settings.png"
     },
     {
-        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\salir.png",
-        "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\salir.png"
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\onboarding1.png",
+        "source": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\onboarding1.png"
     },
     {
         "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\ic_launcher.png",
@@ -58,14 +162,6 @@
     {
         "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\onboarding2.png",
         "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\onboarding2.png"
-    },
-    {
-        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\logo2.png",
-        "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\logo2.png"
-    },
-    {
-        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\onboarding.png",
-        "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\onboarding.png"
     },
     {
         "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\onboarding1.png",
@@ -84,14 +180,6 @@
         "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\configuracion.png"
     },
     {
-        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\ic_launcher_round.png",
-        "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
-    },
-    {
-        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\onboarding4.png",
-        "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\onboarding4.png"
-    },
-    {
         "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\indicador.png",
         "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\indicador.png"
     },
@@ -100,48 +188,52 @@
         "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\check.png"
     },
     {
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\ic_flecha.png",
+        "source": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\ic_flecha.png"
+    },
+    {
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\agregar.png",
+        "source": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\agregar.png"
+    },
+    {
         "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\circle.png",
         "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\circle.png"
-    },
-    {
-        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\salir.png",
-        "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\salir.png"
-    },
-    {
-        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\user.png",
-        "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\user.png"
     },
     {
         "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\onboarding3.png",
         "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\onboarding3.png"
     },
     {
-        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\logoh.png",
-        "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\logoh.png"
+        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\user.png",
+        "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\user.png"
+    },
+    {
+        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\salir.png",
+        "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\salir.png"
+    },
+    {
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\logo2.png",
+        "source": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\logo2.png"
     },
     {
         "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\ic_flecha.png",
         "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\ic_flecha.png"
     },
     {
-        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\onboarding3.png",
-        "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\onboarding3.png"
-    },
-    {
         "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\icono.png",
         "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\icono.png"
     },
     {
-        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\settings.png",
-        "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\settings.png"
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\user.png",
+        "source": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\user.png"
     },
     {
-        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\user.png",
-        "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\user.png"
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\onboarding2.png",
+        "source": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\onboarding2.png"
     },
     {
-        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\agregar.png",
-        "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\agregar.png"
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\indicador.png",
+        "source": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\indicador.png"
     },
     {
         "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\money.png",
@@ -152,19 +244,15 @@
         "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\indicador.png"
     },
     {
-        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\logoh.png",
-        "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\logoh.png"
-    },
-    {
         "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\onboarding1.png",
         "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\onboarding1.png"
     },
     {
-        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\ic_launcher.png",
-        "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\presupuesto.png",
+        "source": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\presupuesto.png"
     },
     {
-        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\onboarding2.png",
-        "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\onboarding2.png"
+        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\ic_launcher.png",
+        "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
     }
 ]
