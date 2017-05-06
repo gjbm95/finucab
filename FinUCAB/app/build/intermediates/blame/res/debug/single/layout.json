@@ -1,23 +1,23 @@
 [
     {
-        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_bottom_navigation_item.xml",
-        "source": "C:\\Users\\Junior\\.android\\build-cache\\db275bfa44eef075a834d3b7c6cc31b29b67b919\\output\\res\\layout\\design_bottom_navigation_item.xml"
-    },
-    {
         "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_dialog_title_material.xml",
         "source": "C:\\Users\\Junior\\.android\\build-cache\\eb5d5070fc894083c51fb88af2525637b506d1ca\\output\\res\\layout\\abc_dialog_title_material.xml"
+    },
+    {
+        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_bottom_navigation_item.xml",
+        "source": "C:\\Users\\Junior\\.android\\build-cache\\db275bfa44eef075a834d3b7c6cc31b29b67b919\\output\\res\\layout\\design_bottom_navigation_item.xml"
     },
     {
         "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_up_container.xml",
         "source": "C:\\Users\\Junior\\.android\\build-cache\\eb5d5070fc894083c51fb88af2525637b506d1ca\\output\\res\\layout\\abc_action_bar_up_container.xml"
     },
     {
-        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_menu.xml",
-        "source": "C:\\Users\\Junior\\.android\\build-cache\\db275bfa44eef075a834d3b7c6cc31b29b67b919\\output\\res\\layout\\design_navigation_menu.xml"
-    },
-    {
         "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_select_dialog_material.xml",
         "source": "C:\\Users\\Junior\\.android\\build-cache\\eb5d5070fc894083c51fb88af2525637b506d1ca\\output\\res\\layout\\abc_select_dialog_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_menu.xml",
+        "source": "C:\\Users\\Junior\\.android\\build-cache\\db275bfa44eef075a834d3b7c6cc31b29b67b919\\output\\res\\layout\\design_navigation_menu.xml"
     },
     {
         "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_register_swap.xml",
@@ -48,20 +48,20 @@
         "source": "C:\\FinUCAB\\app\\src\\main\\res\\layout\\activity_register.xml"
     },
     {
-        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_close_item_material.xml",
-        "source": "C:\\Users\\Oswaldo\\.android\\build-cache\\1280e2832a14950715bc29491217d511a549eb47\\output\\res\\layout\\abc_action_mode_close_item_material.xml"
-    },
-    {
         "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view.xml",
         "source": "C:\\Users\\Junior\\.android\\build-cache\\eb5d5070fc894083c51fb88af2525637b506d1ca\\output\\res\\layout\\abc_activity_chooser_view.xml"
     },
     {
-        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\home_fragment.xml",
-        "source": "C:\\FinUCAB\\app\\src\\main\\res\\layout\\home_fragment.xml"
+        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_close_item_material.xml",
+        "source": "C:\\Users\\Oswaldo\\.android\\build-cache\\1280e2832a14950715bc29491217d511a549eb47\\output\\res\\layout\\abc_action_mode_close_item_material.xml"
     },
     {
         "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_title_item.xml",
         "source": "C:\\Users\\Junior\\.android\\build-cache\\eb5d5070fc894083c51fb88af2525637b506d1ca\\output\\res\\layout\\abc_action_bar_title_item.xml"
+    },
+    {
+        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\home_fragment.xml",
+        "source": "C:\\FinUCAB\\app\\src\\main\\res\\layout\\home_fragment.xml"
     },
     {
         "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_menu.xml",
@@ -188,20 +188,20 @@
         "source": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\src\\main\\res\\layout\\activity_register.xml"
     },
     {
-        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media_custom.xml",
-        "source": "C:\\Users\\Junior\\.android\\build-cache\\eb5d5070fc894083c51fb88af2525637b506d1ca\\output\\res\\layout\\notification_template_media_custom.xml"
-    },
-    {
         "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_bottom_navigation_item.xml",
         "source": "C:\\Users\\Oswaldo\\.android\\build-cache\\167d006212698f4bfd1eb320fa6c6862fb97a357\\output\\res\\layout\\design_bottom_navigation_item.xml"
     },
     {
-        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item.xml",
-        "source": "C:\\Users\\Oswaldo\\.android\\build-cache\\167d006212698f4bfd1eb320fa6c6862fb97a357\\output\\res\\layout\\design_navigation_item.xml"
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media_custom.xml",
+        "source": "C:\\Users\\Junior\\.android\\build-cache\\eb5d5070fc894083c51fb88af2525637b506d1ca\\output\\res\\layout\\notification_template_media_custom.xml"
     },
     {
         "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\budget_fragment.xml",
         "source": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\src\\main\\res\\layout\\budget_fragment.xml"
+    },
+    {
+        "merged": "C:\\Users\\Oswaldo\\Documents\\AndroidStudoProjects\\Repositorio\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item.xml",
+        "source": "C:\\Users\\Oswaldo\\.android\\build-cache\\167d006212698f4bfd1eb320fa6c6862fb97a357\\output\\res\\layout\\design_navigation_item.xml"
     },
     {
         "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_select_dialog_material.xml",
