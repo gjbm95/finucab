@@ -7,8 +7,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.ucab.fin.finucab.R;
+import com.ucab.fin.finucab.controllers.GestionUsuarios_Controller;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -65,7 +67,22 @@ public class DatosSeguridadFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_datos_seguridad, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_datos_seguridad, container, false);
+        if (GestionUsuarios_Controller.pregunta==null)
+        GestionUsuarios_Controller.pregunta = (EditText)rootView.findViewById(R.id.questionREditText);
+        else {
+            EditText pregunta = (EditText) rootView.findViewById(R.id.questionREditText);
+            pregunta.setText(GestionUsuarios_Controller.pregunta.getText());
+            GestionUsuarios_Controller.pregunta= pregunta;
+        }
+        if (GestionUsuarios_Controller.respuesta==null)
+        GestionUsuarios_Controller.respuesta = (EditText)rootView.findViewById(R.id.answerREditText);
+        else {
+            EditText respuesta = (EditText) rootView.findViewById(R.id.answerREditText);
+            respuesta.setText(GestionUsuarios_Controller.respuesta.getText());
+            GestionUsuarios_Controller.respuesta= respuesta;
+        }
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

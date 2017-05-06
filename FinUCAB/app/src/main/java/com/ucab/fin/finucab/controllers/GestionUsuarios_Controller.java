@@ -7,6 +7,16 @@ import android.widget.EditText;
  */
 
 public class GestionUsuarios_Controller {
+    //Recursos:
+    public static EditText nombre;
+    public static EditText apellido;
+    public static EditText correo;
+    public static EditText usuario;
+    public static EditText contrasena1;
+    public static EditText contrasena2;
+    public static EditText pregunta;
+    public static EditText respuesta;
+
 
     public GestionUsuarios_Controller (){
 
@@ -15,10 +25,11 @@ public class GestionUsuarios_Controller {
 
     //Se encarga de validar que no se encuentre vacio los campos nombre, apellido, correo
     //Tambien se valida si el formato del correo electronico es correcto.
-    public  int validacionEtapaDatos(EditText nombre,EditText apellido,EditText correo){
+    public static int validacionEtapaDatos(){
 
             if (nombre.getText().toString().isEmpty()){
                 nombre.setError("Debe colocar un Nombre");
+
                 return 1;
             } else if (apellido.getText().toString().isEmpty()){
                 apellido.setError("Debe colocar un Apellido");
@@ -37,13 +48,15 @@ public class GestionUsuarios_Controller {
                     return 1;
                   }
               }
-
+               //Estadarizamos mayusculas y minusculas:
+               nombre.setText(GestionUsuarios_Controller.formatearCadena(nombre.getText().toString()));
+               apellido.setText(GestionUsuarios_Controller.formatearCadena(apellido.getText().toString()));
                return 0;
     }
 
 
     //Se encarga de validar que no se encuentre vacio los campos usuario, contrasena, repeticion de contrasena
-    public int validacionEtapaCuenta(EditText usuario,EditText contrasena1,EditText contrasena2)
+    public static int validacionEtapaCuenta()
     {
 
         if (usuario.getText().toString().isEmpty()){
@@ -70,7 +83,7 @@ public class GestionUsuarios_Controller {
 
 
     //Se encarga de validar que no se encuentre vacio los campos pregunta, respuesta
-    public  int validacionEtapaSeguridad(EditText pregunta,EditText respuesta){
+    public static int validacionEtapaSeguridad(){
 
         if (pregunta.getText().toString().isEmpty()){
             pregunta.setError("Debe colocar una Pregunta");
@@ -85,11 +98,22 @@ public class GestionUsuarios_Controller {
 
     //Este metodo le da un formato unico a los Nombre y Apellidos. Colocando su primera letra en Mayusculas y el
     //resto en minusculas.
-    public String formatearCadena (String texto){
+    public static CharSequence formatearCadena (String texto){
         String convertido = texto.toLowerCase();
         return Character.toUpperCase(convertido.charAt(0)) + convertido.substring(1);
     }
 
+    //Inicializo nuevamente las variables
+    public static void resetarVariables (){
+         nombre=null;
+         apellido=null;
+         correo=null;
+         usuario=null;
+         contrasena1=null;
+         contrasena2=null;
+         pregunta=null;
+         respuesta=null;
+    }
 
 
 }

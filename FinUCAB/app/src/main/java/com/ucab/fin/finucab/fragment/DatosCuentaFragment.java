@@ -7,8 +7,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.ucab.fin.finucab.R;
+import com.ucab.fin.finucab.controllers.GestionUsuarios_Controller;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -65,7 +67,31 @@ public class DatosCuentaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_datos_cuenta, container, false);
+
+        View rootView = inflater.inflate(R.layout.fragment_datos_cuenta, container, false);
+        if (GestionUsuarios_Controller.usuario==null)
+        GestionUsuarios_Controller.usuario = (EditText)rootView.findViewById(R.id.usernameREditText);
+        else {
+            EditText usuario = (EditText) rootView.findViewById(R.id.usernameREditText);
+            usuario.setText(GestionUsuarios_Controller.usuario.getText());
+            GestionUsuarios_Controller.usuario= usuario;
+        }
+        if (GestionUsuarios_Controller.contrasena1==null)
+        GestionUsuarios_Controller.contrasena1 = (EditText)rootView.findViewById(R.id.passwordREditText);
+        else {
+            EditText contrasena1 = (EditText) rootView.findViewById(R.id.passwordREditText);
+            contrasena1.setText(GestionUsuarios_Controller.contrasena1.getText());
+            GestionUsuarios_Controller.contrasena1= contrasena1;
+        }
+        if (GestionUsuarios_Controller.contrasena2==null)
+        GestionUsuarios_Controller.contrasena2 = (EditText)rootView.findViewById(R.id.passwordtwoREditText);
+        else {
+            EditText contrasena2 = (EditText) rootView.findViewById(R.id.passwordtwoREditText);
+            contrasena2.setText(GestionUsuarios_Controller.contrasena2.getText());
+            GestionUsuarios_Controller.contrasena2= contrasena2;
+        }
+
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@color/colorBackground"
+    android:id="@+id/personales"
     android:layout_height="match_parent"
     tools:context="com.ucab.fin.finucab.fragment.DatosPersonalesFragment">
 
@@ -15,8 +16,10 @@
         android:hint="Ingrese su correo electronico"
         android:ems="10"
         android:layout_marginTop="24dp"
-        android:id="@+id/passwordR2EditText"
-        android:layout_below="@+id/answersREditText"
+        android:id="@+id/emailR2EditText"
+        android:imeOptions="actionDone"
+        android:singleLine="true"
+        android:layout_below="@+id/lastnameREditText"
         android:layout_centerHorizontal="true" />
 
     <EditText
@@ -28,11 +31,13 @@
         android:text=""
         android:ems="10"
         android:background="@drawable/caja"
-        android:id="@+id/answersREditText"
+        android:id="@+id/lastnameREditText"
         android:layout_marginTop="21dp"
-        android:layout_below="@+id/questionREditText"
-        android:layout_alignLeft="@+id/passwordR2EditText"
-        android:layout_alignStart="@+id/passwordR2EditText" />
+        android:imeOptions="actionNext"
+        android:singleLine="true"
+        android:layout_below="@+id/nameREditText"
+        android:layout_alignLeft="@+id/emailR2EditText"
+        android:layout_alignStart="@+id/emailR2EditText" />
 
     <EditText
         android:layout_width="250dp"
@@ -43,9 +48,11 @@
         android:text=""
         android:ems="10"
         android:background="@drawable/caja"
-        android:id="@+id/questionREditText"
+        android:id="@+id/nameREditText"
+        android:imeOptions="actionNext"
+        android:singleLine="true"
         android:layout_marginTop="44dp"
         android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/answersREditText"
-        android:layout_alignStart="@+id/answersREditText" />
+        android:layout_alignLeft="@+id/lastnameREditText"
+        android:layout_alignStart="@+id/lastnameREditText" />
 </RelativeLayout>
