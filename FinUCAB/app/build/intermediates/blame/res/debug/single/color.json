@@ -48,12 +48,12 @@
         "source": "C:\\Users\\Junior\\.android\\build-cache\\eb5d5070fc894083c51fb88af2525637b506d1ca\\output\\res\\color\\abc_search_url_text.xml"
     },
     {
-        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_primary_text_disable_only_material_light.xml",
-        "source": "C:\\Users\\Junior\\.android\\build-cache\\eb5d5070fc894083c51fb88af2525637b506d1ca\\output\\res\\color\\abc_primary_text_disable_only_material_light.xml"
-    },
-    {
         "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_tint_edittext.xml",
         "source": "C:\\Users\\Junior\\.android\\build-cache\\eb5d5070fc894083c51fb88af2525637b506d1ca\\output\\res\\color\\abc_tint_edittext.xml"
+    },
+    {
+        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_primary_text_disable_only_material_light.xml",
+        "source": "C:\\Users\\Junior\\.android\\build-cache\\eb5d5070fc894083c51fb88af2525637b506d1ca\\output\\res\\color\\abc_primary_text_disable_only_material_light.xml"
     },
     {
         "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\color\\abc_btn_colored_borderless_text_material.xml",
