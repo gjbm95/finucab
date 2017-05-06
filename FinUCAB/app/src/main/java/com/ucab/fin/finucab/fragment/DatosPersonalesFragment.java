@@ -62,7 +62,7 @@ public class DatosPersonalesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_datos_personales, container, false);
+        View rootView = inflater.inflate(R.layout.datos_personales_fragment, container, false);
         if (GestionUsuarios_Controller.nombre==null)
         GestionUsuarios_Controller.nombre = (EditText)rootView.findViewById(R.id.nameREditText);
         else {

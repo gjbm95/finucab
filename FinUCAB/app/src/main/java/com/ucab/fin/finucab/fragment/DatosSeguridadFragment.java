@@ -67,7 +67,7 @@ public class DatosSeguridadFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_datos_seguridad, container, false);
+        View rootView = inflater.inflate(R.layout.datos_seguridad_fragment, container, false);
         if (GestionUsuarios_Controller.pregunta==null)
         GestionUsuarios_Controller.pregunta = (EditText)rootView.findViewById(R.id.questionREditText);
         else {
