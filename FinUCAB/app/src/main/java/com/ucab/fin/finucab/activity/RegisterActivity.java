@@ -64,7 +64,7 @@ public class RegisterActivity extends AppCompatActivity {
         siguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (conteo<=3)
+                if (conteo<3)
                     conteo++;
                 else
                     conteo =1;

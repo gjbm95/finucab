@@ -32,12 +32,12 @@
         "source": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\onboarding.png"
     },
     {
-        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\onboarding.png",
-        "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\onboarding.png"
-    },
-    {
         "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\logo2.png",
         "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\logo2.png"
+    },
+    {
+        "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\onboarding.png",
+        "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\onboarding.png"
     },
     {
         "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\ic_launcher_round.png",
@@ -126,6 +126,10 @@
     {
         "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\agregar.png",
         "source": "C:\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\agregar.png"
+    },
+    {
+        "merged": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\ic_menu.png",
+        "source": "C:\\Users\\Junior\\Documents\\Trabajos para la universidad\\DESARROLLO DE SOFTWARE\\Proyecto\\Implementacion\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-mdpi\\ic_menu.png"
     },
     {
         "merged": "C:\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\presupuesto.png",

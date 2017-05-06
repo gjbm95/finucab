@@ -3463,21 +3463,22 @@ containing a value of this type.
         public static final int ic_flecha=0x7f030004;
         public static final int ic_launcher=0x7f030005;
         public static final int ic_launcher_round=0x7f030006;
-        public static final int icono=0x7f030007;
-        public static final int indicador=0x7f030008;
-        public static final int logo2=0x7f030009;
-        public static final int logoh=0x7f03000a;
-        public static final int main_icon=0x7f03000b;
-        public static final int money=0x7f03000c;
-        public static final int onboarding=0x7f03000d;
-        public static final int onboarding1=0x7f03000e;
-        public static final int onboarding2=0x7f03000f;
-        public static final int onboarding3=0x7f030010;
-        public static final int onboarding4=0x7f030011;
-        public static final int presupuesto=0x7f030012;
-        public static final int salir=0x7f030013;
-        public static final int settings=0x7f030014;
-        public static final int user=0x7f030015;
+        public static final int ic_menu=0x7f030007;
+        public static final int icono=0x7f030008;
+        public static final int indicador=0x7f030009;
+        public static final int logo2=0x7f03000a;
+        public static final int logoh=0x7f03000b;
+        public static final int main_icon=0x7f03000c;
+        public static final int money=0x7f03000d;
+        public static final int onboarding=0x7f03000e;
+        public static final int onboarding1=0x7f03000f;
+        public static final int onboarding2=0x7f030010;
+        public static final int onboarding3=0x7f030011;
+        public static final int onboarding4=0x7f030012;
+        public static final int presupuesto=0x7f030013;
+        public static final int salir=0x7f030014;
+        public static final int settings=0x7f030015;
+        public static final int user=0x7f030016;
     }
     public static final class string {
         public static final int abc_action_bar_home_description=0x7f070000;
