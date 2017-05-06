@@ -12,7 +12,6 @@
         android:layout_height="55dp"
         android:inputType="textEmailAddress"
         android:background="@drawable/caja"
-
         android:hint="Ingrese su correo electronico"
         android:ems="10"
         android:layout_marginTop="24dp"
@@ -25,7 +24,7 @@
         android:layout_height="55dp"
         android:inputType="textPersonName"
         android:hint="Ingrese su apellido"
-
+        android:digits="qwertzuiopasdfghjklyxcvbnñmQWERTYUIOPASDFGHJKLÑZXCVBNM"
         android:text=""
         android:ems="10"
         android:background="@drawable/caja"
@@ -40,7 +39,7 @@
         android:layout_height="55dp"
         android:inputType="textPersonName"
         android:hint="Ingrese su nombre"
-
+        android:digits="qwertzuiopasdfghjklyxcvbnñmQWERTYUIOPASDFGHJKLÑZXCVBNM"
         android:text=""
         android:ems="10"
         android:background="@drawable/caja"
