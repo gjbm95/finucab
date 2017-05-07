@@ -131,6 +131,8 @@ public class RegisterActivity extends AppCompatActivity {
         if(indicador ==1) {
             anterior = (Button) findViewById(R.id.cancelButton);
             anterior.setText("CANCELAR");
+            siguiente = (Button) findViewById(R.id.nextButton);
+            siguiente.setText("SIGUIENTE");
             posicionEtapa = (ImageView) findViewById(R.id.onboardindImageView);
             posicionEtapa.setImageResource(R.mipmap.onboarding1);
             DatosPersonalesFragment fragment1 = new DatosPersonalesFragment();
@@ -139,6 +141,8 @@ public class RegisterActivity extends AppCompatActivity {
         if (indicador==2){
             anterior = (Button) findViewById(R.id.cancelButton);
             anterior.setText("ANTERIOR");
+            siguiente = (Button) findViewById(R.id.nextButton);
+            siguiente.setText("SIGUIENTE");
             posicionEtapa = (ImageView) findViewById(R.id.onboardindImageView);
             posicionEtapa.setImageResource(R.mipmap.onboarding2);
             DatosCuentaFragment fragment1 = new DatosCuentaFragment();
@@ -147,6 +151,8 @@ public class RegisterActivity extends AppCompatActivity {
         if(indicador==3){
             anterior = (Button) findViewById(R.id.cancelButton);
             anterior.setText("ANTERIOR");
+            siguiente = (Button) findViewById(R.id.nextButton);
+            siguiente.setText("LISTO");
             posicionEtapa = (ImageView) findViewById(R.id.onboardindImageView);
             posicionEtapa.setImageResource(R.mipmap.onboarding3);
             DatosSeguridadFragment fragment1 = new DatosSeguridadFragment();
