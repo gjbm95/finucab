@@ -2,10 +2,10 @@ package com.ucab.fin.finucab.fragment;
 
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v4.app.Fragment;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -21,29 +21,39 @@ import com.ucab.fin.finucab.controllers.Presupuesto_Controller;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AgregarPresupuesto_fragment extends Fragment implements CompoundButton.OnCheckedChangeListener{
+public class ModificarPresupuestoFragment extends Fragment implements CompoundButton.OnCheckedChangeListener {
+
+
     TextView recurrentTextView;
-    EditText monthsEditText, nameEditText;
+    EditText monthsEditText, nameEditText,amountEditText;
     RadioButton onlyRadioButton, recurrentRadioButton;
     Spinner categorySpinner;
     MainActivity parentActivity;
-    private static final String ARG_SECTION_NUMBER = "section_number";
 
+    public ModificarPresupuestoFragment() {
+        // Required empty public constructor
+    }
+
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        setHasOptionsMenu(true);
-        super.onCreate(savedInstanceState);
+        // Inflate the layout for this fragment
 
         View rootView = inflater.inflate(R.layout.agregar_presupuesto_fragment, container, false);
 
 
         parentActivity = (MainActivity) getActivity();
-        parentActivity.getSupportActionBar().setTitle("Agregar Presupuesto");
+        parentActivity.getSupportActionBar().setTitle("Modificar Presupuesto");
         recurrentTextView = (TextView) rootView.findViewById(R.id.recurrentTextView);
-        monthsEditText = (EditText) rootView.findViewById(R.id.monthsEditText);
+
 
         nameEditText = (EditText) rootView.findViewById(R.id.budgetNameEditText);
-        nameEditText.setText(Presupuesto_Controller.presupuesto.get_nombre());
+        monthsEditText = (EditText) rootView.findViewById(R.id.monthsEditText);
+        amountEditText = (EditText) rootView.findViewById(R.id.amountEditText);
+
+        Presupuesto_Controller.asignarValores(monthsEditText, nameEditText,amountEditText);
+
 
         onlyRadioButton = (RadioButton) rootView.findViewById(R.id.onlyRadioButton);
         onlyRadioButton.setOnCheckedChangeListener(this);
@@ -58,8 +68,13 @@ public class AgregarPresupuesto_fragment extends Fragment implements CompoundBut
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(adapter);
 
+
+
         return rootView;
+
     }
+
+
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (isChecked) {
@@ -74,7 +89,4 @@ public class AgregarPresupuesto_fragment extends Fragment implements CompoundBut
         }
 
     }
-
-
-
 }
