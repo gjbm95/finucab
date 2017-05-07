@@ -7,7 +7,7 @@ public class Presupuesto {
     String _categoria;
     Float _monto;
     String _clasificacion;
-    int _duracion;
+    Integer _duracion;
     String _tipo;
 
     public Presupuesto(String _nombre, String _categoria, Float _monto, String _clasificacion, int _duracion, String _tipo) {
@@ -37,7 +37,7 @@ public class Presupuesto {
         return _clasificacion;
     }
 
-    public int get_duracion() {
+    public Integer get_duracion() {
         return _duracion;
     }
 
@@ -61,7 +61,7 @@ public class Presupuesto {
         this._clasificacion = _clasificacion;
     }
 
-    public void set_duracion(int _duracion) {
+    public void set_duracion(Integer _duracion) {
         this._duracion = _duracion;
     }
 

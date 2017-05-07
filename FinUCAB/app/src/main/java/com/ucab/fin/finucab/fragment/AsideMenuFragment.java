@@ -52,17 +52,14 @@ public class AsideMenuFragment extends Fragment implements View.OnClickListener{
         switch (view.getId()){
 
             case R.id.myProfileBtn:
-                parentActivity.getSupportActionBar().setTitle("Mi Perfil");
                 parentActivity.changeFragment(new MyProfileFragment(), false);
                 parentActivity.closeDrawerLayout();
                break;
             case R.id.budgetBtn:
-                parentActivity.getSupportActionBar().setTitle("Presupuestos");
                 parentActivity.changeFragment(new BudgetFragment(), false);
                 parentActivity.closeDrawerLayout();
                 break;
             case R.id.categoryBtn:
-                parentActivity.getSupportActionBar().setTitle("Categorias");
                 parentActivity.changeFragment(new CategoryFragment(), false);
                 parentActivity.closeDrawerLayout();
                 break;

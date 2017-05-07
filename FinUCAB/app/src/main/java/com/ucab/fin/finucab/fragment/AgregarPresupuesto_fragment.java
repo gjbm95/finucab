@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
+import com.ucab.fin.finucab.controllers.Presupuesto_Controller;
 
 
 /**
@@ -22,7 +23,7 @@ import com.ucab.fin.finucab.activity.MainActivity;
  */
 public class AgregarPresupuesto_fragment extends Fragment implements CompoundButton.OnCheckedChangeListener{
     TextView recurrentTextView;
-    EditText monthsEditText;
+    EditText monthsEditText, nameEditText;
     RadioButton onlyRadioButton, recurrentRadioButton;
     Spinner categorySpinner;
     MainActivity parentActivity;
@@ -33,12 +34,17 @@ public class AgregarPresupuesto_fragment extends Fragment implements CompoundBut
         setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
 
-        View rootView = inflater.inflate(R.layout.fragment_agregar_presupuesto, container, false);
+        View rootView = inflater.inflate(R.layout.agregar_presupuesto_fragment, container, false);
+
 
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Agregar Presupuesto");
         recurrentTextView = (TextView) rootView.findViewById(R.id.recurrentTextView);
         monthsEditText = (EditText) rootView.findViewById(R.id.monthsEditText);
+
+        nameEditText = (EditText) rootView.findViewById(R.id.budgetNameEditText);
+        nameEditText.setText(Presupuesto_Controller.presupuesto.get_nombre());
+
         onlyRadioButton = (RadioButton) rootView.findViewById(R.id.onlyRadioButton);
         onlyRadioButton.setOnCheckedChangeListener(this);
         recurrentRadioButton = (RadioButton) rootView.findViewById(R.id.recurrentRadioButton);

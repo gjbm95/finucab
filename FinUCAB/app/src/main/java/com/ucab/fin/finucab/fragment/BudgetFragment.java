@@ -30,6 +30,7 @@ public class BudgetFragment extends Fragment {
     private AppBarLayout appBar;
     private TabLayout pestanas;
     private ViewPager viewPager;
+    MainActivity parentActivity;
 
     public BudgetFragment() {
     }
@@ -38,7 +39,8 @@ public class BudgetFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.budget_fragment, container, false);
-        //((MainActivity) getActivity()).setTitle("Presupuesto");
+        parentActivity = (MainActivity) getActivity();
+        parentActivity.getSupportActionBar().setTitle("Presupuesto");
         if (savedInstanceState == null) {
             insertarTabs(container);
 
