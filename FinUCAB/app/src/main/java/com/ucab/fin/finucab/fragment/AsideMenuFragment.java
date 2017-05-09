@@ -2,6 +2,7 @@ package com.ucab.fin.finucab.fragment;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.ucab.fin.finucab.R;
+import com.ucab.fin.finucab.activity.LoginActivity;
 import com.ucab.fin.finucab.activity.MainActivity;
 
 public class AsideMenuFragment extends Fragment implements View.OnClickListener{
@@ -20,7 +22,7 @@ public class AsideMenuFragment extends Fragment implements View.OnClickListener{
     private View parentView;
     private MainActivity parentActivity;
 
-    LinearLayout myProfileBtn, budgetBtn, categorybtn;
+    LinearLayout myProfileBtn, budgetBtn, categorybtn,logoutbtn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -31,12 +33,13 @@ public class AsideMenuFragment extends Fragment implements View.OnClickListener{
         myProfileBtn = (LinearLayout) parentView.findViewById(R.id.myProfileBtn);
         budgetBtn = (LinearLayout) parentView.findViewById(R.id.budgetBtn);
         categorybtn = (LinearLayout) parentView.findViewById(R.id.categoryBtn);
+        logoutbtn = (LinearLayout) parentView.findViewById(R.id.singoutBtn);
 
 //        SET LISTENERS
         myProfileBtn.setOnClickListener(this);
         budgetBtn.setOnClickListener(this);
         categorybtn.setOnClickListener(this);
-
+        logoutbtn.setOnClickListener(this);
 
         return parentView;
     }
@@ -49,7 +52,7 @@ public class AsideMenuFragment extends Fragment implements View.OnClickListener{
         switch (view.getId()){
 
             case R.id.myProfileBtn:
-               parentActivity.changeFragment(new MyProfileFragment(), false);
+                parentActivity.changeFragment(new MyProfileFragment(), false);
                 parentActivity.closeDrawerLayout();
                break;
             case R.id.budgetBtn:
@@ -58,6 +61,12 @@ public class AsideMenuFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.categoryBtn:
                 parentActivity.changeFragment(new CategoryFragment(), false);
+                parentActivity.closeDrawerLayout();
+                break;
+            case R.id.singoutBtn:
+                Intent inicio = new Intent (parentActivity, LoginActivity.class);
+                startActivity(inicio);
+                parentActivity.finish();
                 parentActivity.closeDrawerLayout();
                 break;
 

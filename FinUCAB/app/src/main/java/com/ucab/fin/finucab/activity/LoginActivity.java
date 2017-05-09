@@ -13,6 +13,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
     Button signInButton;
+    Button signUpButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,23 +26,30 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         actionBar.setIcon(R.mipmap.logoh);
         actionBar.setTitle("");
         //------------------------------------------------------------------------------------------
-//        BIND VIEES
+//        BIND VIEES (Se extraen los objetos asociados a los botones en pantalla)
         signInButton = (Button) findViewById(R.id.signInButton);
+        signUpButton = (Button) findViewById(R.id.signUpButton);
 
-//        SET LISTENERS
+//        SET LISTENERS (Se le asigna la actividad en el cual funcionaran)
         signInButton.setOnClickListener(this);
-
-
+        signUpButton.setOnClickListener(this);
 
     }
 
+
+    //Dandole funcionalidades a cada uno de los botones que salen en pantalla:
     @Override
     public void onClick(View view) {
-
+        Intent i;
         switch (view.getId()){
-
+             //Al accionar, se inician los procesos de validacion de datos para acceder el perfil de usuario.
             case R.id.signInButton:
-                Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                i = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(i);
+                break;
+            //Al accionar, se inicia la actividad que presenta el formulario de registro.
+            case R.id.signUpButton:
+                i = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(i);
                 break;
         }
