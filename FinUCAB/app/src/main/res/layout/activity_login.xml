@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_principal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.ucab.fin.finucab.activity.LoginActivity">
+
+    <ImageView
+        android:id="@+id/appIconImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp"
+        app:srcCompat="@mipmap/main_icon" />
+
+    <EditText
+        android:id="@+id/userNameEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        android:layout_below="@+id/appIconImageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_white_border"
+        android:ems="10"
+        android:hint="@string/user_name"
+        android:inputType="textPersonName"
+        />
+
+    <EditText
+        android:id="@+id/userPwdEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        android:layout_alignEnd="@+id/userNameEditText"
+        android:layout_alignRight="@+id/userNameEditText"
+        android:layout_below="@+id/userNameEditText"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/rounded_white_border"
+        android:ems="10"
+        android:hint="@string/user_password"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/signUpButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/signInButton"
+        android:layout_centerHorizontal="true"
+        android:text="@string/sign_up" />
+
+    <Button
+        android:id="@+id/signInButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/signUpButton"
+        android:layout_alignLeft="@+id/signUpButton"
+        android:layout_alignRight="@+id/signUpButton"
+        android:layout_alignStart="@+id/signUpButton"
+        android:layout_below="@+id/userPwdEditText"
+        android:layout_marginTop="52dp"
+        android:text="@string/sign_in" />
+
+    <TextView
+        android:id="@+id/forgotPwdTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userPwdEditText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="@string/forgot_password"
+        android:textColor="@android:color/background_light" />
+</RelativeLayout>
