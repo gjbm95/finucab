@@ -4,37 +4,37 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_perfil"
+            android:id="@+id/nav_camera"
             android:title="Mi Perfil"
-            android:icon="@drawable/user" />
+            android:icon="@mipmap/user" />
         <item
-            android:id="@+id/nav_pago"
+            android:id="@+id/nav_gallery"
             android:title="Pagos"
-            android:icon="@drawable/money" />
+            android:icon="@mipmap/money" />
         <item
-            android:id="@+id/nav_categoria"
+            android:id="@+id/nav_slideshow"
             android:title="Categorias"
-            android:icon="@drawable/check" />
+            android:icon="@mipmap/check" />
         <item
-            android:id="@+id/nav_presupuesto"
+            android:id="@+id/nav_manage"
             android:title="Presupuestos"
-            android:icon="@drawable/presupuesto" />
+            android:icon="@mipmap/presupuesto" />
     </group>
 
     <item android:title="Configuracion">
         <menu>
             <item
-                android:id="@+id/nav_cuenta"
+                android:id="@+id/nav_share"
                 android:title="Mi Cuenta"
-                android:icon="@drawable/user" />
+                android:icon="@mipmap/user" />
             <item
-                android:id="@+id/nav_ajuste"
+                android:id="@+id/nav_send"
                 android:title="Ajustes"
-                android:icon="@drawable/configuracion" />
+                android:icon="@mipmap/configuracion" />
             <item
                 android:id="@+id/nav_exit"
                 android:title="Cerrar Sesion"
-                android:icon="@drawable/salir" />
+                android:icon="@mipmap/salir" />
         </menu>
     </item>
 

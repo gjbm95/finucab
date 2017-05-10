@@ -1,0 +1,41 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/colorBackground"
+    android:layout_height="match_parent"
+    android:id="@+id/seguridad"
+    tools:context="com.ucab.fin.finucab.fragment.DatosSeguridadFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:inputType="textPersonName"
+        android:hint="Ingrese su pregunta secreta"
+        android:imeOptions="actionNext"
+        android:singleLine="true"
+        android:text=""
+        android:ems="10"
+        android:background="@drawable/caja"
+        android:id="@+id/questionREditText"
+        android:layout_marginTop="44dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:inputType="textPersonName"
+        android:hint="Ingrese su respuesta secreta"
+        android:imeOptions="actionDone"
+        android:singleLine="true"
+        android:text=""
+        android:ems="10"
+        android:background="@drawable/caja"
+        android:id="@+id/answerREditText"
+        android:layout_marginTop="18dp"
+        android:layout_below="@+id/questionREditText"
+        android:layout_alignLeft="@+id/questionREditText"
+        android:layout_alignStart="@+id/questionREditText" />
+</RelativeLayout>
