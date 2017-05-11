@@ -9,7 +9,6 @@ import java.util.Date;
 public class Transaccion {
     private int idTransaccion;
     private String categoria;
-    private String nombre;
     private String descripcion;
     private Date fecha;
     private float subtotal;
@@ -31,14 +30,6 @@ public class Transaccion {
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 
     public String getDescripcion() {
@@ -89,10 +80,9 @@ public class Transaccion {
         this.tipo = tipo;
     }
 
-    public Transaccion(int idTransaccion, String categoria, String nombre, String descripcion, Date fecha, float subtotal, float impuesto, float total, String tipo) {
+    public Transaccion(int idTransaccion, String categoria, String descripcion, Date fecha, float subtotal, float impuesto, float total, String tipo) {
         this.idTransaccion = idTransaccion;
         this.categoria = categoria;
-        this.nombre = nombre;
         this.descripcion = descripcion;
         this.fecha = fecha;
         this.subtotal = subtotal;
