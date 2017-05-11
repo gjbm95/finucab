@@ -7,12 +7,6 @@ package com.ucab.fin.finucab.domain;
  */
 
 public class Categoria {
-    private int idcategoria;
-    private String nombre;
-    private String descripcion;
-    private boolean estaHabilitado;
-    private boolean tipo;
-
     public int getIdcategoria() {
         return idcategoria;
     }
@@ -52,4 +46,11 @@ public class Categoria {
     public void setTipo(boolean tipo) {
         this.tipo = tipo;
     }
+
+    private int idcategoria;
+    private String nombre;
+    private String descripcion;
+    private boolean estaHabilitado;
+    private boolean tipo;
+
 }
