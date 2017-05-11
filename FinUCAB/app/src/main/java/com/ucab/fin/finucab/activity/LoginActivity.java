@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -36,6 +38,30 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
+
+    //Agrego un menu Overflow al Action Bar:
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.overflow, menu);
+        return true;
+    }
+
+
+   //Se le coloca acciones a las funcionalidades que ofrece el Menu overflow del action bar.
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.exit:
+                System.exit(0);
+                return true;
+            case R.id.setting:
+                //Aqui se llama a las opciones de Configuracion
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     //Dandole funcionalidades a cada uno de los botones que salen en pantalla:
     @Override
