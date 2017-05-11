@@ -132,7 +132,7 @@ public class GestionUsuarios_Controller {
 
     //Realizo la validacion para verificar que las contraseñas son diferentes:
     public static void verificoIgualdad(EditText contesena1, EditText contrasena2) throws ContrasenasDiferentes_Exception {
-        if (!(contrasena2.getText().toString().equals(contrasena2.getText().toString())))
+        if (!(contrasena1.getText().toString().equals(contrasena2.getText().toString())))
         {
             ContrasenasDiferentes_Exception diferentes = new ContrasenasDiferentes_Exception("Las contraseñas son diferentes");
             diferentes.setCampo(contrasena2);
