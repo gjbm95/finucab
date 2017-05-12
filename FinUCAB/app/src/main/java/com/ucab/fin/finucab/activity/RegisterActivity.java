@@ -30,6 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
     private int conteo;
 
 
+
     //Creacion de la actividad:
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,6 +130,7 @@ public class RegisterActivity extends AppCompatActivity {
     public void activarPaso(int indicador){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left);
 
         if(indicador ==1) {
             anterior = (Button) findViewById(R.id.cancelButton);
