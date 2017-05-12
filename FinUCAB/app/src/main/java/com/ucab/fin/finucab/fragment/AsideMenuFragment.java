@@ -22,7 +22,7 @@ public class AsideMenuFragment extends Fragment implements View.OnClickListener{
     private View parentView;
     private MainActivity parentActivity;
 
-    LinearLayout myProfileBtn, budgetBtn, categorybtn,logoutbtn;
+    LinearLayout myProfileBtn, budgetBtn, categorybtn,paysBtn,logoutbtn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -33,12 +33,14 @@ public class AsideMenuFragment extends Fragment implements View.OnClickListener{
         myProfileBtn = (LinearLayout) parentView.findViewById(R.id.myProfileBtn);
         budgetBtn = (LinearLayout) parentView.findViewById(R.id.budgetBtn);
         categorybtn = (LinearLayout) parentView.findViewById(R.id.categoryBtn);
+        paysBtn = (LinearLayout) parentView.findViewById(R.id.paysBtn);
         logoutbtn = (LinearLayout) parentView.findViewById(R.id.singoutBtn);
 
 //        SET LISTENERS
         myProfileBtn.setOnClickListener(this);
         budgetBtn.setOnClickListener(this);
         categorybtn.setOnClickListener(this);
+        paysBtn.setOnClickListener(this);
         logoutbtn.setOnClickListener(this);
 
         return parentView;
@@ -61,6 +63,10 @@ public class AsideMenuFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.categoryBtn:
                 parentActivity.changeFragment(new CategoryFragment(), false);
+                parentActivity.closeDrawerLayout();
+                break;
+            case R.id.paysBtn:
+                parentActivity.changeFragment(new PaymentFragment(), false);
                 parentActivity.closeDrawerLayout();
                 break;
             case R.id.singoutBtn:

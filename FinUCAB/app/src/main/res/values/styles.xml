@@ -10,6 +10,9 @@
         <item name="homeAsUpIndicator">@mipmap/ic_menu</item>
 
     </style>
+    <style name="SinBarra" parent="Theme.AppCompat.Light.NoActionBar">
+
+    </style>
 
 
 
