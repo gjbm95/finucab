@@ -3,7 +3,6 @@ package com.ucab.fin.finucab.fragment;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -34,9 +33,9 @@ public class PaymentFragment extends Fragment {
         if (savedInstanceState == null) {
             viewPager = (ViewPager) view.findViewById(R.id.payment);
             AdaptadorSecciones adapter = new AdaptadorSecciones(getChildFragmentManager());
-            adapter.addFragment(new AgregarTransaccion_Fragment(), "Agregar Transacion");
+            adapter.addFragment(new AgregarTransaccion_Fragment(), "Agregar Transaccion");
             viewPager.setAdapter(adapter);
-            m
+
         }
 
         return view;
