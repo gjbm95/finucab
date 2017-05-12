@@ -33,7 +33,7 @@
 
         android:layout_marginStart="16dp"
 
-        android:layout_marginTop="286dp"
+        android:layout_marginTop="233dp"
 
         android:background="@drawable/spinner"
 
@@ -45,7 +45,7 @@
 
         app:layout_constraintEnd_toEndOf="parent"
 
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
 
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -66,7 +66,7 @@
 
         android:layout_marginStart="16dp"
 
-        android:layout_marginTop="199dp"
+        android:layout_marginTop="145dp"
 
         android:background="@drawable/spinner"
 
@@ -78,7 +78,7 @@
 
         app:layout_constraintEnd_toEndOf="parent"
 
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
 
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -105,9 +105,9 @@
 
         app:layout_constraintEnd_toEndOf="parent"
 
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="16dp"
 
-        app:layout_constraintHorizontal_bias="0.0" />
+        app:layout_constraintHorizontal_bias="1.0" />
     <TextView
 
         android:id="@+id/tipoTransaccionTextView"
@@ -130,9 +130,9 @@
 
         app:layout_constraintEnd_toEndOf="parent"
 
-        android:layout_marginTop="166dp"
+        android:layout_marginTop="104dp"
 
-        app:layout_constraintHorizontal_bias="0.0" />
+        app:layout_constraintHorizontal_bias="1.0" />
     <TextView
 
         android:id="@+id/categoryTextView"
@@ -155,9 +155,9 @@
 
         app:layout_constraintEnd_toEndOf="parent"
 
-        android:layout_marginTop="251dp"
+        android:layout_marginTop="199dp"
 
-        app:layout_constraintHorizontal_bias="0.0" />
+        app:layout_constraintHorizontal_bias="1.0" />
     <TextView
 
         android:id="@+id/descripcionTextView"
@@ -180,9 +180,9 @@
 
         app:layout_constraintEnd_toEndOf="parent"
 
-        android:layout_marginTop="339dp"
+        android:layout_marginTop="286dp"
 
-        app:layout_constraintHorizontal_bias="0.0" />
+        app:layout_constraintHorizontal_bias="1.0" />
     <EditText
 
         android:id="@+id/montoEditText"
@@ -209,9 +209,9 @@
 
         app:layout_constraintEnd_toEndOf="parent"
 
-        android:layout_marginTop="113dp"
+        android:layout_marginTop="57dp"
 
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp" />
     <EditText
@@ -240,9 +240,9 @@
 
         app:layout_constraintEnd_toEndOf="parent"
 
-        android:layout_marginTop="372dp"
+        android:layout_marginTop="318dp"
 
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp" />
     <Button
@@ -265,9 +265,9 @@
 
         app:layout_constraintTop_toTopOf="parent"
 
-        android:layout_marginTop="461dp"
+        android:layout_marginTop="447dp"
 
-        />
+        app:layout_constraintHorizontal_bias="0.937" />
 
 </android.support.constraint.ConstraintLayout>
 
