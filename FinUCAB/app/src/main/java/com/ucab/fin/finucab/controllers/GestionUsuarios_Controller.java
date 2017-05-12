@@ -150,8 +150,15 @@ public class GestionUsuarios_Controller {
         }else
         {
             String [] fragmento = campo.getText().toString().split("@");
-            if (!fragmento[1].contains(".")) {
-                CorreoInvalido_Exception correoinvalido  =  new CorreoInvalido_Exception("El correo es invalido");
+            if (fragmento.length==2) {
+                if (!fragmento[1].contains(".")) {
+                    CorreoInvalido_Exception correoinvalido = new CorreoInvalido_Exception("El correo es invalido");
+                    correoinvalido.setCampo(campo);
+                    throw correoinvalido;
+                }
+            }else
+            {
+                CorreoInvalido_Exception correoinvalido = new CorreoInvalido_Exception("El correo es invalido");
                 correoinvalido.setCampo(campo);
                 throw correoinvalido;
             }
