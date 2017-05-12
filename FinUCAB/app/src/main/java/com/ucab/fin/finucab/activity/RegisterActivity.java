@@ -7,6 +7,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -131,6 +133,8 @@ public class RegisterActivity extends AppCompatActivity {
         if(indicador ==1) {
             anterior = (Button) findViewById(R.id.cancelButton);
             anterior.setText("CANCELAR");
+            siguiente = (Button) findViewById(R.id.nextButton);
+            siguiente.setText("SIGUIENTE");
             posicionEtapa = (ImageView) findViewById(R.id.onboardindImageView);
             posicionEtapa.setImageResource(R.mipmap.onboarding1);
             DatosPersonalesFragment fragment1 = new DatosPersonalesFragment();
@@ -139,6 +143,8 @@ public class RegisterActivity extends AppCompatActivity {
         if (indicador==2){
             anterior = (Button) findViewById(R.id.cancelButton);
             anterior.setText("ANTERIOR");
+            siguiente = (Button) findViewById(R.id.nextButton);
+            siguiente.setText("SIGUIENTE");
             posicionEtapa = (ImageView) findViewById(R.id.onboardindImageView);
             posicionEtapa.setImageResource(R.mipmap.onboarding2);
             DatosCuentaFragment fragment1 = new DatosCuentaFragment();
@@ -147,6 +153,8 @@ public class RegisterActivity extends AppCompatActivity {
         if(indicador==3){
             anterior = (Button) findViewById(R.id.cancelButton);
             anterior.setText("ANTERIOR");
+            siguiente = (Button) findViewById(R.id.nextButton);
+            siguiente.setText("LISTO");
             posicionEtapa = (ImageView) findViewById(R.id.onboardindImageView);
             posicionEtapa.setImageResource(R.mipmap.onboarding3);
             DatosSeguridadFragment fragment1 = new DatosSeguridadFragment();
@@ -177,12 +185,31 @@ public class RegisterActivity extends AppCompatActivity {
                 return false;
             }
         }
+        return true;
+    }
 
-
+    //Agrego un menu Overflow al Action Bar:
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.overflow, menu);
         return true;
     }
 
 
+    //Se le coloca acciones a las funcionalidades que ofrece el Menu overflow del action bar.
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.exit:
+                System.exit(0);
+                return true;
+            case R.id.setting:
+                //Aqui se llama a las opciones de Configuracion
+                return true;
 
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
 }

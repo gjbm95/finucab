@@ -68,7 +68,7 @@ public class DatosCuentaFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View rootView = inflater.inflate(R.layout.fragment_datos_cuenta, container, false);
+        View rootView = inflater.inflate(R.layout.datos_cuenta_fragment, container, false);
         if (GestionUsuarios_Controller.usuario==null)
         GestionUsuarios_Controller.usuario = (EditText)rootView.findViewById(R.id.usernameREditText);
         else {

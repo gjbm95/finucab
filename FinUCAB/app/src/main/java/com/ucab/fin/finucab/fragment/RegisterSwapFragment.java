@@ -41,7 +41,7 @@ public class RegisterSwapFragment extends Fragment {
         this.container = container;
         this.inflater = inflater;
 
-        View view = inflater.inflate(R.layout.fragment_register_swap, container, false);
+        View view = inflater.inflate(R.layout.register_swap_fragment, container, false);
 
         if (savedInstanceState == null) {
            // insertarTabs(container);
@@ -56,7 +56,7 @@ public class RegisterSwapFragment extends Fragment {
 
     public void  setPosition(int index){
 
-        View view = inflater.inflate(R.layout.fragment_register_swap, container, false);
+        View view = inflater.inflate(R.layout.register_swap_fragment, container, false);
         viewPager = (ViewPager) view.findViewById(R.id.pagerregister);
         viewPager.setCurrentItem(index, true);
 

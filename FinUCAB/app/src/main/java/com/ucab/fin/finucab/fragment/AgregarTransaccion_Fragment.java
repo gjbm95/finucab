@@ -1,26 +1,24 @@
 package com.ucab.fin.finucab.fragment;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 
 import com.ucab.fin.finucab.R;
-import com.ucab.fin.finucab.controllers.GestionUsuarios_Controller;
+
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link DatosSeguridadFragment.OnFragmentInteractionListener} interface
+ * {@link AgregarTransaccion_Fragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link DatosSeguridadFragment#newInstance} factory method to
+ * Use the {@link AgregarTransaccion_Fragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DatosSeguridadFragment extends Fragment {
+public class AgregarTransaccion_Fragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -32,7 +30,7 @@ public class DatosSeguridadFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public DatosSeguridadFragment() {
+    public AgregarTransaccion_Fragment() {
         // Required empty public constructor
     }
 
@@ -42,11 +40,11 @@ public class DatosSeguridadFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment DatosSeguridadFragment.
+     * @return A new instance of fragment AgregarTransaccion_Fragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static DatosSeguridadFragment newInstance(String param1, String param2) {
-        DatosSeguridadFragment fragment = new DatosSeguridadFragment();
+    public static AgregarTransaccion_Fragment newInstance(String param1, String param2) {
+        AgregarTransaccion_Fragment fragment = new AgregarTransaccion_Fragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -67,22 +65,7 @@ public class DatosSeguridadFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.datos_seguridad_fragment, container, false);
-        if (GestionUsuarios_Controller.pregunta==null)
-        GestionUsuarios_Controller.pregunta = (EditText)rootView.findViewById(R.id.questionREditText);
-        else {
-            EditText pregunta = (EditText) rootView.findViewById(R.id.questionREditText);
-            pregunta.setText(GestionUsuarios_Controller.pregunta.getText());
-            GestionUsuarios_Controller.pregunta= pregunta;
-        }
-        if (GestionUsuarios_Controller.respuesta==null)
-        GestionUsuarios_Controller.respuesta = (EditText)rootView.findViewById(R.id.answerREditText);
-        else {
-            EditText respuesta = (EditText) rootView.findViewById(R.id.answerREditText);
-            respuesta.setText(GestionUsuarios_Controller.respuesta.getText());
-            GestionUsuarios_Controller.respuesta= respuesta;
-        }
-        return rootView;
+        return inflater.inflate(R.layout.fragment_agregartransaccion, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -92,7 +75,11 @@ public class DatosSeguridadFragment extends Fragment {
         }
     }
 
-
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
 
     /**
      * This interface must be implemented by activities that contain this
