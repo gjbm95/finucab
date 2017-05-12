@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Space;
 
@@ -16,7 +17,7 @@ import com.ucab.fin.finucab.controllers.GestionUsuarios_Controller;
 public class BeginActivity extends AppCompatActivity {
      ImageView logo;
      ImageView ucab;
-     Button touch;
+     ImageView touch;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +34,7 @@ public class BeginActivity extends AppCompatActivity {
         animation2.setFillAfter(true);
         ucab.startAnimation(animation2);
         //---------------------------------------------------------
-        touch = (Button)findViewById(R.id.botonPresentacion);
+        touch = (ImageView)findViewById(R.id.touch);
         touch.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
