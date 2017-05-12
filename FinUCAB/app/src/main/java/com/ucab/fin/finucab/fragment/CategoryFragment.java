@@ -29,13 +29,11 @@ public class CategoryFragment extends Fragment {
         View view= inflater.inflate(R.layout.category_fragment, container, false);
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Categorias");
-
         if (savedInstanceState == null) {
             viewPager = (ViewPager) view.findViewById(R.id.category);
-            AdaptadorSecciones adapter = new AdaptadorSecciones(getChildFragmentManager());
-            adapter.addFragment(new AgregarCategoria_Fragment(), "Agregar Categoria");
+            CategoryFragment.AdaptadorSecciones adapter = new CategoryFragment.AdaptadorSecciones(getChildFragmentManager());
+            adapter.addFragment(new ListaCategorias_Fragment(), "Puedo");
             viewPager.setAdapter(adapter);
-
         }
 
         return view;
