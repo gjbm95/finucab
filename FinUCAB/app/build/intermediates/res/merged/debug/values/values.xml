@@ -709,15 +709,21 @@
     <string name="abc_toolbar_collapse_description">Collapse</string>
     <string name="aceptar">Aceptar</string>
     <string name="agregar">Agregar</string>
+    <string name="agregarCategoria">Agregar una categoria</string>
+    <string name="agregarDescripcion">Agregue una descripcion</string>
     <string name="app_name">FinUCAB</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
     <string name="bottom_sheet_behavior" translatable="false">android.support.design.widget.BottomSheetBehavior</string>
     <string name="budget"> Presupuestos</string>
+    <string name="campoObligatorio">*Campo obligatorio</string>
+    <string name="campoObligatorioDes">*Campo obligatorio</string>
     <string name="categoria">Categoría</string>
     <string name="categoria_prompt">Indique la Categoria</string>
     <string name="category"> Categorias</string>
     <string name="character_counter_pattern" translatable="false">%1$d / %2$d</string>
     <string name="descripcion">Descripcion</string>
+    <string name="escribirCategoria">Escriba una categoria</string>
+    <string name="escribirDescripcion">Escriba una descripcion</string>
     <string name="forgot_password">¿Olvidó su contraseña?</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="indiqueCategoria">Indique la Categoria</string>
@@ -754,6 +760,7 @@
     <string name="unico">Único</string>
     <string name="user_name">Nombre de usuario</string>
     <string name="user_password">Contrasena</string>
+    <string name="volver">Volver</string>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>
     <style name="AlertDialog.AppCompat.Light" parent="Base.AlertDialog.AppCompat.Light"/>
     <style name="Animation.AppCompat.Dialog" parent="Base.Animation.AppCompat.Dialog"/>

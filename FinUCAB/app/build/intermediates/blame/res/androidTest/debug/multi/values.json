@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "C:\\Users\\Somebody\\Documents\\Proyecto Desarrollo\\repo\\finucab\\FinUCAB\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
+        "outputFile": "C:\\Users\\Juan\\Documents\\finucab\\FinUCAB\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 96
                 },
                 "from": {
-                    "file": "C:\\Users\\Somebody\\.android\\build-cache\\6219545a8f8f71393345308221a4106b171a7a6d\\output\\res\\values\\values.xml",
+                    "file": "C:\\Users\\Juan\\.android\\build-cache\\d602ab5ae69faaecb546eb1c3282211b8af3faf3\\output\\res\\values\\values.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,

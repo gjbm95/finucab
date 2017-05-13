@@ -1,4 +1,7 @@
-#Fri May 12 18:00:00 VET 2017
-base.0=C\:\\Users\\Somebody\\Documents\\Proyecto Desarrollo\\repo\\finucab\\FinUCAB\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main
+#Sat May 13 13:10:39 VET 2017
+base.0=C\:\\Users\\Juan\\Documents\\finucab\\FinUCAB\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_ef8c0b16532626ea1d473cbd93f2783dde14c24f
+renamed.1=classes2.dex
 renamed.0=classes.dex
-file.0=C\:\\Users\\Somebody\\Documents\\Proyecto Desarrollo\\repo\\finucab\\FinUCAB\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main\\classes.dex
+file.1=C\:\\Users\\Juan\\Documents\\finucab\\FinUCAB\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_c04eff7765fc6d2ad5795235201ba8e158e03fc3\\classes.dex
+base.1=C\:\\Users\\Juan\\Documents\\finucab\\FinUCAB\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_c04eff7765fc6d2ad5795235201ba8e158e03fc3
+file.0=C\:\\Users\\Juan\\Documents\\finucab\\FinUCAB\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_ef8c0b16532626ea1d473cbd93f2783dde14c24f\\classes.dex

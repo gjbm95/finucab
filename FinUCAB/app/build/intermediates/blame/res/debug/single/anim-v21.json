@@ -1,10 +1,10 @@
 [
     {
-        "merged": "C:\\Users\\Somebody\\Documents\\Proyecto Desarrollo\\repo\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim-v21\\design_bottom_sheet_slide_out.xml",
-        "source": "C:\\Users\\Somebody\\.android\\build-cache\\34cecbda7f33c99d4051ac4bda8a898478451af5\\output\\res\\anim-v21\\design_bottom_sheet_slide_out.xml"
+        "merged": "C:\\Users\\Juan\\Documents\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim-v21\\design_bottom_sheet_slide_in.xml",
+        "source": "C:\\Users\\Juan\\.android\\build-cache\\8e2c06ee4ae357e4d8e3164e85fde0edf33adb12\\output\\res\\anim-v21\\design_bottom_sheet_slide_in.xml"
     },
     {
-        "merged": "C:\\Users\\Somebody\\Documents\\Proyecto Desarrollo\\repo\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim-v21\\design_bottom_sheet_slide_in.xml",
-        "source": "C:\\Users\\Somebody\\.android\\build-cache\\34cecbda7f33c99d4051ac4bda8a898478451af5\\output\\res\\anim-v21\\design_bottom_sheet_slide_in.xml"
+        "merged": "C:\\Users\\Juan\\Documents\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\anim-v21\\design_bottom_sheet_slide_out.xml",
+        "source": "C:\\Users\\Juan\\.android\\build-cache\\8e2c06ee4ae357e4d8e3164e85fde0edf33adb12\\output\\res\\anim-v21\\design_bottom_sheet_slide_out.xml"
     }
 ]
