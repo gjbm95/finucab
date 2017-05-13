@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.app.Fragment;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -23,10 +24,11 @@ import com.ucab.fin.finucab.controllers.Presupuesto_Controller;
  */
 public class AgregarPresupuesto_fragment extends Fragment implements CompoundButton.OnCheckedChangeListener{
     TextView recurrentTextView;
-    EditText monthsEditText, nameEditText;
+    EditText monthsEditText, nameEditText,amountEditText;
     RadioButton onlyRadioButton, recurrentRadioButton;
     Spinner categorySpinner;
     MainActivity parentActivity;
+    Button agregarButton;
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,15 +41,35 @@ public class AgregarPresupuesto_fragment extends Fragment implements CompoundBut
 
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Agregar Presupuesto");
+
+
         recurrentTextView = (TextView) rootView.findViewById(R.id.recurrentTextView);
         monthsEditText = (EditText) rootView.findViewById(R.id.monthsEditText);
-
         nameEditText = (EditText) rootView.findViewById(R.id.budgetNameEditText);
-        nameEditText.setText(Presupuesto_Controller.presupuesto.get_nombre());
+        amountEditText = (EditText) rootView.findViewById(R.id.amountEditText);
+        categorySpinner= (Spinner) rootView.findViewById(R.id.categorySpinner) ;
+        onlyRadioButton= (RadioButton) rootView.findViewById(R.id.onlyRadioButton);
+        recurrentRadioButton= (RadioButton) rootView.findViewById(R.id.recurrentRadioButton);
 
-        onlyRadioButton = (RadioButton) rootView.findViewById(R.id.onlyRadioButton);
+
+        Presupuesto_Controller.nombrePresupuesto = nameEditText;
+        Presupuesto_Controller.montoPresupuesto = amountEditText;
+        Presupuesto_Controller.recurrenciaPresupuesto=monthsEditText;
+        Presupuesto_Controller.categoriaPresupuesto=categorySpinner;
+        Presupuesto_Controller.recurrenciaButton=recurrentRadioButton;
+        Presupuesto_Controller.unicoButton=onlyRadioButton;
+
+
+        agregarButton = (Button) rootView.findViewById(R.id.acceptButton);
+        agregarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Presupuesto_Controller.validacionPresupuestoVacio();
+            }
+        });
+
+
         onlyRadioButton.setOnCheckedChangeListener(this);
-        recurrentRadioButton = (RadioButton) rootView.findViewById(R.id.recurrentRadioButton);
         recurrentRadioButton.setOnCheckedChangeListener(this);
 
         recurrentTextView.setVisibility(recurrentTextView.INVISIBLE);   //SE COLOCA INVISIBLE EL TEXTVIEW
@@ -57,6 +79,7 @@ public class AgregarPresupuesto_fragment extends Fragment implements CompoundBut
         ArrayAdapter adapter = ArrayAdapter.createFromResource(getActivity(), R.array.categoryArray, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(adapter);
+
 
         return rootView;
     }
