@@ -3,12 +3,12 @@ package com.ucab.fin.finucab.domain;
 
 
 public class Presupuesto {
-    String _nombre;
-    String _categoria;
-    Float _monto;
-    String _clasificacion;
-    Integer _duracion;
-    String _tipo;
+    private String _nombre;
+    private String _categoria;
+    private Float _monto;
+    private String _clasificacion;
+    private Integer _duracion;
+    private String _tipo;
 
     public Presupuesto(String _nombre, String _categoria, Float _monto, String _clasificacion, int _duracion, String _tipo) {
         this._nombre = _nombre;
