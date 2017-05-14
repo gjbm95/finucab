@@ -47,6 +47,8 @@ public class MyProfileFragment extends Fragment {
 
             }
         });
+        //myEditText.setText( myEditText.getText() + " " + myButton.getText() );
+        etNombre.setText( etNombre.getText() + " " + boton.getText());
 
         return view;
 
