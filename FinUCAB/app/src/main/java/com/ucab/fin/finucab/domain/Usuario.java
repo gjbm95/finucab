@@ -15,13 +15,26 @@ public class Usuario {
     private String contrasena;
     private String pregunta;
     private String respuesta;
-    private ArrayList<Cuenta_Bancaria> cuentas;
-    private ArrayList<Planificacion_Pago> planes;
+    private ArrayList<Cuenta_Bancaria> cuentas = new ArrayList<Cuenta_Bancaria>();
+    private ArrayList<Planificacion_Pago> planes = new ArrayList<Planificacion_Pago>();
 
 
     public Usuario()
     {
 
+    }
+
+    public Usuario(int idusuario, String nombre, String apellido, String correo, String usuario, String contrasena, String pregunta, String respuesta, ArrayList<Cuenta_Bancaria> cuentas, ArrayList<Planificacion_Pago> planes) {
+        this.idusuario = idusuario;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.correo = correo;
+        this.usuario = usuario;
+        this.contrasena = contrasena;
+        this.pregunta = pregunta;
+        this.respuesta = respuesta;
+        this.cuentas = cuentas;
+        this.planes = planes;
     }
 
     public int getIdusuario() {
