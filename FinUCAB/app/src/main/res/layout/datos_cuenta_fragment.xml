@@ -1,0 +1,50 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/cuenta"
+    android:background="@color/colorBackground"
+    tools:context="com.ucab.fin.finucab.fragment.DatosCuentaFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:background="@drawable/caja"
+        android:hint="Repita la contraseña"
+        android:ems="10"
+        android:layout_marginTop="24dp"
+        android:inputType="textPassword"
+        android:id="@+id/passwordtwoREditText"
+        android:layout_below="@+id/passwordREditText"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:hint="Ingrese una contraseña"
+        android:text=""
+        android:ems="10"
+        android:background="@drawable/caja"
+        android:id="@+id/passwordREditText"
+        android:inputType="textPassword"
+        android:layout_marginTop="21dp"
+        android:layout_below="@+id/usernameREditText"
+        android:layout_alignLeft="@+id/passwordtwoREditText"
+        android:layout_alignStart="@+id/passwordtwoREditText" />
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:inputType="textPersonName"
+        android:hint="Ingrese un nombre de usuario"
+        android:text=""
+        android:ems="10"
+        android:background="@drawable/caja"
+        android:id="@+id/usernameREditText"
+        android:layout_marginTop="44dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/passwordREditText"
+        android:layout_alignStart="@+id/passwordREditText" />
+
+</RelativeLayout>

@@ -1,0 +1,58 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/colorBackground"
+    android:id="@+id/personales"
+    android:layout_height="match_parent"
+    tools:context="com.ucab.fin.finucab.fragment.DatosPersonalesFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:inputType="textEmailAddress"
+        android:background="@drawable/caja"
+        android:hint="Ingrese su correo electronico"
+        android:ems="10"
+        android:layout_marginTop="24dp"
+        android:id="@+id/emailR2EditText"
+        android:imeOptions="actionDone"
+        android:singleLine="true"
+        android:layout_below="@+id/lastnameREditText"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:inputType="textPersonName"
+        android:hint="Ingrese su apellido"
+        android:digits="qwertzuiopasdfghjklyxcvbnñmQWERTYUIOPASDFGHJKLÑZXCVBNM"
+        android:text=""
+        android:ems="10"
+        android:background="@drawable/caja"
+        android:id="@+id/lastnameREditText"
+        android:layout_marginTop="21dp"
+        android:imeOptions="actionNext"
+        android:singleLine="true"
+        android:layout_below="@+id/nameREditText"
+        android:layout_alignLeft="@+id/emailR2EditText"
+        android:layout_alignStart="@+id/emailR2EditText" />
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:inputType="textPersonName"
+        android:hint="Ingrese su nombre"
+        android:digits="qwertzuiopasdfghjklyxcvbnñmQWERTYUIOPASDFGHJKLÑZXCVBNM"
+        android:text=""
+        android:ems="10"
+        android:background="@drawable/caja"
+        android:id="@+id/nameREditText"
+        android:imeOptions="actionNext"
+        android:singleLine="true"
+        android:layout_marginTop="44dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/lastnameREditText"
+        android:layout_alignStart="@+id/lastnameREditText" />
+</RelativeLayout>
