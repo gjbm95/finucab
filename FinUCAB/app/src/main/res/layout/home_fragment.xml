@@ -9,13 +9,13 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="60dp"
+        android:layout_alignBottom="@+id/bAffiliations"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:text="Bienvenido"
         android:textColor="#FFF"
-        android:textSize="20dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:textSize="20dp" />
     <TextView
         android:id="@+id/separator"
         android:layout_width="match_parent"
@@ -28,11 +28,10 @@
     <Button
         android:id="@+id/bAffiliations"
         android:layout_width="120dp"
-        android:layout_height="80dp"
-        android:text="VER AFILIACIONES"
-        android:layout_alignParentTop="true"
+        android:layout_height="60dp"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:text="VER AFILIACIONES" />
 
 
 </RelativeLayout>
