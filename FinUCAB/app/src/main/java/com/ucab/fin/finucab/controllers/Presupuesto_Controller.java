@@ -29,64 +29,56 @@ public class Presupuesto_Controller {
     public static EditText recurrenciaPresupuesto;
     public static CompoundButton recurrenciaButton, unicoButton;
     public static Spinner categoriaPresupuesto;
-    public static boolean isChecked;
+    public static TextView recurrenciaTextView;
 
 
 
 
     public static void asignarValores( ){
 
-        recurrenciaPresupuesto.setText( presupuesto.get_duracion().toString());
         nombrePresupuesto.setText(presupuesto.get_nombre());
         montoPresupuesto.setText(presupuesto.get_monto().toString());
+        if(presupuesto.get_tipo().equals("Unico")){
 
+            unicoButton.setChecked(true);
+            recurrenciaTextView.setVisibility(recurrenciaTextView.INVISIBLE);       //SE COLOCA INVISIBLE EL TEXTVIEW
+            recurrenciaPresupuesto.setVisibility(recurrenciaPresupuesto.INVISIBLE); //SE COLOCA INVISIBLE EL EDITTEXT
+        }else if(presupuesto.get_tipo().equals("Recurrente")){
+            recurrenciaButton.setChecked(true);
+            recurrenciaTextView.setVisibility(recurrenciaTextView.VISIBLE);       //SE COLOCA INVISIBLE EL TEXTVIEW
+            recurrenciaPresupuesto.setVisibility(recurrenciaPresupuesto.VISIBLE); //SE COLOCA INVISIBLE EL EDITTEXT
+            recurrenciaPresupuesto.setText( presupuesto.get_duracion().toString());
+        }
+
+    }
+
+    public static void volverInvisibleRecurrencia(){
+        recurrenciaTextView.setVisibility(recurrenciaTextView.INVISIBLE);       //SE COLOCA INVISIBLE EL TEXTVIEW
+        recurrenciaPresupuesto.setVisibility(recurrenciaPresupuesto.INVISIBLE); //SE COLOCA INVISIBLE EL EDITTEXT
     }
 
     public static int validacionPresupuestoVacio() {
 
+        //TEXTVIEW
+
         if (nombrePresupuesto.getText().toString().isEmpty()) {
             nombrePresupuesto.setError("Debe colocar un Nombre de Presupuesto");
-
-            return 1;
         }
         if (montoPresupuesto.getText().toString().isEmpty()) {
             montoPresupuesto.setError("Debe colocar un Monto");
-            return 1;
-
         }
-        if (recurrenciaButton.getId() == R.id.recurrentRadioButton) {                //VERIFICO SI EL BOTON QUE ESTA PRESIONADO ES RRECURRENTE
+
+        //SPINNER
+        if (categoriaPresupuesto.getSelectedItemPosition() == 0) {
+            TextView errorText = (TextView) categoriaPresupuesto.getSelectedView();
+            errorText.setError("Debe colocar una categoria");
+        }
+
+        if (recurrenciaButton.isChecked()) {
             if (recurrenciaPresupuesto.getText().toString().isEmpty()) {
-                recurrenciaPresupuesto.setError("Debe colocar un Mes");
-                return 1;
+                recurrenciaPresupuesto.setError("Debe colocar un numero de meses");
             }
         }
-           /* if ((recurrenciaButton.getId() == R.id.recurrentRadioButton) && (unicoButton.getId() == R.id.onlyRadioButton)) {                //VERIFICO SI EL BOTON QUE ESTA PRESIONADO ES RRECURRENTE
-                recurrenciaButton.setError("Debe seleccionar un tipo de presupuesto");
-                unicoButton.setError("Debe seleccionar un tipo de presupuesto");
-                return 1;
-            }*/
-
-        if (categoriaPresupuesto.getSelectedItemPosition()==0) {
-
-           /* View selectedView = categoriaPresupuesto.getSelectedView();
-            if (selectedView != null && selectedView instanceof TextView) {
-                TextView selectedTextView = (TextView) selectedView;
-                selectedTextView.setError("Debe seleccionar una categoria");
-            }*/
-            nombrePresupuesto.setText("aquiles gay");
-
-        }
-        if (categoriaPresupuesto.getSelectedItemPosition()==-1) {
-
-           /* View selectedView = categoriaPresupuesto.getSelectedView();
-            if (selectedView != null && selectedView instanceof TextView) {
-                TextView selectedTextView = (TextView) selectedView;
-                selectedTextView.setError("Debe seleccionar una categoria");
-            }*/
-            nombrePresupuesto.setText("aquiles maricon");
-
-        }
-
 
         return 0;
     }

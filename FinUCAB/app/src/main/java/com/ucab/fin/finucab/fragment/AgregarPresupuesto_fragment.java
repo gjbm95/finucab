@@ -33,15 +33,10 @@ public class AgregarPresupuesto_fragment extends Fragment implements CompoundBut
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        setHasOptionsMenu(true);
-        super.onCreate(savedInstanceState);
-
         View rootView = inflater.inflate(R.layout.agregar_presupuesto_fragment, container, false);
-
 
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Agregar Presupuesto");
-
 
         recurrentTextView = (TextView) rootView.findViewById(R.id.recurrentTextView);
         monthsEditText = (EditText) rootView.findViewById(R.id.monthsEditText);
@@ -50,7 +45,7 @@ public class AgregarPresupuesto_fragment extends Fragment implements CompoundBut
         categorySpinner= (Spinner) rootView.findViewById(R.id.categorySpinner) ;
         onlyRadioButton= (RadioButton) rootView.findViewById(R.id.onlyRadioButton);
         recurrentRadioButton= (RadioButton) rootView.findViewById(R.id.recurrentRadioButton);
-
+        agregarButton = (Button) rootView.findViewById(R.id.acceptButton);
 
         Presupuesto_Controller.nombrePresupuesto = nameEditText;
         Presupuesto_Controller.montoPresupuesto = amountEditText;
@@ -58,9 +53,10 @@ public class AgregarPresupuesto_fragment extends Fragment implements CompoundBut
         Presupuesto_Controller.categoriaPresupuesto=categorySpinner;
         Presupuesto_Controller.recurrenciaButton=recurrentRadioButton;
         Presupuesto_Controller.unicoButton=onlyRadioButton;
+        Presupuesto_Controller.recurrenciaTextView = recurrentTextView;
 
+        Presupuesto_Controller.volverInvisibleRecurrencia();
 
-        agregarButton = (Button) rootView.findViewById(R.id.acceptButton);
         agregarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,18 +64,13 @@ public class AgregarPresupuesto_fragment extends Fragment implements CompoundBut
             }
         });
 
-
         onlyRadioButton.setOnCheckedChangeListener(this);
         recurrentRadioButton.setOnCheckedChangeListener(this);
 
-        recurrentTextView.setVisibility(recurrentTextView.INVISIBLE);   //SE COLOCA INVISIBLE EL TEXTVIEW
-        monthsEditText.setVisibility(monthsEditText.INVISIBLE);         //SE COLOCA INVISIBLE EL EDITTEXT
-
-        categorySpinner = (Spinner)rootView.findViewById(R.id.categorySpinner);
+        //Se borrrara cuando se implemente correctamente
         ArrayAdapter adapter = ArrayAdapter.createFromResource(getActivity(), R.array.categoryArray, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(adapter);
-
 
         return rootView;
     }

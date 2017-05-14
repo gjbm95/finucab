@@ -40,10 +40,7 @@ public class ModificarPresupuestoFragment extends Fragment implements CompoundBu
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
         View rootView = inflater.inflate(R.layout.agregar_presupuesto_fragment, container, false);
-
 
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Modificar Presupuesto");
@@ -63,6 +60,7 @@ public class ModificarPresupuestoFragment extends Fragment implements CompoundBu
         Presupuesto_Controller.categoriaPresupuesto=categorySpinner;
         Presupuesto_Controller.recurrenciaButton=recurrentRadioButton;
         Presupuesto_Controller.unicoButton=onlyRadioButton;
+        Presupuesto_Controller.recurrenciaTextView = recurrentTextView;
 
         Presupuesto_Controller.asignarValores();
 
@@ -78,16 +76,9 @@ public class ModificarPresupuestoFragment extends Fragment implements CompoundBu
         onlyRadioButton.setOnCheckedChangeListener(this);
         recurrentRadioButton.setOnCheckedChangeListener(this);
 
-        recurrentTextView.setVisibility(recurrentTextView.INVISIBLE);   //SE COLOCA INVISIBLE EL TEXTVIEW
-        monthsEditText.setVisibility(monthsEditText.INVISIBLE);         //SE COLOCA INVISIBLE EL EDITTEXT
-
-
         ArrayAdapter adapter = ArrayAdapter.createFromResource(getActivity(), R.array.categoryArray, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(adapter);
-
-
-
         return rootView;
 
     }

@@ -2,9 +2,9 @@
 <menu
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/modifyOption"
+    <item android:id="@+id/modifyGainOption"
         android:title="@string/opcionModificar"></item>
-    <item android:id="@+id/deleteOpcion"
+    <item android:id="@+id/deleteGainOpcion"
         android:title="@string/opcionEliminar"></item>
 
 </menu>

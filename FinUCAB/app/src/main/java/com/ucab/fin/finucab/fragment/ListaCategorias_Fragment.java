@@ -107,7 +107,7 @@ public class ListaCategorias_Fragment extends Fragment {
 
         MenuInflater inflater = getActivity().getMenuInflater();
 
-        inflater.inflate(R.menu.presupuesto_menu, menu);
+        inflater.inflate(R.menu.presupuesto_gasto_menu, menu);
 
     }
     */
