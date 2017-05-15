@@ -1,11 +1,11 @@
 [
     {
-        "merged": "C:\\Users\\Juan\\Documents\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item_header.xml",
-        "source": "C:\\Users\\Juan\\.android\\build-cache\\8e2c06ee4ae357e4d8e3164e85fde0edf33adb12\\output\\res\\layout\\design_navigation_item_header.xml"
-    },
-    {
         "merged": "C:\\Users\\Juan\\Documents\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\home_fragment.xml",
         "source": "C:\\Users\\Juan\\Documents\\finucab\\FinUCAB\\app\\src\\main\\res\\layout\\home_fragment.xml"
+    },
+    {
+        "merged": "C:\\Users\\Juan\\Documents\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item_header.xml",
+        "source": "C:\\Users\\Juan\\.android\\build-cache\\8e2c06ee4ae357e4d8e3164e85fde0edf33adb12\\output\\res\\layout\\design_navigation_item_header.xml"
     },
     {
         "merged": "C:\\Users\\Juan\\Documents\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_toolbar.xml",
@@ -28,12 +28,12 @@
         "source": "C:\\Users\\Juan\\.android\\build-cache\\e23dd056de0b744d0f789268ad4038c3adb94a49\\output\\res\\layout\\abc_alert_dialog_title_material.xml"
     },
     {
-        "merged": "C:\\Users\\Juan\\Documents\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_view.xml",
-        "source": "C:\\Users\\Juan\\.android\\build-cache\\e23dd056de0b744d0f789268ad4038c3adb94a49\\output\\res\\layout\\abc_search_view.xml"
-    },
-    {
         "merged": "C:\\Users\\Juan\\Documents\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_action_tombstone.xml",
         "source": "C:\\Users\\Juan\\.android\\build-cache\\e23dd056de0b744d0f789268ad4038c3adb94a49\\output\\res\\layout\\notification_action_tombstone.xml"
+    },
+    {
+        "merged": "C:\\Users\\Juan\\Documents\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_view.xml",
+        "source": "C:\\Users\\Juan\\.android\\build-cache\\e23dd056de0b744d0f789268ad4038c3adb94a49\\output\\res\\layout\\abc_search_view.xml"
     },
     {
         "merged": "C:\\Users\\Juan\\Documents\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\layout\\category_fragment.xml",
