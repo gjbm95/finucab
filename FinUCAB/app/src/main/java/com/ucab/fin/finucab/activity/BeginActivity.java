@@ -24,12 +24,12 @@ public class BeginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_begin);
         logo = (ImageView)findViewById(R.id.logoPresentacion);
         ucab = (ImageView)findViewById(R.id.ucabPresentacion);
-        Animation animation = new TranslateAnimation(0,0,0,150);
+        Animation animation = new TranslateAnimation(0,0,Animation.RELATIVE_TO_SELF,150);
         animation.setDuration(2000);
         animation.setFillAfter(true);
         logo.startAnimation(animation);
         //--------------------------------------------------------
-        Animation animation2 = new TranslateAnimation(0,60,0,0);
+        Animation animation2 = new TranslateAnimation(Animation.RELATIVE_TO_SELF,60,0,0);
         animation2.setDuration(2000);
         animation2.setFillAfter(true);
         ucab.startAnimation(animation2);

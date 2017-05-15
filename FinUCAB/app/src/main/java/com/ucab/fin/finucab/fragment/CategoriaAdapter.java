@@ -48,7 +48,6 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
     }
 
 
-
     @Override
 
     public void onBindViewHolder( final CategoriaViewHolder CategoriaViewHolder, int i)
