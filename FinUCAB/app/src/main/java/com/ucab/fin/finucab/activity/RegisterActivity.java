@@ -190,28 +190,6 @@ public class RegisterActivity extends AppCompatActivity {
         return true;
     }
 
-    //Agrego un menu Overflow al Action Bar:
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.overflow, menu);
-        return true;
-    }
 
-
-    //Se le coloca acciones a las funcionalidades que ofrece el Menu overflow del action bar.
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.exit:
-                System.exit(0);
-                return true;
-            case R.id.setting:
-                //Aqui se llama a las opciones de Configuracion
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 
 }

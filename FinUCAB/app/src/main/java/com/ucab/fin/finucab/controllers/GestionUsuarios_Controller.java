@@ -3,9 +3,11 @@ package com.ucab.fin.finucab.controllers;
 import android.widget.EditText;
 
 import com.ucab.fin.finucab.exceptions.CampoVacio_Exception;
+import com.ucab.fin.finucab.exceptions.ContrasenaInvalida_Exception;
 import com.ucab.fin.finucab.exceptions.ContrasenasDiferentes_Exception;
 import com.ucab.fin.finucab.exceptions.CorreoInvalido_Exception;
 import com.ucab.fin.finucab.exceptions.Longitud_Exception;
+import com.ucab.fin.finucab.exceptions.UsuarioInvalido_Exception;
 
 /**
  * Created by Junior on 06/05/2017.
@@ -23,9 +25,42 @@ public class GestionUsuarios_Controller {
     public static EditText respuesta;
 
 
+
+
+
     public GestionUsuarios_Controller (){
 
 
+    }
+    // Valida que no esten vacios los campos y coincida con la respuesta establecida por el usuario con la establecida por el usuario en recuperacion de contraseña
+    public static int validacionRespuesta() {
+
+        try {
+        verificoVacio(respuesta);
+            //FALTA VERIFICAR QUE COINCIDA CON LA ESTABLECIDA
+        } catch (CampoVacio_Exception e) {
+            e.getCampo().setError(e.getMessage());
+        return 1;
+        }
+        return 0;
+    }
+
+    // Valida que no esten vacios los campos y coincidan las contraseñas en recuperacion de contraseña
+    public static int validacionContrasenas() {
+
+        try {
+            verificoVacio(contrasena1);
+            verificoVacio(contrasena2);
+            verificoIgualdad(contrasena1,contrasena2);
+            //FALTA VERIFICAR QUE COINCIDA CON LA ESTABLECIDA
+        } catch (CampoVacio_Exception e) {
+            e.getCampo().setError(e.getMessage());
+            return 1;
+        }catch (ContrasenasDiferentes_Exception e){
+            e.getCampo().setError(e.getMessage());
+            return 1;
+        }
+        return 0;
     }
 
     //Se encarga de validar que no se encuentre vacio los campos nombre, apellido, correo
@@ -126,6 +161,29 @@ public class GestionUsuarios_Controller {
             CampoVacio_Exception campovacio = new CampoVacio_Exception("Este campo esta vacio");
             campovacio.setCampo(campo);
             throw campovacio;
+        }
+
+    }
+
+    //Realizo la validacion para verificar que el usuario existe:
+    public static void verificoUsuario(EditText campo) throws UsuarioInvalido_Exception {
+        if (campo.getText().toString().isEmpty()) //HAY QUE CORREGIR LA VERIFICACION
+        {
+            UsuarioInvalido_Exception campoerroneo = new UsuarioInvalido_Exception("Usuario Inexistente");
+            campoerroneo.setCampo(campo);
+            throw campoerroneo;
+        }
+
+    }
+
+    //Realizo la validacion para verificar que la contraseña coincide a la establecida por ese usuario:
+    public static void verificoContrasena(EditText campo) throws ContrasenaInvalida_Exception {
+        if (campo.getText().toString().isEmpty()) //HAY QUE CORREGIR LA VERIFICACION
+        {
+            ContrasenaInvalida_Exception campoerroneo = new ContrasenaInvalida_Exception("Contraseña Invalida");
+            campoerroneo.setCampo(campo);
+            campo.setText("");
+            throw campoerroneo;
         }
 
     }
