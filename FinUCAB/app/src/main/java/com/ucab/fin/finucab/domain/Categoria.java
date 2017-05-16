@@ -39,18 +39,18 @@ public class Categoria {
         this.estaHabilitado = estaHabilitado;
     }
 
-    public boolean isTipo() {
-        return tipo;
+    public boolean isIngreso() {
+        return esIngreso;
     }
 
-    public void setTipo(boolean tipo) {
-        this.tipo = tipo;
+    public void isIngreso(boolean esIngreso) {
+        this.esIngreso = esIngreso;
     }
 
     private int idcategoria;
     private String nombre;
     private String descripcion;
     private boolean estaHabilitado;
-    private boolean tipo;
+    private boolean esIngreso;
 
 }

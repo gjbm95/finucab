@@ -25,19 +25,19 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/ucab"
-        android:id="@+id/ucabPresentacion"
-        android:layout_marginTop="109dp"
-        android:layout_below="@+id/logoPresentacion"
+        app:srcCompat="@mipmap/botoncomenzar"
+        android:id="@+id/touch"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/botoncomenzar"
-        android:id="@+id/touch"
-        android:layout_alignParentBottom="true"
+        app:srcCompat="@mipmap/ucab"
+        android:id="@+id/ucabPresentacion"
+        android:layout_marginTop="104dp"
+        android:layout_below="@+id/logoPresentacion"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 

@@ -8,9 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
+import com.ucab.fin.finucab.controllers.ExportarPresupuesto_Controller;
 
 
 /**
@@ -19,7 +21,7 @@ import com.ucab.fin.finucab.activity.MainActivity;
 public class TotalFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
     TextView ingresos, gastos, total;
-    FloatingActionButton fab;
+    FloatingActionButton exportFAB;
     MainActivity parentActivity;
 
 
@@ -40,11 +42,14 @@ public class TotalFragment extends Fragment {
         gastos.setText("0");
         total.setText("0");
         parentActivity = (MainActivity) getActivity();
-        fab = (FloatingActionButton) rootView.findViewById(R.id.addFloatingBtnTotal);
-        fab.setOnClickListener(new View.OnClickListener() {
+        exportFAB = (FloatingActionButton) rootView.findViewById(R.id.addFloatingBtnTotal);
+        exportFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                parentActivity.changeFragment(new AgregarPresupuesto_fragment(), false);
+                Toast.makeText(parentActivity, "Exportando...", Toast.LENGTH_SHORT).show();
+                ExportarPresupuesto_Controller task=new ExportarPresupuesto_Controller();
+                task.execute();
+                Toast.makeText(parentActivity, "Exportado correctamente", Toast.LENGTH_SHORT).show();
 
             }
         });
