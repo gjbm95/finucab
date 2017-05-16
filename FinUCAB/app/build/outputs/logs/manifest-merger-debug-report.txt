@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\Data\UCAB\Desarollo\finucab\FinUCAB\app\src\main\AndroidManifest.xml:2:1-30:12
+ADDED from D:\Data\UCAB\Desarollo\finucab\FinUCAB\app\src\main\AndroidManifest.xml:2:1-32:12
 	package
 		ADDED from D:\Data\UCAB\Desarollo\finucab\FinUCAB\app\src\main\AndroidManifest.xml:3:5-35
 		INJECTED from D:\Data\UCAB\Desarollo\finucab\FinUCAB\app\src\main\AndroidManifest.xml
@@ -14,7 +14,7 @@ ADDED from D:\Data\UCAB\Desarollo\finucab\FinUCAB\app\src\main\AndroidManifest.x
 		INJECTED from D:\Data\UCAB\Desarollo\finucab\FinUCAB\app\src\main\AndroidManifest.xml
 		INJECTED from D:\Data\UCAB\Desarollo\finucab\FinUCAB\app\src\main\AndroidManifest.xml
 application
-ADDED from D:\Data\UCAB\Desarollo\finucab\FinUCAB\app\src\main\AndroidManifest.xml:5:5-28:19
+ADDED from D:\Data\UCAB\Desarollo\finucab\FinUCAB\app\src\main\AndroidManifest.xml:5:5-30:19
 MERGED from [com.android.support:design:25.3.1] C:\Users\Ramon\.android\build-cache\ececf8ff9c72ee219d81c4e67a084c7768b50fe1\output\AndroidManifest.xml:29:5-20
 MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\Ramon\.android\build-cache\5ccd30fc1859cfd672a1a4210f625bd65eb7ab9b\output\AndroidManifest.xml:29:5-20
 MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\Ramon\.android\build-cache\ad22e085b3d6d16985bebc2f9d034e7abc05376e\output\AndroidManifest.xml:26:5-20
@@ -69,6 +69,10 @@ category#android.intent.category.LAUNCHER
 ADDED from D:\Data\UCAB\Desarollo\finucab\FinUCAB\app\src\main\AndroidManifest.xml:24:17-77
 	android:name
 		ADDED from D:\Data\UCAB\Desarollo\finucab\FinUCAB\app\src\main\AndroidManifest.xml:24:27-74
+activity#com.ucab.fin.finucab.activity.AddCategoryActivity
+ADDED from D:\Data\UCAB\Desarollo\finucab\FinUCAB\app\src\main\AndroidManifest.xml:29:9-66
+	android:name
+		ADDED from D:\Data\UCAB\Desarollo\finucab\FinUCAB\app\src\main\AndroidManifest.xml:29:19-63
 uses-sdk
 INJECTED from D:\Data\UCAB\Desarollo\finucab\FinUCAB\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [com.android.support:design:25.3.1] C:\Users\Ramon\.android\build-cache\ececf8ff9c72ee219d81c4e67a084c7768b50fe1\output\AndroidManifest.xml:21:5-23:62

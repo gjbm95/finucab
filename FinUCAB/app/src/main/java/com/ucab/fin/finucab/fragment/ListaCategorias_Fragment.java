@@ -1,10 +1,7 @@
 package com.ucab.fin.finucab.fragment;
 
-
-
-
-
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -18,41 +15,41 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ucab.fin.finucab.R;
+import com.ucab.fin.finucab.activity.AddCategoryActivity;
 import com.ucab.fin.finucab.activity.MainActivity;
 import com.ucab.fin.finucab.domain.Categoria;
 
 import java.util.ArrayList;
-
-
-
-
 
 /**
 
  * A simple {@link Fragment} subclass.
 
  */
-
 public class ListaCategorias_Fragment extends Fragment {
 
     FloatingActionButton fab;
-
     MainActivity parentActivity;
 
     public ListaCategorias_Fragment() {
-
         // Required empty public constructor
-
     }
 
     @Override
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_lista_categorias, container, false);
         parentActivity = (MainActivity) getActivity();
         final RecyclerView recycleList = (RecyclerView) rootView.findViewById(R.id.categoriaReList);
+
+        fab = (FloatingActionButton) rootView.findViewById(R.id.addFloatingBtnCategoria);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity( new Intent(parentActivity, AddCategoryActivity.class));
+            }
+        });
 
         LinearLayoutManager myLayoutManager = new LinearLayoutManager(getActivity());
         myLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -93,8 +90,6 @@ public class ListaCategorias_Fragment extends Fragment {
 
         {
 
-            float monto = 150000;
-
             Categoria pi = new Categoria();
 
             pi.setNombre("Nombre Categoria");
@@ -103,8 +98,6 @@ public class ListaCategorias_Fragment extends Fragment {
             pi.setIdcategoria(0);
             pi.isIngreso(false);
             listOfPersona.add(pi);
-
-
 
         }
 
@@ -128,17 +121,10 @@ public class ListaCategorias_Fragment extends Fragment {
 
     class RecyclerTouchListener implements RecyclerView.OnItemTouchListener{
 
-
-
         private ListaCategorias_Fragment.ClickListener clicklistener;
-
         private GestureDetector gestureDetector;
 
-
-
         public RecyclerTouchListener(Context context, final RecyclerView recycleView, final ListaCategorias_Fragment.ClickListener clicklistener){
-
-
 
             this.clicklistener=clicklistener;
 
