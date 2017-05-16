@@ -348,6 +348,10 @@
         "source": "C:\\Users\\Ramon\\.android\\build-cache\\ececf8ff9c72ee219d81c4e67a084c7768b50fe1\\output\\res\\drawable\\design_fab_background.xml"
     },
     {
+        "merged": "D:\\Data\\UCAB\\Desarollo\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\toggle_state.xml",
+        "source": "D:\\Data\\UCAB\\Desarollo\\finucab\\FinUCAB\\app\\src\\main\\res\\drawable\\toggle_state.xml"
+    },
+    {
         "merged": "C:\\Users\\Juan\\Documents\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\notification_icon_background.xml",
         "source": "C:\\Users\\Juan\\.android\\build-cache\\e23dd056de0b744d0f789268ad4038c3adb94a49\\output\\res\\drawable\\notification_icon_background.xml"
     },

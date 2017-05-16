@@ -1,4 +1,4 @@
-#Tue May 16 00:09:00 VET 2017
+#Tue May 16 00:40:03 VET 2017
 base.0=D\:\\Data\\UCAB\\Desarollo\\finucab\\FinUCAB\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_592ca3086deea4d880e9f32d4ecb3221b3f98bcc
 renamed.1=classes.dex
 renamed.0=classes2.dex

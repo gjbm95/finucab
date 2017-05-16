@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ToggleButton;
 
 import com.ucab.fin.finucab.R;
 
@@ -13,6 +14,8 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
 
     Button signInButton;
     Button signUpButton;
+    ToggleButton toggleButtonHabilitado;
+    ToggleButton toggleButtonIngreso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,10 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
 //        SET LISTENERS (Se le asigna la actividad en el cual funcionaran)
         signInButton.setOnClickListener(this);
         signUpButton.setOnClickListener(this);
+
+        toggleButtonHabilitado = (ToggleButton) findViewById(R.id.toggleButtonHabilitado);
+        toggleButtonHabilitado.setChecked(true);
+        toggleButtonIngreso = (ToggleButton) findViewById(R.id.toggleButtonIngreso);
 
     }
 
