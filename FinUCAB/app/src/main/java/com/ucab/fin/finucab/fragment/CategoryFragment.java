@@ -9,7 +9,6 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
 
@@ -28,16 +27,51 @@ public class CategoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.category_fragment, container, false);
         parentActivity = (MainActivity) getActivity();
-        parentActivity.getSupportActionBar().setTitle("Categorias");
+        parentActivity.getSupportActionBar().setTitle("Cetgorias");
+
         if (savedInstanceState == null) {
             viewPager = (ViewPager) view.findViewById(R.id.category);
             CategoryFragment.AdaptadorSecciones adapter = new CategoryFragment.AdaptadorSecciones(getChildFragmentManager());
-            adapter.addFragment(new ListaCategorias_Fragment(), "Puedo");
+            adapter.addFragment(new AgregarCategoria_Fragment(), "Agregar Categoria");
             viewPager.setAdapter(adapter);
+
         }
 
         return view;
     }
+
+    //EJEMPLO DE PRESUPUESTO
+
+    /*
+
+
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view= inflater.inflate(R.layout.category_fragment, container, false);
+        parentActivity = (MainActivity) getActivity();
+        parentActivity.getSupportActionBar().setTitle("Categorias");
+        if (savedInstanceState == null) {
+
+
+            // Setear adaptador al viewpager.
+            viewPager = (ViewPager) view.findViewById(R.id.category);
+            poblarViewPager(viewPager);
+
+        }
+
+        return view;
+    }
+
+     private void poblarViewPager(ViewPager viewPager) {
+        AdaptadorSecciones adapter = new AdaptadorSecciones(getChildFragmentManager());
+        adapter.addFragment(new ListaCategorias_Fragment(), "Entre");
+        viewPager.setAdapter(adapter);
+    }
+
+
+     */
 
 
 
