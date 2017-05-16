@@ -95,7 +95,13 @@ public class ResumenPagos_Fragment extends Fragment {
 
             pi.setCategoria("Nombre Categoria");
             pi.setDescripcion("Descripcion");
-            pi.setTotal(1000);
+            pi.setTotal(10);
+            pi.setFecha("A");
+            pi.setImpuesto(0);
+            pi.setSubtotal(0);
+            pi.setTipo("ingreso");
+            pi.setIdTransaccion(0);
+
             listOfPersona.add(pi);
 
         }
