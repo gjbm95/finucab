@@ -3,12 +3,10 @@ package com.ucab.fin.finucab.fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewDebug;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ucab.fin.finucab.R;
-import com.ucab.fin.finucab.domain.Categoria;
 import com.ucab.fin.finucab.domain.Transaccion;
 
 import java.util.List;
@@ -66,9 +64,9 @@ public class PagoAdapter extends RecyclerView.Adapter<PagoAdapter.PagoViewHolder
         public PagoViewHolder(View v) {
             super(v);
 
-            montoTextView = (TextView) v.findViewById(R.id.monthTextView);
-            categoriaTextView = (TextView) v.findViewById(R.id.categoriasTextView);
-            descripcionTextView = (TextView) v.findViewById(R.id.descripcionTextView);
+            montoTextView = (TextView) v.findViewById(R.id.montopagoTextView);
+            categoriaTextView = (TextView) v.findViewById(R.id.categoriapagosTextView);
+            descripcionTextView = (TextView) v.findViewById(R.id.categoriapagosTextView);
 
         }
 
