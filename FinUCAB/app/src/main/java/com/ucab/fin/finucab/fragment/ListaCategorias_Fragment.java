@@ -37,23 +37,13 @@ public class ListaCategorias_Fragment extends Fragment {
 
     FloatingActionButton fab;
 
-
-
     MainActivity parentActivity;
-
-
-
-
 
     public ListaCategorias_Fragment() {
 
         // Required empty public constructor
 
     }
-
-
-
-
 
     @Override
 
@@ -63,8 +53,10 @@ public class ListaCategorias_Fragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_lista_categorias, container, false);
         parentActivity = (MainActivity) getActivity();
         final RecyclerView recycleList = (RecyclerView) rootView.findViewById(R.id.categoriaReList);
+
         LinearLayoutManager myLayoutManager = new LinearLayoutManager(getActivity());
         myLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+
         recycleList.setLayoutManager(myLayoutManager);
         recycleList.addOnItemTouchListener(new RecyclerTouchListener(getActivity(),
                 recycleList, new ListaCategorias_Fragment.ClickListener() {
@@ -89,71 +81,6 @@ public class ListaCategorias_Fragment extends Fragment {
     }
 
 
-
-
-
-
-/*
- @Override
-    public void onCreateContextMenu(ContextMenu menu, View v,
-
-                                    ContextMenu.ContextMenuInfo menuInfo)
-
-    {
-
-        super.onCreateContextMenu(menu, v, menuInfo);
-
-
-
-        MenuInflater inflater = getActivity().getMenuInflater();
-
-        inflater.inflate(R.menu.presupuesto_menu, menu);
-
-    }
-    */
-
-
-
-    //COLOCAR LASOPCIONES MODIFICAR Y ELIMINAR
-
-
-
-   /*
-   @Override
-   public boolean onContextItemSelected(MenuItem item) {
-
-
-
-        switch (item.getItemId()) {
-
-            case R.id.modifyOption:
-
-                Presupuesto p = new Presupuesto();
-                p.set_nombre("hola");
-                p.set_duracion(20);
-                // p.set_categoria("categoria 1");
-                p.set_monto((float) 150000.0);
-                // p.set_clasificacion("sdfgsdf"); //clasificacion ganancia perdida
-                // p.set_tipo("sdfsdfsd"); // unico o recurrente
-                Presupuesto_Controller.presupuesto = p;
-                parentActivity.changeFragment(new ModificarPresupuestoFragment(), false);
-
-                return true;
-
-            case R.id.deleteOpcion:
-
-                Toast.makeText(getActivity(), "Opcion Eliminar seleccionada",Toast.LENGTH_LONG).show();
-
-                return true;
-
-            default:
-
-                return super.onContextItemSelected(item);
-
-        }
-
-    }
-*/
 //BORRAR CUANDO SE IMPLEMENTE LA CLASE PRESUPUESTO
 
 
@@ -171,8 +98,10 @@ public class ListaCategorias_Fragment extends Fragment {
             Categoria pi = new Categoria();
 
             pi.setNombre("Nombre Categoria");
-
-
+            pi.setDescripcion("Descripcion");
+            pi.setEstaHabilitado(true);
+            pi.setIdcategoria(0);
+            pi.isIngreso(false);
             listOfPersona.add(pi);
 
 

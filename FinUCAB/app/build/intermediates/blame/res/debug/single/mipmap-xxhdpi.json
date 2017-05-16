@@ -4,8 +4,20 @@
         "source": "C:\\Users\\Juan\\Documents\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.png"
     },
     {
+        "merged": "D:\\Data\\UCAB\\Desarollo\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_launcher_round.png",
+        "source": "D:\\Data\\UCAB\\Desarollo\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "D:\\Data\\UCAB\\Desarollo\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_launcher.png",
+        "source": "D:\\Data\\UCAB\\Desarollo\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
+    },
+    {
         "merged": "C:\\Users\\Juan\\Documents\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_flecha.png",
         "source": "C:\\Users\\Juan\\Documents\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_flecha.png"
+    },
+    {
+        "merged": "D:\\Data\\UCAB\\Desarollo\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_flecha.png",
+        "source": "D:\\Data\\UCAB\\Desarollo\\finucab\\FinUCAB\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_flecha.png"
     },
     {
         "merged": "C:\\Users\\Juan\\Documents\\finucab\\FinUCAB\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_launcher.png",

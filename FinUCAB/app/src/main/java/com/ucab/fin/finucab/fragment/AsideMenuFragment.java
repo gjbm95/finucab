@@ -57,7 +57,7 @@ public class AsideMenuFragment extends Fragment implements View.OnClickListener{
                 parentActivity.closeDrawerLayout();
                 break;
             case R.id.categoryBtn:
-                parentActivity.changeFragment(new CategoryFragment(), false);
+                parentActivity.changeFragment(new ListaCategorias_Fragment(), false);
                 parentActivity.closeDrawerLayout();
                 break;
             case R.id.paysBtn:
