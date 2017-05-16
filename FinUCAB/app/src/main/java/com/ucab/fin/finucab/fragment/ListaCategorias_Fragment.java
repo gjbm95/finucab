@@ -72,7 +72,7 @@ public class ListaCategorias_Fragment extends Fragment {
                 registerForContextMenu(recycleList);
             }
         }));
-
+            //celdas
         CategoriaAdapter cAdapter =new CategoriaAdapter(populatedList());
         recycleList.setAdapter(cAdapter);
         return rootView;
