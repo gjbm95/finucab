@@ -182,7 +182,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    /**Se actualiza la variable conteo, con el fin de que se permita el desplazamiento entre formularios. 
+    /**Se actualiza la variable conteo, con el fin de que se permita el desplazamiento entre formularios.
      *
      * @param conteo
      * @return
