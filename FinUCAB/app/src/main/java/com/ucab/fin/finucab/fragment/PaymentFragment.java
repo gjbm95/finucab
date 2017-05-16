@@ -36,7 +36,7 @@ public class PaymentFragment extends Fragment {
             AdaptadorSecciones adapter = new AdaptadorSecciones(getChildFragmentManager());
             adapter.addFragment(new AgregarTransaccion_Fragment(), "Agregar Transacion");
             viewPager.setAdapter(adapter);
-            m
+
         }
 
         return view;
