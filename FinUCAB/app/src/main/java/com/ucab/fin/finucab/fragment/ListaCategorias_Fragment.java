@@ -41,8 +41,9 @@ public class ListaCategorias_Fragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_lista_categorias, container, false);
         parentActivity = (MainActivity) getActivity();
-        final RecyclerView recycleList = (RecyclerView) rootView.findViewById(R.id.categoriaReList);
+        parentActivity.getSupportActionBar().setTitle("Categorias");
 
+        // Configuracion inicial del boton flotante
         fab = (FloatingActionButton) rootView.findViewById(R.id.addFloatingBtnCategoria);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +52,7 @@ public class ListaCategorias_Fragment extends Fragment {
             }
         });
 
+        final RecyclerView recycleList = (RecyclerView) rootView.findViewById(R.id.categoriaReList);
         LinearLayoutManager myLayoutManager = new LinearLayoutManager(getActivity());
         myLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
