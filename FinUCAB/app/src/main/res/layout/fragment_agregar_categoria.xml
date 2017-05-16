@@ -223,7 +223,7 @@
 
         android:layout_height="0dp"
 
-        android:text="@string/volver"
+        android:text="Volver"
 
         android:textSize="14sp"
 
