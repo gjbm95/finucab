@@ -38,7 +38,7 @@ public class MyProfileFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        sqlThread.start();
+        //sqlThread.start();
         View view = inflater.inflate(R.layout.profile_fragment, container, false);
 
         boton = (Button) view.findViewById(R.id.bBack);
@@ -65,7 +65,9 @@ public class MyProfileFragment extends Fragment {
         return view;
     }
 
-    Thread sqlThread = new Thread() {
+
+
+   /* Thread sqlThread = new Thread() {
         public void run() {
             try {
                 Class.forName("org.postgresql.Driver");
@@ -86,7 +88,7 @@ public class MyProfileFragment extends Fragment {
                 System.out.println("oops! No se encuentra la clase. Error: " + e.getMessage());
             }
         }
-    };
+    };*/
 }
 
 
