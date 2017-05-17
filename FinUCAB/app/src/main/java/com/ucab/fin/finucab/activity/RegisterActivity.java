@@ -211,6 +211,7 @@ public class RegisterActivity extends AppCompatActivity {
         return true;
     }
 
+<<<<<<< HEAD
     /**Agrego un menu Overflow al Action Bar:
      *
      * @param menu
@@ -243,5 +244,8 @@ public class RegisterActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+=======
+
+>>>>>>> origin/modulo1Erbin
 
 }
