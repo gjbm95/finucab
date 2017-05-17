@@ -54,12 +54,12 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
         switch (view.getId()){
 
             case R.id.backButton:
-                i = new Intent(AddCategoryActivity.this, ListaCategoryActivity.class);
+                i = new Intent(AddCategoryActivity.this, MainActivity.class);
                 startActivity(i);
                 break;
             //Al accionar, se inicia la actividad que presenta el formulario de registro.
             case R.id.acceptButton:
-                i = new Intent(AddCategoryActivity.this,ListaCategoryActivity.class);
+                i = new Intent(AddCategoryActivity.this,MainActivity.class);
                 startActivity(i);
                 break;
         }
