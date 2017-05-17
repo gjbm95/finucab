@@ -9,8 +9,9 @@ import android.widget.Button;
 import android.widget.ToggleButton;
 
 import com.ucab.fin.finucab.R;
+import com.ucab.fin.finucab.fragment.ResumenPagos_Fragment;
 
-public class AddCategoryActivity extends AppCompatActivity implements View.OnClickListener  {
+public class AddPagoActivity extends AppCompatActivity implements View.OnClickListener  {
 
     Button signInButton;
     Button signUpButton;
@@ -20,7 +21,7 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_agregar_categoria);
+        setContentView(R.layout.fragment_agregartransaccion);
 
         //Colocando el icono en la parte superior izquierda:
         ActionBar actionBar = getSupportActionBar();
@@ -36,9 +37,6 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
         signInButton.setOnClickListener(this);
         signUpButton.setOnClickListener(this);
 
-        toggleButtonHabilitado = (ToggleButton) findViewById(R.id.toggleButtonHabilitado);
-        toggleButtonHabilitado.setChecked(true);
-        toggleButtonIngreso = (ToggleButton) findViewById(R.id.toggleButtonIngreso);
 
     }
 
@@ -54,12 +52,12 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
         switch (view.getId()){
 
             case R.id.backButton:
-                i = new Intent(AddCategoryActivity.this, MainActivity.class);
+                i = new Intent(AddPagoActivity.this, ResumenPagoActivity.class);
                 startActivity(i);
                 break;
             //Al accionar, se inicia la actividad que presenta el formulario de registro.
             case R.id.acceptButton:
-                i = new Intent(AddCategoryActivity.this,MainActivity.class);
+                i = new Intent(AddPagoActivity.this, RegisterActivity.class);
                 startActivity(i);
                 break;
         }

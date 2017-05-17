@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.AddCategoryActivity;
@@ -29,6 +30,8 @@ import java.util.ArrayList;
 public class ListaCategorias_Fragment extends Fragment {
 
     FloatingActionButton fab;
+    Button ExportarButton;
+
     MainActivity parentActivity;
 
     public ListaCategorias_Fragment() {
@@ -49,6 +52,20 @@ public class ListaCategorias_Fragment extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity( new Intent(parentActivity, AddCategoryActivity.class));
+
+        //configuracion inicion del boton exportar
+
+            }
+        });
+
+        ExportarButton = (Button) rootView.findViewById(R.id.ExportarButton);
+        ExportarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity( new Intent(parentActivity, AddCategoryActivity.class));
+
+                //configuracion inicion del boton exportar
+
             }
         });
 
@@ -72,7 +89,7 @@ public class ListaCategorias_Fragment extends Fragment {
                 registerForContextMenu(recycleList);
             }
         }));
-
+            //celdas
         CategoriaAdapter cAdapter =new CategoriaAdapter(populatedList());
         recycleList.setAdapter(cAdapter);
         return rootView;
