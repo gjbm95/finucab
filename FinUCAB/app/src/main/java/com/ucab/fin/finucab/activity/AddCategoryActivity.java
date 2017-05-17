@@ -59,7 +59,7 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
                 break;
             //Al accionar, se inicia la actividad que presenta el formulario de registro.
             case R.id.acceptButton:
-                i = new Intent(AddCategoryActivity.this, RegisterActivity.class);
+                i = new Intent(AddCategoryActivity.this,MainActivity.class);
                 startActivity(i);
                 break;
         }
