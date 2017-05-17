@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.AddCategoryActivity;
+import com.ucab.fin.finucab.activity.AddPagoActivity;
 import com.ucab.fin.finucab.activity.MainActivity;
 import com.ucab.fin.finucab.domain.Transaccion;
 
@@ -48,7 +49,7 @@ public class ResumenPagos_Fragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity( new Intent(parentActivity, AddCategoryActivity.class));
+                startActivity( new Intent(parentActivity, AddPagoActivity.class));
             }
         });
 
@@ -95,7 +96,13 @@ public class ResumenPagos_Fragment extends Fragment {
 
             pi.setCategoria("Nombre Categoria");
             pi.setDescripcion("Descripcion");
-            pi.setTotal(1000);
+            pi.setTotal(10);
+            pi.setFecha("A");
+            pi.setImpuesto(0);
+            pi.setSubtotal(0);
+            pi.setTipo("ingreso");
+            pi.setIdTransaccion(0);
+
             listOfPersona.add(pi);
 
         }
