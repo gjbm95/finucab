@@ -27,12 +27,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
-
         <activity android:name=".activity.AddCategoryActivity" />
-=======
         <activity android:name=".activity.ForgotActivity"></activity>
->>>>>>> origin/modulo1Erbin
+
     </application>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission-sdk-23 android:name="android.permission.INTERNET"/>
 
 </manifest>

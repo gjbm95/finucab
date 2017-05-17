@@ -181,15 +181,8 @@ public class GestionUsuarios_Controller {
 
     }
 
-<<<<<<< HEAD
-    /**Realizo la validacion para verificar que las contraseñas son diferentes:
-     *
-     *
-     * @param contesena1
-     * @param contrasena2
-     * @throws ContrasenasDiferentes_Exception
-     */
-=======
+
+
     //Realizo la validacion para verificar que el usuario existe:
     public static void verificoUsuario(EditText campo) throws UsuarioInvalido_Exception {
         if (campo.getText().toString().isEmpty()) //HAY QUE CORREGIR LA VERIFICACION
@@ -213,8 +206,13 @@ public class GestionUsuarios_Controller {
 
     }
 
-    //Realizo la validacion para verificar que las contraseñas son diferentes:
->>>>>>> origin/modulo1Erbin
+    /**Realizo la validacion para verificar que las contraseñas son diferentes:
+     *
+     *
+     * @param contesena1
+     * @param contrasena2
+     * @throws ContrasenasDiferentes_Exception
+     */
     public static void verificoIgualdad(EditText contesena1, EditText contrasena2) throws ContrasenasDiferentes_Exception {
         if (!(contrasena1.getText().toString().equals(contrasena2.getText().toString())))
         {

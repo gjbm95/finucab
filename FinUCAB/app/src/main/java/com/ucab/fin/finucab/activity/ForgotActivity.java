@@ -95,16 +95,12 @@ public class ForgotActivity extends AppCompatActivity implements View.OnClickLis
             }else{
                 //SE DEBE ESCRIBIR LA NUEVA CONTRASEÑA EN LA BASE DE DATOS
                     if(conteo ==2 && GestionUsuarios_Controller.validacionContrasenas()==0) {
-                        Intent home = new Intent(ForgotActivity.this, LoginActivity.class);
-                        startActivity(home);
                         GestionUsuarios_Controller.resetarVariables();
                         finish();
                     }
             }
                 break;
             case R.id.cancelButton:
-                Intent home = new Intent(ForgotActivity.this, LoginActivity.class);
-                startActivity(home);
                 GestionUsuarios_Controller.resetarVariables();
                 finish();
                 break;

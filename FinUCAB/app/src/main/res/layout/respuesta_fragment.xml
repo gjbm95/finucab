@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginTop="50dp"
-        android:text="Pregunta secreta?"
+        android:text="¿Pregunta secreta?"
         android:textAlignment="center"
         android:textColor="@color/colorPrimary"
         android:textSize="20sp"
