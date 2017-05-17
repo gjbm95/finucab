@@ -66,7 +66,7 @@ public class PagoAdapter extends RecyclerView.Adapter<PagoAdapter.PagoViewHolder
 
             montoTextView = (TextView) v.findViewById(R.id.montopagoTextView);
             categoriaTextView = (TextView) v.findViewById(R.id.categoriapagosTextView);
-            descripcionTextView = (TextView) v.findViewById(R.id.categoriapagosTextView);
+            descripcionTextView = (TextView) v.findViewById(R.id.descripcionpagoTextView);
 
         }
 
