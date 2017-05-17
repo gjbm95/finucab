@@ -30,8 +30,10 @@ public class RegisterActivity extends AppCompatActivity {
     private int conteo;
 
 
-
-    //Creacion de la actividad:
+    /**Creacion de la actividad:
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         //Inicio el contador de etapas:
         //---------------------------------------------------------------------------------
-        conteo=1;
+        conteo=1; //Esta variable se encarga de indicar que paso del registro de usuario se debe ejecutar
         //Colocando el icono en la parte superior izquierda de la pantalla:
         //---------------------------------------------------------------------------------
         ActionBar actionBar = getSupportActionBar();
@@ -65,21 +67,21 @@ public class RegisterActivity extends AppCompatActivity {
                     if (controlValidacion(conteo))
                     {
                         inicioOnboarding();
-                        activarPaso(1);
+                        activarPaso(conteo);
                     }
                 }
                 if (conteo==2) {
                     if (controlValidacion(conteo))
                     {
                         inicioOnboarding();
-                        activarPaso(2);
+                        activarPaso(conteo);
                     }
                 }
                 if (conteo==3) {
                     if (controlValidacion(conteo))
                     {
                         inicioOnboarding();
-                        activarPaso(3);
+                        activarPaso(conteo);
                     }
                 }
             }
@@ -87,7 +89,9 @@ public class RegisterActivity extends AppCompatActivity {
         );
 
 
-        //Colocando acciones al boton de "Cancelar":
+        /**Colocando acciones al boton de "Cancelar":
+         *
+         */
         //----------------------------------------------------------------------------------
         anterior = (Button) findViewById(R.id.cancelButton);
         anterior.setOnClickListener(new View.OnClickListener() {
@@ -116,7 +120,9 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    //Quito la visibilidad a los indicadores de Etapa:
+    /**Quito la visibilidad a los indicadores de Etapa:
+     *
+     */
     //---------------------------------------------------------------------------------
     public void inicioOnboarding(){
 
@@ -125,38 +131,49 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    //Coloco la visibilidad a un indicador y formualario en la Etapa:
+    /**Coloco la visibilidad a un indicador y formualario en la Etapa:
+     *
+     * @param indicador
+     */
     //---------------------------------------------------------------------------------
     public void activarPaso(int indicador){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left);
-
+        //Muestro el formulario de registro para datos personales.
         if(indicador ==1) {
+            //Ajusto el titulo de los botones.
             anterior = (Button) findViewById(R.id.cancelButton);
             anterior.setText("CANCELAR");
             siguiente = (Button) findViewById(R.id.nextButton);
             siguiente.setText("SIGUIENTE");
+            //Modifico la posicion del grafico de onBoarding.
             posicionEtapa = (ImageView) findViewById(R.id.onboardindImageView);
             posicionEtapa.setImageResource(R.mipmap.onboarding1);
             DatosPersonalesFragment fragment1 = new DatosPersonalesFragment();
             fragmentTransaction.replace(R.id.fragment, fragment1).commit();
         }
+        //Muestro el formulario de registro para datos de la cuenta.
         if (indicador==2){
+            //Ajusto el titulo de los botones.
             anterior = (Button) findViewById(R.id.cancelButton);
             anterior.setText("ANTERIOR");
             siguiente = (Button) findViewById(R.id.nextButton);
             siguiente.setText("SIGUIENTE");
+            //Modifico la posicion del grafico de onBoarding.
             posicionEtapa = (ImageView) findViewById(R.id.onboardindImageView);
             posicionEtapa.setImageResource(R.mipmap.onboarding2);
             DatosCuentaFragment fragment1 = new DatosCuentaFragment();
             fragmentTransaction.replace(R.id.fragment, fragment1).commit();
         }
+        //Muestro el formulario de registro para datos de la seguridad de la cuenta.
         if(indicador==3){
+            //Ajusto el titulo de los botones.
             anterior = (Button) findViewById(R.id.cancelButton);
             anterior.setText("ANTERIOR");
             siguiente = (Button) findViewById(R.id.nextButton);
             siguiente.setText("LISTO");
+            //Modifico la posicion del grafico de onBoarding.
             posicionEtapa = (ImageView) findViewById(R.id.onboardindImageView);
             posicionEtapa.setImageResource(R.mipmap.onboarding3);
             DatosSeguridadFragment fragment1 = new DatosSeguridadFragment();
@@ -165,7 +182,11 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    //Se activa un tipo de validacion dependiendo del formulario donde se encuentre.
+    /**Se actualiza la variable conteo, con el fin de que se permita el desplazamiento entre formularios.
+     *
+     * @param conteo
+     * @return
+     */
     public boolean controlValidacion(int conteo){
         if((conteo)==2){
             if(GestionUsuarios_Controller.validacionEtapaDatos()==1)
@@ -190,7 +211,11 @@ public class RegisterActivity extends AppCompatActivity {
         return true;
     }
 
-    //Agrego un menu Overflow al Action Bar:
+    /**Agrego un menu Overflow al Action Bar:
+     *
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.overflow, menu);
@@ -198,13 +223,18 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
-    //Se le coloca acciones a las funcionalidades que ofrece el Menu overflow del action bar.
+    /**Se le coloca acciones a las funcionalidades que ofrece el Menu overflow del action bar.
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            //Se finaliza la aplicacion.
             case R.id.exit:
                 System.exit(0);
                 return true;
+            //Se accede a la funcionalidades de configuracion.
             case R.id.setting:
                 //Aqui se llama a las opciones de Configuracion
                 return true;

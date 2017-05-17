@@ -3,75 +3,189 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
     xmlns:tools="http://schemas.android.com/tools"
+
     android:id="@+id/fragment_agregar_transacion"
+
     android:layout_width="match_parent"
+
     android:layout_height="match_parent"
-    android:background="#0895E0">
 
+    android:background="#0895E0"
+
+    android:titleTextColor="#000">
+
+
+    <Spinner
+
+        android:id="@+id/categoriaSpinner"
+
+        android:layout_width="0dp"
+
+        android:layout_height="45dp"
+
+        android:layout_marginEnd="16dp"
+
+        android:layout_marginLeft="16dp"
+
+        android:layout_marginRight="16dp"
+
+        android:layout_marginStart="16dp"
+
+        android:layout_marginTop="233dp"
+
+        android:background="@drawable/spinner"
+
+        android:entries="@array/categoryArray"
+
+        android:prompt="@string/categoria_prompt"
+
+        android:textSize="14sp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintHorizontal_bias="1.0"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <Spinner
+
+        android:id="@+id/tipoTransaccionSpinner"
+
+        android:layout_width="0dp"
+
+        android:layout_height="45dp"
+
+        android:layout_marginEnd="16dp"
+
+        android:layout_marginLeft="16dp"
+
+        android:layout_marginRight="16dp"
+
+        android:layout_marginStart="16dp"
+
+        android:layout_marginTop="145dp"
+
+        android:background="@drawable/spinner"
+
+        android:entries="@array/tipoTransaccionArray"
+
+        android:prompt="@string/tipoTransaccion_prompt"
+
+        android:textSize="14sp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintHorizontal_bias="1.0"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <TextView
 
-        android:id="@+id/agregarTextView"
+        android:id="@+id/montoTextView"
+
         android:layout_width="0dp"
+
         android:layout_height="wrap_content"
+
         android:textColor="#fff"
+
         android:textSize="20sp"
-        android:text="@string/agregarCategoria"
+
+        android:text="@string/monto"
+
         app:layout_constraintLeft_toLeftOf="parent"
+
         app:layout_constraintTop_toTopOf="parent"
+
         app:layout_constraintRight_toRightOf="parent"
+
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="69dp"
+
+        android:layout_marginTop="16dp"
+
         app:layout_constraintHorizontal_bias="1.0" />
-
     <TextView
 
-        android:id="@+id/DescripcionTextView"
+        android:id="@+id/tipoTransaccionTextView"
+
         android:layout_width="0dp"
+
         android:layout_height="wrap_content"
+
         android:textColor="#fff"
+
         android:textSize="20sp"
-        android:text="@string/agregarDescripcion"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="214dp"
-        app:layout_constraintHorizontal_bias="0.0" />
 
+        android:text="@string/tipoTransaccion"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent"
+
+        app:layout_constraintRight_toRightOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+
+        android:layout_marginTop="104dp"
+
+        app:layout_constraintHorizontal_bias="1.0" />
     <TextView
 
-        android:id="@+id/campoObligatorioTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textColor="#f44336"
-        android:textSize="14sp"
-        android:text="@string/campoObligatorio"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="169dp"
-        app:layout_constraintHorizontal_bias="0.0" />
+        android:id="@+id/categoryTextView"
 
+        android:layout_width="0dp"
+
+        android:layout_height="wrap_content"
+
+        android:textColor="#fff"
+
+        android:textSize="20sp"
+
+        android:text="@string/categoria"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent"
+
+        app:layout_constraintRight_toRightOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+
+        android:layout_marginTop="199dp"
+
+        app:layout_constraintHorizontal_bias="1.0" />
     <TextView
 
-        android:id="@+id/campoObligatorioDescripcionTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textColor="#f44336"
-        android:textSize="14sp"
-        android:text="@string/campoObligatorioDes"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="313dp"
-        app:layout_constraintHorizontal_bias="0.0" />
+        android:id="@+id/descripcionTextView"
 
+        android:layout_width="0dp"
+
+        android:layout_height="wrap_content"
+
+        android:textColor="#fff"
+
+        android:textSize="20sp"
+
+        android:text="@string/descripcion"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent"
+
+        app:layout_constraintRight_toRightOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+
+        android:layout_marginTop="286dp"
+
+        app:layout_constraintHorizontal_bias="1.0" />
     <EditText
 
-        android:id="@+id/AgregarcategoriaEditText"
+        android:id="@+id/montoEditText"
 
         android:layout_width="0dp"
 
@@ -81,7 +195,7 @@
 
         android:layout_marginRight="16dp"
 
-        android:hint="@string/escribirCategoria"
+        android:hint="@string/indiqueMonto"
 
         android:background="@drawable/rounded_white_border"
 
@@ -95,98 +209,89 @@
 
         app:layout_constraintEnd_toEndOf="parent"
 
-        android:layout_marginTop="114dp"
+        android:layout_marginTop="57dp"
 
-        app:layout_constraintHorizontal_bias="0.0"
-
+        app:layout_constraintHorizontal_bias="1.0"
         android:layout_marginStart="16dp"
-
         android:layout_marginEnd="16dp" />
-
     <EditText
 
-        android:id="@+id/AddDescripcionEditText"
+        android:id="@+id/descripccionEditText"
+
         android:layout_width="0dp"
-        android:layout_height="47dp"
+
+        android:layout_height="45dp"
+
+        android:hint="@string/indiqueDescripccion"
+
         android:layout_marginLeft="16dp"
+
         android:layout_marginRight="16dp"
-        android:hint="@string/escribirDescripcion"
+
         android:background="@drawable/rounded_white_border"
+
         android:textSize="14sp"
+
         app:layout_constraintLeft_toLeftOf="parent"
+
         app:layout_constraintTop_toTopOf="parent"
+
         app:layout_constraintRight_toRightOf="parent"
+
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="258dp"
-        app:layout_constraintHorizontal_bias="0.0"
+
+        android:layout_marginTop="318dp"
+
+        app:layout_constraintHorizontal_bias="1.0"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp" />
-
     <Button
 
         android:id="@+id/acceptButton"
-        android:layout_width="126dp"
-        android:layout_height="0dp"
-        android:text="@string/aceptar"
-        android:textSize="14sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="436dp"
-        app:layout_constraintHorizontal_bias="0.937" />
 
+        android:layout_width="126dp"
+
+        android:layout_height="0dp"
+
+        android:text="@string/aceptar"
+
+        android:textSize="14sp"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+
+        app:layout_constraintRight_toRightOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent"
+
+        android:layout_marginTop="447dp"
+
+        app:layout_constraintHorizontal_bias="0.937" />
     <Button
 
         android:id="@+id/backButton"
+
         android:layout_width="126dp"
+
         android:layout_height="0dp"
+
         android:text="@string/volver"
+
         android:textSize="14sp"
+
         app:layout_constraintLeft_toLeftOf="parent"
+
         app:layout_constraintRight_toRightOf="parent"
+
         app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="436dp"
-        app:layout_constraintHorizontal_bias="0.062" />
 
-    <ToggleButton
-        android:id="@+id/toggleButtonHabilitado"
-        android:layout_width="126dp"
-        android:layout_height="37dp"
-        android:textOn="@string/habilitado"
-        android:textOff="@string/deshabilitado"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/agregarTextView"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:background="@drawable/toggle_state"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="126dp" />
+        android:layout_marginTop="447dp"
 
-    <ToggleButton
-        android:id="@+id/toggleButtonIngreso"
-        android:layout_width="94dp"
-        android:layout_height="38dp"
-        android:textOn="@string/ingreso"
-        android:textOff="@string/egreso"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/campoObligatorioDescripcionTextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintVertical_bias="0.152"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:background="@drawable/toggle_state"
+        app:layout_constraintHorizontal_bias="0.112" />
 
 
-        tools:layout_editor_absoluteX="145dp"
-        app:layout_constraintHorizontal_bias="0.501" />
 </android.support.constraint.ConstraintLayout>
 

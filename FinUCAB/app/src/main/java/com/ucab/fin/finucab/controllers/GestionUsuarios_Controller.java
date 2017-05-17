@@ -58,8 +58,13 @@ public class GestionUsuarios_Controller {
     }
 
 
-    //Se encarga de validar que no se encuentre vacio los campos usuario, contrasena, repeticion de contrasena
-    public static int validacionEtapaCuenta()
+     /**
+     *  Metodo encargado de validar los datos suministrados en la etapa de registro de datos de la cuenta.
+     *
+     *
+     * @return
+     */
+     public static int validacionEtapaCuenta()
     {
           try{
               verificoVacio(usuario);
@@ -85,8 +90,12 @@ public class GestionUsuarios_Controller {
     }
 
 
-    //Se encarga de validar que no se encuentre vacio los campos pregunta, respuesta
-    public static int validacionEtapaSeguridad(){
+    /**Se encarga de validar que no se encuentre vacio los campos pregunta, respuesta
+     * en la etapa de registro de datos de la seguridad de las cuentas.
+     *
+     *
+    **/
+     public static int validacionEtapaSeguridad(){
         try{
             verificoVacio(pregunta);
             verificoLongitud(pregunta,1000,"string");
@@ -103,7 +112,9 @@ public class GestionUsuarios_Controller {
         return 0;
     }
 
-    //Validacion para verficar que los campos cumplan con el rango correcto
+    /**
+     * Validacion para verficar que los campos cumplan con el rango correcto
+     **/
     public static void verificoLongitud(EditText campo,int longitud, String tipo)throws Longitud_Exception {
            if (campo.getText().toString().length() >= longitud) {
                if (tipo.equals("string")) {
@@ -119,7 +130,12 @@ public class GestionUsuarios_Controller {
            }
     }
 
-    //Realizo la validacion para verificar que el campo este vacio:
+    /**Realizo la validacion para verificar que el campo este vacio:
+     *
+     *
+     * @param campo
+     * @throws CampoVacio_Exception
+     */
     public static void verificoVacio(EditText campo) throws CampoVacio_Exception {
         if (campo.getText().toString().isEmpty())
         {
@@ -130,7 +146,13 @@ public class GestionUsuarios_Controller {
 
     }
 
-    //Realizo la validacion para verificar que las contraseñas son diferentes:
+    /**Realizo la validacion para verificar que las contraseñas son diferentes:
+     *
+     *
+     * @param contesena1
+     * @param contrasena2
+     * @throws ContrasenasDiferentes_Exception
+     */
     public static void verificoIgualdad(EditText contesena1, EditText contrasena2) throws ContrasenasDiferentes_Exception {
         if (!(contrasena1.getText().toString().equals(contrasena2.getText().toString())))
         {
@@ -141,7 +163,10 @@ public class GestionUsuarios_Controller {
 
     }
 
-    //Realizo la validacion para verificar si el correo electronico suministrado es valido.
+    /**Realizo la validacion para verificar si el correo electronico suministrado es valido.
+     * @param campo
+     * @throws CorreoInvalido_Exception
+     */
     public static void verificoCorreo(EditText campo)throws CorreoInvalido_Exception{
         if (!campo.getText().toString().contains("@")) {
             CorreoInvalido_Exception correoinvalido  =  new CorreoInvalido_Exception("El correo es invalido");
@@ -166,14 +191,17 @@ public class GestionUsuarios_Controller {
     }
 
 
-    //Este metodo le da un formato unico a los Nombre y Apellidos. Colocando su primera letra en Mayusculas y el
-    //resto en minusculas.
-    public static CharSequence formatearCadena (String texto){
+    /**Este metodo le da un formato unico a los Nombre y Apellidos.
+     * Colocando su primera letra en Mayusculas y el resto en minusculas.
+    **/
+     public static CharSequence formatearCadena (String texto){
         String convertido = texto.toLowerCase();
         return Character.toUpperCase(convertido.charAt(0)) + convertido.substring(1);
     }
 
-    //Inicializo nuevamente las variables
+    /**Inicializo nuevamente las variables
+     *
+     */
     public static void resetarVariables (){
          nombre=null;
          apellido=null;
