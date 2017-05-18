@@ -27,7 +27,7 @@ public class ModificarPago_Fragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_modificar_pago, container, false);
         parentActivity = (MainActivity) getActivity();
-        parentActivity.getSupportActionBar().setTitle("Agregar Pago");
+        parentActivity.getSupportActionBar().setTitle("Modificar Pago");
 
         descripcionEditText = (EditText) rootView.findViewById(R.id.descripccionEditText);
         montoEditText = (EditText) rootView.findViewById(R.id.montoEditText);
