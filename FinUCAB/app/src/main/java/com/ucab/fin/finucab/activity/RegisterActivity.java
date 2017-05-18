@@ -139,7 +139,6 @@ public class RegisterActivity extends AppCompatActivity {
     public void activarPaso(int indicador){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left);
         //Muestro el formulario de registro para datos personales.
         if(indicador ==1) {
             //Ajusto el titulo de los botones.
@@ -156,6 +155,7 @@ public class RegisterActivity extends AppCompatActivity {
         //Muestro el formulario de registro para datos de la cuenta.
         if (indicador==2){
             //Ajusto el titulo de los botones.
+            fragmentTransaction.setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left);
             anterior = (Button) findViewById(R.id.cancelButton);
             anterior.setText("ANTERIOR");
             siguiente = (Button) findViewById(R.id.nextButton);
@@ -169,6 +169,7 @@ public class RegisterActivity extends AppCompatActivity {
         //Muestro el formulario de registro para datos de la seguridad de la cuenta.
         if(indicador==3){
             //Ajusto el titulo de los botones.
+            fragmentTransaction.setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left);
             anterior = (Button) findViewById(R.id.cancelButton);
             anterior.setText("ANTERIOR");
             siguiente = (Button) findViewById(R.id.nextButton);
@@ -211,6 +212,7 @@ public class RegisterActivity extends AppCompatActivity {
         return true;
     }
 
+
     /**Agrego un menu Overflow al Action Bar:
      *
      * @param menu
@@ -243,5 +245,6 @@ public class RegisterActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
 
 }

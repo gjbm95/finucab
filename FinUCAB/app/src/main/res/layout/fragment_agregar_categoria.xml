@@ -3,7 +3,8 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/fragment_agregar_categoria"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_agregar_transacion"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#0895E0">
@@ -151,8 +152,8 @@
 
     <ToggleButton
         android:id="@+id/toggleButtonHabilitado"
-        android:layout_width="329dp"
-        android:layout_height="48dp"
+        android:layout_width="126dp"
+        android:layout_height="37dp"
         android:textOn="@string/habilitado"
         android:textOff="@string/deshabilitado"
         app:layout_constraintTop_toTopOf="parent"
@@ -163,24 +164,29 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
-        android:background="@drawable/toggle_state"/>
+        android:background="@drawable/toggle_state"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="126dp" />
 
     <ToggleButton
         android:id="@+id/toggleButtonIngreso"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="94dp"
+        android:layout_height="38dp"
         android:textOn="@string/ingreso"
         android:textOff="@string/egreso"
         android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@+id/campoObligatorioDescripcionTextView"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="8dp"
-        app:layout_constraintVertical_bias="0.153"
+        app:layout_constraintVertical_bias="0.152"
         android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:background="@drawable/toggle_state"
-        />
+
+
+        tools:layout_editor_absoluteX="145dp"
+        app:layout_constraintHorizontal_bias="0.501" />
 </android.support.constraint.ConstraintLayout>
 
