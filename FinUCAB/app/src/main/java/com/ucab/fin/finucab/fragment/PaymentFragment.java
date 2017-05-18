@@ -40,17 +40,15 @@ public class PaymentFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View rootView = inflater.inflate(R.layout.activity_main, container, false);
+        View rootView = inflater.inflate(R.layout.payment_fragment, container, false);
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Pagos");
 
         // Configuracion inicial del boton flotante
         fab = (FloatingActionButton) rootView.findViewById(R.id.addFloatingBtnPago);
         fab.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View v) {
                 parentActivity.changeFragment(new AgregarPago_Fragment(), false);
-
             }
         });
 
