@@ -13,7 +13,7 @@ import android.widget.Spinner;
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
 import com.ucab.fin.finucab.controllers.Pago_Controller;
-
+import com.ucab.fin.finucab.controllers.Presupuesto_Controller;
 
 
 public class ModificarPago_Fragment extends Fragment {
@@ -38,9 +38,9 @@ public class ModificarPago_Fragment extends Fragment {
 
         Pago_Controller.categoriaPago = categoriaSpinner;
         Pago_Controller.montoPago = montoEditText;
-        Pago_Controller.tipoTransaccion=tipoSpinner;
-        Pago_Controller.descripcionPago=descripcionEditText;
-
+        Pago_Controller.tipoTransaccion = tipoSpinner;
+        Pago_Controller.descripcionPago = descripcionEditText;
+        Pago_Controller.asignarValores();
         agregarButton = (Button) rootView.findViewById(R.id.acceptButtonMPago);
         agregarButton.setOnClickListener(new View.OnClickListener() {
             @Override
