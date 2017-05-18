@@ -44,7 +44,6 @@ public class PaymentFragment extends Fragment {
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Pagos");
 
-<<<<<<< Updated upstream
         // Configuracion inicial del boton flotante
         fab = (FloatingActionButton) rootView.findViewById(R.id.addFloatingBtnPago);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +102,6 @@ public class PaymentFragment extends Fragment {
     public boolean onContextItemSelected(MenuItem item) {
 
 
-
         switch (item.getItemId()) {
 
             case R.id.modifyGainOption:
@@ -121,13 +119,11 @@ public class PaymentFragment extends Fragment {
             default:
 
                 return super.onContextItemSelected(item);
-=======
->>>>>>> Stashed changes
 
-
+        }
     }
     //BORRAR CUANDO SE IMPLEMENTE LA CLASE PAGO
-    private ArrayList<Pago> populatedList() {
+    private ArrayList<Pago> populatedList(){
 
         ArrayList<Pago> listOfPersona = new ArrayList<Pago>();
 

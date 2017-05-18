@@ -17,12 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
-<<<<<<< Updated upstream
         android:layout_alignParentTop="true"
-=======
-        android:layout_below="@+id/textView"
-        android:layout_marginTop="35dp"
->>>>>>> Stashed changes
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
