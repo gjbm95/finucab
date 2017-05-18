@@ -1,30 +1,29 @@
 package com.ucab.fin.finucab.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
 
 import com.ucab.fin.finucab.R;
-import com.ucab.fin.finucab.activity.AddPaymentActivity;
 import com.ucab.fin.finucab.activity.MainActivity;
+import com.ucab.fin.finucab.controllers.Pago_Controller;
+import com.ucab.fin.finucab.controllers.Presupuesto_Controller;
 import com.ucab.fin.finucab.domain.Pago;
+import com.ucab.fin.finucab.domain.Presupuesto;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class PaymentFragment extends Fragment {
 
@@ -49,7 +48,7 @@ public class PaymentFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity( new Intent(parentActivity, AddPaymentActivity.class));
+                parentActivity.changeFragment(new AgregarPago_Fragment(), false);
 
             }
         });
@@ -81,10 +80,51 @@ public class PaymentFragment extends Fragment {
 
     }
 
-//BORRAR CUANDO SE IMPLEMENTE LA CLASE PRESUPUESTO
+
+    @Override
+
+    public void onCreateContextMenu(ContextMenu menu, View v,
+
+                                    ContextMenu.ContextMenuInfo menuInfo)
+
+    {
+
+        super.onCreateContextMenu(menu, v, menuInfo);
 
 
 
+        MenuInflater inflater = getActivity().getMenuInflater();
+
+        inflater.inflate(R.menu.pago_menu, menu);
+    }
+    @Override
+
+    public boolean onContextItemSelected(MenuItem item) {
+
+
+
+        switch (item.getItemId()) {
+
+            case R.id.modifyGainOption:
+
+                Pago p = new Pago();
+                p.setCategoria("Universidad");
+                p.setDescripcion("Semestre2");
+                p.setTotal((float) 222.222);
+                p.setTipo("Egreso");
+                Pago_Controller.pago = p;
+                parentActivity.changeFragment(new ModificarPago_Fragment(), false);
+
+                return true;
+
+            default:
+
+                return super.onContextItemSelected(item);
+
+        }
+
+    }
+    //BORRAR CUANDO SE IMPLEMENTE LA CLASE PAGO
     private ArrayList<Pago> populatedList() {
 
         ArrayList<Pago> listOfPersona = new ArrayList<Pago>();
@@ -154,7 +194,6 @@ public class PaymentFragment extends Fragment {
                     View child=recycleView.findChildViewUnder(e.getX(),e.getY());
 
                     if(child!=null && clicklistener!=null){
-
                         clicklistener.onLongClick(child,recycleView.getChildAdapterPosition(child));
 
                     }
@@ -165,8 +204,6 @@ public class PaymentFragment extends Fragment {
 
         }
 
-        public RecyclerTouchListener(FragmentActivity activity, RecyclerView recycleList, ClickListener clickListener) {
-        }
 
 
         @Override
