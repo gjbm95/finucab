@@ -6,7 +6,7 @@
 
     xmlns:tools="http://schemas.android.com/tools"
 
-    android:id="@+id/fragment_agregar_transacion"
+    android:id="@+id/fragment_modificar_transaccion"
 
     android:layout_width="match_parent"
 

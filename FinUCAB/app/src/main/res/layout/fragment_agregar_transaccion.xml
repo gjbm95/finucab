@@ -3,18 +3,11 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
-    xmlns:tools="http://schemas.android.com/tools"
-
-    android:id="@+id/fragment_agregar_transacion"
-
+    android:id="@+id/fragment_agregar_transaccion"
     android:layout_width="match_parent"
-
     android:layout_height="match_parent"
+    android:background="#0895E0">
 
-    android:background="#0895E0"
-
-    android:titleTextColor="#000">
 
 
     <Spinner
@@ -271,40 +264,26 @@
     <Button
 
         android:id="@+id/backButton"
+
         android:layout_width="126dp"
+
         android:layout_height="0dp"
+
         android:text="@string/volver"
+
         android:textSize="14sp"
+
         app:layout_constraintLeft_toLeftOf="parent"
+
         app:layout_constraintRight_toRightOf="parent"
+
         app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="436dp"
-        app:layout_constraintHorizontal_bias="0.062" />
 
-    <Button
+        android:layout_marginTop="447dp"
 
-    android:id="@+id/backButton"
-
-    android:layout_width="126dp"
-
-    android:layout_height="0dp"
-
-    android:text="@string/volver"
-
-    android:textSize="14sp"
-
-    app:layout_constraintLeft_toLeftOf="parent"
-
-    app:layout_constraintRight_toRightOf="parent"
-
-    app:layout_constraintEnd_toEndOf="parent"
-
-    app:layout_constraintTop_toTopOf="parent"
-
-    android:layout_marginTop="447dp"
-
-    app:layout_constraintHorizontal_bias="0.1" />
+        app:layout_constraintHorizontal_bias="0.1" />
 
 </android.support.constraint.ConstraintLayout>
 

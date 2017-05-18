@@ -15,8 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ucab.fin.finucab.R;
-import com.ucab.fin.finucab.activity.AddCategoryActivity;
-import com.ucab.fin.finucab.activity.AddPagoActivity;
+import com.ucab.fin.finucab.activity.AddPaymentActivity;
 import com.ucab.fin.finucab.activity.MainActivity;
 import com.ucab.fin.finucab.domain.Transaccion;
 
@@ -49,7 +48,7 @@ public class ResumenPagos_Fragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity( new Intent(parentActivity, AddPagoActivity.class));
+                startActivity( new Intent(parentActivity, AddPaymentActivity.class));
             }
         });
 
@@ -88,7 +87,7 @@ public class ResumenPagos_Fragment extends Fragment {
 
         ArrayList<Transaccion> listOfPersona = new ArrayList<Transaccion>();
 
-        for(int i=0;i<20;i++)
+        for(int i=0;i<5;i++)
 
         {
 

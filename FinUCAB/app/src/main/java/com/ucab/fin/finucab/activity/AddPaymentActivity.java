@@ -9,19 +9,16 @@ import android.widget.Button;
 import android.widget.ToggleButton;
 
 import com.ucab.fin.finucab.R;
-import com.ucab.fin.finucab.fragment.ResumenPagos_Fragment;
 
-public class AddPagoActivity extends AppCompatActivity implements View.OnClickListener  {
+public class AddPaymentActivity extends AppCompatActivity implements View.OnClickListener  {
 
     Button signInButton;
     Button signUpButton;
-    ToggleButton toggleButtonHabilitado;
-    ToggleButton toggleButtonIngreso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_agregartransaccion);
+        setContentView(R.layout.fragment_agregar_transaccion);
 
         //Colocando el icono en la parte superior izquierda:
         ActionBar actionBar = getSupportActionBar();
@@ -36,14 +33,7 @@ public class AddPagoActivity extends AppCompatActivity implements View.OnClickLi
 //        SET LISTENERS (Se le asigna la actividad en el cual funcionaran)
         signInButton.setOnClickListener(this);
         signUpButton.setOnClickListener(this);
-
-
     }
-
-
-
-
-
 
     //Dandole funcionalidades a cada uno de los botones que salen en pantalla:
     @Override
@@ -52,12 +42,12 @@ public class AddPagoActivity extends AppCompatActivity implements View.OnClickLi
         switch (view.getId()){
 
             case R.id.backButton:
-                i = new Intent(AddPagoActivity.this, ResumenPagoActivity.class);
+                i = new Intent(AddPaymentActivity.this, MainActivity.class);
                 startActivity(i);
                 break;
             //Al accionar, se inicia la actividad que presenta el formulario de registro.
             case R.id.acceptButton:
-                i = new Intent(AddPagoActivity.this, RegisterActivity.class);
+                i = new Intent(AddPaymentActivity.this, RegisterActivity.class);
                 startActivity(i);
                 break;
         }
