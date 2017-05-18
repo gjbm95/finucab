@@ -39,7 +39,8 @@ public class PaymentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.payment_fragment, container, false);
+
+        View rootView = inflater.inflate(R.layout.activity_main, container, false);
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Pagos");
 
@@ -77,6 +78,7 @@ public class PaymentFragment extends Fragment {
         PagoAdapter pAdapter =new PagoAdapter(populatedList());
         recycleList.setAdapter(pAdapter);
         return rootView;
+
 
     }
 
