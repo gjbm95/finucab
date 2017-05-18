@@ -1,6 +1,7 @@
 package com.ucab.fin.finucab.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -15,8 +16,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.ucab.fin.finucab.R;
+import com.ucab.fin.finucab.activity.AddCategoryActivity;
 import com.ucab.fin.finucab.activity.MainActivity;
 import com.ucab.fin.finucab.controllers.Pago_Controller;
 import com.ucab.fin.finucab.controllers.Presupuesto_Controller;
@@ -51,6 +55,7 @@ public class PaymentFragment extends Fragment {
                 parentActivity.changeFragment(new AgregarPago_Fragment(), false);
             }
         });
+
 
         final RecyclerView recycleList = (RecyclerView) rootView.findViewById(R.id.pagosReList);
         LinearLayoutManager myLayoutManager = new LinearLayoutManager(getActivity());
@@ -104,7 +109,7 @@ public class PaymentFragment extends Fragment {
 
         switch (item.getItemId()) {
 
-            case R.id.modifyGainOption:
+            case R.id.modifyPagoOption:
 
                 Pago p = new Pago();
                 p.setCategoria("Universidad");
@@ -113,6 +118,12 @@ public class PaymentFragment extends Fragment {
                 p.setTipo("Egreso");
                 Pago_Controller.pago = p;
                 parentActivity.changeFragment(new ModificarPago_Fragment(), false);
+
+                return true;
+
+            case R.id.exportPagoOpcion:
+
+                Toast.makeText(getActivity(), "Opcion Exportar seleccionada",Toast.LENGTH_LONG).show();
 
                 return true;
 
