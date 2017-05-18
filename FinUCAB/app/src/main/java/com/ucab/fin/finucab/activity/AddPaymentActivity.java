@@ -6,7 +6,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ToggleButton;
 
 import com.ucab.fin.finucab.R;
 
@@ -18,7 +17,7 @@ public class AddPaymentActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_agregar_transaccion);
+        setContentView(R.layout.fragment_agregar_pago);
 
         //Colocando el icono en la parte superior izquierda:
         ActionBar actionBar = getSupportActionBar();
