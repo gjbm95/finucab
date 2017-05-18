@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ToggleButton;
-
 import com.ucab.fin.finucab.R;
 
 public class AddCategoryActivity extends AppCompatActivity implements View.OnClickListener  {

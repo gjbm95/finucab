@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ucab.fin.finucab.R;
-import com.ucab.fin.finucab.domain.Transaccion;
+import com.ucab.fin.finucab.domain.Pago;
 
 import java.util.List;
 
@@ -16,9 +16,9 @@ public class PagoAdapter extends RecyclerView.Adapter<PagoAdapter.PagoViewHolder
 
 
 
-    private List<Transaccion> PagoList;
+    private List<Pago> PagoList;
 
-    public PagoAdapter(List<Transaccion> PagoList)
+    public PagoAdapter(List<Pago> PagoList)
     {
         this.PagoList = PagoList;
     }
@@ -35,7 +35,7 @@ public class PagoAdapter extends RecyclerView.Adapter<PagoAdapter.PagoViewHolder
     @Override
     public void onBindViewHolder( final PagoViewHolder PagoViewHolder, int i)
     {
-        Transaccion Pi = PagoList.get(i);
+        Pago Pi = PagoList.get(i);
         PagoViewHolder.categoriaTextView.setText(Pi.getCategoria());
         PagoViewHolder.descripcionTextView.setText(Pi.getDescripcion());
         PagoViewHolder.montoTextView.setText(Float.toString(Pi.getTotal()));
