@@ -22,7 +22,6 @@ public class Pago_Controller {
 
         descripcionPago.setText(pago.getDescripcion());
         montoPago.setText(Float.toString(pago.getTotal()));
-
     }
     public static int validacionPagoVacio() {
         int x = 1;
