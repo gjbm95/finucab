@@ -17,7 +17,7 @@ import com.ucab.fin.finucab.exceptions.CampoVacio_Exception;
 import com.ucab.fin.finucab.exceptions.ContrasenaInvalida_Exception;
 import com.ucab.fin.finucab.exceptions.UsuarioInvalido_Exception;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class InicioActivity extends AppCompatActivity implements View.OnClickListener {
 
 
     Button signInButton;
@@ -91,7 +91,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     GestionUsuarios_Controller.verificoUsuario(userNameEditText);
                     GestionUsuarios_Controller.verificoContrasena(usrPwdEditText);
 
-                    i = new Intent(LoginActivity.this,MainActivity.class);
+                    i = new Intent(InicioActivity.this,MainActivity.class);
                     startActivity(i);
                     userNameEditText.setText("");
                     usrPwdEditText.setText("");
@@ -107,7 +107,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             //Al accionar, se inicia la actividad que presenta el formulario de registro.
             case R.id.signUpButton:
-                i = new Intent(LoginActivity.this, RegisterActivity.class);
+                i = new Intent(InicioActivity.this, RegistroActivity.class);
                 startActivity(i);
                 break;
 
@@ -116,7 +116,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 try {
                     GestionUsuarios_Controller.verificoVacio(userNameEditText);
 
-                    i = new Intent(LoginActivity.this, ForgotActivity.class);
+                    i = new Intent(InicioActivity.this, RecuperacionActivity.class);
                     startActivity(i);
 
                 }catch(CampoVacio_Exception e) {

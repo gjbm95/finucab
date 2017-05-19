@@ -17,7 +17,7 @@ import com.ucab.fin.finucab.exceptions.CampoVacio_Exception;
 import com.ucab.fin.finucab.fragment.ContrasenaFragment;
 import com.ucab.fin.finucab.fragment.RespuestaFragment;
 
-public class ForgotActivity extends AppCompatActivity implements View.OnClickListener {
+public class RecuperacionActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button siguiente;
     private Button cancelar;
