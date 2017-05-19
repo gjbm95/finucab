@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/deleteCategoryOption"
+        android:title="@string/opcionEliminarCategoria"></item>
+    <item android:id="@+id/exportCategoryOpcion"
+        android:title="@string/opcionExportarCategoria"></item>
+</menu>
