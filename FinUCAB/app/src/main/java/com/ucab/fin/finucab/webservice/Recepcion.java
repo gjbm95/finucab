@@ -57,7 +57,7 @@ public class Recepcion extends AsyncTask<String,Void,String>{
 
         try{
             HttpClient client = new DefaultHttpClient();
-            HttpGet get = new HttpGet(url[0]); //Consulto mediante HTTP
+            HttpGet get = new HttpGet(Parametros.getUrl()); //Consulto mediante HTTP
             HttpResponse respuesta = client.execute(get); // obtengo la informacion
             HttpEntity entity = respuesta.getEntity();
             StatusLine statusline = respuesta.getStatusLine();
@@ -97,10 +97,8 @@ public class Recepcion extends AsyncTask<String,Void,String>{
         if (this.status.isShowing()){
             this.status.dismiss();
         }
-        if(!s.equals(null))
-        {
-            convertJson(s);
-        }
+
+        Parametros.setRespuesta(response);
     }
 
     private void convertJson(String s){
