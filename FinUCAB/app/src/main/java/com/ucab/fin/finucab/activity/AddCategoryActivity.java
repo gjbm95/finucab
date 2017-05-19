@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -16,7 +17,8 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
     Button acceptButton;
     Switch switchestado;
     Switch switchtipo;
-    private TextView switchStatus;
+    private TextView statusTextView;
+    private TextView tipoTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +35,33 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
         acceptButton = (Button) findViewById(R.id.acceptButton);
         switchestado = (Switch) findViewById(R.id.habilitarSwitch);
         switchtipo = (Switch) findViewById(R.id.tipoSwitch);
-        switchStatus = (TextView) findViewById(R.id.estadoTextView);
+        statusTextView = (TextView) findViewById(R.id.estadoTextView);
+        tipoTextView = (TextView) findViewById(R.id.TipoTextView);
 
 //        SET LISTENERS (Se le asigna la actividad en el cual funcionaran)
         acceptButton.setOnClickListener(this);
+        switchtipo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (isChecked){
+                    tipoTextView.setText("Ingerso");
+                }else{
+                    tipoTextView.setText("Egreso");
+                }
+
+            }
+        });
+        switchestado.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (isChecked){
+                    statusTextView.setText("Habilitado");
+                }else{
+                    statusTextView.setText("Deshabilitado");
+                }
+
+            }
+        });
 
         //set the switch to ON
         switchtipo.setChecked(true);
