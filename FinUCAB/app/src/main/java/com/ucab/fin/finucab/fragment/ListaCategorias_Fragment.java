@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.ContextMenu;
@@ -62,16 +61,8 @@ public class ListaCategorias_Fragment extends Fragment {
             }
         });
 
-        ExportarButton = (Button) rootView.findViewById(R.id.ExportarButton);
-        ExportarButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity( new Intent(parentActivity, AddCategoryActivity.class));
 
-                //configuracion inicion del boton exportar
 
-            }
-        });
 
         final RecyclerView recycleList = (RecyclerView) rootView.findViewById(R.id.categoriaReList);
         LinearLayoutManager myLayoutManager = new LinearLayoutManager(getActivity());

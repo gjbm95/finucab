@@ -6,15 +6,18 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ToggleButton;
+import android.widget.Switch;
+import android.widget.TextView;
+
 import com.ucab.fin.finucab.R;
 
 public class AddCategoryActivity extends AppCompatActivity implements View.OnClickListener  {
 
     Button signInButton;
     Button signUpButton;
-    ToggleButton toggleButtonHabilitado;
-    ToggleButton toggleButtonIngreso;
+    Switch switchestado;
+    Switch switchtipo;
+    private TextView switchStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,20 +31,28 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
         actionBar.setTitle("");
         //------------------------------------------------------------------------------------------
 //        BIND VIEES (Se extraen los objetos asociados a los botones en pantalla)
-        signInButton = (Button) findViewById(R.id.backButton);
+
         signUpButton = (Button) findViewById(R.id.acceptButton);
+        switchestado = (Switch) findViewById(R.id.habilitarSwitch);
+
+        switchtipo = (Switch) findViewById(R.id.tipoSwitch);
+        switchStatus = (TextView) findViewById(R.id.estadoTextView);
+
+
 
 //        SET LISTENERS (Se le asigna la actividad en el cual funcionaran)
         signInButton.setOnClickListener(this);
         signUpButton.setOnClickListener(this);
 
-        toggleButtonHabilitado = (ToggleButton) findViewById(R.id.toggleButtonHabilitado);
-        toggleButtonHabilitado.setChecked(true);
-        toggleButtonIngreso = (ToggleButton) findViewById(R.id.toggleButtonIngreso);
+
+        //set the switch to ON
+
+        switchtipo.setChecked(true);
+        switchestado.setChecked(true);
+        //attach a listener to check for changes in state
+
 
     }
-
-
 
 
 
@@ -52,10 +63,7 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
         Intent i;
         switch (view.getId()){
 
-            case R.id.backButton:
-                i = new Intent(AddCategoryActivity.this, MainActivity.class);
-                startActivity(i);
-                break;
+
             //Al accionar, se inicia la actividad que presenta el formulario de registro.
             case R.id.acceptButton:
                 i = new Intent(AddCategoryActivity.this,MainActivity.class);
