@@ -16,13 +16,13 @@
         android:roundIcon="@mipmap/icono"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.InicioActivity" />
         <activity
             android:name=".activity.MainActivity"
             android:icon="@mipmap/indicador" />
-        <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.RegistroActivity" />
         <activity
-            android:name=".activity.BeginActivity"
+            android:name=".activity.PresentacionActivity"
             android:theme="@style/SinBarra">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,8 +32,14 @@
         </activity>
         <activity android:name=".activity.AddCategoryActivity" />
 
-        <activity android:name=".activity.ForgotActivity" />
+
+        <activity android:name=".activity.RecuperacionActivity" />
+
         <activity android:name=".activity.Prueba"></activity>
+
+
+
+
     </application>
 
 </manifest>
