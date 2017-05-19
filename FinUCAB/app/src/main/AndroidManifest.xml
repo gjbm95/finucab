@@ -5,6 +5,9 @@
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="23" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission-sdk-23 android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -28,11 +31,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.AddCategoryActivity" />
-        <activity android:name=".activity.ForgotActivity"></activity>
 
-
+        <activity android:name=".activity.ForgotActivity" />
+        <activity android:name=".activity.Prueba"></activity>
     </application>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission-sdk-23 android:name="android.permission.INTERNET"/>
 
 </manifest>

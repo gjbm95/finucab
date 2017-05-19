@@ -91,7 +91,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     GestionUsuarios_Controller.verificoUsuario(userNameEditText);
                     GestionUsuarios_Controller.verificoContrasena(usrPwdEditText);
 
-                    i = new Intent(LoginActivity.this, MainActivity.class);
+                    i = new Intent(LoginActivity.this,MainActivity.class);
                     startActivity(i);
                     userNameEditText.setText("");
                     usrPwdEditText.setText("");
