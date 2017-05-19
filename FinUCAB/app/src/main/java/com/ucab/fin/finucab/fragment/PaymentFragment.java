@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;
@@ -16,17 +15,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
-import android.widget.Button;
 import android.widget.Toast;
-
 import com.ucab.fin.finucab.R;
-import com.ucab.fin.finucab.activity.AddCategoryActivity;
 import com.ucab.fin.finucab.activity.MainActivity;
 import com.ucab.fin.finucab.controllers.Pago_Controller;
-import com.ucab.fin.finucab.controllers.Presupuesto_Controller;
 import com.ucab.fin.finucab.domain.Pago;
-import com.ucab.fin.finucab.domain.Presupuesto;
-
 import java.util.ArrayList;
 
 public class PaymentFragment extends Fragment {
