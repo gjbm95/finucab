@@ -99,7 +99,7 @@ public class ListaCategorias_Fragment extends Fragment {
         return rootView;
 
     }
-
+    @Override
     //Creando menu de longpress llamada al menu
     public void onCreateContextMenu(ContextMenu menu, View v,
 
@@ -228,10 +228,6 @@ public class ListaCategorias_Fragment extends Fragment {
             });
 
         }
-
-        public RecyclerTouchListener(FragmentActivity activity, RecyclerView recycleList, ClickListener clickListener) {
-        }
-
 
         @Override
 

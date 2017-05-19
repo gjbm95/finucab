@@ -1,10 +1,10 @@
 package com.ucab.fin.finucab.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;
@@ -15,14 +15,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
-
+import android.widget.Toast;
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
 import com.ucab.fin.finucab.controllers.Pago_Controller;
-import com.ucab.fin.finucab.controllers.Presupuesto_Controller;
 import com.ucab.fin.finucab.domain.Pago;
-import com.ucab.fin.finucab.domain.Presupuesto;
-
 import java.util.ArrayList;
 
 public class PaymentFragment extends Fragment {
@@ -51,6 +48,7 @@ public class PaymentFragment extends Fragment {
                 parentActivity.changeFragment(new AgregarPago_Fragment(), false);
             }
         });
+
 
         final RecyclerView recycleList = (RecyclerView) rootView.findViewById(R.id.pagosReList);
         LinearLayoutManager myLayoutManager = new LinearLayoutManager(getActivity());
@@ -102,10 +100,9 @@ public class PaymentFragment extends Fragment {
     public boolean onContextItemSelected(MenuItem item) {
 
 
-
         switch (item.getItemId()) {
 
-            case R.id.modifyGainOption:
+            case R.id.modifyPagoOption:
 
                 Pago p = new Pago();
                 p.setCategoria("Universidad");
@@ -117,15 +114,20 @@ public class PaymentFragment extends Fragment {
 
                 return true;
 
+            case R.id.exportPagoOpcion:
+
+                Toast.makeText(getActivity(), "Opcion Exportar seleccionada",Toast.LENGTH_LONG).show();
+
+                return true;
+
             default:
 
                 return super.onContextItemSelected(item);
 
         }
-
     }
     //BORRAR CUANDO SE IMPLEMENTE LA CLASE PAGO
-    private ArrayList<Pago> populatedList() {
+    private ArrayList<Pago> populatedList(){
 
         ArrayList<Pago> listOfPersona = new ArrayList<Pago>();
 
@@ -135,8 +137,8 @@ public class PaymentFragment extends Fragment {
 
             Pago pi = new Pago();
 
-            pi.setCategoria("Nombre Categoria");
-            pi.setDescripcion("Descripcion");
+            pi.setCategoria("Universidad");
+            pi.setDescripcion("Semestre");
             pi.setTotal(10);
             pi.setFecha("A");
             pi.setImpuesto(0);
