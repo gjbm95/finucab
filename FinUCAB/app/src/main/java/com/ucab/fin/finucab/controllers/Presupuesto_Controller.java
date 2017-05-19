@@ -1,5 +1,6 @@
 package com.ucab.fin.finucab.controllers;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -13,6 +14,11 @@ import android.widget.Toast;
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.domain.Presupuesto;
 import com.ucab.fin.finucab.fragment.AgregarPresupuesto_fragment;
+import com.ucab.fin.finucab.webservice.Parametros;
+import com.ucab.fin.finucab.webservice.Recepcion;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import static java.security.AccessController.getContext;
 
@@ -81,6 +87,16 @@ public class Presupuesto_Controller {
         }
 
         return 0;
+    }
+
+    public static void cualquiercosa (Activity actividad, TextView cartel){
+        JSONObject data;
+        Parametros.setUrl("http://192.168.0.104:8080/FinUCABWebService_war_exploded/servicio/verpersona" );
+        System.out.println("Entro");
+        new Recepcion(actividad).execute(Parametros.getUrl());
+
+
+
     }
 
 

@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 
 public class Usuario {
+    //Estas variables almacenan los datos personasles de los usuarios en memoria.
     private int idusuario;
     private String nombre;
     private String apellido;

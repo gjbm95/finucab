@@ -21,7 +21,7 @@ import com.ucab.fin.finucab.fragment.DatosCuentaFragment;
 import com.ucab.fin.finucab.fragment.DatosPersonalesFragment;
 import com.ucab.fin.finucab.fragment.DatosSeguridadFragment;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegistroActivity extends AppCompatActivity {
 
 
     private Button siguiente;
@@ -99,7 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
              public void onClick(View v) {
                  //Cambio la actividad de vuelta al Home Inicio de Sesion.
                 if (anterior.getText().equals("CANCELAR")||anterior.getText().equals("Cancelar")) {
-                    Intent home = new Intent(RegisterActivity.this, LoginActivity.class);
+                    Intent home = new Intent(RegistroActivity.this, InicioActivity.class);
                     startActivity(home);
                     GestionUsuarios_Controller.resetarVariables();
                     finish();

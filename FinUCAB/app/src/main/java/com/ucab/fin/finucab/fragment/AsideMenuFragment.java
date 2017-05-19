@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.ucab.fin.finucab.R;
-import com.ucab.fin.finucab.activity.LoginActivity;
+import com.ucab.fin.finucab.activity.InicioActivity;
 import com.ucab.fin.finucab.activity.MainActivity;
 
 public class AsideMenuFragment extends Fragment implements View.OnClickListener{
@@ -65,7 +65,7 @@ public class AsideMenuFragment extends Fragment implements View.OnClickListener{
                 parentActivity.closeDrawerLayout();
                 break;
             case R.id.singoutBtn:
-                Intent inicio = new Intent (parentActivity, LoginActivity.class);
+                Intent inicio = new Intent (parentActivity, InicioActivity.class);
                 startActivity(inicio);
                 parentActivity.finish();
                 parentActivity.closeDrawerLayout();
