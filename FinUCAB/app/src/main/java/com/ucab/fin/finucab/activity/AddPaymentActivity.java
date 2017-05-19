@@ -46,7 +46,7 @@ public class AddPaymentActivity extends AppCompatActivity implements View.OnClic
                 break;
             //Al accionar, se inicia la actividad que presenta el formulario de registro.
             case R.id.acceptButton:
-                i = new Intent(AddPaymentActivity.this, RegisterActivity.class);
+                i = new Intent(AddPaymentActivity.this, RegistroActivity.class);
                 startActivity(i);
                 break;
         }
