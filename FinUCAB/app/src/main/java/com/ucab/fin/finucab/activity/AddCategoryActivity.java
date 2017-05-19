@@ -13,8 +13,7 @@ import com.ucab.fin.finucab.R;
 
 public class AddCategoryActivity extends AppCompatActivity implements View.OnClickListener  {
 
-    Button signInButton;
-    Button signUpButton;
+    Button acceptButton;
     Switch switchestado;
     Switch switchtipo;
     private TextView switchStatus;
@@ -31,22 +30,15 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
         actionBar.setTitle("");
         //------------------------------------------------------------------------------------------
 //        BIND VIEES (Se extraen los objetos asociados a los botones en pantalla)
-
-        signUpButton = (Button) findViewById(R.id.acceptButton);
+        acceptButton = (Button) findViewById(R.id.acceptButton);
         switchestado = (Switch) findViewById(R.id.habilitarSwitch);
-
         switchtipo = (Switch) findViewById(R.id.tipoSwitch);
         switchStatus = (TextView) findViewById(R.id.estadoTextView);
 
-
-
 //        SET LISTENERS (Se le asigna la actividad en el cual funcionaran)
-        signInButton.setOnClickListener(this);
-        signUpButton.setOnClickListener(this);
-
+        acceptButton.setOnClickListener(this);
 
         //set the switch to ON
-
         switchtipo.setChecked(true);
         switchestado.setChecked(true);
         //attach a listener to check for changes in state
@@ -54,15 +46,11 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
 
     }
 
-
-
-
     //Dandole funcionalidades a cada uno de los botones que salen en pantalla:
     @Override
     public void onClick(View view) {
         Intent i;
         switch (view.getId()){
-
 
             //Al accionar, se inicia la actividad que presenta el formulario de registro.
             case R.id.acceptButton:
