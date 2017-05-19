@@ -11,8 +11,8 @@ package com.ucab.fin.finucab.webservice;
  */
 public class Parametros {
 
-    public static String url;  // Almacena la URL del servicio web, con sus metodos y parametros.
-    public static String respuesta; // Almacena la respuesta del servicio web para que se pueda consumir.
+    public static String url="";  // Almacena la URL del servicio web, con sus metodos y parametros.
+    public static String respuesta=""; // Almacena la respuesta del servicio web para que se pueda consumir.
 
     public Parametros () {
 

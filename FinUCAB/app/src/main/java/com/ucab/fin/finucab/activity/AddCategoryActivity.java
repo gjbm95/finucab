@@ -6,15 +6,19 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ToggleButton;
+import android.widget.CompoundButton;
+import android.widget.Switch;
+import android.widget.TextView;
+
 import com.ucab.fin.finucab.R;
 
 public class AddCategoryActivity extends AppCompatActivity implements View.OnClickListener  {
 
-    Button signInButton;
-    Button signUpButton;
-    ToggleButton toggleButtonHabilitado;
-    ToggleButton toggleButtonIngreso;
+    Button acceptButton;
+    Switch switchestado;
+    Switch switchtipo;
+    private TextView statusTextView;
+    private TextView tipoTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,23 +32,44 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
         actionBar.setTitle("");
         //------------------------------------------------------------------------------------------
 //        BIND VIEES (Se extraen los objetos asociados a los botones en pantalla)
-        signInButton = (Button) findViewById(R.id.backButton);
-        signUpButton = (Button) findViewById(R.id.acceptButton);
+        acceptButton = (Button) findViewById(R.id.acceptButton);
+        switchestado = (Switch) findViewById(R.id.habilitarSwitch);
+        switchtipo = (Switch) findViewById(R.id.tipoSwitch);
+        statusTextView = (TextView) findViewById(R.id.estadoTextView);
+        tipoTextView = (TextView) findViewById(R.id.TipoTextView);
 
 //        SET LISTENERS (Se le asigna la actividad en el cual funcionaran)
-        signInButton.setOnClickListener(this);
-        signUpButton.setOnClickListener(this);
+        acceptButton.setOnClickListener(this);
+        switchtipo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-        toggleButtonHabilitado = (ToggleButton) findViewById(R.id.toggleButtonHabilitado);
-        toggleButtonHabilitado.setChecked(true);
-        toggleButtonIngreso = (ToggleButton) findViewById(R.id.toggleButtonIngreso);
+                if (isChecked){
+                    tipoTextView.setText("Ingerso");
+                }else{
+                    tipoTextView.setText("Egreso");
+                }
+
+            }
+        });
+        switchestado.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (isChecked){
+                    statusTextView.setText("Habilitado");
+                }else{
+                    statusTextView.setText("Deshabilitado");
+                }
+
+            }
+        });
+
+        //set the switch to ON
+        switchtipo.setChecked(true);
+        switchestado.setChecked(true);
+        //attach a listener to check for changes in state
+
 
     }
-
-
-
-
-
 
     //Dandole funcionalidades a cada uno de los botones que salen en pantalla:
     @Override
@@ -52,10 +77,6 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
         Intent i;
         switch (view.getId()){
 
-            case R.id.backButton:
-                i = new Intent(AddCategoryActivity.this, MainActivity.class);
-                startActivity(i);
-                break;
             //Al accionar, se inicia la actividad que presenta el formulario de registro.
             case R.id.acceptButton:
                 i = new Intent(AddCategoryActivity.this,MainActivity.class);
