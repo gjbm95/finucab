@@ -36,23 +36,6 @@
         android:layout_marginRight="19dp"
         app:srcCompat="@mipmap/agregar" />
 
-    <Button
-
-        android:id="@+id/ExportarButton"
-        android:layout_width="126dp"
-        android:layout_height="60dp"
-        android:text="@string/exportar"
-        android:textSize="14sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0."
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
-
-
 
 </RelativeLayout>
 

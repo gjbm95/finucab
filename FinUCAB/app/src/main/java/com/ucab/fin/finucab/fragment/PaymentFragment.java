@@ -4,27 +4,23 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.widget.Toast;
 import com.ucab.fin.finucab.R;
-import com.ucab.fin.finucab.activity.AddPaymentActivity;
 import com.ucab.fin.finucab.activity.MainActivity;
+import com.ucab.fin.finucab.controllers.Pago_Controller;
 import com.ucab.fin.finucab.domain.Pago;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class PaymentFragment extends Fragment {
 
@@ -41,19 +37,18 @@ public class PaymentFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View rootView = inflater.inflate(R.layout.activity_main, container, false);
+        View rootView = inflater.inflate(R.layout.payment_fragment, container, false);
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Pagos");
 
         // Configuracion inicial del boton flotante
         fab = (FloatingActionButton) rootView.findViewById(R.id.addFloatingBtnPago);
         fab.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View v) {
-                startActivity( new Intent(parentActivity, AddPaymentActivity.class));
-
+                parentActivity.changeFragment(new AgregarPago_Fragment(), false);
             }
         });
+
 
         final RecyclerView recycleList = (RecyclerView) rootView.findViewById(R.id.pagosReList);
         LinearLayoutManager myLayoutManager = new LinearLayoutManager(getActivity());
@@ -83,11 +78,56 @@ public class PaymentFragment extends Fragment {
 
     }
 
-//BORRAR CUANDO SE IMPLEMENTE LA CLASE PRESUPUESTO
+
+    @Override
+
+    public void onCreateContextMenu(ContextMenu menu, View v,
+
+                                    ContextMenu.ContextMenuInfo menuInfo)
+
+    {
+
+        super.onCreateContextMenu(menu, v, menuInfo);
 
 
 
-    private ArrayList<Pago> populatedList() {
+        MenuInflater inflater = getActivity().getMenuInflater();
+
+        inflater.inflate(R.menu.pago_menu, menu);
+    }
+    @Override
+
+    public boolean onContextItemSelected(MenuItem item) {
+
+
+        switch (item.getItemId()) {
+
+            case R.id.modifyPagoOption:
+
+                Pago p = new Pago();
+                p.setCategoria("Universidad");
+                p.setDescripcion("Semestre2");
+                p.setTotal((float) 222.222);
+                p.setTipo("Egreso");
+                Pago_Controller.pago = p;
+                parentActivity.changeFragment(new ModificarPago_Fragment(), false);
+
+                return true;
+
+            case R.id.exportPagoOpcion:
+
+                Toast.makeText(getActivity(), "Opcion Exportar seleccionada",Toast.LENGTH_LONG).show();
+
+                return true;
+
+            default:
+
+                return super.onContextItemSelected(item);
+
+        }
+    }
+    //BORRAR CUANDO SE IMPLEMENTE LA CLASE PAGO
+    private ArrayList<Pago> populatedList(){
 
         ArrayList<Pago> listOfPersona = new ArrayList<Pago>();
 
@@ -97,8 +137,8 @@ public class PaymentFragment extends Fragment {
 
             Pago pi = new Pago();
 
-            pi.setCategoria("Nombre Categoria");
-            pi.setDescripcion("Descripcion");
+            pi.setCategoria("Universidad");
+            pi.setDescripcion("Semestre");
             pi.setTotal(10);
             pi.setFecha("A");
             pi.setImpuesto(0);
@@ -156,7 +196,6 @@ public class PaymentFragment extends Fragment {
                     View child=recycleView.findChildViewUnder(e.getX(),e.getY());
 
                     if(child!=null && clicklistener!=null){
-
                         clicklistener.onLongClick(child,recycleView.getChildAdapterPosition(child));
 
                     }
@@ -167,8 +206,6 @@ public class PaymentFragment extends Fragment {
 
         }
 
-        public RecyclerTouchListener(FragmentActivity activity, RecyclerView recycleList, ClickListener clickListener) {
-        }
 
 
         @Override

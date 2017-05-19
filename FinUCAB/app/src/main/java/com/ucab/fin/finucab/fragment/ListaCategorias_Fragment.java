@@ -5,15 +5,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextMenu;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.AddCategoryActivity;
@@ -58,16 +61,8 @@ public class ListaCategorias_Fragment extends Fragment {
             }
         });
 
-        ExportarButton = (Button) rootView.findViewById(R.id.ExportarButton);
-        ExportarButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity( new Intent(parentActivity, AddCategoryActivity.class));
 
-                //configuracion inicion del boton exportar
 
-            }
-        });
 
         final RecyclerView recycleList = (RecyclerView) rootView.findViewById(R.id.categoriaReList);
         LinearLayoutManager myLayoutManager = new LinearLayoutManager(getActivity());
@@ -95,8 +90,57 @@ public class ListaCategorias_Fragment extends Fragment {
         return rootView;
 
     }
+    @Override
+    //Creando menu de longpress llamada al menu
+    public void onCreateContextMenu(ContextMenu menu, View v,
 
-//BORRAR CUANDO SE IMPLEMENTE LA CLASE PRESUPUESTO
+                                    ContextMenu.ContextMenuInfo menuInfo)
+
+    {
+
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+
+
+        MenuInflater inflater = getActivity().getMenuInflater();
+
+        inflater.inflate(R.menu.categoria_menu, menu);
+
+    }
+
+
+
+    //COLOCAR LASOPCIONES EXPORTAR Y ELIMINAR
+
+    @Override
+
+    public boolean onContextItemSelected(MenuItem item) {
+
+
+
+        switch (item.getItemId()) {
+
+            case R.id.exportCategoryOpcion:
+
+
+
+                return true;
+
+            case R.id.deleteCategoryOption:
+
+                Toast.makeText(getActivity(), "Opcion Eliminar seleccionada",Toast.LENGTH_LONG).show();
+
+                return true;
+
+            default:
+
+                return super.onContextItemSelected(item);
+
+        }
+
+    }
+
+//BORRAR CUANDO SE IMPLEMENTE LA CLASE CATEGORIA
 
 
 
@@ -175,10 +219,6 @@ public class ListaCategorias_Fragment extends Fragment {
             });
 
         }
-
-        public RecyclerTouchListener(FragmentActivity activity, RecyclerView recycleList, ClickListener clickListener) {
-        }
-
 
         @Override
 

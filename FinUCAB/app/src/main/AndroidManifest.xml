@@ -31,9 +31,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.AddCategoryActivity" />
+
         <activity android:name=".activity.RecuperacionActivity" />
+
         <activity android:name=".activity.Prueba"></activity>
     </application>
-    <permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" android:protectionLevel="signature"/>
 
 </manifest>
