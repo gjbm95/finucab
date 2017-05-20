@@ -35,6 +35,7 @@ public class ListaCategorias_Fragment extends Fragment {
     FloatingActionButton fab;
     Button ExportarButton;
 
+
     MainActivity parentActivity;
 
     public ListaCategorias_Fragment() {
@@ -57,6 +58,9 @@ public class ListaCategorias_Fragment extends Fragment {
                 startActivity( new Intent(parentActivity, AddCategoryActivity.class));
 
         //configuracion inicion del boton exportar
+
+        //configuracion inicial switch habilitar
+
 
             }
         });
