@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "986126254686",
+    "firebase_url": "https://finucab-aaec1.firebaseio.com",
+    "project_id": "finucab-aaec1",
+    "storage_bucket": "finucab-aaec1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:986126254686:android:98f11e8aec2937aa",
+        "android_client_info": {
+          "package_name": "com.ucab.fin.finucab"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "986126254686-mbdp0973n0o9fci9lu0jd42bfj99qu8h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuOiceOE3Op_rhZowFXgpK6Bj0KXWh0ts"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
