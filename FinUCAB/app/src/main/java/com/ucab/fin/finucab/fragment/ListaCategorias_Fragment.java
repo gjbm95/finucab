@@ -122,9 +122,11 @@ public class ListaCategorias_Fragment extends Fragment {
 
             case R.id.exportCategoryOpcion:
 
-
+                Toast.makeText(getActivity(), "Opcion Exportar seleccionada",Toast.LENGTH_LONG).show();
 
                 return true;
+
+
 
             case R.id.deleteCategoryOption:
 
