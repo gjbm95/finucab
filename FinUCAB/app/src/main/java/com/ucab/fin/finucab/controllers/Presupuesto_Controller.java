@@ -90,12 +90,8 @@ public class Presupuesto_Controller {
     }
 
     public static void cualquiercosa (Activity actividad, TextView cartel){
-        JSONObject data;
-        Parametros.setUrl("http://192.168.0.104:8080/FinUCABWebService_war_exploded/servicio/verpersona" );
-        System.out.println("Entro");
+        Parametros.setUrl("http://192.168.0.112:8080/FinUcabWebService/webresources/Modulo1/pruebaDB" );
         new Recepcion(actividad).execute(Parametros.getUrl());
-
-
 
     }
 

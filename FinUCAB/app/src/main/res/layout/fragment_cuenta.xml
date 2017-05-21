@@ -1,0 +1,89 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    tools:context="com.ucab.fin.finucab.fragment.CuentaFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <ImageView
+        android:layout_width="36dp"
+        app:srcCompat="@mipmap/checkicon"
+        android:id="@+id/imageView2"
+        android:layout_marginTop="11dp"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@+id/textView6"
+        android:layout_height="20dp" />
+
+    <TextView
+        android:text="Registro Exitoso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView6"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#fff"
+        android:layout_alignTop="@+id/imageView2"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="Datos de la Cuenta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:layout_marginTop="13dp"
+        android:textColor="#fff"
+        android:id="@+id/textView7"
+        android:layout_below="@+id/textView6"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="Nombre:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:id="@+id/nombreRE"
+        android:textColor="#fff"
+        android:textSize="12sp"
+        android:layout_below="@+id/usuarioRE"
+        android:layout_alignLeft="@+id/usuarioRE"
+        android:layout_alignStart="@+id/usuarioRE" />
+
+    <TextView
+        android:text="Apellido:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nombreRE"
+        android:layout_alignLeft="@+id/nombreRE"
+        android:layout_alignStart="@+id/nombreRE"
+        android:layout_marginTop="11dp"
+        android:textColor="#fff"
+        android:textSize="12sp"
+        android:id="@+id/apellidoRE" />
+
+    <TextView
+        android:text="Correo:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/apellidoRE"
+        android:layout_alignLeft="@+id/apellidoRE"
+        android:layout_alignStart="@+id/apellidoRE"
+        android:textColor="#fff"
+        android:textSize="12sp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/correoRE" />
+
+    <TextView
+        android:text="Usuario:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:textSize="12sp"
+        android:id="@+id/usuarioRE"
+        android:textColor="#fff"
+        android:layout_below="@+id/textView7"
+        android:layout_toLeftOf="@+id/imageView2"
+        android:layout_toStartOf="@+id/imageView2" />
+</RelativeLayout>
