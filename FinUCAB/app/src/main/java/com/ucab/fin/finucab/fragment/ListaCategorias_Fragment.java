@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.AddCategoryActivity;
 import com.ucab.fin.finucab.activity.MainActivity;
+import com.ucab.fin.finucab.controllers.ExportarCategoria_Controller;
 import com.ucab.fin.finucab.domain.Categoria;
 
 import java.util.ArrayList;
@@ -134,7 +135,10 @@ public class ListaCategorias_Fragment extends Fragment {
 
             case R.id.exportCategoryOpcion:
 
-                Toast.makeText(getActivity(), "Opcion Exportar seleccionada",Toast.LENGTH_LONG).show();
+                Toast.makeText(parentActivity, "Exportando...", Toast.LENGTH_SHORT).show();
+                ExportarCategoria_Controller task=new ExportarCategoria_Controller();
+                task.execute();
+                Toast.makeText(parentActivity, "Exportado correctamente", Toast.LENGTH_SHORT).show();
 
                 return true;
 
