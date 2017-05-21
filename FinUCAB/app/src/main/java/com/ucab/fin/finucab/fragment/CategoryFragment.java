@@ -23,11 +23,12 @@ public class CategoryFragment extends Fragment {
     private TabLayout pestanas;
     private ViewPager viewPager;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.category_fragment, container, false);
         parentActivity = (MainActivity) getActivity();
-        parentActivity.getSupportActionBar().setTitle("Cetgorias");
+        parentActivity.getSupportActionBar().setTitle("Categorias");
 
         if (savedInstanceState == null) {
             viewPager = (ViewPager) view.findViewById(R.id.category);
@@ -40,38 +41,6 @@ public class CategoryFragment extends Fragment {
         return view;
     }
 
-    //EJEMPLO DE PRESUPUESTO
-
-    /*
-
-
-
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view= inflater.inflate(R.layout.category_fragment, container, false);
-        parentActivity = (MainActivity) getActivity();
-        parentActivity.getSupportActionBar().setTitle("Categorias");
-        if (savedInstanceState == null) {
-
-
-            // Setear adaptador al viewpager.
-            viewPager = (ViewPager) view.findViewById(R.id.category);
-            poblarViewPager(viewPager);
-
-        }
-
-        return view;
-    }
-
-     private void poblarViewPager(ViewPager viewPager) {
-        AdaptadorSecciones adapter = new AdaptadorSecciones(getChildFragmentManager());
-        adapter.addFragment(new ListaCategorias_Fragment(), "Entre");
-        viewPager.setAdapter(adapter);
-    }
-
-
-     */
 
 
 
@@ -107,6 +76,8 @@ public class CategoryFragment extends Fragment {
             return titulosFragmentos.get(position);
         }
     }
+
+
 
 
 
