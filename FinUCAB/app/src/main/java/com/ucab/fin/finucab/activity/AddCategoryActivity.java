@@ -88,10 +88,18 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
 
             //Al accionar, se inicia la actividad que presenta el formulario de registro.
             case R.id.acceptButton:
-                Resp = Categoria_Controller.validacionCategoriaVacio();
-                if (Resp == 1) {
-                    i = new Intent(AddCategoryActivity.this, MainActivity.class);
-                    startActivity(i);
+
+                try {
+                    Resp = Categoria_Controller.validacionCategoriaVacio();
+                    if (Resp == 1) {
+                        i = new Intent(AddCategoryActivity.this, MainActivity.class);
+                        startActivity(i);
+                    }
+                }
+
+                //aca deberia colocar la excepcion de CampoVacio_Exception
+                catch (Exception e ){
+
                 }
 
         }
