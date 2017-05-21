@@ -161,7 +161,7 @@ public class ListaCategorias_Fragment extends Fragment {
 //BORRAR CUANDO SE IMPLEMENTE LA CLASE CATEGORIA
 
 
-
+/*
     private ArrayList<Categoria> populatedList() {
 
         ArrayList<Categoria> listOfPersona = new ArrayList<Categoria>();
@@ -184,7 +184,42 @@ public class ListaCategorias_Fragment extends Fragment {
         return listOfPersona;
 
     }
+    */
+    private ArrayList<Categoria> populatedList() {
 
+        ArrayList<Categoria> listOfPersona = new ArrayList<Categoria>();
+
+
+             Categoria po = new Categoria();
+             Categoria pi = new Categoria();
+             Categoria pu = new Categoria();
+
+            pi.setNombre("Comida");
+            pi.setDescripcion("Almuerzos en la universidad");
+            pi.setEstaHabilitado(true);
+            pi.setIdcategoria(0);
+            pi.isIngreso(false);
+            listOfPersona.add(pi);
+
+        po.setNombre("Deporte");
+        po.setDescripcion("Prueba");
+        po.setEstaHabilitado(true);
+        po.setIdcategoria(0);
+        po.isIngreso(false);
+        listOfPersona.add(po);
+
+        pu.setNombre("Universidad");
+        pu.setDescripcion("Pago de semestres y matricula");
+        pu.setEstaHabilitado(true);
+        pu.setIdcategoria(0);
+        pu.isIngreso(false);
+        listOfPersona.add(pu);
+
+
+
+        return listOfPersona;
+
+    }
 
 
 
