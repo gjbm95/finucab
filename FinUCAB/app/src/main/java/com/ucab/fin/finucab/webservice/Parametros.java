@@ -64,7 +64,7 @@ public class Parametros {
     }
     public static void setMetodo(String direccion){
 
-        Parametros.url = server +":"+puerto+"/FinUcabWebService/webresources/Modulo1/"+direccion;
+        Parametros.url = server +":"+puerto+"/FinUcabWebService/webresources/"+direccion;
     }
     /**
      * Este metodo se encarga de colocar valores nulos a los atributos de la clase
