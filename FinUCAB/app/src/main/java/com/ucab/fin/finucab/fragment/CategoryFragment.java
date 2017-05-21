@@ -23,6 +23,7 @@ public class CategoryFragment extends Fragment {
     private TabLayout pestanas;
     private ViewPager viewPager;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.category_fragment, container, false);
@@ -75,6 +76,8 @@ public class CategoryFragment extends Fragment {
             return titulosFragmentos.get(position);
         }
     }
+
+
 
 
 

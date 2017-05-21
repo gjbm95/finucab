@@ -50,6 +50,7 @@ public class ListaCategorias_Fragment extends Fragment {
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Categorias");
 
+
         // Configuracion inicial del boton flotante
         fab = (FloatingActionButton) rootView.findViewById(R.id.addFloatingBtnCategoria);
         fab.setOnClickListener(new View.OnClickListener() {
