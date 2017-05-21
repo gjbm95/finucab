@@ -35,6 +35,7 @@ public class ListaCategorias_Fragment extends Fragment {
     FloatingActionButton fab;
     Button ExportarButton;
 
+
     MainActivity parentActivity;
 
     public ListaCategorias_Fragment() {
@@ -49,6 +50,7 @@ public class ListaCategorias_Fragment extends Fragment {
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Categorias");
 
+
         // Configuracion inicial del boton flotante
         fab = (FloatingActionButton) rootView.findViewById(R.id.addFloatingBtnCategoria);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +59,9 @@ public class ListaCategorias_Fragment extends Fragment {
                 startActivity( new Intent(parentActivity, AddCategoryActivity.class));
 
         //configuracion inicion del boton exportar
+
+        //configuracion inicial switch habilitar
+
 
             }
         });
@@ -122,9 +127,11 @@ public class ListaCategorias_Fragment extends Fragment {
 
             case R.id.exportCategoryOpcion:
 
-
+                Toast.makeText(getActivity(), "Opcion Exportar seleccionada",Toast.LENGTH_LONG).show();
 
                 return true;
+
+
 
             case R.id.deleteCategoryOption:
 

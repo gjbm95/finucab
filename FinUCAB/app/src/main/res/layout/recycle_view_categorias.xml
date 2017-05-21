@@ -48,7 +48,9 @@
         android:layout_alignTop="@+id/categoriasTextView"
         android:layout_marginEnd="11dp"
         android:layout_marginRight="11dp"
-        android:visibility="visible" />
+        android:visibility="visible"
+        android:textOff="Deshabilitado"
+        android:textOn="Habilitado"/>
 
 
 
