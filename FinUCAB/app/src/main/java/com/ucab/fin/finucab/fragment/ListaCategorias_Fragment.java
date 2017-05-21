@@ -16,6 +16,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.ucab.fin.finucab.R;
@@ -34,6 +35,7 @@ public class ListaCategorias_Fragment extends Fragment {
 
     FloatingActionButton fab;
     Button ExportarButton;
+    Switch switchestado;
 
 
     MainActivity parentActivity;
@@ -51,6 +53,8 @@ public class ListaCategorias_Fragment extends Fragment {
         parentActivity.getSupportActionBar().setTitle("Categorias");
 
 
+
+
         // Configuracion inicial del boton flotante
         fab = (FloatingActionButton) rootView.findViewById(R.id.addFloatingBtnCategoria);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -65,6 +69,9 @@ public class ListaCategorias_Fragment extends Fragment {
 
             }
         });
+
+
+
 
 
 

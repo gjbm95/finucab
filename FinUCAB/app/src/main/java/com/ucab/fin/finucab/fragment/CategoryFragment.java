@@ -30,11 +30,18 @@ public class CategoryFragment extends Fragment {
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Categorias");
 
-        if (savedInstanceState == null) {
-            viewPager = (ViewPager) view.findViewById(R.id.category);
-            CategoryFragment.AdaptadorSecciones adapter = new CategoryFragment.AdaptadorSecciones(getChildFragmentManager());
-            adapter.addFragment(new AgregarCategoria_Fragment(), "Agregar Categoria");
-            viewPager.setAdapter(adapter);
+
+        try {
+            if (savedInstanceState == null) {
+                viewPager = (ViewPager) view.findViewById(R.id.category);
+                CategoryFragment.AdaptadorSecciones adapter = new CategoryFragment.AdaptadorSecciones(getChildFragmentManager());
+                adapter.addFragment(new AgregarCategoria_Fragment(), "Agregar Categoria");
+                viewPager.setAdapter(adapter);
+
+            }
+        }
+        catch (Exception e)
+        {
 
         }
 

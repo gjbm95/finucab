@@ -29,15 +29,14 @@ import com.ucab.fin.finucab.R;
             actionBar.setTitle("");
             //------------------------------------------------------------------------------------------
 //        BIND VIEES (Se extraen los objetos asociados a los botones en pantalla)
-            switchestado.setTextOn("Habilitado"); // displayed text of the Switch whenever it is in checked or on state
-            switchestado.setTextOff("Deshabilitado");
+
 
             switchestado = (Switch) findViewById(R.id.switch2);
             statusTextView = (TextView) findViewById(R.id.estadoTextView);
 
-//
-            //Dandole funcionalidades a cada uno de los botones que salen en pantalla:
 
+//
+            switchestado.setChecked(true);
         }
     }
 
