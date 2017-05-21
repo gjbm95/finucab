@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
+import com.ucab.fin.finucab.controllers.Presupuesto_Controller;
 
 import android.graphics.Color;
 
@@ -41,6 +42,9 @@ public class BudgetFragment extends Fragment {
         View view = inflater.inflate(R.layout.budget_fragment, container, false);
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Presupuesto");
+
+        Presupuesto_Controller.visualizarPresupuestos(parentActivity);
+
         if (savedInstanceState == null) {
             insertarTabs(container);
 

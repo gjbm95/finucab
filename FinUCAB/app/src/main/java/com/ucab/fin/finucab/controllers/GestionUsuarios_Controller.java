@@ -340,11 +340,6 @@ public class GestionUsuarios_Controller {
          return cleartext.hashCode();
     }
 
-
-
-
-
-
     /**Inicializo nuevamente las variables
      *
      */
