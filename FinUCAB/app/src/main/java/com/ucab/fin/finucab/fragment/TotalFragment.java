@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
 import com.ucab.fin.finucab.controllers.ExportarPresupuesto_Controller;
+import com.ucab.fin.finucab.controllers.Presupuesto_Controller;
 
 
 /**
@@ -20,10 +21,9 @@ import com.ucab.fin.finucab.controllers.ExportarPresupuesto_Controller;
  */
 public class TotalFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
-    TextView ingresos, gastos, total;
+    TextView gananciaTextView, gastoTextView, totalTextView;
     FloatingActionButton exportFAB;
     MainActivity parentActivity;
-
 
     public TotalFragment() {
         // Required empty public constructor
@@ -35,12 +35,16 @@ public class TotalFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.total_fragment, container, false);
-        ingresos = (TextView) rootView.findViewById(R.id.ingreso);
-        gastos = (TextView) rootView.findViewById(R.id.gasto);
-        total = (TextView) rootView.findViewById(R.id.total);
-        ingresos.setText("0");
-        gastos.setText("0");
-        total.setText("0");
+        gananciaTextView = (TextView) rootView.findViewById(R.id.ingreso);
+        gastoTextView = (TextView) rootView.findViewById(R.id.gasto);
+        totalTextView = (TextView) rootView.findViewById(R.id.total);
+
+        Presupuesto_Controller.gananciaTextView = gananciaTextView;
+        Presupuesto_Controller.gastoTextView = gastoTextView;
+        Presupuesto_Controller.totalTextView = totalTextView;
+
+        Presupuesto_Controller.asignarTotales();
+
         parentActivity = (MainActivity) getActivity();
         exportFAB = (FloatingActionButton) rootView.findViewById(R.id.addFloatingBtnTotal);
         exportFAB.setOnClickListener(new View.OnClickListener() {

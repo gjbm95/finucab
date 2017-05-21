@@ -227,7 +227,7 @@ public class GestionUsuarios_Controller {
             campoerroneo.setCampo(campo);
             throw campoerroneo;
         }
-        Parametros.setMetodo("verificarUsuario?nombreUsuario="+campo.getText().toString());
+        Parametros.setMetodo("Modulo1/verificarUsuario?nombreUsuario="+campo.getText().toString());
         new Recepcion(actividad).execute("GET");
 
     }
@@ -324,7 +324,7 @@ public class GestionUsuarios_Controller {
             e.printStackTrace();
         }
         Parametros.reset();
-        Parametros.setMetodo("registrarUsuario?datosUsuario="+URLEncoder.encode(nuevo_usuario.toString()));
+        Parametros.setMetodo("Modulo1/registrarUsuario?datosUsuario="+URLEncoder.encode(nuevo_usuario.toString()));
         new Recepcion(actividad).execute("GET");
         return Parametros.getRespuesta();
     }
@@ -339,11 +339,6 @@ public class GestionUsuarios_Controller {
 
          return cleartext.hashCode();
     }
-
-
-
-
-
 
     /**Inicializo nuevamente las variables
      *
