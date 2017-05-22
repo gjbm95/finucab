@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
 import com.ucab.fin.finucab.controllers.Pago_Controller;
-import com.ucab.fin.finucab.controllers.Presupuesto_Controller;
+import com.ucab.fin.finucab.domain.Pago;
 
 
 public class AgregarPago_Fragment extends Fragment {
@@ -26,6 +26,7 @@ public class AgregarPago_Fragment extends Fragment {
     EditText descripcionEditText, montoEditText;
     Spinner categoriaSpinner,tipoSpinner;
     int Resp;
+    Pago pago;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_agregar_pago, container, false);
@@ -44,12 +45,21 @@ public class AgregarPago_Fragment extends Fragment {
         Pago_Controller.tipoTransaccion=tipoSpinner;
         Pago_Controller.descripcionPago=descripcionEditText;
 
+
+
+
         agregarButton = (Button) rootView.findViewById(R.id.acceptButtonAPago);
         agregarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Resp = Pago_Controller.validacionPagoVacio();
                 if (Resp == 1) {
+                    pago = new Pago();
+                    pago.setCategoria(categoriaSpinner.getSelectedItem().toString());
+                    pago.setDescripcion(descripcionEditText.getText().toString());
+                    pago.setTotal(Float.valueOf(montoEditText.getText().toString()));
+                    pago.setTipo(tipoSpinner.getSelectedItem().toString());
+                    Pago_Controller.registrarPago(pago,parentActivity);
                     parentActivity.changeFragment(new PaymentFragment(), false);
                 }
             }

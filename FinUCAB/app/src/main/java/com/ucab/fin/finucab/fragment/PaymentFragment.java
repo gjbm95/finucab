@@ -140,9 +140,6 @@ public class PaymentFragment extends Fragment {
             pi.setCategoria("Universidad");
             pi.setDescripcion("Semestre");
             pi.setTotal(10);
-            pi.setFecha("A");
-            pi.setImpuesto(0);
-            pi.setSubtotal(0);
             pi.setTipo("ingreso");
             pi.setIdPago(0);
 
