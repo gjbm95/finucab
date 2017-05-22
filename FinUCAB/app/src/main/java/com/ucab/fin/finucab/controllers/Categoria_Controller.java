@@ -1,13 +1,11 @@
 package com.ucab.fin.finucab.controllers;
 
+import android.app.Activity;
 import android.util.Log;
 import android.widget.EditText;
 
 import com.ucab.fin.finucab.domain.Categoria;
 import com.ucab.fin.finucab.exceptions.CampoVacio_Exception;
-
-import android.app.Activity;
-
 import com.ucab.fin.finucab.webservice.Parametros;
 import com.ucab.fin.finucab.webservice.Recepcion;
 
@@ -72,6 +70,8 @@ public class Categoria_Controller {
         new Recepcion(actividad).execute("GET");
         return Parametros.getRespuesta();
     }
+
+
 
 }
 

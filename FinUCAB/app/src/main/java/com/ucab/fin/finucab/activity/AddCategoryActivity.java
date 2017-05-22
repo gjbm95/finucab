@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.controllers.Categoria_Controller;
 import com.ucab.fin.finucab.exceptions.CampoVacio_Exception;
+import com.ucab.fin.finucab.domain.Categoria;
 
 public class AddCategoryActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -94,6 +95,7 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
 
                     Categoria_Controller.verificoVacio(AgregarcategoriaEditText);
                     Categoria_Controller.verificoVacio(AddDescripcionEditText);
+                    Categoria categoria = new Categoria();
                     this.onBackPressed();
 
                 }catch(CampoVacio_Exception e){
