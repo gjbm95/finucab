@@ -62,6 +62,7 @@ public class ModificarPresupuestoFragment extends Fragment implements CompoundBu
         Presupuesto_Controller.unicoButton=onlyRadioButton;
         Presupuesto_Controller.recurrenciaTextView = recurrentTextView;
 
+        Presupuesto_Controller.obtenerPresupuesto(parentActivity);
         Presupuesto_Controller.asignarValores();
 
 
