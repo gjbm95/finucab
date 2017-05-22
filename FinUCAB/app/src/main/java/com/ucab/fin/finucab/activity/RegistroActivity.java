@@ -114,7 +114,7 @@ public class RegistroActivity extends AppCompatActivity {
                                                      usuario.setUsuario(GestionUsuarios_Controller.usuario.getText().toString());
                                                      usuario.setContrasena(Integer.toString(GestionUsuarios_Controller.encriptarDatos(GestionUsuarios_Controller.contrasena1.getText().toString())));
                                                      usuario.setPregunta(GestionUsuarios_Controller.pregunta.getText().toString());
-                                                     usuario.setRespuesta(GestionUsuarios_Controller.respuesta.getText().toString());
+                                                     usuario.setRespuesta(Integer.toString(GestionUsuarios_Controller.encriptarDatos(GestionUsuarios_Controller.respuesta.getText().toString())));
                                                      GestionUsuarios_Controller.registrarUsuario(usuario, RegistroActivity.this);
                                                  }
 
