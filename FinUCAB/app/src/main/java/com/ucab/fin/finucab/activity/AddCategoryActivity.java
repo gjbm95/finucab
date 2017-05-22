@@ -94,6 +94,11 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
                     if (Resp == 1) {
                         i = new Intent(AddCategoryActivity.this, MainActivity.class);
                         startActivity(i);
+                        //lamariamos al metodo agregar categoria
+                        /*
+                        Categoria categoria = new Categoria();
+                        Categoria_Controller.registrarCategoria(categoria, AddCategoryActivity.this);
+                        */
                     }
                 }
 
