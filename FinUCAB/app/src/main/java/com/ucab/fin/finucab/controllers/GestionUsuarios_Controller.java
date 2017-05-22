@@ -31,30 +31,32 @@ import javax.crypto.spec.SecretKeySpec;
 import static org.apache.commons.codec.binary.Base64.encodeBase64;
 
 /**
- * Created by Junior on 06/05/2017.
- */
+ *Modulo 1 - Modulo de  Inicio de Sesion y registro de usuario
+ *Desarrolladores:
+ *@author Garry Jr. Bruno / Erbin Rodriguez / Alejadandro Negrin
+ *Descripción de la clase:
+ * Esta clase se encarga de gestionar los datos entrantes y salientes de la aplicacion que va
+ * relacionado con los usuarios del sistema.
+ *
+ **/
 
 public class GestionUsuarios_Controller {
     //Recursos:
-    public static EditText nombre;
-    public static EditText apellido;
-    public static EditText correo;
-    public static EditText usuario;
-    public static EditText contrasena1;
-    public static EditText contrasena2;
-    public static EditText pregunta;
-    public static EditText respuesta;
-    public static int pasoRegistro;
+    public static EditText nombre;  // EditText que contiene el nombre del usuario
+    public static EditText apellido;// EditText que contiene el apellido del usuario
+    public static EditText correo; // EditText que contiene el correo del usuario
+    public static EditText usuario; // EditText que contiene el nombre de usuario de la cuenta
+    public static EditText contrasena1; // EditText que contiene la contrasena del usuario
+    public static EditText contrasena2; // EditText que contiene la contrasena confirmada del usuario
+    public static EditText pregunta; // EditText que contiene la pregunta secreta del usuario
+    public static EditText respuesta; // EditText que contiene la respuesta secreta del usuario
+    public static int pasoRegistro; // Variable entera que almacena la etapa actual del registro de usuario.
 
-
-
-
-
-    public GestionUsuarios_Controller (){
-
-
-    }
-    // Valida que no esten vacios los campos y coincida con la respuesta establecida por el usuario con la establecida por el usuario en recuperacion de contraseña
+    /**
+     * Valida que no esten vacios los campos y coincida con la respuesta establecida por el usuario
+     * con la establecida por el usuario en recuperacion de contraseña
+     *
+      */
     public static int validacionRespuesta() {
 
         try {
@@ -85,8 +87,12 @@ public class GestionUsuarios_Controller {
         return 0;
     }
 
-    //Se encarga de validar que no se encuentre vacio los campos nombre, apellido, correo
-    //Tambien se valida si el formato del correo electronico es correcto.
+
+    /**
+     *  Se encarga de validar que no se encuentre vacio los campos nombre, apellido, correo
+     *  tambien se valida si el formato del correo electronico es correcto.
+     *  @return retorna 0 si no hay ningun error y retorna 1 si los hay.
+     */
     public static int validacionEtapaDatos(){
 
         try{
@@ -108,18 +114,17 @@ public class GestionUsuarios_Controller {
             return 1;
         }
 
-               //Estadarizamos mayusculas y minusculas:
-               nombre.setText(GestionUsuarios_Controller.formatearCadena(nombre.getText().toString()));
-               apellido.setText(GestionUsuarios_Controller.formatearCadena(apellido.getText().toString()));
-               return 0;
+         //Estadarizamos mayusculas y minusculas:
+         nombre.setText(GestionUsuarios_Controller.formatearCadena(nombre.getText().toString()));
+         apellido.setText(GestionUsuarios_Controller.formatearCadena(apellido.getText().toString()));
+         return 0;
     }
 
 
      /**
      *  Metodo encargado de validar los datos suministrados en la etapa de registro de datos de la cuenta.
      *
-     *
-     * @return
+     * @return retorna 0 si no hay ningun error y retorna 1 si lo hay
      */
      public static int validacionEtapaCuenta(Activity activity)
     {
@@ -139,18 +144,13 @@ public class GestionUsuarios_Controller {
               e.getCampo().setError(e.getMessage());
               return 1;
           }
-        /*
-            Falta validar si  ya existe el nombre de usuario en el sistema.
-         */
-
         return 0;
     }
 
 
     /**Se encarga de validar que no se encuentre vacio los campos pregunta, respuesta
      * en la etapa de registro de datos de la seguridad de las cuentas.
-     *
-     *
+     * @return retorna 0 si no hay ningun error y retorna 1 si lo hay
     **/
      public static int validacionEtapaSeguridad(){
         try{
@@ -170,7 +170,7 @@ public class GestionUsuarios_Controller {
     }
 
     /**
-     * Validacion para verficar que los campos cumplan con el rango correcto
+     * Realiza Validacion para verficar que los campos cumplan con el rango correcto
      *
      * @Param campo representa el EditText que contiene el texto a verificar
      * @Param longitud representa el limite maximo que debe tener la cadena de caracteres a validad
@@ -191,11 +191,10 @@ public class GestionUsuarios_Controller {
            }
     }
 
-    /**Realizo la validacion para verificar que el campo este vacio:
+    /**Realiza la validacion para verificar que el campo este vacio:
      *
-     *
-     * @param campo
-     * @throws CampoVacio_Exception
+     * @param campo  Es el campo de texto EditText que quiero validad
+     * @throws CampoVacio_Exception Señala que el campo esta vacio
      */
     public static void verificoVacio(EditText campo) throws CampoVacio_Exception {
         if (campo.getText().toString().isEmpty())
@@ -207,8 +206,12 @@ public class GestionUsuarios_Controller {
 
     }
 
-
-    //Realizo la validacion para verificar que el usuario este correcto y si no esta repetido:
+    /**
+     * Realiza la validacion para verificar que el usuario este correcto y si no esta repetido:
+     *
+     * @param campo campo de texto (EditText) donde se va a validar si el campo se lleno.
+     * @throws UsuarioInvalido_Exception se ejecuta esta excepcion si el campo esta vacio.
+     */
     public static void verificoUsuario(EditText campo) throws UsuarioInvalido_Exception {
         if (campo.getText().toString().isEmpty()) //HAY QUE CORREGIR LA VERIFICACION
         {
@@ -219,7 +222,12 @@ public class GestionUsuarios_Controller {
     }
 
 
-    //Realizo la validacion para verificar que el usuario este correcto y si no esta repetido:
+    /**
+     *   Realizo la validacion para verificar que el usuario este correcto y si no esta repetido:
+     *
+     *   @param actividad  es la actividad actual donde se esta validando el usuario
+     *   @param campo es el campo de texto (EditText) donde se va a validar la exitencia del usuario
+     */
     public static void verificoUsuario(Activity actividad,EditText campo) throws UsuarioInvalido_Exception {
         if (campo.getText().toString().isEmpty()) //HAY QUE CORREGIR LA VERIFICACION
         {
@@ -232,7 +240,10 @@ public class GestionUsuarios_Controller {
 
     }
 
-    //Realizo la validacion para verificar que la contraseña coincide a la establecida por ese usuario:
+    /**
+     *  Realizo la validacion para verificar que la contraseña coincide a la establecida por ese usuario:
+     *  @Param campo campo de texto donde se va a validar
+     */
     public static void verificoContrasena(EditText campo) throws ContrasenaInvalida_Exception {
         if (campo.getText().toString().isEmpty()) //HAY QUE CORREGIR LA VERIFICACION
         {
@@ -294,8 +305,8 @@ public class GestionUsuarios_Controller {
     /**Este metodo le da un formato unico a los Nombre y Apellidos.
      * Colocando su primera letra en Mayusculas y el resto en minusculas.
      * @Param texto // Cadena de texto a ser formateada
-     *
-    **/
+     * @return devuelve una cadena de caracteres formateada de esta forma "Formato"
+     **/
      public static CharSequence formatearCadena (String texto){
         String convertido = texto.toLowerCase();
         return Character.toUpperCase(convertido.charAt(0)) + convertido.substring(1);
@@ -354,7 +365,7 @@ public class GestionUsuarios_Controller {
      * Función de tipo entero que devuelve el codigo hash del la constrasena suministrada
      *
      * @param cleartext el texto sin cifrar a encriptar
-     * @return el texto cifrado en modo int
+     * @return el texto cifrado en int
      */
     public static int encriptarDatos(String cleartext)  {
 

@@ -17,21 +17,32 @@ import com.ucab.fin.finucab.exceptions.CampoVacio_Exception;
 import com.ucab.fin.finucab.exceptions.ContrasenaInvalida_Exception;
 import com.ucab.fin.finucab.exceptions.UsuarioInvalido_Exception;
 import com.ucab.fin.finucab.webservice.Parametros;
-
+/**
+ *Modulo 1 - Modulo de  Inicio de Sesion y registro de usuario
+ *Desarrolladores:
+ *@author Garry Jr. Bruno / Erbin Rodriguez / Alejadandro Negrin
+ *Descripción de la clase:
+ * Esta clase se encarga de gestionar la actividad de Inicio de sesion de la aplicacion. Y de inicializar
+ * parametros de red para la aplicacion.
+ *
+ **/
 public class InicioActivity extends AppCompatActivity implements View.OnClickListener {
 
 
-    Button signInButton;
-    Button signUpButton;
-    TextView forgotPwdText;
-    EditText userNameEditText;
-    EditText usrPwdEditText;
+    Button signInButton; // Boton para activar el inicio de sesion.
+    Button signUpButton; // Boton para activar el registro de usuario.
+    TextView forgotPwdText; // Boton para activar la recuperacion de cuenta.
+    EditText userNameEditText; // Caja de texto para almacenar el nombre de usuario.
+    EditText usrPwdEditText; // Caja de texto para almacenar la contraseña.
 
+    /**
+     * Metodo de inicializacion de la actividad
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         //Colocando el icono en la parte superior izquierda:
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
@@ -52,7 +63,9 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
     }
 
 
-    //Agrego un menu Overflow al Action Bar:
+    /**
+     * Agrego un menu Overflow al Action Bar:
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.overflow, menu);
@@ -60,7 +73,9 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
     }
 
 
-   //Se le coloca acciones a las funcionalidades que ofrece el Menu overflow del action bar.
+    /**
+     * Se le coloca acciones a las funcionalidades que ofrece el Menu overflow del action bar.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -76,7 +91,9 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    //Dandole funcionalidades a cada uno de los botones que salen en pantalla:
+    /**
+     * Dandole funcionalidades a cada uno de los botones que salen en pantalla:
+     */
     @Override
     public void onClick(View view) {
         Intent i;
