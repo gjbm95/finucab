@@ -14,10 +14,12 @@ import android.widget.TextView;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.controllers.Categoria_Controller;
-import com.ucab.fin.finucab.exceptions.CampoVacio_Exception;
 import com.ucab.fin.finucab.domain.Categoria;
+import com.ucab.fin.finucab.exceptions.CampoVacio_Exception;
 
 public class AddCategoryActivity extends AppCompatActivity implements View.OnClickListener {
+
+    MainActivity parentActivity;
 
     EditText AddDescripcionEditText, AgregarcategoriaEditText;
     Button acceptButton;
@@ -27,7 +29,10 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
     private TextView tipoTextView;
     int Resp;
 
+
     @Override
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_agregar_categoria);
@@ -95,8 +100,15 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
 
                     Categoria_Controller.verificoVacio(AgregarcategoriaEditText);
                     Categoria_Controller.verificoVacio(AddDescripcionEditText);
-                    Categoria categoria = new Categoria();
                     this.onBackPressed();
+                    Categoria categoria = new Categoria();
+                    categoria.setDescripcion(AgregarcategoriaEditText.getText().toString());
+                    categoria.setDescripcion(AddDescripcionEditText.getText().toString());
+                    categoria.setDescripcion(switchestado.getText().toString());
+                    categoria.setDescripcion(switchtipo.getText().toString());
+                    Categoria_Controller.registrarCategoria(categoria, parentActivity);
+
+
 
                 }catch(CampoVacio_Exception e){
                     e.getCampo().setError(e.getMessage());
