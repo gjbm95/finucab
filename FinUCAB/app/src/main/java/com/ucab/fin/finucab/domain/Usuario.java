@@ -18,6 +18,7 @@ public class Usuario {
     private String respuesta;
     private ArrayList<Cuenta_Bancaria> cuentas = new ArrayList<Cuenta_Bancaria>();
     private ArrayList<Planificacion_Pago> planes = new ArrayList<Planificacion_Pago>();
+    private ArrayList<Presupuesto> presupuestos = new ArrayList<Presupuesto>();
 
 
     public Usuario()

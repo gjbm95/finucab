@@ -53,4 +53,20 @@ public class Categoria {
     private boolean estaHabilitado;
     private boolean esIngreso;
 
+    public Categoria() {
+        this.idcategoria = 0;
+        this.nombre = "";
+        this.descripcion = "";
+        this.estaHabilitado = false;
+        this.esIngreso = false;
+    }
+
+
+    public Categoria(int idcategoria, String nombre, String descripcion, boolean estaHabilitado, boolean esIngreso) {
+        this.idcategoria = idcategoria;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.estaHabilitado = estaHabilitado;
+        this.esIngreso = esIngreso;
+    }
 }

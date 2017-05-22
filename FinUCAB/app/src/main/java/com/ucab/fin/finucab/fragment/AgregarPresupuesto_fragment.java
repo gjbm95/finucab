@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
 import com.ucab.fin.finucab.controllers.Presupuesto_Controller;
+import com.ucab.fin.finucab.domain.Presupuesto;
 
 
 /**
@@ -67,10 +68,7 @@ public class AgregarPresupuesto_fragment extends Fragment implements CompoundBut
         onlyRadioButton.setOnCheckedChangeListener(this);
         recurrentRadioButton.setOnCheckedChangeListener(this);
 
-        //Se borrrara cuando se implemente correctamente
-        ArrayAdapter adapter = ArrayAdapter.createFromResource(getActivity(), R.array.categoryArray, android.R.layout.simple_spinner_dropdown_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        categorySpinner.setAdapter(adapter);
+        Presupuesto_Controller.asignarSpinner(parentActivity);
 
         return rootView;
     }
