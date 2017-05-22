@@ -26,6 +26,7 @@ public class Pago_Controller {
 
         descripcionPago.setText(pago.getDescripcion());
         montoPago.setText(Float.toString(pago.getTotal()));
+
     }
     public static int validacionPagoVacio() {
         int x = 1;
@@ -60,11 +61,14 @@ public class Pago_Controller {
     public static String registrarPago(Pago pago, Activity actividad){
         JSONObject nuevo_pago = new JSONObject();
         try {
-            nuevo_pago.put("pg_monto",pago.getTotal());
-            nuevo_pago.put("pg_tipoTransaccion",pago.getTipo());
+           // nuevo_pago.put("pg_monto",pago.getTotal());
+            nuevo_pago.put("pg_monto",100);
+           // nuevo_pago.put("pg_tipoTransaccion",pago.getTipo());
+            nuevo_pago.put("pg_tipoTransaccion","ingreso");
            // nuevo_pago.put("pg_categoria",pago.getCategoria());
             nuevo_pago.put("categoriaca_id",1);
-            nuevo_pago.put("pg_descripcion",pago.getDescripcion());
+            //nuevo_pago.put("pg_descripcion",pago.getDescripcion());
+            nuevo_pago.put("pg_descripcion","prueba");
         } catch (JSONException e) {
             e.printStackTrace();
         }
