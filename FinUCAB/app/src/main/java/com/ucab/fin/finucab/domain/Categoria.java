@@ -39,18 +39,34 @@ public class Categoria {
         this.estaHabilitado = estaHabilitado;
     }
 
-    public boolean isTipo() {
-        return tipo;
+    public boolean isIngreso() {
+        return esIngreso;
     }
 
-    public void setTipo(boolean tipo) {
-        this.tipo = tipo;
+    public void isIngreso(boolean esIngreso) {
+        this.esIngreso = esIngreso;
     }
 
     private int idcategoria;
     private String nombre;
     private String descripcion;
     private boolean estaHabilitado;
-    private boolean tipo;
+    private boolean esIngreso;
 
+    public Categoria() {
+        this.idcategoria = 0;
+        this.nombre = "";
+        this.descripcion = "";
+        this.estaHabilitado = false;
+        this.esIngreso = false;
+    }
+
+
+    public Categoria(int idcategoria, String nombre, String descripcion, boolean estaHabilitado, boolean esIngreso) {
+        this.idcategoria = idcategoria;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.estaHabilitado = estaHabilitado;
+        this.esIngreso = esIngreso;
+    }
 }

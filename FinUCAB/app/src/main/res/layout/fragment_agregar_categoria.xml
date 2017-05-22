@@ -3,72 +3,41 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
     xmlns:tools="http://schemas.android.com/tools"
-
-    android:id="@+id/fragment_agregar_transacion"
-
+    android:id="@+id/fragment_agregar_categoria"
     android:layout_width="match_parent"
-
     android:layout_height="match_parent"
-
-    android:background="#0895E0"
-
-    android:titleTextColor="#000">
-
-
+    android:background="#0895E0">
 
     <TextView
 
         android:id="@+id/agregarTextView"
-
         android:layout_width="0dp"
-
         android:layout_height="wrap_content"
-
         android:textColor="#fff"
-
         android:textSize="20sp"
-
         android:text="@string/agregarCategoria"
-
         app:layout_constraintLeft_toLeftOf="parent"
-
         app:layout_constraintTop_toTopOf="parent"
-
         app:layout_constraintRight_toRightOf="parent"
-
         app:layout_constraintEnd_toEndOf="parent"
-
-        android:layout_marginTop="69dp"
-
-        app:layout_constraintHorizontal_bias="1.0" />
+        android:layout_marginTop="54dp"
+        app:layout_constraintHorizontal_bias="0.0" />
 
     <TextView
 
-        android:id="@+id/campoObligatorioTextView"
-
+        android:id="@+id/DescripcionTextView"
         android:layout_width="0dp"
-
         android:layout_height="wrap_content"
-
-        android:textColor="#f44336"
-
-        android:textSize="15sp"
-
-        android:text="@string/campoObligatorio"
-
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:text="@string/agregarDescripcion"
         app:layout_constraintLeft_toLeftOf="parent"
-
         app:layout_constraintTop_toTopOf="parent"
-
         app:layout_constraintRight_toRightOf="parent"
-
         app:layout_constraintEnd_toEndOf="parent"
-
-        android:layout_marginTop="179dp"
-
-        app:layout_constraintHorizontal_bias="1.0" />
+        android:layout_marginTop="161dp"
+        app:layout_constraintHorizontal_bias="0.0" />
 
     <EditText
 
@@ -96,7 +65,7 @@
 
         app:layout_constraintEnd_toEndOf="parent"
 
-        android:layout_marginTop="114dp"
+        android:layout_marginTop="96dp"
 
         app:layout_constraintHorizontal_bias="0.0"
 
@@ -104,53 +73,105 @@
 
         android:layout_marginEnd="16dp" />
 
+    <EditText
+
+        android:id="@+id/AddDescripcionEditText"
+        android:layout_width="0dp"
+        android:layout_height="47dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:hint="@string/escribirDescripcion"
+        android:background="@drawable/rounded_white_border"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="197dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp" />
+
     <Button
 
         android:id="@+id/acceptButton"
-
         android:layout_width="126dp"
-
         android:layout_height="0dp"
-
         android:text="@string/aceptar"
-
         android:textSize="14sp"
-
         app:layout_constraintLeft_toLeftOf="parent"
-
         app:layout_constraintRight_toRightOf="parent"
-
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintTop_toTopOf="parent"
-
         android:layout_marginTop="436dp"
-
         app:layout_constraintHorizontal_bias="0.937" />
 
-    <Button
+    <Switch
+        android:id="@+id/habilitarSwitch"
+        android:layout_width="214dp"
+        android:layout_height="16dp"
+        android:visibility="visible"
 
-        android:id="@+id/backButton"
-
-        android:layout_width="126dp"
-
-        android:layout_height="0dp"
-
-        android:text="@string/volver"
-
-        android:textSize="14sp"
-
-        app:layout_constraintLeft_toLeftOf="parent"
-
+        android:layout_marginRight="297dp"
         app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="150dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginTop="50dp"
+        app:layout_constraintTop_toBottomOf="@+id/AddDescripcionEditText"
+        android:layout_marginBottom="33dp"
+        app:layout_constraintBottom_toTopOf="@+id/tipoSwitch"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteY="304dp"
+        tools:layout_editor_absoluteX="150dp" />
 
+    <Switch
+        android:id="@+id/tipoSwitch"
+        android:layout_width="231dp"
+        android:layout_height="31dp"
+        android:visibility="visible"
+        android:layout_marginLeft="133dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="109dp"
+        app:layout_constraintTop_toBottomOf="@+id/AddDescripcionEditText"
+        android:layout_marginRight="260dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        tools:layout_editor_absoluteY="351dp" />
+
+    <TextView
+
+        android:id="@+id/estadoTextView"
+        android:layout_width="381dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="293dp"
+        android:text="@string/estado"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteY="292dp"
+        tools:layout_editor_absoluteX="-25dp" />
 
-        android:layout_marginTop="436dp"
+    <TextView
 
-        app:layout_constraintHorizontal_bias="0.062" />
+        android:id="@+id/TipoTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="357dp"
+        android:text="@string/tipo"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
 

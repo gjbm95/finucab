@@ -9,7 +9,6 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
 
@@ -24,20 +23,31 @@ public class CategoryFragment extends Fragment {
     private TabLayout pestanas;
     private ViewPager viewPager;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.category_fragment, container, false);
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Categorias");
-        if (savedInstanceState == null) {
-            viewPager = (ViewPager) view.findViewById(R.id.category);
-            CategoryFragment.AdaptadorSecciones adapter = new CategoryFragment.AdaptadorSecciones(getChildFragmentManager());
-            adapter.addFragment(new ListaCategorias_Fragment(), "Puedo");
-            viewPager.setAdapter(adapter);
+
+
+        try {
+            if (savedInstanceState == null) {
+                viewPager = (ViewPager) view.findViewById(R.id.category);
+                CategoryFragment.AdaptadorSecciones adapter = new CategoryFragment.AdaptadorSecciones(getChildFragmentManager());
+                adapter.addFragment(new AgregarCategoria_Fragment(), "Agregar Categoria");
+                viewPager.setAdapter(adapter);
+
+            }
+        }
+        catch (Exception e)
+        {
+
         }
 
         return view;
     }
+
 
 
 
@@ -73,6 +83,8 @@ public class CategoryFragment extends Fragment {
             return titulosFragmentos.get(position);
         }
     }
+
+
 
 
 

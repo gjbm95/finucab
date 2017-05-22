@@ -17,11 +17,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
-        android:layout_below="@+id/textView"
-        android:layout_marginTop="35dp"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentStart="true" />
 
 
     <android.support.design.widget.FloatingActionButton
@@ -37,5 +35,7 @@
         android:layout_marginEnd="19dp"
         android:layout_marginRight="19dp"
         app:srcCompat="@mipmap/agregar" />
+
+
 </RelativeLayout>
 

@@ -8,14 +8,23 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.ucab.fin.finucab.R;
+import com.ucab.fin.finucab.controllers.GestionUsuarios_Controller;
+import com.ucab.fin.finucab.exceptions.CampoVacio_Exception;
+import com.ucab.fin.finucab.exceptions.ContrasenaInvalida_Exception;
+import com.ucab.fin.finucab.exceptions.UsuarioInvalido_Exception;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class InicioActivity extends AppCompatActivity implements View.OnClickListener {
 
 
     Button signInButton;
     Button signUpButton;
+    TextView forgotPwdText;
+    EditText userNameEditText;
+    EditText usrPwdEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +40,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //        BIND VIEES (Se extraen los objetos asociados a los botones en pantalla)
         signInButton = (Button) findViewById(R.id.signInButton);
         signUpButton = (Button) findViewById(R.id.signUpButton);
-
+        forgotPwdText = (TextView) findViewById(R.id.forgotPwdTextView);
+        userNameEditText = (EditText) findViewById(R.id.userNameEditText);
+        usrPwdEditText = (EditText) findViewById(R.id.userPwdEditText);
 //        SET LISTENERS (Se le asigna la actividad en el cual funcionaran)
         signInButton.setOnClickListener(this);
         signUpButton.setOnClickListener(this);
+        forgotPwdText.setOnClickListener(this);
 
     }
 
@@ -68,15 +80,48 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         Intent i;
         switch (view.getId()){
+
              //Al accionar, se inician los procesos de validacion de datos para acceder el perfil de usuario.
             case R.id.signInButton:
-                i = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(i);
+                try {
+                    GestionUsuarios_Controller.verificoVacio(userNameEditText);
+                    GestionUsuarios_Controller.verificoVacio(usrPwdEditText);
+
+                    //DEBEN CORREGIRSE LAS VERIFICACIONES DE USUARIO Y CONTRASEÑA
+                    GestionUsuarios_Controller.verificoUsuario(userNameEditText);
+                    GestionUsuarios_Controller.verificoContrasena(usrPwdEditText);
+
+                    i = new Intent(InicioActivity.this,MainActivity.class);
+                    startActivity(i);
+                    userNameEditText.setText("");
+                    usrPwdEditText.setText("");
+                }catch(CampoVacio_Exception e){
+                    e.getCampo().setError(e.getMessage());
+                }catch(UsuarioInvalido_Exception e){
+                    e.getCampo().setError(e.getMessage());
+                }
+                catch(ContrasenaInvalida_Exception e){
+                    e.getCampo().setError(e.getMessage());
+                }
                 break;
+
             //Al accionar, se inicia la actividad que presenta el formulario de registro.
             case R.id.signUpButton:
-                i = new Intent(LoginActivity.this, RegisterActivity.class);
+                i = new Intent(InicioActivity.this, RegistroActivity.class);
                 startActivity(i);
+                break;
+
+            //Al accionar, se verifican los datos e inicia la actividad de recuperar contraseña.
+            case R.id.forgotPwdTextView:
+                try {
+                    GestionUsuarios_Controller.verificoVacio(userNameEditText);
+
+                    i = new Intent(InicioActivity.this, RecuperacionActivity.class);
+                    startActivity(i);
+
+                }catch(CampoVacio_Exception e) {
+                    e.getCampo().setError(e.getMessage());
+                }
                 break;
         }
 

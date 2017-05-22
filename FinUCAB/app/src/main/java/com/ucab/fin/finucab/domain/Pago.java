@@ -1,27 +1,25 @@
 package com.ucab.fin.finucab.domain;
 
-import java.util.Date;
-
 /**
  * Created by Jeffrey on 10/05/2017.
  */
 
-public class Transaccion {
-    private int idTransaccion;
+public class Pago {
+    private int idPago;
     private String categoria;
     private String descripcion;
-    private Date fecha;
+    private String fecha;
     private float subtotal;
     private float impuesto;
     private float total;
     private String tipo;
 
-    public int getIdTransaccion() {
-        return idTransaccion;
+    public int getIdPago() {
+        return idPago;
     }
 
-    public void setIdTransaccion(int idTransaccion) {
-        this.idTransaccion = idTransaccion;
+    public void setIdPago(int idPago) {
+        this.idPago = idPago;
     }
 
     public String getCategoria() {
@@ -40,11 +38,11 @@ public class Transaccion {
         this.descripcion = descripcion;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
@@ -80,8 +78,8 @@ public class Transaccion {
         this.tipo = tipo;
     }
 
-    public Transaccion(int idTransaccion, String categoria, String descripcion, Date fecha, float subtotal, float impuesto, float total, String tipo) {
-        this.idTransaccion = idTransaccion;
+    public Pago(int idPago, String categoria, String descripcion, String fecha, float subtotal, float impuesto, float total, String tipo) {
+        this.idPago = idPago;
         this.categoria = categoria;
         this.descripcion = descripcion;
         this.fecha = fecha;
@@ -91,7 +89,7 @@ public class Transaccion {
         this.tipo = tipo;
     }
 
-    public Transaccion(){
+    public Pago(){
 
     }
 }

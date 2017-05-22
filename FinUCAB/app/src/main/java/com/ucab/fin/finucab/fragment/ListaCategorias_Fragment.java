@@ -1,70 +1,76 @@
 package com.ucab.fin.finucab.fragment;
 
-
-
-
-
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.ContextMenu;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Switch;
+import android.widget.Toast;
 
 import com.ucab.fin.finucab.R;
+import com.ucab.fin.finucab.activity.AddCategoryActivity;
 import com.ucab.fin.finucab.activity.MainActivity;
+import com.ucab.fin.finucab.controllers.ExportarCategoria_Controller;
 import com.ucab.fin.finucab.domain.Categoria;
 
 import java.util.ArrayList;
-
-
-
-
 
 /**
 
  * A simple {@link Fragment} subclass.
 
  */
-
 public class ListaCategorias_Fragment extends Fragment {
 
     FloatingActionButton fab;
-
-
-
     MainActivity parentActivity;
-
-
-
-
+    RecyclerView recycleList;
 
     public ListaCategorias_Fragment() {
-
         // Required empty public constructor
-
     }
 
-
-
-
-
     @Override
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_lista_categorias, container, false);
         parentActivity = (MainActivity) getActivity();
-        final RecyclerView recycleList = (RecyclerView) rootView.findViewById(R.id.categoriaReList);
+        parentActivity.getSupportActionBar().setTitle("Categorias");
+
+        // Configuracion inicial del boton flotante
+        fab = (FloatingActionButton) rootView.findViewById(R.id.addFloatingBtnCategoria);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity( new Intent(parentActivity, AddCategoryActivity.class));
+
+        //configuracion inicion del boton exportar
+
+        //configuracion inicial switch habilitar
+
+
+            }
+        });
+
+
+        recycleList = (RecyclerView) rootView.findViewById(R.id.categoriaReList);
         LinearLayoutManager myLayoutManager = new LinearLayoutManager(getActivity());
         myLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+
         recycleList.setLayoutManager(myLayoutManager);
         recycleList.addOnItemTouchListener(new RecyclerTouchListener(getActivity(),
                 recycleList, new ListaCategorias_Fragment.ClickListener() {
@@ -81,108 +87,78 @@ public class ListaCategorias_Fragment extends Fragment {
                 registerForContextMenu(recycleList);
             }
         }));
+            //celdas
 
-        CategoriaAdapter cAdapter =new CategoriaAdapter(populatedList());
-        recycleList.setAdapter(cAdapter);
         return rootView;
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
 
+        CategoriaAdapter cAdapter =new CategoriaAdapter(populatedList());
+        recycleList.setAdapter(cAdapter);
+    }
 
-
-
-
-/*
- @Override
-    public void onCreateContextMenu(ContextMenu menu, View v,
-
-                                    ContextMenu.ContextMenuInfo menuInfo)
-
+    @Override
+    //Creando menu de longpress llamada al menu
+    public void onCreateContextMenu(ContextMenu menu, View v,  ContextMenu.ContextMenuInfo menuInfo)
     {
 
         super.onCreateContextMenu(menu, v, menuInfo);
-
-
-
         MenuInflater inflater = getActivity().getMenuInflater();
-
-        inflater.inflate(R.menu.presupuesto_gasto_menu, menu);
+        inflater.inflate(R.menu.categoria_menu, menu);
 
     }
-    */
 
 
 
-    //COLOCAR LASOPCIONES MODIFICAR Y ELIMINAR
-
-
-
-   /*
-   @Override
-   public boolean onContextItemSelected(MenuItem item) {
-
-
+    //COLOCAR LASOPCIONES EXPORTAR Y ELIMINAR
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
 
-            case R.id.modifyOption:
+            case R.id.exportCategoryOpcion:
 
-                Presupuesto p = new Presupuesto();
-                p.set_nombre("hola");
-                p.set_duracion(20);
-                // p.set_categoria("categoria 1");
-                p.set_monto((float) 150000.0);
-                // p.set_clasificacion("sdfgsdf"); //clasificacion ganancia perdida
-                // p.set_tipo("sdfsdfsd"); // unico o recurrente
-                Presupuesto_Controller.presupuesto = p;
-                parentActivity.changeFragment(new ModificarPresupuestoFragment(), false);
+                Toast.makeText(parentActivity, "Exportando...", Toast.LENGTH_SHORT).show();
+                ExportarCategoria_Controller task=new ExportarCategoria_Controller();
+                task.execute();
+                Toast.makeText(parentActivity, "Exportado correctamente", Toast.LENGTH_SHORT).show();
 
                 return true;
 
-            case R.id.deleteOpcion:
+            case R.id.deleteCategoryOption:
 
                 Toast.makeText(getActivity(), "Opcion Eliminar seleccionada",Toast.LENGTH_LONG).show();
 
                 return true;
 
             default:
-
                 return super.onContextItemSelected(item);
 
         }
 
     }
-*/
-//BORRAR CUANDO SE IMPLEMENTE LA CLASE PRESUPUESTO
 
-
-
+//BORRAR CUANDO SE IMPLEMENTE LA CLASE CATEGORIA
     private ArrayList<Categoria> populatedList() {
 
-        ArrayList<Categoria> listOfPersona = new ArrayList<Categoria>();
+        ArrayList<Categoria> listTest = new ArrayList<Categoria>();
 
-        for(int i=0;i<20;i++)
+        listTest.add(new Categoria(0,"Comida","Almuerzos en la uni",true, false));
+        listTest.add(new Categoria(1,"Tranporte","Camino a la uni",true, false));
+        listTest.add(new Categoria(2,"Chupetas","Venta de cupetas",true, true));
+        listTest.add(new Categoria(3,"Pintura","Putura par ala casa",false, false));
+        listTest.add(new Categoria(4,"Deporte","Deporte en la uni",false, false));
+        listTest.add(new Categoria(5,"Materiales","materiales de la uni",false, false));
+        listTest.add(new Categoria(6,"Musica","Pago de servicios en la uni",true, false));
+        listTest.add(new Categoria(7,"Cable","Cable dela casa",false, false));
 
-        {
-
-            float monto = 150000;
-
-            Categoria pi = new Categoria();
-
-            pi.setNombre("Nombre Categoria");
-
-
-            listOfPersona.add(pi);
-
-
-
-        }
-
-        return listOfPersona;
+        return listTest;
 
     }
-
 
 
 
@@ -190,43 +166,29 @@ public class ListaCategorias_Fragment extends Fragment {
     public static interface ClickListener{
 
         public void onClick(View view,int position);
-
         public void onLongClick(View view,int position);
 
     }
 
-
-
     class RecyclerTouchListener implements RecyclerView.OnItemTouchListener{
 
-
-
         private ListaCategorias_Fragment.ClickListener clicklistener;
-
         private GestureDetector gestureDetector;
 
-
-
         public RecyclerTouchListener(Context context, final RecyclerView recycleView, final ListaCategorias_Fragment.ClickListener clicklistener){
-
-
 
             this.clicklistener=clicklistener;
 
             gestureDetector=new GestureDetector(context,new GestureDetector.SimpleOnGestureListener(){
 
                 @Override
-
                 public boolean onSingleTapUp(MotionEvent e) {
 
                     return true;
 
                 }
 
-
-
                 @Override
-
                 public void onLongPress(MotionEvent e) {
 
                     View child=recycleView.findChildViewUnder(e.getX(),e.getY());
@@ -243,12 +205,7 @@ public class ListaCategorias_Fragment extends Fragment {
 
         }
 
-        public RecyclerTouchListener(FragmentActivity activity, RecyclerView recycleList, ClickListener clickListener) {
-        }
-
-
         @Override
-
         public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
 
             View child=rv.findChildViewUnder(e.getX(),e.getY());
@@ -259,8 +216,6 @@ public class ListaCategorias_Fragment extends Fragment {
 
             }
 
-
-
             return false;
 
         }
@@ -268,20 +223,12 @@ public class ListaCategorias_Fragment extends Fragment {
 
 
         @Override
-
         public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-
-
 
         }
 
-
-
         @Override
-
         public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-
 
         }
 

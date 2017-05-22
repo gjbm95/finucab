@@ -31,8 +31,7 @@
         android:background="@drawable/rounded_white_border"
         android:ems="10"
         android:hint="@string/user_name"
-        android:inputType="textPersonName"
-        />
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/userPwdEditText"

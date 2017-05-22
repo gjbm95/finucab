@@ -63,15 +63,28 @@ public class DatosCuentaFragment extends Fragment {
         }
     }
 
+    /**
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     *
+     * Meotodo encargado de la generacion del fragmento
+     *
+     **/
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
+        /* Se le asignan campos de texto a la clase GestionUsuarios_Controller con el fin de poder
+           interactuar con estos para realizar validaciones.
+        */
         View rootView = inflater.inflate(R.layout.datos_cuenta_fragment, container, false);
         if (GestionUsuarios_Controller.usuario==null)
         GestionUsuarios_Controller.usuario = (EditText)rootView.findViewById(R.id.usernameREditText);
         else {
+            //Se le asigna el campo usuario.
             EditText usuario = (EditText) rootView.findViewById(R.id.usernameREditText);
             usuario.setText(GestionUsuarios_Controller.usuario.getText());
             GestionUsuarios_Controller.usuario= usuario;
@@ -79,6 +92,7 @@ public class DatosCuentaFragment extends Fragment {
         if (GestionUsuarios_Controller.contrasena1==null)
         GestionUsuarios_Controller.contrasena1 = (EditText)rootView.findViewById(R.id.passwordREditText);
         else {
+            //Se le asigna el campo contraseña.
             EditText contrasena1 = (EditText) rootView.findViewById(R.id.passwordREditText);
             contrasena1.setText(GestionUsuarios_Controller.contrasena1.getText());
             GestionUsuarios_Controller.contrasena1= contrasena1;
@@ -86,6 +100,7 @@ public class DatosCuentaFragment extends Fragment {
         if (GestionUsuarios_Controller.contrasena2==null)
         GestionUsuarios_Controller.contrasena2 = (EditText)rootView.findViewById(R.id.passwordtwoREditText);
         else {
+            //Se le asigna el campo contraseña.
             EditText contrasena2 = (EditText) rootView.findViewById(R.id.passwordtwoREditText);
             contrasena2.setText(GestionUsuarios_Controller.contrasena2.getText());
             GestionUsuarios_Controller.contrasena2= contrasena2;

@@ -13,31 +13,38 @@ import android.widget.Space;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.controllers.GestionUsuarios_Controller;
+import com.ucab.fin.finucab.webservice.Parametros;
 
-public class BeginActivity extends AppCompatActivity {
-     ImageView logo;
-     ImageView ucab;
-     ImageView touch;
+public class PresentacionActivity extends AppCompatActivity {
+     ImageView logo; //Contiene el logo de la aplicacion
+     ImageView ucab; //Contiene el texto del logo de la aplicacion
+     ImageView touch;  //Contiene el boton en forma de imagen para iniciar la aplicacion.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_begin);
-        logo = (ImageView)findViewById(R.id.logoPresentacion);
-        ucab = (ImageView)findViewById(R.id.ucabPresentacion);
-        Animation animation = new TranslateAnimation(0,0,0,150);
-        animation.setDuration(2000);
+        //Configuraciones de Red: (Coloque aqui la IP y puerto de su servidor)
+        //-------------------------------------------------------------------
+        Parametros.setServer("http://192.168.1.4");
+        Parametros.setPuerto("8080");
+        //-------------------------------------------------------
+        logo = (ImageView)findViewById(R.id.logoPresentacion); //Asigno las imagenes
+        ucab = (ImageView)findViewById(R.id.ucabPresentacion); // Asino las imagenes
+        Animation animation = new TranslateAnimation(0,0,Animation.RELATIVE_TO_SELF,150);  //Desplazo la imagen hacia abajo
+        animation.setDuration(2000); //La duracion la ajusto a 2 segundos.
         animation.setFillAfter(true);
-        logo.startAnimation(animation);
+        logo.startAnimation(animation); //Inicio la animacion
         //--------------------------------------------------------
-        Animation animation2 = new TranslateAnimation(0,60,0,0);
-        animation2.setDuration(2000);
+        Animation animation2 = new TranslateAnimation(Animation.RELATIVE_TO_SELF,60,0,0); //Dessplazo la imagen hacia la derecha
+        animation2.setDuration(2000);  // La duracion la ajusto a 2 segundos.
         animation2.setFillAfter(true);
-        ucab.startAnimation(animation2);
+        ucab.startAnimation(animation2); // Inicio la animacion.
         //---------------------------------------------------------
         touch = (ImageView)findViewById(R.id.touch);
         touch.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
+                                            //Desplazo las imagenes nuevamente.
                                             Animation animation = new TranslateAnimation(0,0,150,0);
                                             animation.setDuration(2000);
                                             animation.setFillAfter(true);
@@ -46,8 +53,8 @@ public class BeginActivity extends AppCompatActivity {
                                             animation2.setDuration(2000);
                                             animation2.setFillAfter(true);
                                             ucab.startAnimation(animation2);
-                                            Intent inicio = new Intent(BeginActivity.this,LoginActivity.class);
-                                            startActivity(inicio);
+                                            Intent inicio = new Intent(PresentacionActivity.this,InicioActivity.class);
+                                            startActivity(inicio); // Inicio la ventana de inicio de sesion.
                                         }
                                     }
         );
