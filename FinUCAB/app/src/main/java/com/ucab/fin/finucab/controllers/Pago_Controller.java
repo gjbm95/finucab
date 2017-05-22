@@ -65,8 +65,6 @@ public class Pago_Controller {
            // nuevo_pago.put("pg_categoria",pago.getCategoria());
             nuevo_pago.put("categoriaca_id",1);
             nuevo_pago.put("pg_descripcion",pago.getDescripcion());
-
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
