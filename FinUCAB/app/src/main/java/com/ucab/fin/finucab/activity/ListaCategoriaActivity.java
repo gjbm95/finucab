@@ -31,7 +31,7 @@ import com.ucab.fin.finucab.R;
 //        BIND VIEES (Se extraen los objetos asociados a los botones en pantalla)
 
 
-            switchestado = (Switch) findViewById(R.id.switch2);
+            switchestado = (Switch) findViewById(R.id.switchestado);
             statusTextView = (TextView) findViewById(R.id.estadoTextView);
 
 

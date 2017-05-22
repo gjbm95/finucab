@@ -161,63 +161,21 @@ public class ListaCategorias_Fragment extends Fragment {
 //BORRAR CUANDO SE IMPLEMENTE LA CLASE CATEGORIA
 
 
-/*
+
     private ArrayList<Categoria> populatedList() {
 
-        ArrayList<Categoria> listOfPersona = new ArrayList<Categoria>();
+        ArrayList<Categoria> listTest = new ArrayList<Categoria>();
 
-        for(int i=0;i<20;i++)
+        listTest.add(new Categoria(0,"Comida","Almuerzos en la uni",true, false));
+        listTest.add(new Categoria(1,"Tranporte","Camino a la uni",true, false));
+        listTest.add(new Categoria(2,"Chupetas","Venta de cupetas",true, true));
+        listTest.add(new Categoria(3,"Pintura","Putura par ala casa",false, false));
+        listTest.add(new Categoria(4,"Deporte","Deporte en la uni",false, false));
+        listTest.add(new Categoria(5,"Materiales","materiales de la uni",false, false));
+        listTest.add(new Categoria(6,"Musica","Pago de servicios en la uni",true, false));
+        listTest.add(new Categoria(7,"Cable","Cable dela casa",false, false));
 
-        {
-
-            Categoria pi = new Categoria();
-
-            pi.setNombre("Nombre Categoria");
-            pi.setDescripcion("Descripcion");
-            pi.setEstaHabilitado(true);
-            pi.setIdcategoria(0);
-            pi.isIngreso(false);
-            listOfPersona.add(pi);
-
-        }
-
-        return listOfPersona;
-
-    }
-    */
-    private ArrayList<Categoria> populatedList() {
-
-        ArrayList<Categoria> listOfPersona = new ArrayList<Categoria>();
-
-
-             Categoria po = new Categoria();
-             Categoria pi = new Categoria();
-             Categoria pu = new Categoria();
-
-            pi.setNombre("Comida");
-            pi.setDescripcion("Almuerzos en la universidad");
-            pi.setEstaHabilitado(true);
-            pi.setIdcategoria(0);
-            pi.isIngreso(false);
-            listOfPersona.add(pi);
-
-        po.setNombre("Deporte");
-        po.setDescripcion("Prueba");
-        po.setEstaHabilitado(true);
-        po.setIdcategoria(0);
-        po.isIngreso(false);
-        listOfPersona.add(po);
-
-        pu.setNombre("Universidad");
-        pu.setDescripcion("Pago de semestres y matricula");
-        pu.setEstaHabilitado(true);
-        pu.setIdcategoria(0);
-        pu.isIngreso(false);
-        listOfPersona.add(pu);
-
-
-
-        return listOfPersona;
+        return listTest;
 
     }
 
