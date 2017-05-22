@@ -8,9 +8,6 @@ public class Pago {
     private int idPago;
     private String categoria;
     private String descripcion;
-    private String fecha;
-    private float subtotal;
-    private float impuesto;
     private float total;
     private String tipo;
 
@@ -38,30 +35,6 @@ public class Pago {
         this.descripcion = descripcion;
     }
 
-    public String getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
-
-    public float getSubtotal() {
-        return subtotal;
-    }
-
-    public void setSubtotal(float subtotal) {
-        this.subtotal = subtotal;
-    }
-
-    public float getImpuesto() {
-        return impuesto;
-    }
-
-    public void setImpuesto(float impuesto) {
-        this.impuesto = impuesto;
-    }
-
     public float getTotal() {
         return total;
     }
@@ -78,13 +51,10 @@ public class Pago {
         this.tipo = tipo;
     }
 
-    public Pago(int idPago, String categoria, String descripcion, String fecha, float subtotal, float impuesto, float total, String tipo) {
+    public Pago(int idPago, String categoria, String descripcion, float total, String tipo) {
         this.idPago = idPago;
         this.categoria = categoria;
         this.descripcion = descripcion;
-        this.fecha = fecha;
-        this.subtotal = subtotal;
-        this.impuesto = impuesto;
         this.total = total;
         this.tipo = tipo;
     }
