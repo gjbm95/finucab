@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -35,11 +36,8 @@ import java.util.ArrayList;
 public class ListaCategorias_Fragment extends Fragment {
 
     FloatingActionButton fab;
-    Button ExportarButton;
-    Switch switchestado;
-
-
     MainActivity parentActivity;
+    RecyclerView recycleList;
 
     public ListaCategorias_Fragment() {
         // Required empty public constructor
@@ -52,9 +50,6 @@ public class ListaCategorias_Fragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_lista_categorias, container, false);
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Categorias");
-
-
-
 
         // Configuracion inicial del boton flotante
         fab = (FloatingActionButton) rootView.findViewById(R.id.addFloatingBtnCategoria);
@@ -72,12 +67,7 @@ public class ListaCategorias_Fragment extends Fragment {
         });
 
 
-
-
-
-
-
-        final RecyclerView recycleList = (RecyclerView) rootView.findViewById(R.id.categoriaReList);
+        recycleList = (RecyclerView) rootView.findViewById(R.id.categoriaReList);
         LinearLayoutManager myLayoutManager = new LinearLayoutManager(getActivity());
         myLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
@@ -98,25 +88,26 @@ public class ListaCategorias_Fragment extends Fragment {
             }
         }));
             //celdas
-        CategoriaAdapter cAdapter =new CategoriaAdapter(populatedList());
-        recycleList.setAdapter(cAdapter);
+
         return rootView;
 
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        CategoriaAdapter cAdapter =new CategoriaAdapter(populatedList());
+        recycleList.setAdapter(cAdapter);
+    }
+
     @Override
     //Creando menu de longpress llamada al menu
-    public void onCreateContextMenu(ContextMenu menu, View v,
-
-                                    ContextMenu.ContextMenuInfo menuInfo)
-
+    public void onCreateContextMenu(ContextMenu menu, View v,  ContextMenu.ContextMenuInfo menuInfo)
     {
 
         super.onCreateContextMenu(menu, v, menuInfo);
-
-
-
         MenuInflater inflater = getActivity().getMenuInflater();
-
         inflater.inflate(R.menu.categoria_menu, menu);
 
     }
@@ -124,12 +115,8 @@ public class ListaCategorias_Fragment extends Fragment {
 
 
     //COLOCAR LASOPCIONES EXPORTAR Y ELIMINAR
-
     @Override
-
     public boolean onContextItemSelected(MenuItem item) {
-
-
 
         switch (item.getItemId()) {
 
@@ -142,8 +129,6 @@ public class ListaCategorias_Fragment extends Fragment {
 
                 return true;
 
-
-
             case R.id.deleteCategoryOption:
 
                 Toast.makeText(getActivity(), "Opcion Eliminar seleccionada",Toast.LENGTH_LONG).show();
@@ -151,7 +136,6 @@ public class ListaCategorias_Fragment extends Fragment {
                 return true;
 
             default:
-
                 return super.onContextItemSelected(item);
 
         }
@@ -159,9 +143,6 @@ public class ListaCategorias_Fragment extends Fragment {
     }
 
 //BORRAR CUANDO SE IMPLEMENTE LA CLASE CATEGORIA
-
-
-
     private ArrayList<Categoria> populatedList() {
 
         ArrayList<Categoria> listTest = new ArrayList<Categoria>();
@@ -185,12 +166,9 @@ public class ListaCategorias_Fragment extends Fragment {
     public static interface ClickListener{
 
         public void onClick(View view,int position);
-
         public void onLongClick(View view,int position);
 
     }
-
-
 
     class RecyclerTouchListener implements RecyclerView.OnItemTouchListener{
 
@@ -204,17 +182,13 @@ public class ListaCategorias_Fragment extends Fragment {
             gestureDetector=new GestureDetector(context,new GestureDetector.SimpleOnGestureListener(){
 
                 @Override
-
                 public boolean onSingleTapUp(MotionEvent e) {
 
                     return true;
 
                 }
 
-
-
                 @Override
-
                 public void onLongPress(MotionEvent e) {
 
                     View child=recycleView.findChildViewUnder(e.getX(),e.getY());
@@ -232,7 +206,6 @@ public class ListaCategorias_Fragment extends Fragment {
         }
 
         @Override
-
         public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
 
             View child=rv.findChildViewUnder(e.getX(),e.getY());
@@ -243,8 +216,6 @@ public class ListaCategorias_Fragment extends Fragment {
 
             }
 
-
-
             return false;
 
         }
@@ -252,20 +223,12 @@ public class ListaCategorias_Fragment extends Fragment {
 
 
         @Override
-
         public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-
-
 
         }
 
-
-
         @Override
-
         public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-
 
         }
 

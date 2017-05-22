@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -13,6 +14,10 @@ import android.widget.TextView;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.controllers.Categoria_Controller;
+import com.ucab.fin.finucab.controllers.GestionUsuarios_Controller;
+import com.ucab.fin.finucab.exceptions.CampoVacio_Exception;
+import com.ucab.fin.finucab.exceptions.ContrasenaInvalida_Exception;
+import com.ucab.fin.finucab.exceptions.UsuarioInvalido_Exception;
 
 public class AddCategoryActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -88,19 +93,18 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
 
             //Al accionar, se inicia la actividad que presenta el formulario de registro.
             case R.id.acceptButton:
-
                 try {
-                    Resp = Categoria_Controller.validacionCategoriaVacio();
-                    if (Resp == 1) {
-                        i = new Intent(AddCategoryActivity.this, MainActivity.class);
-                        startActivity(i);
-                    }
+
+                    Categoria_Controller.verificoVacio(AgregarcategoriaEditText);
+                    Categoria_Controller.verificoVacio(AddDescripcionEditText);
+                    this.onBackPressed();
+
+                }catch(CampoVacio_Exception e){
+                    e.getCampo().setError(e.getMessage());
+                }catch(Exception e){
+                    Log.e("Error","No capturado");
                 }
 
-                //aca deberia colocar la excepcion de CampoVacio_Exception
-                catch (Exception e ){
-
-                }
 
         }
     }
