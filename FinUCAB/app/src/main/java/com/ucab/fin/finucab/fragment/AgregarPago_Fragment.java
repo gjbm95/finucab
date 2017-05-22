@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
 import com.ucab.fin.finucab.controllers.Pago_Controller;
-import com.ucab.fin.finucab.controllers.Presupuesto_Controller;
+import com.ucab.fin.finucab.domain.Pago;
 
 
 public class AgregarPago_Fragment extends Fragment {
@@ -44,13 +44,22 @@ public class AgregarPago_Fragment extends Fragment {
         Pago_Controller.tipoTransaccion=tipoSpinner;
         Pago_Controller.descripcionPago=descripcionEditText;
 
+
+
+
         agregarButton = (Button) rootView.findViewById(R.id.acceptButtonAPago);
         agregarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Resp = Pago_Controller.validacionPagoVacio();
                 if (Resp == 1) {
-                    parentActivity.changeFragment(new PaymentFragment(), false);
+                    Pago pago = new Pago();
+                    pago.setCategoria(Pago_Controller.categoriaPago.getSelectedItem().toString());
+                    pago.setDescripcion(Pago_Controller.descripcionPago.getText().toString());
+                    pago.setTotal(Float.valueOf(Pago_Controller.montoPago.getText().toString()));
+                    pago.setTipo(Pago_Controller.tipoTransaccion.getSelectedItem().toString());
+                    Pago_Controller.registrarPago(pago,parentActivity);
+                    //parentActivity.changeFragment(new PaymentFragment(), false);
                 }
             }
         });
