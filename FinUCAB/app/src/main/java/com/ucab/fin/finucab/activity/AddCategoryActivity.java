@@ -14,10 +14,7 @@ import android.widget.TextView;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.controllers.Categoria_Controller;
-import com.ucab.fin.finucab.controllers.GestionUsuarios_Controller;
 import com.ucab.fin.finucab.exceptions.CampoVacio_Exception;
-import com.ucab.fin.finucab.exceptions.ContrasenaInvalida_Exception;
-import com.ucab.fin.finucab.exceptions.UsuarioInvalido_Exception;
 
 public class AddCategoryActivity extends AppCompatActivity implements View.OnClickListener {
 
