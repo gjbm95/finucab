@@ -61,14 +61,17 @@ public class AgregarPresupuesto_fragment extends Fragment implements CompoundBut
         agregarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Presupuesto_Controller.validacionPresupuestoVacio();
+                if(Presupuesto_Controller.validacionVacio()==0){
+                    Presupuesto_Controller.registrarPresupuesto(parentActivity);
+                }
+                Presupuesto_Controller.vaciarCasillas();
             }
         });
 
         onlyRadioButton.setOnCheckedChangeListener(this);
         recurrentRadioButton.setOnCheckedChangeListener(this);
 
-        Presupuesto_Controller.asignarSpinner(parentActivity);
+        //Presupuesto_Controller.asignarSpinner(parentActivity);
 
         return rootView;
     }
