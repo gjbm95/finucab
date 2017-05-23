@@ -126,7 +126,7 @@ public class GestionUsuarios_Controller {
      *
      * @return retorna 0 si no hay ningun error y retorna 1 si lo hay
      */
-     public static int validacionEtapaCuenta(Activity activity)
+     public static int validacionEtapaCuenta()
     {
           try{
               verificoVacio(usuario);

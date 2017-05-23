@@ -258,7 +258,7 @@ public class RegistroActivity extends AppCompatActivity {
                 return false;
             }
         } else if ((conteo) == 3) {
-            if (GestionUsuarios_Controller.validacionEtapaCuenta(RegistroActivity.this) == 1) {
+            if (GestionUsuarios_Controller.validacionEtapaCuenta() == 1) {
                 this.conteo--;
                 return false;
             }else {
