@@ -5,6 +5,11 @@ import android.widget.TextView;
 
 import com.ucab.fin.finucab.activity.RegistroActivity;
 import com.ucab.fin.finucab.controllers.GestionUsuarios_Controller;
+import com.ucab.fin.finucab.exceptions.CampoVacio_Exception;
+import com.ucab.fin.finucab.exceptions.ContrasenasDiferentes_Exception;
+import com.ucab.fin.finucab.exceptions.CorreoInvalido_Exception;
+import com.ucab.fin.finucab.exceptions.Longitud_Exception;
+import com.ucab.fin.finucab.exceptions.UsuarioInvalido_Exception;
 import com.ucab.fin.finucab.fragment.DatosCuentaFragment;
 import com.ucab.fin.finucab.fragment.DatosPersonalesFragment;
 import com.ucab.fin.finucab.fragment.DatosSeguridadFragment;
@@ -70,9 +75,6 @@ public class GestionUsuariosTest {
         GestionUsuarios_Controller.respuesta.setText("Hola");
         GestionUsuarios_Controller.pregunta.setText("");
         assertEquals(GestionUsuarios_Controller.validacionEtapaSeguridad(),1);
-
-        System.out.println("El metodo validacionRespuesta() funciona correctamente");
-
     }
 
     /**
@@ -82,7 +84,7 @@ public class GestionUsuariosTest {
      */
 
     @Test
-    public void validacionCuenta_isCorrect() throws Exception {
+    public void validacionContrasenas_isCorrect() throws Exception {
         DatosCuentaFragment fragment = new DatosCuentaFragment();
         startFragment( fragment );
         //Situacion 1:
@@ -110,7 +112,16 @@ public class GestionUsuariosTest {
         GestionUsuarios_Controller.contrasena2 = (EditText)fragment.getView().findViewById(R.id.passwordtwoREditText);
         GestionUsuarios_Controller.contrasena2.setText("");
         assertEquals(GestionUsuarios_Controller.validacionContrasenas(),1);
-        //Situacion 5:
+    }
+    /**
+     * Realizo pruebas a la validacion de contraseñas
+     * @throws Exception
+     */
+    @Test
+    public void validacionCuenta_isCorrect() throws Exception {
+        DatosCuentaFragment fragment = new DatosCuentaFragment();
+        startFragment( fragment );
+        //Situacion 1:
         GestionUsuarios_Controller.usuario = (EditText)fragment.getView().findViewById(R.id.usernameREditText);
         GestionUsuarios_Controller.usuario.setText("");
         GestionUsuarios_Controller.contrasena2 = (EditText)fragment.getView().findViewById(R.id.passwordtwoREditText);
@@ -118,7 +129,7 @@ public class GestionUsuariosTest {
         GestionUsuarios_Controller.contrasena1 = (EditText)fragment.getView().findViewById(R.id.passwordREditText);
         GestionUsuarios_Controller.contrasena1.setText("Prueba");
         assertEquals(GestionUsuarios_Controller.validacionEtapaCuenta(),1);
-        //Situacion 6:
+        //Situacion 2:
         GestionUsuarios_Controller.usuario = (EditText)fragment.getView().findViewById(R.id.passwordREditText);
         GestionUsuarios_Controller.usuario.setText("Prueba");
         GestionUsuarios_Controller.contrasena2 = (EditText)fragment.getView().findViewById(R.id.passwordtwoREditText);
@@ -126,8 +137,14 @@ public class GestionUsuariosTest {
         GestionUsuarios_Controller.contrasena1 = (EditText)fragment.getView().findViewById(R.id.passwordREditText);
         GestionUsuarios_Controller.contrasena1.setText("Prueba");
         assertEquals(GestionUsuarios_Controller.validacionEtapaCuenta(),0);
-        System.out.println("El metodo validacionContrasena() funciona correctamente");
-
+        //Situacion 1:
+        GestionUsuarios_Controller.usuario = (EditText)fragment.getView().findViewById(R.id.usernameREditText);
+        GestionUsuarios_Controller.usuario.setText("Prueba");
+        GestionUsuarios_Controller.contrasena2 = (EditText)fragment.getView().findViewById(R.id.passwordtwoREditText);
+        GestionUsuarios_Controller.contrasena2.setText("Prueba");
+        GestionUsuarios_Controller.contrasena1 = (EditText)fragment.getView().findViewById(R.id.passwordREditText);
+        GestionUsuarios_Controller.contrasena1.setText("Prueba2");
+        assertEquals(GestionUsuarios_Controller.validacionEtapaCuenta(),1);
     }
 
 
@@ -182,11 +199,205 @@ public class GestionUsuariosTest {
         GestionUsuarios_Controller.correo = (EditText)fragment.getView().findViewById(R.id.emailR2EditText);
         GestionUsuarios_Controller.correo.setText("Prueba@hotmail.com");
         assertEquals(GestionUsuarios_Controller.validacionEtapaDatos(),1);
-
-        System.out.println("El metodo validacionDatos() funciona correctamente");
-
     }
 
 
+    /**
+     * Realizo pruebas a la validacion de longitud de caracteres
+     *
+     * @throws Exception
+     */
 
+    @Test
+    public void validacionLongitud_isCorrect() throws Exception {
+        DatosPersonalesFragment fragment = new DatosPersonalesFragment();
+        startFragment( fragment );
+        //Situacion 1:
+        GestionUsuarios_Controller.nombre = (EditText)fragment.getView().findViewById(R.id.nameREditText);
+        GestionUsuarios_Controller.nombre.setText("Pruebaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        boolean paso = false ;
+        try{
+            GestionUsuarios_Controller.verificoLongitud(GestionUsuarios_Controller.nombre,50,"string");
+        }catch(Longitud_Exception e){
+             paso = true;
+        }
+         assertTrue(paso);
+        //Situacion 2:
+        GestionUsuarios_Controller.nombre.setText("Prueba");
+        paso = false;
+        try{
+            GestionUsuarios_Controller.verificoLongitud(GestionUsuarios_Controller.nombre,50,"string");
+        }catch(Longitud_Exception e){
+            paso = true;
+        }
+        assertFalse(paso);
+    }
+
+    /**
+     * Realizo pruebas a la validacion de texto vacio
+     *
+     * @throws Exception
+     */
+
+    @Test
+    public void validacionVacio_isCorrect() throws Exception {
+        DatosPersonalesFragment fragment = new DatosPersonalesFragment();
+        startFragment( fragment );
+        //Situacion 1:
+        GestionUsuarios_Controller.nombre = (EditText)fragment.getView().findViewById(R.id.nameREditText);
+        GestionUsuarios_Controller.nombre.setText("");
+        boolean paso = false ;
+        try{
+            GestionUsuarios_Controller.verificoVacio(GestionUsuarios_Controller.nombre);
+        }catch(CampoVacio_Exception e){
+            paso = true;
+        }
+        assertTrue(paso);
+        //Situacion 2:
+        GestionUsuarios_Controller.nombre.setText("Prueba");
+        paso = false;
+        try{
+            GestionUsuarios_Controller.verificoVacio(GestionUsuarios_Controller.nombre);
+        }catch(CampoVacio_Exception e){
+            paso = true;
+        }
+        assertFalse(paso);
+    }
+
+
+    /**
+     * Realizo pruebas a la validacion de nombre de usuario vacio
+     *
+     * @throws Exception
+     */
+    @Test
+    public void validacionUsuario_isCorrect() throws Exception {
+        DatosCuentaFragment fragment = new DatosCuentaFragment();
+        startFragment( fragment );
+        //Situacion 1:
+        GestionUsuarios_Controller.usuario = (EditText)fragment.getView().findViewById(R.id.usernameREditText);
+        GestionUsuarios_Controller.usuario.setText("");
+        boolean paso = false ;
+        try{
+            GestionUsuarios_Controller.verificoUsuario(GestionUsuarios_Controller.usuario);
+        }catch(UsuarioInvalido_Exception e){
+            paso = true;
+        }
+        assertTrue(paso);
+        //Situacion 2:
+        GestionUsuarios_Controller.usuario.setText("Prueba");
+        paso = false;
+        try{
+            GestionUsuarios_Controller.verificoUsuario(GestionUsuarios_Controller.usuario);
+        }catch(UsuarioInvalido_Exception e){
+            paso = true;
+        }
+        assertFalse(paso);
+    }
+
+
+    /**
+     * Realizo pruebas a la validacion de igualdad de contraseñas
+     *
+     * @throws Exception
+     */
+    @Test
+    public void validacionIgualdad_isCorrect() throws Exception {
+        DatosCuentaFragment fragment = new DatosCuentaFragment();
+        startFragment( fragment );
+        //Situacion 1:
+        GestionUsuarios_Controller.contrasena1 = (EditText)fragment.getView().findViewById(R.id.passwordREditText);
+        GestionUsuarios_Controller.contrasena1.setText("Hola");
+        GestionUsuarios_Controller.contrasena2 = (EditText)fragment.getView().findViewById(R.id.passwordtwoREditText);
+        GestionUsuarios_Controller.contrasena2.setText("Hola2");
+        boolean paso = false ;
+        try{
+            GestionUsuarios_Controller.verificoIgualdad(GestionUsuarios_Controller.contrasena1,GestionUsuarios_Controller.contrasena2);
+        }catch(ContrasenasDiferentes_Exception e){
+            paso = true;
+        }
+        assertTrue(paso);
+        //Situacion 2:
+        GestionUsuarios_Controller.contrasena1 = (EditText)fragment.getView().findViewById(R.id.passwordREditText);
+        GestionUsuarios_Controller.contrasena1.setText("Hola");
+        GestionUsuarios_Controller.contrasena2 = (EditText)fragment.getView().findViewById(R.id.passwordtwoREditText);
+        GestionUsuarios_Controller.contrasena2.setText("Hola");
+        paso = false ;
+        try{
+            GestionUsuarios_Controller.verificoIgualdad(GestionUsuarios_Controller.contrasena1,GestionUsuarios_Controller.contrasena2);
+        }catch(ContrasenasDiferentes_Exception e){
+            paso = true;
+        }
+        assertFalse(paso);
+    }
+
+    /**
+     * Realizo pruebas a la validacion de correo electronico
+     *
+     * @throws Exception
+     */
+    @Test
+    public void validacionCorreo_isCorrect() throws Exception {
+        DatosPersonalesFragment fragment = new DatosPersonalesFragment();
+        startFragment( fragment );
+        //Situacion 1:
+        GestionUsuarios_Controller.correo = (EditText)fragment.getView().findViewById(R.id.emailR2EditText);
+        GestionUsuarios_Controller.correo.setText("Hola");
+        boolean paso = false ;
+        try{
+            GestionUsuarios_Controller.verificoCorreo(GestionUsuarios_Controller.correo);
+        }catch(CorreoInvalido_Exception e){
+            paso = true;
+        }
+        assertTrue(paso);
+        //Situacion 2:
+        GestionUsuarios_Controller.correo = (EditText)fragment.getView().findViewById(R.id.emailR2EditText);
+        GestionUsuarios_Controller.correo.setText("Hola@hotmail");
+        paso = false ;
+        try{
+            GestionUsuarios_Controller.verificoCorreo(GestionUsuarios_Controller.correo);
+        }catch(CorreoInvalido_Exception e){
+            paso = true;
+        }
+        assertTrue(paso);
+        //Situacion 3:
+        GestionUsuarios_Controller.correo = (EditText)fragment.getView().findViewById(R.id.emailR2EditText);
+        GestionUsuarios_Controller.correo.setText("Hola@hotmail.com");
+        paso = false ;
+        try{
+            GestionUsuarios_Controller.verificoCorreo(GestionUsuarios_Controller.correo);
+        }catch(CorreoInvalido_Exception e) {
+            paso = true;
+        }
+        assertFalse(paso);
+    }
+
+    /**
+     * Realizo pruebas al formateo de cadenas de caracteres.
+     */
+    @Test
+    public void formatarCadena_isCorrect() throws Exception {
+        //Situacion 1:
+        assertEquals(GestionUsuarios_Controller.formatearCadena("nombre"),"Nombre");
+        //Situacion 2:
+        assertEquals(GestionUsuarios_Controller.formatearCadena("NOMBRE"),"Nombre");
+        //Situacion 3:
+        assertEquals(GestionUsuarios_Controller.formatearCadena("Nombre"),"Nombre");
+        //Situacion 4:
+        assertEquals(GestionUsuarios_Controller.formatearCadena(""),"");
+    }
+    /**
+     * Realizo pruebas al reseteo de variables en
+     */
+    @Test
+    public void resetarVariables_isCorrect() throws Exception {
+        DatosCuentaFragment fragment = new DatosCuentaFragment();
+        startFragment( fragment );
+        //Situacion 1:
+        GestionUsuarios_Controller.usuario = (EditText)fragment.getView().findViewById(R.id.usernameREditText);
+        GestionUsuarios_Controller.usuario.setText("Hola");
+        assertNotNull(GestionUsuarios_Controller.usuario);
+        GestionUsuarios_Controller.resetarVariables();
+        assertNull(GestionUsuarios_Controller.usuario);
+    }
 }

@@ -207,7 +207,7 @@ public class GestionUsuarios_Controller {
     }
 
     /**
-     * Realiza la validacion para verificar que el usuario este correcto y si no esta repetido:
+     * Realiza la validacion para verificar que el usuario este correcto:
      *
      * @param campo campo de texto (EditText) donde se va a validar si el campo se lleno.
      * @throws UsuarioInvalido_Exception se ejecuta esta excepcion si el campo esta vacio.
@@ -223,7 +223,8 @@ public class GestionUsuarios_Controller {
 
 
     /**
-     *   Realizo la validacion para verificar que el usuario este correcto y si no esta repetido:
+     *   Realizo la validacion para verificar que el usuario este correcto y si no esta repetido en el
+     *   servidor:
      *
      *   @param actividad  es la actividad actual donde se esta validando el usuario
      *   @param campo es el campo de texto (EditText) donde se va a validar la exitencia del usuario
@@ -255,9 +256,8 @@ public class GestionUsuarios_Controller {
 
     }
 
-    /**Realizo la validacion para verificar que las contraseñas son diferentes:
-     *
-     *
+    /**
+     * Realizo la validacion para verificar que las contraseñas son diferentes:
      * @param contesena1
      * @param contrasena2
      * @throws ContrasenasDiferentes_Exception
@@ -309,7 +309,9 @@ public class GestionUsuarios_Controller {
      **/
      public static CharSequence formatearCadena (String texto){
         String convertido = texto.toLowerCase();
+         if (texto.length()!=0)
         return Character.toUpperCase(convertido.charAt(0)) + convertido.substring(1);
+         else return "";
     }
 
     /**
