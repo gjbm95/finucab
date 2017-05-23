@@ -10,6 +10,8 @@ import android.app.Activity;
 import com.ucab.fin.finucab.webservice.Parametros;
 import com.ucab.fin.finucab.webservice.Recepcion;
 import java.net.URLEncoder;
+import java.sql.SQLOutput;
+
 /**
  * Created by jjsa_ on 18/5/2017.
  */
@@ -61,18 +63,16 @@ public class Pago_Controller {
     public static String registrarPago(Pago pago, Activity actividad){
         JSONObject nuevo_pago = new JSONObject();
         try {
-           // nuevo_pago.put("pg_monto",pago.getTotal());
-            nuevo_pago.put("pg_monto",100);
-           // nuevo_pago.put("pg_tipoTransaccion",pago.getTipo());
-            nuevo_pago.put("pg_tipoTransaccion","ingreso");
-           // nuevo_pago.put("pg_categoria",pago.getCategoria());
-            nuevo_pago.put("categoriaca_id",1);
-            //nuevo_pago.put("pg_descripcion",pago.getDescripcion());
-            nuevo_pago.put("pg_descripcion","prueba");
+            nuevo_pago.put("pg_monto",pago.getTotal());
+            nuevo_pago.put("pg_tipoTransaccion",pago.getTipo());
+            nuevo_pago.put("pg_categoria",pago.getCategoria());
+            nuevo_pago.put("pg_descripcion",pago.getDescripcion());
         } catch (JSONException e) {
             e.printStackTrace();
         }
         Parametros.reset();
+        Parametros.setServer("http://192.168.3.111");
+        Parametros.setPuerto("8080");
         Parametros.setMetodo("Modulo5/registrarPago?datosPago="+URLEncoder.encode(nuevo_pago.toString()));
         new Recepcion(actividad).execute("GET");
         return Parametros.getRespuesta();
