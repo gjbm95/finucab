@@ -16,6 +16,7 @@ import com.ucab.fin.finucab.controllers.GestionUsuarios_Controller;
 import com.ucab.fin.finucab.exceptions.CampoVacio_Exception;
 import com.ucab.fin.finucab.exceptions.ContrasenaInvalida_Exception;
 import com.ucab.fin.finucab.exceptions.UsuarioInvalido_Exception;
+import com.ucab.fin.finucab.webservice.Parametros;
 /**
  *Modulo 1 - Modulo de  Inicio de Sesion y registro de usuario
  *Desarrolladores:
@@ -133,14 +134,21 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
                 try {
                     GestionUsuarios_Controller.verificoVacio(userNameEditText);
 
-                    i = new Intent(InicioActivity.this, RecuperacionActivity.class);
-                    startActivity(i);
+
 
                 }catch(CampoVacio_Exception e) {
                     e.getCampo().setError(e.getMessage());
                 }
                 break;
         }
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        i = new Intent(InicioActivity.this, RecuperacionActivity.class);
+//        startActivity(i);
 
     }
 }

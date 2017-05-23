@@ -96,6 +96,7 @@ public class RecuperacionActivity extends AppCompatActivity implements View.OnCl
                 //SE DEBE ESCRIBIR LA NUEVA CONTRASEÑA EN LA BASE DE DATOS
                     if(conteo ==2 && GestionUsuarios_Controller.validacionContrasenas()==0) {
                         GestionUsuarios_Controller.resetarVariables();
+
                         finish();
                     }
             }

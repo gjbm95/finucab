@@ -341,6 +341,27 @@ public class GestionUsuarios_Controller {
         new Recepcion(actividad).execute("GET");
         return Parametros.getRespuesta();
     }
+    /**
+     *  Metodo encargado de consultar si el usuario existe en el servidor del sistema.
+     *
+     * @param usuario  // String usuario con los datos del nuevo usuario
+     * @param actividad // Actidad actual donde se ejecuta la accion.
+     * @return
+     */
+    public static String registrarUsuario(String usuario, Activity actividad){
+        JSONObject dato_usuario = new JSONObject();
+        try {
+            dato_usuario.put("u_usuario",usuario);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Parametros.reset();
+        Parametros.setMetodo("Modulo1/registrarUsuario?datosUsuario="+URLEncoder.encode(dato_usuario.toString()));
+        new Recepcion(actividad).execute("GET");
+        return Parametros.getRespuesta();
+    }
 
     /**
      * Función de tipo entero que devuelve el codigo hash del la constrasena suministrada
