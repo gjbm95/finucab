@@ -25,7 +25,7 @@ public class PresentacionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_begin);
         //Configuraciones de Red: (Coloque aqui la IP y puerto de su servidor)
         //-------------------------------------------------------------------
-        Parametros.setServer("http://192.168.1.108");
+        Parametros.setServer("http://localhost");
         Parametros.setPuerto("8080");
         //-------------------------------------------------------
         logo = (ImageView)findViewById(R.id.logoPresentacion); //Asigno las imagenes

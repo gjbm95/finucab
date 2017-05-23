@@ -49,8 +49,8 @@ public class Categoria_Controller {
 
     public static void HabilitarCategoria(int id, boolean esHabilitar){
 
+        //Log.v("Id",id+"/"+esHabilitar);
 
-        Log.v("Id",id+"/"+esHabilitar);
     }
 
 

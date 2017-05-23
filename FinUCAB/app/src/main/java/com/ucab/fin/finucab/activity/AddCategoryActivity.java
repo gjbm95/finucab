@@ -19,8 +19,6 @@ import com.ucab.fin.finucab.exceptions.CampoVacio_Exception;
 
 public class AddCategoryActivity extends AppCompatActivity implements View.OnClickListener {
 
-    MainActivity parentActivity;
-
     EditText AddDescripcionEditText, AgregarcategoriaEditText;
     Button acceptButton;
     Switch switchestado;
@@ -100,15 +98,17 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
 
                     Categoria_Controller.verificoVacio(AgregarcategoriaEditText);
                     Categoria_Controller.verificoVacio(AddDescripcionEditText);
-                    this.onBackPressed();
-                    Categoria categoria = new Categoria();
-                    categoria.setDescripcion(AgregarcategoriaEditText.getText().toString());
-                    categoria.setDescripcion(AddDescripcionEditText.getText().toString());
-                    categoria.setDescripcion(switchestado.getText().toString());
-                    categoria.setDescripcion(switchtipo.getText().toString());
-                    Categoria_Controller.registrarCategoria(categoria, parentActivity);
 
+                    Categoria categoria = new Categoria(AgregarcategoriaEditText.getText().toString(),
+                                                        AddDescripcionEditText.getText().toString(),
+                                                        switchestado.isChecked(),
+                                                        switchtipo.isChecked());
 
+                    String d = Categoria_Controller.registrarCategoria(categoria, this);
+
+                    Log.e("Respuesa", d);
+
+                    //this.onBackPressed();
 
                 }catch(CampoVacio_Exception e){
                     e.getCampo().setError(e.getMessage());
