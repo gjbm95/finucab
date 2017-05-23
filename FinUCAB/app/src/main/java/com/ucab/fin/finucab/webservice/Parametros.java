@@ -14,7 +14,7 @@ import org.json.JSONObject;
  *
  */
 public class Parametros {
-
+    /* AQUI NO CAMBIAR NINGUN DATO, HACER EN PresentacionActivity */
     public static String server ="localhost";// Almacena la direccion IP o Dominio del servidor donde se aloja el WebService
     public static String puerto ="8080"; // Almacena el puerto
     public static String url="";  // Almacena la URL del servicio web, con sus metodos y parametros.
