@@ -107,8 +107,8 @@ public class Modulo5sResource {
             JsonObject pagoJSON = reader.readObject();
             reader.close();
             String query = "INSERT INTO pago ( pg_monto , pg_tipoTransaccion , categoriaca_id , pg_descripcion ) "
-                    + "VALUES ( '" + Float.valueOf(pagoJSON.getString("pg_monto")) + "' , '" + pagoJSON.getString("pg_tipoTransaccion") + "' , "
-                    + "'" + Integer.parseInt(pagoJSON.getString("categoriaca_id")) + "' , '" + pagoJSON.getString("pg_descripcion") + "' );";
+                    + "VALUES ( '" + pagoJSON.getInt("pg_monto") + "' , '" + pagoJSON.getString("pg_tipoTransaccion") + "' , '"
+                    + pagoJSON.getString("pg_categoria") + "' , '" + pagoJSON.getString("pg_descripcion") + "' );";
 
             if (st.executeUpdate(query) > 0) {
                 st.close();
