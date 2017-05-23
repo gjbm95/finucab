@@ -1,3 +1,4 @@
+
 package Services;
 
 import DataBase.Conexion;
@@ -5,7 +6,10 @@ import java.io.StringReader;
 import java.net.URLDecoder;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
@@ -137,10 +141,10 @@ public class Modulo4sResource {
 
             if (st.executeUpdate(query) > 0) {
                 st.close();
-                return "Registro exitoso";
+                return "Borrado exitoso";
             } else {
                 st.close();
-                return "No se pudo registrar";
+                return "No se pudo borrar";
             }
 
         } catch (Exception e) {
@@ -149,6 +153,42 @@ public class Modulo4sResource {
 
         }
     }
+    
+     @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("/eliminarCategoria")
+    public String mostrarCategoria(@QueryParam("datosCategoria") String datosCategoria , String usuario) {
+        //TODO return proper representation object
+    
+        String decodifico = URLDecoder.decode(datosCategoria);
+        String respuesta = "";
+        
+        try {
+
+            Connection conn = Conexion.conectarADb();
+            Statement st = conn.createStatement();
+            //Se coloca el query
+            ResultSet rs = st.executeQuery ("SELECT ca_nombre, c_descripcion  FROM Usuario Categoria WHERE u_usuario = usuariou_id AND  u_usuario ='" + usuario + "';");
+            while (rs.next()) {
+                //Creo el objeto Json!             
+                JsonObjectBuilder categoriaBuilder = Json.createObjectBuilder();
+                categoriaBuilder.add("Nombre", rs.getString(0));
+                categoriaBuilder.add("Descripcion", rs.getString(1));
+                categoriaBuilder.add("Estado", rs.getString(2));
+                JsonObject categoriaJsonObject = categoriaBuilder.build();
+                respuesta = categoriaJsonObject.toString();
+
+            }
+            rs.close();
+            st.close();
+
+            return respuesta;
+        }
+        catch(Exception e) {
+            return e.getMessage();
+        }
+    }
+
 
     /**
      * POST method for creating an instance of Modulo4Resource
@@ -170,4 +210,8 @@ public class Modulo4sResource {
     public Modulo4Resource getModulo4Resource(@PathParam("id") String id) {
         return Modulo4Resource.getInstance(id);
     }
+
 }
+
+
+
