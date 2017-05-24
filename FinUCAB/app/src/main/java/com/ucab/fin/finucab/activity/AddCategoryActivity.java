@@ -104,9 +104,8 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
                                                         switchestado.isChecked(),
                                                         switchtipo.isChecked());
 
-                    String d = Categoria_Controller.registrarCategoria(categoria, this);
+                    Categoria_Controller.registrarCategoria(categoria, this);
 
-                    Log.e("Respuesa", d);
 
                     //this.onBackPressed();
 

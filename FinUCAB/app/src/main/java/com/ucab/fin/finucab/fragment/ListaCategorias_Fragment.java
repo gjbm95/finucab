@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.AddCategoryActivity;
 import com.ucab.fin.finucab.activity.MainActivity;
+import com.ucab.fin.finucab.controllers.Categoria_Controller;
 import com.ucab.fin.finucab.controllers.ExportarCategoria_Controller;
 import com.ucab.fin.finucab.domain.Categoria;
 
@@ -99,6 +100,9 @@ public class ListaCategorias_Fragment extends Fragment {
 
         CategoriaAdapter cAdapter =new CategoriaAdapter(populatedList());
         recycleList.setAdapter(cAdapter);
+
+        //Categoria_Controller.obtenerTodasCategorias(parentActivity);
+
     }
 
     @Override
@@ -131,7 +135,8 @@ public class ListaCategorias_Fragment extends Fragment {
 
             case R.id.deleteCategoryOption:
 
-                Toast.makeText(getActivity(), "Opcion Eliminar seleccionada",Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Eliminando categoria ...",Toast.LENGTH_LONG).show();
+                Categoria_Controller.borrarCategoria(2,parentActivity);
 
                 return true;
 

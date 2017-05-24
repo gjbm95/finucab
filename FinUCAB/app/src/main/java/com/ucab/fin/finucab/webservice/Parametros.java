@@ -68,7 +68,6 @@ public class Parametros {
 
         Parametros.url = server +":"+puerto+"/FinUcabWebService/webresources/"+direccion;
 
-        Log.v("Request",server);
         Log.v("Request",Parametros.url);
     }
     /**

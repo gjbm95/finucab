@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.EditText;
 
 import com.ucab.fin.finucab.domain.Categoria;
+import com.ucab.fin.finucab.domain.Manejador_Categoria;
 import com.ucab.fin.finucab.exceptions.CampoVacio_Exception;
 import com.ucab.fin.finucab.fragment.CategoriaAdapter;
 import com.ucab.fin.finucab.webservice.Parametros;
@@ -59,56 +60,34 @@ public class Categoria_Controller {
     }
 
     //METODO PARA REGISTRAR UNA CATEGORIA
-    public static String registrarCategoria(Categoria categoria, Activity actividad){
-        JSONObject nueva_categoria = new JSONObject();
-        try {
-            nueva_categoria.put("c_nombre",categoria.getNombre());
-            nueva_categoria.put("c_descripcion",categoria.getDescripcion());
-            nueva_categoria.put("c_estado",categoria.isEstaHabilitado());
-            nueva_categoria.put("c_ingreso",categoria.isIngreso());
+    public static void registrarCategoria(Categoria categoria, Activity actividad){
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Parametros.reset();
-        Parametros.setMetodo("Modulo4/registrarCategoria?datosCategoria="+ URLEncoder.encode(nueva_categoria.toString()));
-        new Recepcion(actividad).execute("GET");
-        return Parametros.getRespuesta();
+        Manejador_Categoria manejador = new Manejador_Categoria(actividad);
+        manejador.agregarCategoria(categoria);
+
     }
+
+    public static void borrarCategoria(int id, Activity actividad){
+
+        Manejador_Categoria manejador = new Manejador_Categoria(actividad);
+        manejador.borrarCategoria(id);
+
+    }
+
+
+    public static void obtenerTodasCategorias( Activity actividad ){
+
+        Manejador_Categoria manejador = new Manejador_Categoria(actividad);
+        manejador.obtenerTodasCategorias();
+
+    }
+
 
     //METODOS PARA VISUALIZAR CATEGORIA
     public static void visualizarCategoria(RecyclerView recycleList){
         CategoriaAdapter cAdapter;
         cAdapter = new CategoriaAdapter(listaCategoria);
         recycleList.setAdapter(cAdapter);
-    }
-
-    public static void visualizarCategoria( Activity actividad ){
-
-        listaCategoria = new ArrayList<>();
-
-
-        Parametros.setMetodo("Modulo4/ListaCategoria" );
-        new Recepcion(actividad).execute("GET");
-        System.out.println(Parametros.respuesta);
-        JSONObject jObject = null;
-        try {
-            JSONArray mJsonArray = new JSONArray(Parametros.respuesta);
-            int count = mJsonArray.length();
-            for(int i=0 ; i< count; i++){   // iterate through jsonArray
-                jObject = mJsonArray.getJSONObject(i);  // get jsonObject @ i position
-                Categoria cat = new Categoria();
-                cat.setNombre((String)jObject.get("Nombre"));
-                cat.setDescripcion((String)jObject.get("Descripcion"));
-                //cat.isEstaHabilitado(Boolean.parseBoolean((String) jObject.get("Estado")));
-
-            }
-
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
     }
 
 

@@ -1,0 +1,116 @@
+package com.ucab.fin.finucab.domain;
+
+import android.app.Activity;
+import android.util.Log;
+
+import com.ucab.fin.finucab.webservice.Parametros;
+import com.ucab.fin.finucab.webservice.Recepcion;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by Ramon on 24-May-17.
+ */
+
+public class Manejador_Categoria {
+
+    private Activity actividad;
+    private ArrayList<Categoria> categorias;
+
+    public ArrayList<Categoria> getCategorias() {
+
+        if (categorias.size() == 0 ){
+            categorias = obtenerTodasCategorias();
+        }
+
+        return categorias;
+    }
+
+    public Manejador_Categoria(Activity actividad){
+
+        this.actividad = actividad;
+    }
+
+    public boolean agregarCategoria( Categoria categoria) {
+
+        JSONObject nueva_categoria = new JSONObject();
+        try {
+            nueva_categoria.put("c_nombre",categoria.getNombre());
+            nueva_categoria.put("c_descripcion",categoria.getDescripcion());
+            nueva_categoria.put("c_estado",categoria.isEstaHabilitado());
+            nueva_categoria.put("c_ingreso",categoria.isIngreso());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Parametros.reset();
+        Parametros.setMetodo("Modulo4/registrarCategoria?datosCategoria="+ URLEncoder.encode(nueva_categoria.toString()));
+        new Recepcion(actividad).execute("GET");
+        String respuesta = Parametros.getRespuesta();
+
+        Log.v("Response-Manejador",respuesta);
+
+        return true;
+    }
+
+    public boolean modificarCategoria( Categoria categoria) {
+        return false;
+    }
+
+    public Categoria consultarCategoria( int id) {
+        return  null;
+    }
+
+    public boolean borrarCategoria( int id) {
+
+        Parametros.reset();
+        Parametros.setMetodo("Modulo4/eliminarCategoria?datosCategoria="+ String.valueOf(id));
+        new Recepcion(actividad).execute("GET");
+        //Log.v("Response-Manejador",Parametros.respuesta);
+        return false;
+    }
+
+    public ArrayList<Categoria> obtenerTodasCategorias() {
+
+        ArrayList listaCategoria = new ArrayList<Categoria>();
+
+
+        Parametros.setMetodo("Modulo4/visualizarCategoria" );
+        new Recepcion(actividad).execute("GET");
+        System.out.println(Parametros.respuesta);
+        JSONObject jObject = null;
+        try {
+            JSONArray mJsonArray = new JSONArray(Parametros.respuesta);
+            int count = mJsonArray.length();
+
+            Log.v("Response-Manejador",count+"");
+            for(int i=0 ; i< count; i++){   // iterate through jsonArray
+                jObject = mJsonArray.getJSONObject(i);  // get jsonObject @ i position
+                Categoria cat = new Categoria();
+                cat.setNombre((String)jObject.get("Nombre"));
+                cat.setDescripcion((String)jObject.get("Descripcion"));
+                //cat.isEstaHabilitado(Boolean.parseBoolean((String) jObject.get("Estado")));
+
+            }
+
+            return listaCategoria;
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+
+            return null;
+        }
+
+
+
+
+    }
+
+
+}
