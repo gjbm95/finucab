@@ -63,8 +63,9 @@ public class AgregarPresupuesto_fragment extends Fragment implements CompoundBut
             public void onClick(View v) {
                 if(Presupuesto_Controller.validacionVacio()==0){
                     Presupuesto_Controller.registrarPresupuesto(parentActivity);
+                    parentActivity.changeFragment(new AgregadoFragment(), false);
+
                 }
-                Presupuesto_Controller.vaciarCasillas();
             }
         });
 

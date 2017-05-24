@@ -123,11 +123,11 @@ public class Recepcion extends AsyncTask<String,Void,String>{
         Parametros.setRespuesta(response);
         Log.v("Response",response);
 
-        if (interfaz == null){
+       /* if (interfaz == null){
             volver();
         }else {
             interfaz.obtuvoCorrectamente(response);
-        }
+        }*/
 
 
     }
