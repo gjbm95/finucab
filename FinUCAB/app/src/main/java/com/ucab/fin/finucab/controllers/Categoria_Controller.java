@@ -28,13 +28,13 @@ public class Categoria_Controller {
     public static Categoria categoria;
     public static EditText escribirCategoria;
     public static EditText escribirDescripcion;
-    public static ArrayList<Categoria> listaCategoria = new ArrayList<>();
 
+    public static Manejador_Categoria manejador;
 
-    public static void asignarValores( ){
+    public static void initManejador( Activity actividad ){
 
-        escribirCategoria.setText(categoria.getNombre());
-        escribirDescripcion.setText(categoria.getDescripcion());
+        manejador = new Manejador_Categoria(actividad);
+
     }
 
     /**Realizo la validacion para verificar que el campo este vacio:
@@ -55,39 +55,37 @@ public class Categoria_Controller {
 
     public static void HabilitarCategoria(int id, boolean esHabilitar){
 
-        //Log.v("Id",id+"/"+esHabilitar);
+        Categoria categoria = manejador.obtenerCategoria(id);
+        categoria.setEstaHabilitado(esHabilitar);
+
+        manejador.modificarCategoria(categoria);
+
+    }
+
+    public static void modificarCategoria(Categoria categoria){
+
+        manejador.modificarCategoria(categoria);
 
     }
 
     //METODO PARA REGISTRAR UNA CATEGORIA
-    public static void registrarCategoria(Categoria categoria, Activity actividad){
+    public static void registrarCategoria(Categoria categoria){
 
-        Manejador_Categoria manejador = new Manejador_Categoria(actividad);
         manejador.agregarCategoria(categoria);
 
     }
 
-    public static void borrarCategoria(int id, Activity actividad){
+    public static void borrarCategoria(int id){
 
-        Manejador_Categoria manejador = new Manejador_Categoria(actividad);
         manejador.borrarCategoria(id);
 
     }
 
 
-    public static void obtenerTodasCategorias( Activity actividad ){
+    public static void obtenerTodasCategorias(){
 
-        Manejador_Categoria manejador = new Manejador_Categoria(actividad);
         manejador.obtenerTodasCategorias();
 
-    }
-
-
-    //METODOS PARA VISUALIZAR CATEGORIA
-    public static void visualizarCategoria(RecyclerView recycleList){
-        CategoriaAdapter cAdapter;
-        cAdapter = new CategoriaAdapter(listaCategoria);
-        recycleList.setAdapter(cAdapter);
     }
 
 

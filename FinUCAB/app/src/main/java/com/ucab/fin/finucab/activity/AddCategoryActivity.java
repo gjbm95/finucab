@@ -42,6 +42,8 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setIcon(R.mipmap.logoh);
         actionBar.setTitle("");
+
+        Categoria_Controller.initManejador(this);
         //------------------------------------------------------------------------------------------
 //        BIND VIEES (Se extraen los objetos asociados a los botones en pantalla)
         acceptButton = (Button) findViewById(R.id.acceptButton);
@@ -124,7 +126,7 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
                                                         switchestado.isChecked(),
                                                         switchtipo.isChecked());
 
-                    Categoria_Controller.registrarCategoria(categoria, this);
+                    Categoria_Controller.registrarCategoria(categoria);
 
 
                     //this.onBackPressed();

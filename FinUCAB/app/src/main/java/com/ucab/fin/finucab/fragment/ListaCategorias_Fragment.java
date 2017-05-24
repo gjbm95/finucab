@@ -40,7 +40,6 @@ public class ListaCategorias_Fragment extends Fragment {
     MainActivity parentActivity;
     RecyclerView recycleList;
 
-    ArrayList<Categoria> categoriaLista;
 
 
     public ListaCategorias_Fragment() {
@@ -54,6 +53,8 @@ public class ListaCategorias_Fragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_lista_categorias, container, false);
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Categorias");
+
+        Categoria_Controller.initManejador(parentActivity);
 
         // Configuracion inicial del boton flotante
         fab = (FloatingActionButton) rootView.findViewById(R.id.addFloatingBtnCategoria);
@@ -86,7 +87,7 @@ public class ListaCategorias_Fragment extends Fragment {
                 //        Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(parentActivity, AddCategoryActivity.class);
-                intent.putExtra("CATEGORIA_DATA", categoriaLista.get(position));
+                intent.putExtra("CATEGORIA_DATA", Categoria_Controller.manejador.getCategorias().get(position));
                 startActivity(intent);
 
             }
@@ -106,8 +107,7 @@ public class ListaCategorias_Fragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        categoriaLista = populatedList();
-        CategoriaAdapter cAdapter =new CategoriaAdapter(categoriaLista);
+        CategoriaAdapter cAdapter =new CategoriaAdapter(Categoria_Controller.manejador.getCategorias());
         recycleList.setAdapter(cAdapter);
 
     }
@@ -143,7 +143,7 @@ public class ListaCategorias_Fragment extends Fragment {
             case R.id.deleteCategoryOption:
 
                 Toast.makeText(getActivity(), "Eliminando categoria ...",Toast.LENGTH_LONG).show();
-                Categoria_Controller.borrarCategoria(2,parentActivity);
+                Categoria_Controller.borrarCategoria(2);
 
                 return true;
 
@@ -153,28 +153,6 @@ public class ListaCategorias_Fragment extends Fragment {
         }
 
     }
-
-//BORRAR CUANDO SE IMPLEMENTE LA CLASE CATEGORIA
-    private ArrayList<Categoria> populatedList() {
-
-        //Categoria_Controller.obtenerTodasCategorias(parentActivity);
-        ArrayList<Categoria> listTest = new ArrayList<Categoria>();
-
-        listTest.add(new Categoria(0,"Comida","Almuerzos en la uni",true, false));
-        listTest.add(new Categoria(1,"Tranporte","Camino a la uni",true, false));
-        listTest.add(new Categoria(2,"Chupetas","Venta de cupetas",true, true));
-        listTest.add(new Categoria(3,"Pintura","Putura par ala casa",false, false));
-        listTest.add(new Categoria(4,"Deporte","Deporte en la uni",false, false));
-        listTest.add(new Categoria(5,"Materiales","materiales de la uni",false, false));
-        listTest.add(new Categoria(6,"Musica","Pago de servicios en la uni",true, false));
-        listTest.add(new Categoria(7,"Cable","Cable dela casa",false, false));
-
-        return listTest;
-
-    }
-
-
-
 
     public static interface ClickListener{
 

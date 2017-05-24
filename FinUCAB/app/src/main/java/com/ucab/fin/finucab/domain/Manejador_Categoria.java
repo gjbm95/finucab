@@ -105,18 +105,38 @@ public class Manejador_Categoria {
                 Categoria cat = new Categoria((int)jObject.get("Id"),
                                             (String)jObject.get("Nombre"),
                                             (String)jObject.get("Descripcion"),
-                                            (Boolean) jObject.get("Estado"),
-                                            (Boolean) jObject.get("Ingeso"));
+                                            (Boolean) jObject.get("esHabilitado"),
+                                            (Boolean) jObject.get("esIngreso"));
+                listaCategoria.add(cat);
 
             }
 
-            return listaCategoria;
+            return populatedList();
+            //return listaCategoria;
 
         } catch (JSONException e) {
             e.printStackTrace();
 
             return null;
         }
+
+    }
+
+    private ArrayList<Categoria> populatedList() {
+
+        //Categoria_Controller.obtenerTodasCategorias(parentActivity);
+        ArrayList<Categoria> listTest = new ArrayList<Categoria>();
+
+        listTest.add(new Categoria(0,"Comida","Almuerzos en la uni",true, false));
+        listTest.add(new Categoria(1,"Tranporte","Camino a la uni",true, false));
+        listTest.add(new Categoria(2,"Chupetas","Venta de cupetas",true, true));
+        listTest.add(new Categoria(3,"Pintura","Putura par ala casa",false, false));
+        listTest.add(new Categoria(4,"Deporte","Deporte en la uni",false, false));
+        listTest.add(new Categoria(5,"Materiales","materiales de la uni",false, false));
+        listTest.add(new Categoria(6,"Musica","Pago de servicios en la uni",true, false));
+        listTest.add(new Categoria(7,"Cable","Cable dela casa",false, false));
+
+        return listTest;
 
     }
 
