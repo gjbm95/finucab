@@ -8,9 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.controllers.GestionUsuarios_Controller;
+import com.ucab.fin.finucab.webservice.ControlDatos;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -67,8 +69,10 @@ public class RespuestaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.respuesta_fragment, container, false);
 
+        View rootView = inflater.inflate(R.layout.respuesta_fragment, container, false);
+        TextView pregunta = (TextView)rootView.findViewById(R.id.PreguntaTextView);
+        pregunta.setText("¿"+ControlDatos.getUsuario().getPregunta()+"?");
         if (GestionUsuarios_Controller.respuesta==null)
             GestionUsuarios_Controller.respuesta = (EditText)rootView.findViewById(R.id.RespuestaEditText);
         else {
@@ -76,7 +80,7 @@ public class RespuestaFragment extends Fragment {
             respuesta.setText(GestionUsuarios_Controller.respuesta.getText());
             GestionUsuarios_Controller.respuesta= respuesta;
         }
-        
+
         return rootView;
     }
 
