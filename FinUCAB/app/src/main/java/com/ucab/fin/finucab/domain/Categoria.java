@@ -1,12 +1,13 @@
 package com.ucab.fin.finucab.domain;
 
 
+import java.io.Serializable;
 
 /**
  * Created by Juan on 10/05/2017.
  */
 
-public class Categoria {
+public class Categoria implements Serializable{
     public int getIdcategoria() {
         return idcategoria;
     }

@@ -17,6 +17,8 @@ import com.ucab.fin.finucab.controllers.Categoria_Controller;
 import com.ucab.fin.finucab.domain.Categoria;
 import com.ucab.fin.finucab.exceptions.CampoVacio_Exception;
 
+import java.io.Serializable;
+
 public class AddCategoryActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText AddDescripcionEditText, AgregarcategoriaEditText;
@@ -82,9 +84,27 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
         switchestado.setChecked(true);
         //attach a listener to check for changes in state
 
+        cargarData();
 
     }
 
+
+    public void cargarData(){
+
+        Serializable s = getIntent().getSerializableExtra("CATEGORIA_DATA");
+
+        if (s != null ) {
+
+            Categoria categoria = (Categoria) s;
+
+            AgregarcategoriaEditText.setText(categoria.getNombre());
+            AddDescripcionEditText.setText(categoria.getDescripcion());
+            switchestado.setChecked(categoria.isEstaHabilitado());
+            switchtipo.setChecked(categoria.isIngreso());
+
+        }
+
+    }
     //Dandole funcionalidades a cada uno de los botones que salen en pantalla:
 
     @Override

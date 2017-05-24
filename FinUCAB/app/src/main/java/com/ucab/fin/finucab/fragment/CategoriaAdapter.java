@@ -31,7 +31,7 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
         private TextView nameTextView;
         private TextView descripcionTextView;
         Switch switchestado;
-        int id;
+        Categoria categoria;
 
         public CategoriaViewHolder(View v) {
             super(v);
@@ -43,7 +43,7 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
             switchestado.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                    Categoria_Controller.HabilitarCategoria(Integer.parseInt(buttonView.getText()+""),isChecked);
+                    Categoria_Controller.HabilitarCategoria( 1 ,isChecked);
 
                 }
             });
@@ -63,12 +63,12 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
     @Override
     public void onBindViewHolder( final CategoriaViewHolder CategoriaViewHolder, int i)
     {
-        Categoria Pi = CategoriaList.get(i);
-        CategoriaViewHolder.id = Pi.getIdcategoria();
-        CategoriaViewHolder.nameTextView.setText(Pi.getNombre());
-        CategoriaViewHolder.descripcionTextView.setText(Pi.getDescripcion());
-        CategoriaViewHolder.switchestado.setText(Pi.getIdcategoria()+"");
-        CategoriaViewHolder.switchestado.setChecked(Pi.isEstaHabilitado());
+        Categoria pi = CategoriaList.get(i);
+        CategoriaViewHolder.categoria = pi;
+        CategoriaViewHolder.nameTextView.setText(pi.getNombre());
+        CategoriaViewHolder.descripcionTextView.setText(pi.getDescripcion());
+        //CategoriaViewHolder.switchestado.setText(pi.getIdcategoria()+"");
+        CategoriaViewHolder.switchestado.setChecked(pi.isEstaHabilitado());
         CategoriaViewHolder.itemView.setLongClickable(true);
     }
 

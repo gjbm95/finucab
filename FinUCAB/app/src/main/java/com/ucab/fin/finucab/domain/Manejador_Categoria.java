@@ -63,7 +63,18 @@ public class Manejador_Categoria {
         return false;
     }
 
-    public Categoria consultarCategoria( int id) {
+    public Categoria obtenerCategoria( int id) {
+
+        ArrayList<Categoria> la = getCategorias();
+
+        for(int i=0 ; i< la.size(); i++) {
+
+            if( la.get(i).getIdcategoria() == id ){
+                return  la.get(i);
+            }
+
+        }
+
         return  null;
     }
 
@@ -80,7 +91,6 @@ public class Manejador_Categoria {
 
         ArrayList listaCategoria = new ArrayList<Categoria>();
 
-
         Parametros.setMetodo("Modulo4/visualizarCategoria" );
         new Recepcion(actividad).execute("GET");
         System.out.println(Parametros.respuesta);
@@ -92,10 +102,11 @@ public class Manejador_Categoria {
             Log.v("Response-Manejador",count+"");
             for(int i=0 ; i< count; i++){   // iterate through jsonArray
                 jObject = mJsonArray.getJSONObject(i);  // get jsonObject @ i position
-                Categoria cat = new Categoria();
-                cat.setNombre((String)jObject.get("Nombre"));
-                cat.setDescripcion((String)jObject.get("Descripcion"));
-                //cat.isEstaHabilitado(Boolean.parseBoolean((String) jObject.get("Estado")));
+                Categoria cat = new Categoria((int)jObject.get("Id"),
+                                            (String)jObject.get("Nombre"),
+                                            (String)jObject.get("Descripcion"),
+                                            (Boolean) jObject.get("Estado"),
+                                            (Boolean) jObject.get("Ingeso"));
 
             }
 
@@ -106,9 +117,6 @@ public class Manejador_Categoria {
 
             return null;
         }
-
-
-
 
     }
 
