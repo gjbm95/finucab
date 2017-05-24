@@ -30,7 +30,7 @@ public class AsideMenuFragment extends Fragment implements View.OnClickListener{
         categorybtn = (LinearLayout) parentView.findViewById(R.id.categoryBtn);
         paysBtn = (LinearLayout) parentView.findViewById(R.id.paysBtn);
         logoutbtn = (LinearLayout) parentView.findViewById(R.id.singoutBtn);
-        planificationBtn = (LinearLayout) parentView.findViewById(R.id.willBtn);
+        planificationBtn = (LinearLayout) parentView.findViewById(R.id.planificationBtn);
 
 //        SET LISTENERS
         myProfileBtn.setOnClickListener(this);
