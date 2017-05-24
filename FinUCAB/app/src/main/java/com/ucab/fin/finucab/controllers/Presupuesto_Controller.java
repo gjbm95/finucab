@@ -16,6 +16,8 @@ import android.widget.Toast;
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.domain.Presupuesto;
 import com.ucab.fin.finucab.exceptions.CampoVacio_Exception;
+import com.ucab.fin.finucab.exceptions.NombrePresupuesto_Exception;
+import com.ucab.fin.finucab.exceptions.UsuarioInvalido_Exception;
 import com.ucab.fin.finucab.fragment.AgregarPresupuesto_fragment;
 import com.ucab.fin.finucab.fragment.PresupuestoAdapter;
 import com.ucab.fin.finucab.webservice.Parametros;
@@ -146,6 +148,7 @@ public class Presupuesto_Controller {
     }
 
     public static void verificoVacio(EditText campo) throws CampoVacio_Exception {
+
         if (campo.getText().toString().isEmpty()) {
             CampoVacio_Exception campovacio = new CampoVacio_Exception("Este campo esta vacio");
             campovacio.setCampo(campo);
@@ -153,6 +156,21 @@ public class Presupuesto_Controller {
         }
     }
 
+    //Realizo la validacion para verificar que el usuario este correcto y si no esta repetido:
+
+    public static boolean verificoNombre(Activity actividad, EditText campo) throws NombrePresupuesto_Exception{
+        String nombre="";
+        Parametros.setMetodo("Modulo3/verificarNombre?nombrePresupuesto="+campo.getText().toString());
+        new Recepcion(actividad).execute("GET");
+        nombre= Parametros.respuesta;
+        if (nombre.equals("Repetido"))
+        {
+            NombrePresupuesto_Exception repetido = new NombrePresupuesto_Exception("Nombre del presupuesto repetido");
+            repetido.setCampo(campo);
+            throw repetido;
+        }
+        return true;
+    }
     public static void volverInvisibleRecurrencia(){
         recurrenciaTextView.setVisibility(recurrenciaTextView.INVISIBLE);       //SE COLOCA INVISIBLE EL TEXTVIEW
         recurrenciaPresupuesto.setVisibility(recurrenciaPresupuesto.INVISIBLE); //SE COLOCA INVISIBLE EL EDITTEXT
@@ -293,7 +311,7 @@ public class Presupuesto_Controller {
         new Recepcion(actividad).execute("GET");
         System.out.println(Parametros.respuesta);
         JSONObject jObject = null;
-            try {
+        try {
             JSONArray mJsonArray = new JSONArray(Parametros.respuesta);
             int count = mJsonArray.length();
             for(int i=0 ; i< count; i++){   // iterate through jsonArray

@@ -18,6 +18,7 @@ import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
 import com.ucab.fin.finucab.controllers.Presupuesto_Controller;
 import com.ucab.fin.finucab.domain.Presupuesto;
+import com.ucab.fin.finucab.exceptions.NombrePresupuesto_Exception;
 
 
 /**
@@ -62,9 +63,14 @@ public class AgregarPresupuesto_fragment extends Fragment implements CompoundBut
             @Override
             public void onClick(View v) {
                 if(Presupuesto_Controller.validacionVacio()==0){
-                    Presupuesto_Controller.registrarPresupuesto(parentActivity);
-                    parentActivity.changeFragment(new AgregadoFragment(), false);
-
+                    try {
+                        if (Presupuesto_Controller.verificoNombre(parentActivity,nameEditText)) {
+                            Presupuesto_Controller.registrarPresupuesto(parentActivity);
+                            parentActivity.changeFragment(new AgregadoFragment(), false);
+                        }
+                    } catch (NombrePresupuesto_Exception e) {
+                        e.getCampo().setError(e.getMessage());
+                    }
                 }
             }
         });

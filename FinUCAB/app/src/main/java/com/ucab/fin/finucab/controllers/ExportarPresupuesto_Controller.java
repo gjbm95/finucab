@@ -59,10 +59,10 @@ public class ExportarPresupuesto_Controller extends AsyncTask<String ,String, St
             fileCSV.createNewFile();   //CREAR EL ARCHIVO
             FileWriter writerCSV = new FileWriter(fileCSV); //HABILITAR LA FUNCION DE ESCRIBIR EL ARCHIVO
 
-            writerCSV.write("Nombre del Presupuesto;Categoria;Monto;Clasificacion;Duracion;\n"); // ESCRIBO EN EL ARCHIVO EL HEADER
+            writerCSV.write("Nombre del Presupuesto;Categoria;Monto;Clasificacion;Duracion;Tipo;\n"); // ESCRIBO EN EL ARCHIVO EL HEADER
             for(Presupuesto p : presupuesto){ //ITERACION DEL ARRAY
                 writerCSV.write(p.get_nombre()+";"+p.get_categoria()+";"+p.get_monto().toString()+";"+p.get_clasificacion()
-                        +";"+p.get_duracion().toString()+";\n"); //LLENANDO LA FILA
+                        +";"+p.get_duracion().toString()+";"+p.get_tipo()+";"+"\n"); //LLENANDO LA FILA
 
             }
             writerCSV.flush();
@@ -109,6 +109,9 @@ public class ExportarPresupuesto_Controller extends AsyncTask<String ,String, St
             c.setCellValue("Duracion");
             c.setCellStyle(cs);
 
+            c = row0.createCell(5);
+            c.setCellValue("Tipo");
+            c.setCellStyle(cs);
 
             int count = presupuesto.size(); //OBTENGO LA LONGITUD DEL ARRAY
 
@@ -137,7 +140,9 @@ public class ExportarPresupuesto_Controller extends AsyncTask<String ,String, St
                 c.setCellValue(p.get_duracion()); // VALOR DE LA CELDA
                 c.setCellStyle(as); // ESTABLEZCO EL ESTILO
 
-
+                c = row.createCell(5); // LE ASIGNO EL NUMERO DE LA CELDA
+                c.setCellValue(p.get_tipo()); // VALOR DE LA CELDA
+                c.setCellStyle(as); // ESTABLEZCO EL ESTILO
 
             }
 
@@ -169,8 +174,15 @@ public class ExportarPresupuesto_Controller extends AsyncTask<String ,String, St
                 pre.set_monto(Float.parseFloat((String) jObject.get("Monto")));
                 pre.set_clasificacion((String) jObject.get("Clasificacion"));
                 pre.set_duracion(Integer.parseInt((String) jObject.get("Duracion")));
+                if((jObject.get("Tipo")).equals("t")){
+                    pre.set_tipo("Ganancia");
+                }else{
+                    pre.set_tipo("Gasto");
+                }
                 listaPresupuestos.add(pre);
             }
+
+
             return listaPresupuestos;
         } catch (JSONException e) {
             e.printStackTrace();
@@ -178,4 +190,5 @@ public class ExportarPresupuesto_Controller extends AsyncTask<String ,String, St
 
         return null;
     }
+
 }
