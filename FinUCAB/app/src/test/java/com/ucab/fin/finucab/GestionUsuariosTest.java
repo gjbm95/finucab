@@ -59,7 +59,6 @@ public class GestionUsuariosTest {
      *
      * @throws Exception
      */
-
     @Test
     public void validacionSeguridad_isCorrect() throws Exception {
         DatosSeguridadFragment fragment = new DatosSeguridadFragment();
@@ -82,7 +81,6 @@ public class GestionUsuariosTest {
      *
      * @throws Exception
      */
-
     @Test
     public void validacionContrasenas_isCorrect() throws Exception {
         DatosCuentaFragment fragment = new DatosCuentaFragment();
@@ -279,7 +277,7 @@ public class GestionUsuariosTest {
         GestionUsuarios_Controller.usuario.setText("");
         boolean paso = false ;
         try{
-            GestionUsuarios_Controller.verificoUsuario(fragment.getActivity(),GestionUsuarios_Controller.usuario);
+            GestionUsuarios_Controller.verificoUsuario(GestionUsuarios_Controller.usuario);
         }catch(UsuarioInvalido_Exception e){
             paso = true;
         }
@@ -288,7 +286,7 @@ public class GestionUsuariosTest {
         GestionUsuarios_Controller.usuario.setText("Prueba");
         paso = false;
         try{
-            GestionUsuarios_Controller.verificoUsuario(fragment.getActivity(),GestionUsuarios_Controller.usuario);
+            GestionUsuarios_Controller.verificoUsuario(GestionUsuarios_Controller.usuario);
         }catch(UsuarioInvalido_Exception e){
             paso = true;
         }
