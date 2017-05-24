@@ -1,20 +1,24 @@
 package com.ucab.fin.finucab.controllers;
 
+import android.app.Activity;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.EditText;
 
 import com.ucab.fin.finucab.domain.Categoria;
+import com.ucab.fin.finucab.domain.Manejador_Categoria;
 import com.ucab.fin.finucab.exceptions.CampoVacio_Exception;
-
-import android.app.Activity;
-
+import com.ucab.fin.finucab.fragment.CategoriaAdapter;
 import com.ucab.fin.finucab.webservice.Parametros;
 import com.ucab.fin.finucab.webservice.Recepcion;
+import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 /**
  * Created by Juan on 10-05-2017.
@@ -26,11 +30,12 @@ public class Categoria_Controller {
     public static EditText escribirCategoria;
     public static EditText escribirDescripcion;
 
+    public static Manejador_Categoria manejador;
 
-    public static void asignarValores( ){
+    public static void initManejador(Activity actividad, ResponseWebServiceInterface interfaz){
 
-        escribirCategoria.setText(categoria.getNombre());
-        escribirDescripcion.setText(categoria.getDescripcion());
+        manejador = new Manejador_Categoria(actividad, interfaz);
+
     }
 
     /**Realizo la validacion para verificar que el campo este vacio:
@@ -51,28 +56,42 @@ public class Categoria_Controller {
 
     public static void HabilitarCategoria(int id, boolean esHabilitar){
 
+        Categoria categoria = manejador.obtenerCategoria(id);
+        categoria.setEstaHabilitado(esHabilitar);
 
-        Log.v("Id",id+"/"+esHabilitar);
+        manejador.modificarCategoria(categoria);
+
+    }
+
+    public static void modificarCategoria(Categoria categoria){
+
+        manejador.modificarCategoria(categoria);
+
+    }
+
+    //METODO PARA REGISTRAR UNA CATEGORIA
+    public static void registrarCategoria(Categoria categoria){
+
+        manejador.agregarCategoria(categoria);
+
+    }
+
+    public static void borrarCategoria(int id){
+
+        manejador.borrarCategoria(id);
+
     }
 
 
-    public static String registrarCategoria(Categoria categoria, Activity actividad){
-        JSONObject nueva_categoria = new JSONObject();
-        try {
-            nueva_categoria.put("c_nombre",categoria.getNombre());
-            nueva_categoria.put("c_descripcion",categoria.getDescripcion());
-            nueva_categoria.put("c_estado",categoria.isEstaHabilitado());
-            nueva_categoria.put("c_ingreso",categoria.isIngreso());
+    public static void obtenerTodasCategorias(){
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Parametros.reset();
-        Parametros.setMetodo("Modulo4/registrarCategoria?datosCategoria="+ URLEncoder.encode(nueva_categoria.toString()));
-        new Recepcion(actividad).execute("GET");
-        return Parametros.getRespuesta();
+        manejador.obtenerTodasCategorias();
+
     }
+
 
 }
+
+
 
 
