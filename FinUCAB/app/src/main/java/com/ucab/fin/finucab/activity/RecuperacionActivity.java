@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,9 +14,9 @@ import android.widget.Button;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.controllers.GestionUsuarios_Controller;
-import com.ucab.fin.finucab.exceptions.CampoVacio_Exception;
 import com.ucab.fin.finucab.fragment.ContrasenaFragment;
 import com.ucab.fin.finucab.fragment.RespuestaFragment;
+import com.ucab.fin.finucab.webservice.Parametros;
 
 public class RecuperacionActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -67,7 +68,7 @@ public class RecuperacionActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
-     public void activarPaso(int indicador) {
+    public void activarPaso(int indicador) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
@@ -77,12 +78,13 @@ public class RecuperacionActivity extends AppCompatActivity implements View.OnCl
             fragmentTransaction.replace(R.id.RecoverFragment, fragment1).commit();
         }
         else
-         if(indicador ==2) {
-             fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left);
-             ContrasenaFragment fragment1 = new ContrasenaFragment();
-             fragmentTransaction.replace(R.id.RecoverFragment, fragment1).commit();
+        if(indicador ==2) {
+            fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left);
+            ContrasenaFragment fragment1 = new ContrasenaFragment();
+            fragmentTransaction.replace(R.id.RecoverFragment, fragment1).commit();
+            GestionUsuarios_Controller.pasoRecuperacion=2;
 
-         }
+        }
     }
 
     @Override
@@ -92,19 +94,53 @@ public class RecuperacionActivity extends AppCompatActivity implements View.OnCl
                 if(conteo==1 && GestionUsuarios_Controller.validacionRespuesta()==0){
                     activarPaso(2);
                     conteo++;
-            }else{
-                //SE DEBE ESCRIBIR LA NUEVA CONTRASEÑA EN LA BASE DE DATOS
+                }else{
+                    GestionUsuarios_Controller.pasoRecuperacion=2;
                     if(conteo ==2 && GestionUsuarios_Controller.validacionContrasenas()==0) {
-                        GestionUsuarios_Controller.resetarVariables();
 
-                        finish();
+                        GestionUsuarios_Controller.ActualizarContraseña(GestionUsuarios_Controller.contrasena2
+                                .getText().toString(),RecuperacionActivity.this);
+
                     }
-            }
+                }
                 break;
             case R.id.cancelButton:
                 GestionUsuarios_Controller.resetarVariables();
+                Intent iniciar = new Intent(RecuperacionActivity.this, InicioActivity.class);
+                startActivity(iniciar);
+                GestionUsuarios_Controller.resetarVariables();
+                Parametros.reset();
                 finish();
                 break;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(GestionUsuarios_Controller.pasoRecuperacion==2) {
+            if (Parametros.getRespuesta().equals("Clave Modificada")) {
+                GestionUsuarios_Controller.resetarVariables();
+                Intent iniciar = new Intent(RecuperacionActivity.this, InicioActivity.class);
+                startActivity(iniciar);
+                GestionUsuarios_Controller.resetarVariables();
+                Parametros.reset();
+                finish();
+            } else {
+                mensajeError("Ocurrio un Error Inesperado!");
+            }
+        }
+
+    }
+
+    /**
+     * Meotodo que se encarga de mostrar un mensaje de error.
+     * @param mensaje
+     */
+    private void mensajeError(String mensaje){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage(mensaje);
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 }

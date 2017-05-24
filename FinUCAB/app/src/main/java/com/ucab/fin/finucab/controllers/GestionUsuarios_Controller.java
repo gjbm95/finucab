@@ -9,7 +9,9 @@ import com.ucab.fin.finucab.exceptions.ContrasenaInvalida_Exception;
 import com.ucab.fin.finucab.exceptions.ContrasenasDiferentes_Exception;
 import com.ucab.fin.finucab.exceptions.CorreoInvalido_Exception;
 import com.ucab.fin.finucab.exceptions.Longitud_Exception;
+import com.ucab.fin.finucab.exceptions.RespuestaInvalida_Exception;
 import com.ucab.fin.finucab.exceptions.UsuarioInvalido_Exception;
+import com.ucab.fin.finucab.webservice.ControlDatos;
 import com.ucab.fin.finucab.webservice.Parametros;
 import com.ucab.fin.finucab.webservice.Recepcion;
 
@@ -17,16 +19,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URLEncoder;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.SecretKeySpec;
 
 import static org.apache.commons.codec.binary.Base64.encodeBase64;
 
@@ -51,20 +43,26 @@ public class GestionUsuarios_Controller {
     public static EditText pregunta; // EditText que contiene la pregunta secreta del usuario
     public static EditText respuesta; // EditText que contiene la respuesta secreta del usuario
     public static int pasoRegistro; // Variable entera que almacena la etapa actual del registro de usuario.
+    public static int pasoRecuperacion; // Variable entera que almacena la etapa actual del recuperacion de usuario.
+    public static boolean pasoRegistroCuenta; // Variable booleana que indica presencia de error en el paso 2 de registro.
 
     /**
      * Valida que no esten vacios los campos y coincida con la respuesta establecida por el usuario
      * con la establecida por el usuario en recuperacion de contraseña
      *
-      */
+     */
     public static int validacionRespuesta() {
 
         try {
-        verificoVacio(respuesta);
+            verificoVacio(respuesta);
+            verificoRespuesta(respuesta);
             //FALTA VERIFICAR QUE COINCIDA CON LA ESTABLECIDA
         } catch (CampoVacio_Exception e) {
             e.getCampo().setError(e.getMessage());
-        return 1;
+            return 1;
+        } catch (RespuestaInvalida_Exception e) {
+            e.getCampo().setError(e.getMessage());
+            return 1;
         }
         return 0;
     }
@@ -76,7 +74,6 @@ public class GestionUsuarios_Controller {
             verificoVacio(contrasena1);
             verificoVacio(contrasena2);
             verificoIgualdad(contrasena1,contrasena2);
-            //FALTA VERIFICAR QUE COINCIDA CON LA ESTABLECIDA
         } catch (CampoVacio_Exception e) {
             e.getCampo().setError(e.getMessage());
             return 1;
@@ -114,36 +111,36 @@ public class GestionUsuarios_Controller {
             return 1;
         }
 
-         //Estadarizamos mayusculas y minusculas:
-         nombre.setText(GestionUsuarios_Controller.formatearCadena(nombre.getText().toString()));
-         apellido.setText(GestionUsuarios_Controller.formatearCadena(apellido.getText().toString()));
-         return 0;
+        //Estadarizamos mayusculas y minusculas:
+        nombre.setText(GestionUsuarios_Controller.formatearCadena(nombre.getText().toString()));
+        apellido.setText(GestionUsuarios_Controller.formatearCadena(apellido.getText().toString()));
+        return 0;
     }
 
 
-     /**
+    /**
      *  Metodo encargado de validar los datos suministrados en la etapa de registro de datos de la cuenta.
      *
      * @return retorna 0 si no hay ningun error y retorna 1 si lo hay
      */
-     public static int validacionEtapaCuenta()
+    public static int validacionEtapaCuenta()
     {
-          try{
-              verificoVacio(usuario);
-              verificoLongitud(usuario,50,"string");
-              verificoVacio(contrasena1);
-              verificoVacio(contrasena2);
-              verificoIgualdad(contrasena1,contrasena2);
-          } catch (CampoVacio_Exception e){
-              e.getCampo().setError(e.getMessage());
-              return 1;
-          } catch (ContrasenasDiferentes_Exception e){
-              e.getCampo().setError(e.getMessage());
-              return 1;
-          } catch (Longitud_Exception e){
-              e.getCampo().setError(e.getMessage());
-              return 1;
-          }
+        try{
+            verificoVacio(usuario);
+            verificoLongitud(usuario,50,"string");
+            verificoVacio(contrasena1);
+            verificoVacio(contrasena2);
+            verificoIgualdad(contrasena1,contrasena2);
+        } catch (CampoVacio_Exception e){
+            e.getCampo().setError(e.getMessage());
+            return 1;
+        } catch (ContrasenasDiferentes_Exception e){
+            e.getCampo().setError(e.getMessage());
+            return 1;
+        } catch (Longitud_Exception e){
+            e.getCampo().setError(e.getMessage());
+            return 1;
+        }
         return 0;
     }
 
@@ -151,8 +148,8 @@ public class GestionUsuarios_Controller {
     /**Se encarga de validar que no se encuentre vacio los campos pregunta, respuesta
      * en la etapa de registro de datos de la seguridad de las cuentas.
      * @return retorna 0 si no hay ningun error y retorna 1 si lo hay
-    **/
-     public static int validacionEtapaSeguridad(){
+     **/
+    public static int validacionEtapaSeguridad(){
         try{
             verificoVacio(pregunta);
             verificoLongitud(pregunta,1000,"string");
@@ -177,18 +174,18 @@ public class GestionUsuarios_Controller {
      * @Param tipo representa el tipo de dato del texto (String o Int)
      **/
     public static void verificoLongitud(EditText campo,int longitud, String tipo)throws Longitud_Exception {
-           if (campo.getText().toString().length() >= longitud) {
-               if (tipo.equals("string")) {
-                   Longitud_Exception campolargo = new Longitud_Exception("El texto es demasiado largo");
-                   campolargo.setCampo(campo);
-                   throw campolargo;
-               }
-               if (tipo.equals("int")) {
-                   Longitud_Exception campolargo = new Longitud_Exception("El numero es muy alto");
-                   campolargo.setCampo(campo);
-                   throw campolargo;
-               }
-           }
+        if (campo.getText().toString().length() >= longitud) {
+            if (tipo.equals("string")) {
+                Longitud_Exception campolargo = new Longitud_Exception("El texto es demasiado largo");
+                campolargo.setCampo(campo);
+                throw campolargo;
+            }
+            if (tipo.equals("int")) {
+                Longitud_Exception campolargo = new Longitud_Exception("El numero es muy alto");
+                campolargo.setCampo(campo);
+                throw campolargo;
+            }
+        }
     }
 
     /**Realiza la validacion para verificar que el campo este vacio:
@@ -207,24 +204,29 @@ public class GestionUsuarios_Controller {
     }
 
     /**
-     * Realiza la validacion para verificar que el usuario este correcto:
+     * Realiza la validacion para verificar que el usuario y contraseña coincidan
      *
-     * @param campo campo de texto (EditText) donde se va a validar si el campo se lleno.
-     * @throws UsuarioInvalido_Exception se ejecuta esta excepcion si el campo esta vacio.
+     * @param usuario campo de texto (EditText) donde se almacena el usuario.
+     * @param clave campo de texto (EditText) donde se almacena la clave.
+     *
      */
-    public static void verificoUsuario(EditText campo) throws UsuarioInvalido_Exception {
-        if (campo.getText().toString().isEmpty()) //HAY QUE CORREGIR LA VERIFICACION
-        {
-            UsuarioInvalido_Exception campoerroneo = new UsuarioInvalido_Exception("Usuario Inexistente");
-            campoerroneo.setCampo(campo);
-            throw campoerroneo;
+    public static void inicioSesion(EditText usuario,EditText clave,Activity actividad) {
+        JSONObject nuevo_usuario = new JSONObject();
+        try {
+            nuevo_usuario.put("u_password",String.valueOf(clave.getText().toString().hashCode()));
+            nuevo_usuario.put("u_usuario",usuario.getText());
+            System.out.println(URLEncoder.encode(nuevo_usuario.toString()));
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+        Parametros.reset();
+        Parametros.setMetodo("Modulo1/iniciarSesion?datosUsuario="+URLEncoder.encode(nuevo_usuario.toString()));
+        new Recepcion(actividad).execute("GET");
     }
 
 
     /**
-     *   Realizo la validacion para verificar que el usuario este correcto y si no esta repetido en el
-     *   servidor:
+     *   Realizo la validacion para verificar que el usuario este correcto y si no esta repetido:
      *
      *   @param actividad  es la actividad actual donde se esta validando el usuario
      *   @param campo es el campo de texto (EditText) donde se va a validar la exitencia del usuario
@@ -246,9 +248,9 @@ public class GestionUsuarios_Controller {
      *  @Param campo campo de texto donde se va a validar
      */
     public static void verificoContrasena(EditText campo) throws ContrasenaInvalida_Exception {
-        if (campo.getText().toString().isEmpty()) //HAY QUE CORREGIR LA VERIFICACION
+        if (!String.valueOf(campo.getText().toString().hashCode()).equals(ControlDatos.getUsuario().getContrasena()))
         {
-            ContrasenaInvalida_Exception campoerroneo = new ContrasenaInvalida_Exception("Contraseña Invalida");
+            ContrasenaInvalida_Exception campoerroneo = new ContrasenaInvalida_Exception("Contraseña Incorrecta");
             campoerroneo.setCampo(campo);
             campo.setText("");
             throw campoerroneo;
@@ -257,7 +259,23 @@ public class GestionUsuarios_Controller {
     }
 
     /**
-     * Realizo la validacion para verificar que las contraseñas son diferentes:
+     *  Realizo la validacion para verificar que la respuesta secreta coincide a la establecida por ese usuario:
+     *  @Param campo campo de texto donde se va a validar
+     */
+    public static void verificoRespuesta(EditText campo) throws RespuestaInvalida_Exception {
+        if(!String.valueOf(campo.getText().toString().hashCode()).equals(ControlDatos.getUsuario().getRespuesta()))
+        {
+            RespuestaInvalida_Exception campoerroneo = new RespuestaInvalida_Exception("Respuesta Incorrecta");
+            campoerroneo.setCampo(campo);
+            campo.setText("");
+            throw campoerroneo;
+        }
+
+    }
+
+    /**Realizo la validacion para verificar que las contraseñas son diferentes:
+     *
+     *
      * @param contesena1
      * @param contrasena2
      * @throws ContrasenasDiferentes_Exception
@@ -307,11 +325,9 @@ public class GestionUsuarios_Controller {
      * @Param texto // Cadena de texto a ser formateada
      * @return devuelve una cadena de caracteres formateada de esta forma "Formato"
      **/
-     public static CharSequence formatearCadena (String texto){
+    public static CharSequence formatearCadena (String texto){
         String convertido = texto.toLowerCase();
-         if (texto.length()!=0)
         return Character.toUpperCase(convertido.charAt(0)) + convertido.substring(1);
-         else return "";
     }
 
     /**
@@ -341,26 +357,30 @@ public class GestionUsuarios_Controller {
         new Recepcion(actividad).execute("GET");
         return Parametros.getRespuesta();
     }
+
+
+
     /**
      *  Metodo encargado de consultar si el usuario existe en el servidor del sistema.
      *
-     * @param usuario  // String usuario con los datos del nuevo usuario
-     * @param actividad // Actidad actual donde se ejecuta la accion.
+     * @param clave  // String con la clave nueva
      * @return
      */
-    public static String registrarUsuario(String usuario, Activity actividad){
-        JSONObject dato_usuario = new JSONObject();
+    public static void ActualizarContraseña(String clave, Activity actividad){
+        JSONObject nuevo_usuario = new JSONObject();
         try {
-            dato_usuario.put("u_usuario",usuario);
-
+            nuevo_usuario.put("u_password",String.valueOf(clave.hashCode()));
+            nuevo_usuario.put("u_usuario",ControlDatos.getUsuario().getUsuario());
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
         Parametros.reset();
-        Parametros.setMetodo("Modulo1/registrarUsuario?datosUsuario="+URLEncoder.encode(dato_usuario.toString()));
+        Parametros.setMetodo("Modulo1/actualizarClave?datosUsuario="+URLEncoder.encode(nuevo_usuario.toString()));
         new Recepcion(actividad).execute("GET");
-        return Parametros.getRespuesta();
+
+
+
     }
 
     /**
@@ -371,21 +391,53 @@ public class GestionUsuarios_Controller {
      */
     public static int encriptarDatos(String cleartext)  {
 
-         return cleartext.hashCode();
+        return cleartext.hashCode();
+    }
+
+
+    /**
+     * Metodo para consultar datos del usuario del servidor
+     * @param usuario Nombre de usuario
+     * @param activity Actividad actual donde se ejecuta el metodo
+     */
+    public static void buscarUsuario(Activity activity, String usuario){
+        Parametros.setMetodo("Modulo1/recuperarClave?datosUsuario=" + usuario);
+        new Recepcion(activity).execute("GET");
+
+
+    }
+
+    /**
+     * Metodo para obtener datos del usuario del servidor
+     * @param datos informacion en JSON
+     *
+     */
+    public static void descomponerUsuario(String datos){
+
+        try {
+            JSONObject usuario = new JSONObject(datos);
+            ControlDatos.setUsuario(new Usuario(usuario.getInt("u_id"), usuario.getString("u_nombre"), usuario.getString("u_apellido"), usuario.getString("u_correo"), usuario.getString("u_usuario"), usuario.getString("u_password"),usuario.getString("u_pregunta"), usuario.getString("u_respuesta"), null, null));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     /**Inicializo nuevamente las variables
      *
      */
     public static void resetarVariables (){
-         nombre=null;
-         apellido=null;
-         correo=null;
-         usuario=null;
-         contrasena1=null;
-         contrasena2=null;
-         pregunta=null;
-         respuesta=null;
+        nombre=null;
+        apellido=null;
+        correo=null;
+        usuario=null;
+        contrasena1=null;
+        contrasena2=null;
+        pregunta=null;
+        respuesta=null;
+        pasoRecuperacion=0;
+
     }
 
 

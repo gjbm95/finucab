@@ -1,12 +1,15 @@
 package com.ucab.fin.finucab.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.CookieManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -34,6 +37,7 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
     TextView forgotPwdText; // Boton para activar la recuperacion de cuenta.
     EditText userNameEditText; // Caja de texto para almacenar el nombre de usuario.
     EditText usrPwdEditText; // Caja de texto para almacenar la contraseña.
+
 
     /**
      * Metodo de inicializacion de la actividad
@@ -99,26 +103,20 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
         Intent i;
         switch (view.getId()){
 
-             //Al accionar, se inician los procesos de validacion de datos para acceder el perfil de usuario.
+            //Al accionar, se inician los procesos de validacion de datos para acceder el perfil de usuario.
             case R.id.signInButton:
                 try {
                     GestionUsuarios_Controller.verificoVacio(userNameEditText);
                     GestionUsuarios_Controller.verificoVacio(usrPwdEditText);
+                    GestionUsuarios_Controller.usuario =userNameEditText;
+                    GestionUsuarios_Controller.contrasena1=usrPwdEditText;
+                    GestionUsuarios_Controller.inicioSesion(GestionUsuarios_Controller.usuario,
+                            GestionUsuarios_Controller.contrasena1,InicioActivity.this);
 
-                    //DEBEN CORREGIRSE LAS VERIFICACIONES DE USUARIO Y CONTRASEÑA
-                    GestionUsuarios_Controller.verificoUsuario(userNameEditText);
-                    GestionUsuarios_Controller.verificoContrasena(usrPwdEditText);
 
-                    i = new Intent(InicioActivity.this,MainActivity.class);
-                    startActivity(i);
                     userNameEditText.setText("");
                     usrPwdEditText.setText("");
-                }catch(CampoVacio_Exception e){
-                    e.getCampo().setError(e.getMessage());
-                }catch(UsuarioInvalido_Exception e){
-                    e.getCampo().setError(e.getMessage());
-                }
-                catch(ContrasenaInvalida_Exception e){
+                }catch(CampoVacio_Exception e) {
                     e.getCampo().setError(e.getMessage());
                 }
                 break;
@@ -133,10 +131,14 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.forgotPwdTextView:
                 try {
                     GestionUsuarios_Controller.verificoVacio(userNameEditText);
-
+                    Parametros.reset();
+                    GestionUsuarios_Controller.nombre=userNameEditText;
+                    GestionUsuarios_Controller.verificoUsuario(InicioActivity.this,userNameEditText);
 
 
                 }catch(CampoVacio_Exception e) {
+                    e.getCampo().setError(e.getMessage());
+                } catch (UsuarioInvalido_Exception e) {
                     e.getCampo().setError(e.getMessage());
                 }
                 break;
@@ -147,8 +149,52 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onResume() {
         super.onResume();
-//        i = new Intent(InicioActivity.this, RecuperacionActivity.class);
-//        startActivity(i);
+        if (Parametros.getRespuesta() != null) {
+            if (Parametros.getRespuesta().equals("Error")||Parametros.getRespuesta().equals("ERROR") ) {
 
+                mensajeError("Error de conexion con servidor!");
+                GestionUsuarios_Controller.resetarVariables();
+                Parametros.reset();
+            } else if (Parametros.getRespuesta().equals("No Disponible")) {
+                GestionUsuarios_Controller.buscarUsuario(InicioActivity.this,GestionUsuarios_Controller.nombre.getText().toString());
+
+            } else if (Parametros.getRespuesta().equals("Usuario Disponible")) {
+
+                mensajeError("El nombre de usuario suministrado no existe!");
+                GestionUsuarios_Controller.resetarVariables();
+                Parametros.reset();
+            }else if (Parametros.getRespuesta().contains("recuperarclave")){
+                String[] datos = Parametros.getRespuesta().split(":-:");
+                GestionUsuarios_Controller.descomponerUsuario(datos[0]);
+                Intent i = new Intent(InicioActivity.this, RecuperacionActivity.class);
+                startActivity(i);
+
+            }else if (Parametros.getRespuesta().contains("iniciosesion")){
+                String[] datos = Parametros.getRespuesta().split(":-:");
+                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString("cookie",datos[0]);
+                editor.commit();
+                GestionUsuarios_Controller.descomponerUsuario(datos[0]);
+                Intent i = new Intent(InicioActivity.this, MainActivity.class);
+                GestionUsuarios_Controller.resetarVariables();
+                Parametros.reset();
+                startActivity(i);
+                finish();
+
+            }else if (Parametros.getRespuesta().equals("DATOSMAL") ) {
+
+                mensajeError("Combinacion de datos es incorrecta!");
+            }
+
+
+        }
+    }
+
+    private void mensajeError(String mensaje){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage(mensaje);
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 }
