@@ -27,10 +27,15 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
- * REST Web Service
- *
- * @author AlejandroNegrin
- */
+*Modulo 1 - Modulo de Inicio de sesion y registro de usuario.
+*Desarrolladores:
+*Garry Jr. Bruno / Erbin Rodriguez / Alejandro Negrin
+*Descripción de la clase:
+*Metodos del servicio web destinados para las funcionalidades de iniciar session,
+* registro de usuario y recuperacion de cuenta.
+*@Params
+*
+**/
 @Path("/Modulo1")
 public class Modulo1sResource {
 
@@ -161,14 +166,16 @@ public class Modulo1sResource {
         try {
             Connection conn = Conexion.conectarADb();
             Statement st = conn.createStatement();
+          
             String query = "SELECT * from Usuario WHERE u_usuario ='" + usuario + "';";
             ResultSet rs = st.executeQuery(query);
-            while (rs.next()) {
+            
+
+            while(rs.next()){
                 return "No Disponible";
-            }
-
-            return "Usuario Disponible";
-
+            }            
+               return "Usuario Disponible";
+            
         } catch (SQLException ex) {
             Logger.getLogger(Modulo1sResource.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception e) {
@@ -192,30 +199,31 @@ public class Modulo1sResource {
     public String iniciarSesion(@QueryParam("datosUsuario") String usuario) {
 
 //        String decodifico = "{ \"u_usuario\" : \"AleNegrin\" , \"u_password\" : \"123456\" }";
-        String decodifico = URLDecoder.decode(usuario);
+         String decodifico = URLDecoder.decode(usuario);
+ 
         try {
             Connection conn = Conexion.conectarADb();
             Statement st = conn.createStatement();
 
             JsonObject usuarioJSON = this.stringToJSON(decodifico);
 
-            String query = "SELECT * from Usuario WHERE u_usuario ='" + usuarioJSON.getString("u_usuario") + "';";
+            String query = "SELECT * from Usuario WHERE u_usuario ='" + usuarioJSON.getString("u_usuario")
+                    + "' AND u_password ='" + usuarioJSON.getString("u_password")+ "';";
+            
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
                 JsonObject usuarioJsonObject = this.crearUsuarioJson(rs);
 
-                if (usuarioJsonObject.getString("u_usuario").equals(usuarioJSON.getString("u_usuario"))) {
-                    return usuarioJsonObject.toString();
-                } else {
-                    return "ERROR";
-                }
+                
+                    return usuarioJsonObject.toString()+":-:iniciosesion";
+                
             }
 
-            return "ERROR";
+            return "DATOSMAL";
         } catch (SQLException ex) {
             Logger.getLogger(Modulo1sResource.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception e) {
-            return e.getMessage();
+            return "ERROR";
         }
         return null;
     }
@@ -281,7 +289,7 @@ public class Modulo1sResource {
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
                 JsonObject usuarioJsonObject = this.crearUsuarioJson(rs);
-                return usuarioJsonObject.toString();
+                return usuarioJsonObject.toString()+":-:recuperarclave";
             }
             return "ERROR";
         } catch (Exception e) {
@@ -302,7 +310,7 @@ public class Modulo1sResource {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     @Path("/actualizarClave")
-    public Boolean actualizarClave(@QueryParam("datosUsuario") String datosUsuario) {
+    public String actualizarClave(@QueryParam("datosUsuario") String datosUsuario) {
         
 //            String decodifico = "{ \"u_usuario\" : \"jojo\" , \"u_password\" : \"elwebomio\" }";
        String decodifico = URLDecoder.decode(datosUsuario);
@@ -318,15 +326,15 @@ public class Modulo1sResource {
 
             if (st.executeUpdate(query) > 0) {
                 st.close();
-                return true;
+                return "Clave Modificada";
             } else {
                 st.close();
-                return false;
+                return "Error";
             }
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return false;
+            return "Error";
 
         }
     }
