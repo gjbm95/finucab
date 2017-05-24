@@ -383,7 +383,7 @@ public class GestionUsuarios_Controller {
      * @param clave  // String con la clave nueva
      * @return
      */
-    public static void ActualizarContraseña(String clave, Activity actividad){
+    public static void actualizarContrasena(String clave, Activity actividad){
         JSONObject nuevo_usuario = new JSONObject();
         try {
             nuevo_usuario.put("u_password",String.valueOf(clave.hashCode()));

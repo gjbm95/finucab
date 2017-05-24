@@ -59,7 +59,6 @@ public class GestionUsuariosTest {
      *
      * @throws Exception
      */
-
     @Test
     public void validacionSeguridad_isCorrect() throws Exception {
         DatosSeguridadFragment fragment = new DatosSeguridadFragment();
@@ -82,7 +81,6 @@ public class GestionUsuariosTest {
      *
      * @throws Exception
      */
-
     @Test
     public void validacionContrasenas_isCorrect() throws Exception {
         DatosCuentaFragment fragment = new DatosCuentaFragment();

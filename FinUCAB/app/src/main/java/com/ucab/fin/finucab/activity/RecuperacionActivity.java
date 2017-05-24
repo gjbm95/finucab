@@ -98,7 +98,7 @@ public class RecuperacionActivity extends AppCompatActivity implements View.OnCl
                     GestionUsuarios_Controller.pasoRecuperacion=2;
                     if(conteo ==2 && GestionUsuarios_Controller.validacionContrasenas()==0) {
 
-                        GestionUsuarios_Controller.ActualizarContraseña(GestionUsuarios_Controller.contrasena2
+                        GestionUsuarios_Controller.actualizarContrasena(GestionUsuarios_Controller.contrasena2
                                 .getText().toString(),RecuperacionActivity.this);
 
                     }
