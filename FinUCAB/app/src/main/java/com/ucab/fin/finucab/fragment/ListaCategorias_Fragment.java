@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.AddCategoryActivity;
 import com.ucab.fin.finucab.activity.MainActivity;
+import com.ucab.fin.finucab.controllers.Categoria_Controller;
 import com.ucab.fin.finucab.controllers.ExportarCategoria_Controller;
 import com.ucab.fin.finucab.domain.Categoria;
 
@@ -38,6 +39,9 @@ public class ListaCategorias_Fragment extends Fragment {
     FloatingActionButton fab;
     MainActivity parentActivity;
     RecyclerView recycleList;
+
+    ArrayList<Categoria> categoriaLista;
+
 
     public ListaCategorias_Fragment() {
         // Required empty public constructor
@@ -80,6 +84,11 @@ public class ListaCategorias_Fragment extends Fragment {
                 //Values are passing to activity & to fragment as well
                 //Toast.makeText(getActivity(), "Single Click on position :"+position,
                 //        Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(parentActivity, AddCategoryActivity.class);
+                intent.putExtra("CATEGORIA_DATA", categoriaLista.get(position));
+                startActivity(intent);
+
             }
 
             @Override
@@ -97,8 +106,10 @@ public class ListaCategorias_Fragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        CategoriaAdapter cAdapter =new CategoriaAdapter(populatedList());
+        categoriaLista = populatedList();
+        CategoriaAdapter cAdapter =new CategoriaAdapter(categoriaLista);
         recycleList.setAdapter(cAdapter);
+
     }
 
     @Override
@@ -131,7 +142,8 @@ public class ListaCategorias_Fragment extends Fragment {
 
             case R.id.deleteCategoryOption:
 
-                Toast.makeText(getActivity(), "Opcion Eliminar seleccionada",Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Eliminando categoria ...",Toast.LENGTH_LONG).show();
+                Categoria_Controller.borrarCategoria(2,parentActivity);
 
                 return true;
 
@@ -145,6 +157,7 @@ public class ListaCategorias_Fragment extends Fragment {
 //BORRAR CUANDO SE IMPLEMENTE LA CLASE CATEGORIA
     private ArrayList<Categoria> populatedList() {
 
+        //Categoria_Controller.obtenerTodasCategorias(parentActivity);
         ArrayList<Categoria> listTest = new ArrayList<Categoria>();
 
         listTest.add(new Categoria(0,"Comida","Almuerzos en la uni",true, false));

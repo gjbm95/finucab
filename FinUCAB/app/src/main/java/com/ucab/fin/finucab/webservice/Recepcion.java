@@ -115,8 +115,9 @@ public class Recepcion extends AsyncTask<String,Void,String>{
             this.status.dismiss();
         }
         Parametros.setRespuesta(response);
-        System.out.println(response);
+        Log.v("Response",response);
         volver();
+
     }
 
     private void volver(){

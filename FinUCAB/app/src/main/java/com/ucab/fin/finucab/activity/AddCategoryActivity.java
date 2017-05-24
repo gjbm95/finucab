@@ -14,10 +14,10 @@ import android.widget.TextView;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.controllers.Categoria_Controller;
-import com.ucab.fin.finucab.controllers.GestionUsuarios_Controller;
+import com.ucab.fin.finucab.domain.Categoria;
 import com.ucab.fin.finucab.exceptions.CampoVacio_Exception;
-import com.ucab.fin.finucab.exceptions.ContrasenaInvalida_Exception;
-import com.ucab.fin.finucab.exceptions.UsuarioInvalido_Exception;
+
+import java.io.Serializable;
 
 public class AddCategoryActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -29,7 +29,10 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
     private TextView tipoTextView;
     int Resp;
 
+
     @Override
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_agregar_categoria);
@@ -81,9 +84,27 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
         switchestado.setChecked(true);
         //attach a listener to check for changes in state
 
+        cargarData();
 
     }
 
+
+    public void cargarData(){
+
+        Serializable s = getIntent().getSerializableExtra("CATEGORIA_DATA");
+
+        if (s != null ) {
+
+            Categoria categoria = (Categoria) s;
+
+            AgregarcategoriaEditText.setText(categoria.getNombre());
+            AddDescripcionEditText.setText(categoria.getDescripcion());
+            switchestado.setChecked(categoria.isEstaHabilitado());
+            switchtipo.setChecked(categoria.isIngreso());
+
+        }
+
+    }
     //Dandole funcionalidades a cada uno de los botones que salen en pantalla:
 
     @Override
@@ -97,7 +118,16 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
 
                     Categoria_Controller.verificoVacio(AgregarcategoriaEditText);
                     Categoria_Controller.verificoVacio(AddDescripcionEditText);
-                    this.onBackPressed();
+
+                    Categoria categoria = new Categoria(AgregarcategoriaEditText.getText().toString(),
+                                                        AddDescripcionEditText.getText().toString(),
+                                                        switchestado.isChecked(),
+                                                        switchtipo.isChecked());
+
+                    Categoria_Controller.registrarCategoria(categoria, this);
+
+
+                    //this.onBackPressed();
 
                 }catch(CampoVacio_Exception e){
                     e.getCampo().setError(e.getMessage());
