@@ -27,6 +27,7 @@ import com.ucab.fin.finucab.controllers.Categoria_Controller;
 import com.ucab.fin.finucab.controllers.ExportarCategoria_Controller;
 import com.ucab.fin.finucab.domain.Categoria;
 import com.ucab.fin.finucab.webservice.Parametros;
+import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,7 +40,7 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
 
  */
-public class ListaCategorias_Fragment extends Fragment {
+public class ListaCategorias_Fragment extends Fragment implements ResponseWebServiceInterface {
 
     FloatingActionButton fab;
     MainActivity parentActivity;
@@ -60,7 +61,7 @@ public class ListaCategorias_Fragment extends Fragment {
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Categorias");
 
-        Categoria_Controller.initManejador(parentActivity);
+        Categoria_Controller.initManejador(parentActivity,this);
 
         // Configuracion inicial del boton flotante
         fab = (FloatingActionButton) rootView.findViewById(R.id.addFloatingBtnCategoria);
@@ -99,9 +100,8 @@ public class ListaCategorias_Fragment extends Fragment {
             //celdas
 
 
-        //casoRequest = 0;
-        //Categoria_Controller.manejador.obtenerTodasCategorias();
-        Categoria_Controller.manejador.defaultList();
+        casoRequest = 0;
+        Categoria_Controller.manejador.obtenerTodasCategorias();
 
 
         return rootView;
@@ -119,40 +119,6 @@ public class ListaCategorias_Fragment extends Fragment {
 
                 Toast.makeText(parentActivity, "Ups, ha ocurrido un error", Toast.LENGTH_SHORT).show();
 
-            }else{
-                Log.v("Response-Fra",Parametros.getRespuesta());
-                if ( casoRequest == 0 ) {
-
-                    JSONArray mJsonArray = null;
-                    JSONObject jObject = null;
-
-                    ArrayList listaCategoria = new ArrayList<Categoria>();
-                    try {
-                        mJsonArray = new JSONArray(Parametros.getRespuesta());
-                        int count = mJsonArray.length();
-
-                        Log.v("Response-Manejador",count+"");
-                        for(int i=0 ; i< count; i++){   // iterate through jsonArray
-                            jObject = mJsonArray.getJSONObject(i);  // get jsonObject @ i position
-                            Categoria cat = new Categoria((int)jObject.get("Id"),
-                                    (String)jObject.get("Nombre"),
-                                    (String)jObject.get("Descripcion"),
-                                    (Boolean) jObject.get("esHabilitado"),
-                                    (Boolean) jObject.get("esIngreso"));
-                            listaCategoria.add(cat);
-
-                        }
-
-                        Categoria_Controller.manejador.setCategorias(listaCategoria);
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }else if ( casoRequest == 1 ) {
-
-                    Toast.makeText(parentActivity, Parametros.getRespuesta(), Toast.LENGTH_SHORT).show();
-
-                }
             }
 
             Parametros.reset();
@@ -161,7 +127,6 @@ public class ListaCategorias_Fragment extends Fragment {
         CategoriaAdapter cAdapter =new CategoriaAdapter(Categoria_Controller.manejador.getCategorias());
         recycleList.setAdapter(cAdapter);
 
-        casoRequest = -1;
     }
 
     @Override
@@ -280,8 +245,54 @@ public class ListaCategorias_Fragment extends Fragment {
     }
 
 
+    /*---      Response WebService       --*/
 
+    @Override
+    public void obtuvoCorrectamente(Object response){
 
+        if ( casoRequest == 0 ) {
+            JSONArray mJsonArray = null;
+            JSONObject jObject = null;
+            String strJson;
+
+            ArrayList listaCategoria = new ArrayList<Categoria>();
+            try {
+                mJsonArray = new JSONArray(Parametros.getRespuesta());
+                int count = mJsonArray.length();
+
+                for(int i=0 ; i< count; i++){   // iterate through jsonArray
+                    //jObject = mJsonArray.getJSONObject(i);  // get jsonObject @ i position
+                    strJson = mJsonArray.getString(i);
+                    jObject = new JSONObject(strJson);
+
+                    Categoria cat = new Categoria((int)jObject.get("Id"),
+                            (String)jObject.get("Nombre"),
+                            (String)jObject.get("Descripcion"),
+                            (Boolean) jObject.get("esHabilitado"),
+                            (Boolean) jObject.get("esIngreso"));
+
+                    listaCategoria.add(cat);
+
+                }
+
+                Categoria_Controller.manejador.setCategorias(listaCategoria);
+                CategoriaAdapter cAdapter =new CategoriaAdapter(listaCategoria);
+                recycleList.setAdapter(cAdapter);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }else if ( casoRequest == 1 ) {
+
+            Toast.makeText(parentActivity, Parametros.getRespuesta(), Toast.LENGTH_SHORT).show();
+
+        }
+    }
+
+    @Override
+    public void noObtuvoCorrectamente(Object response){
+
+    }
 
 }
 

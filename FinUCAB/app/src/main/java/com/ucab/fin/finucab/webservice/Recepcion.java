@@ -41,14 +41,20 @@ import java.util.List;
 import java.util.UUID;
 
 public class Recepcion extends AsyncTask<String,Void,String>{
+
     private Activity getJSONactivity;
     private ProgressDialog status;
     private static String response="";
+    private ResponseWebServiceInterface interfaz;
 
+    public Recepcion(Activity principalMJson, ResponseWebServiceInterface interfaz) {
+        this.getJSONactivity=principalMJson;
+        this.interfaz = interfaz;
+    }
     public Recepcion(Activity principalMJson) {
         this.getJSONactivity=principalMJson;
+        this.interfaz = null;
     }
-
     /**
      * Metodo que se encarga de mostrar un feedback del proceso de carga de datos al usuario
      */
@@ -116,7 +122,13 @@ public class Recepcion extends AsyncTask<String,Void,String>{
         }
         Parametros.setRespuesta(response);
         Log.v("Response",response);
-        volver();
+
+        if (interfaz == null){
+            volver();
+        }else {
+            interfaz.obtuvoCorrectamente(response);
+        }
+
 
     }
 

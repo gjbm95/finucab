@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.ucab.fin.finucab.webservice.Parametros;
 import com.ucab.fin.finucab.webservice.Recepcion;
+import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,18 +23,19 @@ public class Manejador_Categoria {
 
     private Activity actividad;
     private ArrayList<Categoria> categorias;
+    private ResponseWebServiceInterface intefaz;
 
     public ArrayList<Categoria> getCategorias() {
         return categorias;
     }
-
     public void setCategorias(ArrayList<Categoria> categorias) {
         this.categorias = categorias;
     }
 
-    public Manejador_Categoria(Activity actividad){
+    public Manejador_Categoria(Activity actividad, ResponseWebServiceInterface intefaz){
 
         this.actividad = actividad;
+        this.intefaz = intefaz;
     }
 
     public void agregarCategoria( Categoria categoria) {
@@ -72,6 +74,24 @@ public class Manejador_Categoria {
 
     }
 
+    public void borrarCategoria( int id) {
+
+        Parametros.reset();
+        Parametros.setMetodo("Modulo4/eliminarCategoria?datosCategoria="+ String.valueOf(id));
+        new Recepcion(actividad).execute("GET");
+
+    }
+
+    public void obtenerTodasCategorias() {
+
+        int idUsuario = 1;
+        Parametros.setMetodo("Modulo4/visualizarCategoria?datosCategoria="+ String.valueOf(idUsuario) );
+        new Recepcion(actividad,intefaz).execute("GET");
+        System.out.println(Parametros.respuesta);
+    }
+
+
+
     public Categoria obtenerCategoria( int id) {
 
         ArrayList<Categoria> la = getCategorias();
@@ -87,21 +107,7 @@ public class Manejador_Categoria {
         return  null;
     }
 
-    public void borrarCategoria( int id) {
 
-        Parametros.reset();
-        Parametros.setMetodo("Modulo4/eliminarCategoria?datosCategoria="+ String.valueOf(id));
-        new Recepcion(actividad).execute("GET");
-
-    }
-
-    public void obtenerTodasCategorias() {
-
-        int idUsuario = 1;
-        Parametros.setMetodo("Modulo4/visualizarCategoria?datosCategoria="+ String.valueOf(idUsuario) );
-        new Recepcion(actividad).execute("GET");
-        System.out.println(Parametros.respuesta);
-    }
 
     public void defaultList() {
 

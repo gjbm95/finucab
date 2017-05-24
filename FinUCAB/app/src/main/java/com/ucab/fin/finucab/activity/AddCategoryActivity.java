@@ -43,7 +43,7 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
         actionBar.setIcon(R.mipmap.logoh);
         actionBar.setTitle("");
 
-        Categoria_Controller.initManejador(this);
+        Categoria_Controller.initManejador(this,null);
         //------------------------------------------------------------------------------------------
 //        BIND VIEES (Se extraen los objetos asociados a los botones en pantalla)
         acceptButton = (Button) findViewById(R.id.acceptButton);

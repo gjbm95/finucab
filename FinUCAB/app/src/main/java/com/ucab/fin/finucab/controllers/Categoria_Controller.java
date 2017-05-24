@@ -11,6 +11,7 @@ import com.ucab.fin.finucab.exceptions.CampoVacio_Exception;
 import com.ucab.fin.finucab.fragment.CategoriaAdapter;
 import com.ucab.fin.finucab.webservice.Parametros;
 import com.ucab.fin.finucab.webservice.Recepcion;
+import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,9 +32,9 @@ public class Categoria_Controller {
 
     public static Manejador_Categoria manejador;
 
-    public static void initManejador( Activity actividad ){
+    public static void initManejador(Activity actividad, ResponseWebServiceInterface interfaz){
 
-        manejador = new Manejador_Categoria(actividad);
+        manejador = new Manejador_Categoria(actividad, interfaz);
 
     }
 

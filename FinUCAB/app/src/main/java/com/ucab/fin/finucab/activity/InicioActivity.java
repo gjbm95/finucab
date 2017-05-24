@@ -151,9 +151,6 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
         super.onResume();
         if (Parametros.getRespuesta() != null) {
 
-            Intent i = new Intent(InicioActivity.this, MainActivity.class);
-            startActivity(i);
-            /*
             if (Parametros.getRespuesta().equals("Error")||Parametros.getRespuesta().equals("ERROR") ) {
 
                 mensajeError("Error de conexion con servidor!");
@@ -190,8 +187,6 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
 
                 mensajeError("Combinacion de datos es incorrecta!");
             }
-            */
-
 
         }
     }
