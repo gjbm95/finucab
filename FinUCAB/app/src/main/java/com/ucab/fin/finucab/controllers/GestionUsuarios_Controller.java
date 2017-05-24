@@ -226,7 +226,7 @@ public class GestionUsuarios_Controller {
 
 
     /**
-     *   Realizo la validacion para verificar que el usuario este correcto y si no esta repetido:
+     *   Realizo la validacion para verificar que el usuario  no este repetido en el sistema:
      *
      *   @param actividad  es la actividad actual donde se esta validando el usuario
      *   @param campo es el campo de texto (EditText) donde se va a validar la exitencia del usuario
@@ -241,6 +241,20 @@ public class GestionUsuarios_Controller {
         Parametros.setMetodo("Modulo1/verificarUsuario?nombreUsuario="+campo.getText().toString());
         new Recepcion(actividad).execute("GET");
 
+    }
+
+    /**
+     *   Realizo la validacion para verificar que el usuario no este vacio
+     *
+     *   @param campo es el campo de texto (EditText) donde se va a validar la exitencia del usuario
+     */
+    public static void verificoUsuario(EditText campo) throws UsuarioInvalido_Exception {
+        if (campo.getText().toString().isEmpty()) //HAY QUE CORREGIR LA VERIFICACION
+        {
+            UsuarioInvalido_Exception campoerroneo = new UsuarioInvalido_Exception("Usuario Inexistente");
+            campoerroneo.setCampo(campo);
+            throw campoerroneo;
+        }
     }
 
     /**
@@ -326,8 +340,11 @@ public class GestionUsuarios_Controller {
      * @return devuelve una cadena de caracteres formateada de esta forma "Formato"
      **/
     public static CharSequence formatearCadena (String texto){
-        String convertido = texto.toLowerCase();
-        return Character.toUpperCase(convertido.charAt(0)) + convertido.substring(1);
+        if (texto.length()!=0) {
+            String convertido = texto.toLowerCase();
+            return Character.toUpperCase(convertido.charAt(0)) + convertido.substring(1);
+        }
+        return "";
     }
 
     /**

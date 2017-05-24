@@ -279,7 +279,7 @@ public class GestionUsuariosTest {
         GestionUsuarios_Controller.usuario.setText("");
         boolean paso = false ;
         try{
-            GestionUsuarios_Controller.verificoUsuario(fragment.getActivity(),GestionUsuarios_Controller.usuario);
+            GestionUsuarios_Controller.verificoUsuario(GestionUsuarios_Controller.usuario);
         }catch(UsuarioInvalido_Exception e){
             paso = true;
         }
@@ -288,7 +288,7 @@ public class GestionUsuariosTest {
         GestionUsuarios_Controller.usuario.setText("Prueba");
         paso = false;
         try{
-            GestionUsuarios_Controller.verificoUsuario(fragment.getActivity(),GestionUsuarios_Controller.usuario);
+            GestionUsuarios_Controller.verificoUsuario(GestionUsuarios_Controller.usuario);
         }catch(UsuarioInvalido_Exception e){
             paso = true;
         }
