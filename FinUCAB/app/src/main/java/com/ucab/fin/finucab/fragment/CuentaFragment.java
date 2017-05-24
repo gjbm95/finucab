@@ -1,24 +1,28 @@
-package layout;
+package com.ucab.fin.finucab.fragment;
 
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.text.TextDirectionHeuristicCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.ucab.fin.finucab.R;
+import com.ucab.fin.finucab.controllers.GestionUsuarios_Controller;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link detalle_pago_fragment.OnFragmentInteractionListener} interface
+ * {@link CuentaFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link detalle_pago_fragment#newInstance} factory method to
+ * Use the {@link CuentaFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class detalle_pago_fragment extends Fragment {
+public class CuentaFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,7 +34,7 @@ public class detalle_pago_fragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public detalle_pago_fragment() {
+    public CuentaFragment() {
         // Required empty public constructor
     }
 
@@ -40,11 +44,11 @@ public class detalle_pago_fragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment detalle_pago_fragment.
+     * @return A new instance of fragment CuentaFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static detalle_pago_fragment newInstance(String param1, String param2) {
-        detalle_pago_fragment fragment = new detalle_pago_fragment();
+    public static CuentaFragment newInstance(String param1, String param2) {
+        CuentaFragment fragment = new CuentaFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -64,8 +68,19 @@ public class detalle_pago_fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        View rootView = inflater.inflate(R.layout.fragment_cuenta, container, false);
+        TextView nombre = (TextView) rootView.findViewById(R.id.nombreRE);
+        nombre.setText("Nombre: "+GestionUsuarios_Controller.nombre.getText().toString());
+        TextView apellido = (TextView) rootView.findViewById(R.id.apellidoRE);
+        apellido.setText("Apellido: "+GestionUsuarios_Controller.apellido.getText().toString());
+        TextView correo = (TextView) rootView.findViewById(R.id.correoRE);
+        correo.setText("Correo: "+GestionUsuarios_Controller.correo.getText().toString());
+        TextView usuario = (TextView) rootView.findViewById(R.id.usuarioRE);
+        usuario.setText("Usuario: "+GestionUsuarios_Controller.usuario.getText().toString());
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detalle_pago, container, false);
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
