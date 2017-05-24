@@ -1,24 +1,25 @@
-package layout;
+package com.ucab.fin.finucab.fragment;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.ucab.fin.finucab.R;
+import com.ucab.fin.finucab.activity.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link detalle_pago_fragment.OnFragmentInteractionListener} interface
+ * {@link AgregadoFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link detalle_pago_fragment#newInstance} factory method to
+ * Use the {@link AgregadoFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class detalle_pago_fragment extends Fragment {
+public class AgregadoFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,7 +31,7 @@ public class detalle_pago_fragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public detalle_pago_fragment() {
+    public AgregadoFragment() {
         // Required empty public constructor
     }
 
@@ -40,11 +41,11 @@ public class detalle_pago_fragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment detalle_pago_fragment.
+     * @return A new instance of fragment AgregadoFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static detalle_pago_fragment newInstance(String param1, String param2) {
-        detalle_pago_fragment fragment = new detalle_pago_fragment();
+    public static AgregadoFragment newInstance(String param1, String param2) {
+        AgregadoFragment fragment = new AgregadoFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -60,12 +61,25 @@ public class detalle_pago_fragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
+    Button agregarButton;
+    MainActivity parentActivity;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detalle_pago, container, false);
+
+        View rootView = inflater.inflate(R.layout.fragment_agregado, container, false);
+        parentActivity = (MainActivity) getActivity();
+        parentActivity.getSupportActionBar().setTitle("Registro Exitoso");
+        agregarButton = (Button) rootView.findViewById(R.id.ConfirmarRegistro);
+        agregarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    parentActivity.changeFragment(new BudgetFragment(), false);
+
+            }
+        });
+
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -76,12 +90,6 @@ public class detalle_pago_fragment extends Fragment {
     }
 
 
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
 
     /**
      * This interface must be implemented by activities that contain this

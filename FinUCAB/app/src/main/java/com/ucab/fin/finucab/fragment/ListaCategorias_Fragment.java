@@ -23,8 +23,15 @@ import android.widget.Toast;
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.AddCategoryActivity;
 import com.ucab.fin.finucab.activity.MainActivity;
+import com.ucab.fin.finucab.controllers.Categoria_Controller;
 import com.ucab.fin.finucab.controllers.ExportarCategoria_Controller;
 import com.ucab.fin.finucab.domain.Categoria;
+import com.ucab.fin.finucab.webservice.Parametros;
+import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -33,11 +40,14 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
 
  */
-public class ListaCategorias_Fragment extends Fragment {
+public class ListaCategorias_Fragment extends Fragment implements ResponseWebServiceInterface {
 
     FloatingActionButton fab;
     MainActivity parentActivity;
     RecyclerView recycleList;
+
+    private int positionLongPress = -1;
+    private int casoRequest = -1;
 
     public ListaCategorias_Fragment() {
         // Required empty public constructor
@@ -51,18 +61,14 @@ public class ListaCategorias_Fragment extends Fragment {
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Categorias");
 
+        Categoria_Controller.initManejador(parentActivity,this);
+
         // Configuracion inicial del boton flotante
         fab = (FloatingActionButton) rootView.findViewById(R.id.addFloatingBtnCategoria);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity( new Intent(parentActivity, AddCategoryActivity.class));
-
-        //configuracion inicion del boton exportar
-
-        //configuracion inicial switch habilitar
-
-
             }
         });
 
@@ -77,17 +83,26 @@ public class ListaCategorias_Fragment extends Fragment {
             @Override
 
             public void onClick(View view, final int position) {
-                //Values are passing to activity & to fragment as well
-                //Toast.makeText(getActivity(), "Single Click on position :"+position,
-                //        Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(parentActivity, AddCategoryActivity.class);
+                intent.putExtra("CATEGORIA_DATA", Categoria_Controller.manejador.getCategorias().get(position));
+                startActivity(intent);
+
             }
 
             @Override
             public void onLongClick(View view, int position) {
+                Log.v("longpress",position+"");
+                positionLongPress = position;
                 registerForContextMenu(recycleList);
             }
         }));
             //celdas
+
+
+        casoRequest = 0;
+        Categoria_Controller.manejador.obtenerTodasCategorias();
+
 
         return rootView;
 
@@ -97,8 +112,21 @@ public class ListaCategorias_Fragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        CategoriaAdapter cAdapter =new CategoriaAdapter(populatedList());
+        if (Parametros.getRespuesta() != null) {
+
+            Log.v("Response-Fra",Parametros.getRespuesta());
+            if (Parametros.getRespuesta().equals("Error")||Parametros.getRespuesta().equals("ERROR") ) {
+
+                Toast.makeText(parentActivity, "Ups, ha ocurrido un error", Toast.LENGTH_SHORT).show();
+
+            }
+
+            Parametros.reset();
+        }
+
+        CategoriaAdapter cAdapter =new CategoriaAdapter(Categoria_Controller.manejador.getCategorias());
         recycleList.setAdapter(cAdapter);
+
     }
 
     @Override
@@ -131,7 +159,10 @@ public class ListaCategorias_Fragment extends Fragment {
 
             case R.id.deleteCategoryOption:
 
-                Toast.makeText(getActivity(), "Opcion Eliminar seleccionada",Toast.LENGTH_LONG).show();
+                casoRequest = 1;
+                Toast.makeText(getActivity(), "Eliminando categoria ...",Toast.LENGTH_LONG).show();
+                Categoria_Controller.borrarCategoria(positionLongPress);
+                positionLongPress = -1;
 
                 return true;
 
@@ -141,27 +172,6 @@ public class ListaCategorias_Fragment extends Fragment {
         }
 
     }
-
-//BORRAR CUANDO SE IMPLEMENTE LA CLASE CATEGORIA
-    private ArrayList<Categoria> populatedList() {
-
-        ArrayList<Categoria> listTest = new ArrayList<Categoria>();
-
-        listTest.add(new Categoria(0,"Comida","Almuerzos en la uni",true, false));
-        listTest.add(new Categoria(1,"Tranporte","Camino a la uni",true, false));
-        listTest.add(new Categoria(2,"Chupetas","Venta de cupetas",true, true));
-        listTest.add(new Categoria(3,"Pintura","Putura par ala casa",false, false));
-        listTest.add(new Categoria(4,"Deporte","Deporte en la uni",false, false));
-        listTest.add(new Categoria(5,"Materiales","materiales de la uni",false, false));
-        listTest.add(new Categoria(6,"Musica","Pago de servicios en la uni",true, false));
-        listTest.add(new Categoria(7,"Cable","Cable dela casa",false, false));
-
-        return listTest;
-
-    }
-
-
-
 
     public static interface ClickListener{
 
@@ -235,8 +245,54 @@ public class ListaCategorias_Fragment extends Fragment {
     }
 
 
+    /*---      Response WebService       --*/
 
+    @Override
+    public void obtuvoCorrectamente(Object response){
 
+        if ( casoRequest == 0 ) {
+            JSONArray mJsonArray = null;
+            JSONObject jObject = null;
+            String strJson;
+
+            ArrayList listaCategoria = new ArrayList<Categoria>();
+            try {
+                mJsonArray = new JSONArray(Parametros.getRespuesta());
+                int count = mJsonArray.length();
+
+                for(int i=0 ; i< count; i++){   // iterate through jsonArray
+                    //jObject = mJsonArray.getJSONObject(i);  // get jsonObject @ i position
+                    strJson = mJsonArray.getString(i);
+                    jObject = new JSONObject(strJson);
+
+                    Categoria cat = new Categoria((int)jObject.get("Id"),
+                            (String)jObject.get("Nombre"),
+                            (String)jObject.get("Descripcion"),
+                            (Boolean) jObject.get("esHabilitado"),
+                            (Boolean) jObject.get("esIngreso"));
+
+                    listaCategoria.add(cat);
+
+                }
+
+                Categoria_Controller.manejador.setCategorias(listaCategoria);
+                CategoriaAdapter cAdapter =new CategoriaAdapter(listaCategoria);
+                recycleList.setAdapter(cAdapter);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }else if ( casoRequest == 1 ) {
+
+            Toast.makeText(parentActivity, Parametros.getRespuesta(), Toast.LENGTH_SHORT).show();
+
+        }
+    }
+
+    @Override
+    public void noObtuvoCorrectamente(Object response){
+
+    }
 
 }
 

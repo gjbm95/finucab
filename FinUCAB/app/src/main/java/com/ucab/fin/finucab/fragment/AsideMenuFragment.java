@@ -1,6 +1,8 @@
 package com.ucab.fin.finucab.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,6 +13,7 @@ import android.widget.LinearLayout;
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.InicioActivity;
 import com.ucab.fin.finucab.activity.MainActivity;
+import com.ucab.fin.finucab.webservice.ControlDatos;
 
 public class AsideMenuFragment extends Fragment implements View.OnClickListener{
 
@@ -52,7 +55,7 @@ public class AsideMenuFragment extends Fragment implements View.OnClickListener{
             case R.id.myProfileBtn:
                 parentActivity.changeFragment(new MyProfileFragment(), false);
                 parentActivity.closeDrawerLayout();
-               break;
+                break;
             case R.id.budgetBtn:
                 parentActivity.changeFragment(new BudgetFragment(), false);
                 parentActivity.closeDrawerLayout();
@@ -70,14 +73,23 @@ public class AsideMenuFragment extends Fragment implements View.OnClickListener{
                 parentActivity.closeDrawerLayout();
                 break;
             case R.id.singoutBtn:
+                SharedPreferences pref = parentActivity.getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                SharedPreferences.Editor editor = pref.edit();
+                editor.remove("cookie");
+                editor.commit();
+                ControlDatos.setUsuario(null);
                 Intent inicio = new Intent (parentActivity, InicioActivity.class);
                 startActivity(inicio);
                 parentActivity.finish();
                 parentActivity.closeDrawerLayout();
+
+
                 break;
 
         }
 
 
     }
+
+
 }
