@@ -26,6 +26,11 @@ import com.ucab.fin.finucab.activity.MainActivity;
 import com.ucab.fin.finucab.controllers.Categoria_Controller;
 import com.ucab.fin.finucab.controllers.ExportarCategoria_Controller;
 import com.ucab.fin.finucab.domain.Categoria;
+import com.ucab.fin.finucab.webservice.Parametros;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -40,7 +45,8 @@ public class ListaCategorias_Fragment extends Fragment {
     MainActivity parentActivity;
     RecyclerView recycleList;
 
-
+    private int positionLongPress = -1;
+    private int casoRequest = -1;
 
     public ListaCategorias_Fragment() {
         // Required empty public constructor
@@ -62,12 +68,6 @@ public class ListaCategorias_Fragment extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity( new Intent(parentActivity, AddCategoryActivity.class));
-
-        //configuracion inicion del boton exportar
-
-        //configuracion inicial switch habilitar
-
-
             }
         });
 
@@ -82,9 +82,6 @@ public class ListaCategorias_Fragment extends Fragment {
             @Override
 
             public void onClick(View view, final int position) {
-                //Values are passing to activity & to fragment as well
-                //Toast.makeText(getActivity(), "Single Click on position :"+position,
-                //        Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(parentActivity, AddCategoryActivity.class);
                 intent.putExtra("CATEGORIA_DATA", Categoria_Controller.manejador.getCategorias().get(position));
@@ -94,10 +91,18 @@ public class ListaCategorias_Fragment extends Fragment {
 
             @Override
             public void onLongClick(View view, int position) {
+                Log.v("longpress",position+"");
+                positionLongPress = position;
                 registerForContextMenu(recycleList);
             }
         }));
             //celdas
+
+
+        //casoRequest = 0;
+        //Categoria_Controller.manejador.obtenerTodasCategorias();
+        Categoria_Controller.manejador.defaultList();
+
 
         return rootView;
 
@@ -107,9 +112,56 @@ public class ListaCategorias_Fragment extends Fragment {
     public void onResume() {
         super.onResume();
 
+        if (Parametros.getRespuesta() != null) {
+
+            Log.v("Response-Fra",Parametros.getRespuesta());
+            if (Parametros.getRespuesta().equals("Error")||Parametros.getRespuesta().equals("ERROR") ) {
+
+                Toast.makeText(parentActivity, "Ups, ha ocurrido un error", Toast.LENGTH_SHORT).show();
+
+            }else{
+                Log.v("Response-Fra",Parametros.getRespuesta());
+                if ( casoRequest == 0 ) {
+
+                    JSONArray mJsonArray = null;
+                    JSONObject jObject = null;
+
+                    ArrayList listaCategoria = new ArrayList<Categoria>();
+                    try {
+                        mJsonArray = new JSONArray(Parametros.getRespuesta());
+                        int count = mJsonArray.length();
+
+                        Log.v("Response-Manejador",count+"");
+                        for(int i=0 ; i< count; i++){   // iterate through jsonArray
+                            jObject = mJsonArray.getJSONObject(i);  // get jsonObject @ i position
+                            Categoria cat = new Categoria((int)jObject.get("Id"),
+                                    (String)jObject.get("Nombre"),
+                                    (String)jObject.get("Descripcion"),
+                                    (Boolean) jObject.get("esHabilitado"),
+                                    (Boolean) jObject.get("esIngreso"));
+                            listaCategoria.add(cat);
+
+                        }
+
+                        Categoria_Controller.manejador.setCategorias(listaCategoria);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }else if ( casoRequest == 1 ) {
+
+                    Toast.makeText(parentActivity, Parametros.getRespuesta(), Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            Parametros.reset();
+        }
+
         CategoriaAdapter cAdapter =new CategoriaAdapter(Categoria_Controller.manejador.getCategorias());
         recycleList.setAdapter(cAdapter);
 
+        casoRequest = -1;
     }
 
     @Override
@@ -142,8 +194,10 @@ public class ListaCategorias_Fragment extends Fragment {
 
             case R.id.deleteCategoryOption:
 
+                casoRequest = 1;
                 Toast.makeText(getActivity(), "Eliminando categoria ...",Toast.LENGTH_LONG).show();
-                Categoria_Controller.borrarCategoria(2);
+                Categoria_Controller.borrarCategoria(positionLongPress);
+                positionLongPress = -1;
 
                 return true;
 

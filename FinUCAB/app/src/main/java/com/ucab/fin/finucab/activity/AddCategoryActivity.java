@@ -27,7 +27,7 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
     Switch switchtipo;
     private TextView statusTextView;
     private TextView tipoTextView;
-    int Resp;
+    private boolean isModificando;
 
 
     @Override
@@ -94,8 +94,9 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
     public void cargarData(){
 
         Serializable s = getIntent().getSerializableExtra("CATEGORIA_DATA");
+        isModificando = s != null;
 
-        if (s != null ) {
+        if ( isModificando ) {
 
             Categoria categoria = (Categoria) s;
 
@@ -122,13 +123,16 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
                     Categoria_Controller.verificoVacio(AddDescripcionEditText);
 
                     Categoria categoria = new Categoria(AgregarcategoriaEditText.getText().toString(),
-                                                        AddDescripcionEditText.getText().toString(),
-                                                        switchestado.isChecked(),
-                                                        switchtipo.isChecked());
+                            AddDescripcionEditText.getText().toString(),
+                            switchestado.isChecked(),
+                            switchtipo.isChecked());
 
-                    Categoria_Controller.registrarCategoria(categoria);
-
-
+                    if (isModificando){
+                        categoria.setIdcategoria( ((Categoria) getIntent().getSerializableExtra("CATEGORIA_DATA")).getIdcategoria());
+                        Categoria_Controller.modificarCategoria(categoria);
+                    }else {
+                        Categoria_Controller.registrarCategoria(categoria);
+                    }
                     //this.onBackPressed();
 
                 }catch(CampoVacio_Exception e){

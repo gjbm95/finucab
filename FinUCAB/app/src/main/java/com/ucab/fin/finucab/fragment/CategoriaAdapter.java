@@ -25,7 +25,6 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
         this.CategoriaList = CategoriaList;
     }
 
-
     public class CategoriaViewHolder extends RecyclerView.ViewHolder {
 
         private TextView nameTextView;
@@ -43,7 +42,7 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
             switchestado.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                    Categoria_Controller.HabilitarCategoria( 1 ,isChecked);
+                    //Categoria_Controller.HabilitarCategoria( 1 ,isChecked);
 
                 }
             });
@@ -56,7 +55,11 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
     @Override
     public int getItemCount()
     {
-        return CategoriaList.size();
+        if (CategoriaList == null ){
+            return 0;
+        }else {
+            return CategoriaList.size();
+        }
     }
 
 
