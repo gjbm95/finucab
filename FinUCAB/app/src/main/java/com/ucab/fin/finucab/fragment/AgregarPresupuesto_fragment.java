@@ -78,7 +78,7 @@ public class AgregarPresupuesto_fragment extends Fragment implements CompoundBut
         onlyRadioButton.setOnCheckedChangeListener(this);
         recurrentRadioButton.setOnCheckedChangeListener(this);
 
-        //Presupuesto_Controller.asignarSpinner(parentActivity);
+        Presupuesto_Controller.asignarSpinner(parentActivity);
 
         return rootView;
     }

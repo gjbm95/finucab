@@ -51,7 +51,7 @@ public class PresentacionActivity extends AppCompatActivity {
         //Configuraciones de Red: (Coloque aqui la IP y puerto de su servidor)
         //-------------------------------------------------------------------
         if(datos.equals("vacio")) {
-            Parametros.setServer("http://192.168.1.108"); // Asigno direccion IP a parametros de red.
+            Parametros.setServer("http://192.168.1.4"); // Asigno direccion IP a parametros de red.
             Parametros.setPuerto("8080"); // Asigno puerto por el cual el servidor escucha.
             //-------------------------------------------------------
             logo = (ImageView) findViewById(R.id.logoPresentacion); //Asigno las imagenes
