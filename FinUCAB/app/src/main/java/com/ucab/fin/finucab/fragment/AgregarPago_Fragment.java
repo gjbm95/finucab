@@ -17,6 +17,9 @@ import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
 import com.ucab.fin.finucab.controllers.Pago_Controller;
 import com.ucab.fin.finucab.domain.Pago;
+import com.ucab.fin.finucab.webservice.Parametros;
+
+import java.net.URLEncoder;
 
 
 public class AgregarPago_Fragment extends Fragment {
@@ -31,6 +34,8 @@ public class AgregarPago_Fragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_agregar_pago, container, false);
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Agregar Pago");
+
+
 
         descripcionEditText = (EditText) rootView.findViewById(R.id.descripccionEditText);
         montoEditText = (EditText) rootView.findViewById(R.id.montoEditText);
@@ -59,7 +64,7 @@ public class AgregarPago_Fragment extends Fragment {
                     pago.setTotal(Float.valueOf(Pago_Controller.montoPago.getText().toString()));
                     pago.setTipo(Pago_Controller.tipoTransaccion.getSelectedItem().toString());
                     Pago_Controller.registrarPago(pago,parentActivity);
-                    //parentActivity.changeFragment(new PaymentFragment(), false);
+                    parentActivity.changeFragment(new PaymentFragment(), false);
                 }
             }
         });

@@ -9,6 +9,13 @@ import android.view.ViewGroup;
 
 import com.ucab.fin.finucab.R;
 
+/**
+ *Modulo 4 - Modulo de  Gestion de Categorias
+ *Desarrolladores:
+ *@author Juan Ariza / Augusto Cordero / Manuel Gonzalez
+ *Descripción de la clase:
+ * Esta clase se encargara de llamar al layout fragment para cargar la pantalla de agregar categoria
+ */
 
 public class AgregarCategoria_Fragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -28,6 +35,14 @@ public class AgregarCategoria_Fragment extends Fragment {
 
 
     // TODO: Rename and change types and number of parameters
+
+    /**
+     *
+     * @param param1
+     * @param param2
+     * @return
+     */
+
     public static AgregarCategoria_Fragment newInstance(String param1, String param2) {
         AgregarCategoria_Fragment fragment = new AgregarCategoria_Fragment();
         Bundle args = new Bundle();
@@ -37,6 +52,10 @@ public class AgregarCategoria_Fragment extends Fragment {
         return fragment;
     }
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +65,16 @@ public class AgregarCategoria_Fragment extends Fragment {
         }
     }
 
+
+    /**
+     *
+     *llamada al layout fragment_agregar_categoria la cual muestra la pantalla
+     de agregar categoria
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
