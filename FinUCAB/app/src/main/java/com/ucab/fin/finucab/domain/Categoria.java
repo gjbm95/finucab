@@ -4,7 +4,12 @@ package com.ucab.fin.finucab.domain;
 import java.io.Serializable;
 
 /**
- * Created by Juan on 10/05/2017.
+ *Modulo 4 - Modulo de  Gestion de Categorias
+ *Desarrolladores:
+ *@author Juan Ariza / Augusto Cordero / Manuel Gonzalez
+ *Descripción de la clase:
+ * Esta clase es en la que creamos la clase Categoria con sus atributos
+ * haciendo los metodos de get y set correspondientes
  */
 
 public class Categoria implements Serializable{
