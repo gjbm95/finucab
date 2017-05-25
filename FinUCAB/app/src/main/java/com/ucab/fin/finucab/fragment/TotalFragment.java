@@ -50,6 +50,7 @@ public class TotalFragment extends Fragment {
         exportFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ExportarPresupuesto_Controller.presupuesto = ExportarPresupuesto_Controller.obtenerPresupuestos(parentActivity);
                 Toast.makeText(parentActivity, "Exportando...", Toast.LENGTH_SHORT).show();
                 ExportarPresupuesto_Controller task=new ExportarPresupuesto_Controller();
                 task.execute();

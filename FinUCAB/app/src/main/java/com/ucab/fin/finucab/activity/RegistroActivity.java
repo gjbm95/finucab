@@ -2,6 +2,7 @@ package com.ucab.fin.finucab.activity;
 
 import android.content.Intent;
 
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -69,11 +70,8 @@ public class RegistroActivity extends AppCompatActivity {
         comenzar.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
-                                            Intent iniciar = new Intent(RegistroActivity.this, MainActivity.class);
-                                            startActivity(iniciar);
-                                            GestionUsuarios_Controller.resetarVariables();
-                                            Parametros.reset();
-                                            finish();
+                                            GestionUsuarios_Controller.inicioSesion(GestionUsuarios_Controller.usuario,
+                                                    GestionUsuarios_Controller.contrasena1,RegistroActivity.this);
                                         }
                                     }
         );
@@ -204,6 +202,7 @@ public class RegistroActivity extends AppCompatActivity {
             posicionEtapa.setImageResource(R.mipmap.onboarding2);
             DatosCuentaFragment fragment1 = new DatosCuentaFragment();
             fragmentTransaction.replace(R.id.fragment, fragment1).commit();
+            GestionUsuarios_Controller.pasoRegistroCuenta = true;
             GestionUsuarios_Controller.pasoRegistro = 2;
         }
         //Muestro el formulario de registro para datos de la seguridad de la cuenta.
@@ -258,7 +257,7 @@ public class RegistroActivity extends AppCompatActivity {
                 return false;
             }
         } else if ((conteo) == 3) {
-            if (GestionUsuarios_Controller.validacionEtapaCuenta(RegistroActivity.this) == 1) {
+            if (GestionUsuarios_Controller.validacionEtapaCuenta() == 1) {
                 this.conteo--;
                 return false;
             }else {
@@ -319,11 +318,31 @@ public class RegistroActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(validarUsuario(Parametros.getRespuesta()))
-            System.out.println("Validacion de Etapa 2 de Registro");
-        else if (validarCuenta(Parametros.getRespuesta()))
-            System.out.println("Validacion de Etapa 3 de Registro");
+        if (Parametros.getRespuesta()!=null) {
+            if (validarUsuario(Parametros.getRespuesta()) && GestionUsuarios_Controller.pasoRegistroCuenta)
+                System.out.println("Validacion de Etapa 2 de Registro");
+            else if (validarCuenta(Parametros.getRespuesta()))
+                System.out.println("Validacion de Etapa 3 de Registro");
+            else if (Parametros.getRespuesta().contains("iniciosesion"))
+                iniciarSesion();
+        }
 
+    }
+
+    //Iniciar Sesion
+    private boolean iniciarSesion(){
+        String[] datos = Parametros.getRespuesta().split(":-:");
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("cookie",datos[0]);
+        editor.commit();
+        GestionUsuarios_Controller.descomponerUsuario(datos[0]);
+        Intent iniciar = new Intent(RegistroActivity.this, MainActivity.class);
+        startActivity(iniciar);
+        GestionUsuarios_Controller.resetarVariables();
+        Parametros.reset();
+        finish();
+        return true;
     }
 
      //Validaciones en servidor
@@ -332,6 +351,7 @@ public class RegistroActivity extends AppCompatActivity {
             if (mensaje.equals("Error")&&(GestionUsuarios_Controller.pasoRegistro+1)==2) {
                 conteo=GestionUsuarios_Controller.pasoRegistro+1;
                 activarPaso(conteo);
+                GestionUsuarios_Controller.pasoRegistro = conteo-1;
                 mensajeError("Error de conexion con servidor!");
                 return true;
             }else if (mensaje.equals("No Disponible")){
@@ -342,6 +362,7 @@ public class RegistroActivity extends AppCompatActivity {
             }else if (mensaje.equals("Usuario Disponible")){
                 if (conteo!=3)
                     conteo=3;
+                GestionUsuarios_Controller.pasoRegistroCuenta = false;
                 activarPaso(3);
                 return true;
             }

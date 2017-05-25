@@ -4,6 +4,8 @@ package com.ucab.fin.finucab.webservice;
  * Created by Junior on 17/05/2017.
  */
 
+import android.util.Log;
+
 import org.json.JSONObject;
 
 /**
@@ -65,6 +67,8 @@ public class Parametros {
     public static void setMetodo(String direccion){
 
         Parametros.url = server +":"+puerto+"/FinUcabWebService/webresources/"+direccion;
+
+        Log.v("Request",Parametros.url);
     }
     /**
      * Este metodo se encarga de colocar valores nulos a los atributos de la clase

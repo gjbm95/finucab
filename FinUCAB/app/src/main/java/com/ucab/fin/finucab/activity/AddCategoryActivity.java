@@ -14,10 +14,10 @@ import android.widget.TextView;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.controllers.Categoria_Controller;
-import com.ucab.fin.finucab.controllers.GestionUsuarios_Controller;
+import com.ucab.fin.finucab.domain.Categoria;
 import com.ucab.fin.finucab.exceptions.CampoVacio_Exception;
-import com.ucab.fin.finucab.exceptions.ContrasenaInvalida_Exception;
-import com.ucab.fin.finucab.exceptions.UsuarioInvalido_Exception;
+
+import java.io.Serializable;
 
 public class AddCategoryActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -27,9 +27,12 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
     Switch switchtipo;
     private TextView statusTextView;
     private TextView tipoTextView;
-    int Resp;
+    private boolean isModificando;
+
 
     @Override
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_agregar_categoria);
@@ -39,6 +42,8 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setIcon(R.mipmap.logoh);
         actionBar.setTitle("");
+
+        Categoria_Controller.initManejador(this,null);
         //------------------------------------------------------------------------------------------
 //        BIND VIEES (Se extraen los objetos asociados a los botones en pantalla)
         acceptButton = (Button) findViewById(R.id.acceptButton);
@@ -81,9 +86,28 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
         switchestado.setChecked(true);
         //attach a listener to check for changes in state
 
+        cargarData();
 
     }
 
+
+    public void cargarData(){
+
+        Serializable s = getIntent().getSerializableExtra("CATEGORIA_DATA");
+        isModificando = s != null;
+
+        if ( isModificando ) {
+
+            Categoria categoria = (Categoria) s;
+
+            AgregarcategoriaEditText.setText(categoria.getNombre());
+            AddDescripcionEditText.setText(categoria.getDescripcion());
+            switchestado.setChecked(categoria.isEstaHabilitado());
+            switchtipo.setChecked(categoria.isIngreso());
+
+        }
+
+    }
     //Dandole funcionalidades a cada uno de los botones que salen en pantalla:
 
     @Override
@@ -97,7 +121,19 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
 
                     Categoria_Controller.verificoVacio(AgregarcategoriaEditText);
                     Categoria_Controller.verificoVacio(AddDescripcionEditText);
-                    this.onBackPressed();
+
+                    Categoria categoria = new Categoria(AgregarcategoriaEditText.getText().toString(),
+                            AddDescripcionEditText.getText().toString(),
+                            switchestado.isChecked(),
+                            switchtipo.isChecked());
+
+                    if (isModificando){
+                        categoria.setIdcategoria( ((Categoria) getIntent().getSerializableExtra("CATEGORIA_DATA")).getIdcategoria());
+                        Categoria_Controller.modificarCategoria(categoria);
+                    }else {
+                        Categoria_Controller.registrarCategoria(categoria);
+                    }
+                    //this.onBackPressed();
 
                 }catch(CampoVacio_Exception e){
                     e.getCampo().setError(e.getMessage());
