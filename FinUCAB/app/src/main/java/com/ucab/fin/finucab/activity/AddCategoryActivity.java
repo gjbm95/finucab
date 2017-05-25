@@ -134,16 +134,18 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
         }
 
     }
-    //Dandole funcionalidades a cada uno de los botones que salen en pantalla:
 
+
+    /**
+     * Dandole funcionalidades a cada uno de los botones que salen en pantalla:
+     * @param view
+     */
     @Override
     public void onClick(View view) {
         Intent i;
         switch (view.getId()) {
 
-            /**Colocando acciones al boton de "Aceptar":
-             *
-             */
+            //Colocando acciones al boton de "Aceptar":
             case R.id.acceptButton:
                 try {
 
