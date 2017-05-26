@@ -16,8 +16,6 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import com.ucab.fin.finucab.R;
@@ -36,23 +34,36 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 /**
-
- * A simple {@link Fragment} subclass.
-
+ *Modulo 4 - Modulo de  Gestion de Categorias
+ *Desarrolladores:
+ *@author Juan Ariza / Augusto Cordero / Manuel Gonzalez
+ *Descripción de la clase:
+ * Esta clase se encargara de manejar lo relacionado con la lista de categorias
+ * botones, funciones, llamadas
  */
+
 public class ListaCategorias_Fragment extends Fragment implements ResponseWebServiceInterface {
 
-    FloatingActionButton fab;
+    FloatingActionButton fab; //Boton flotante para agregar mas categorias
     MainActivity parentActivity;
     RecyclerView recycleList;
 
-    private int positionLongPress = -1;
+    private int positionLongPress = -1; //posicion del menu longpress
     private int casoRequest = -1;
 
     public ListaCategorias_Fragment() {
         // Required empty public constructor
     }
 
+
+    /**
+     *llamada al layout fragment_lista_categoria la cual muestra la posicion en la que
+     *se mostraran las listas
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -72,17 +83,25 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
             }
         });
 
-
+        //tipo RecyclerView
         recycleList = (RecyclerView) rootView.findViewById(R.id.categoriaReList);
         LinearLayoutManager myLayoutManager = new LinearLayoutManager(getActivity());
         myLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
+
         recycleList.setLayoutManager(myLayoutManager);
         recycleList.addOnItemTouchListener(new RecyclerTouchListener(getActivity(),
                 recycleList, new ListaCategorias_Fragment.ClickListener() {
+
+            /**
+             * se llama al controlador de categoria
+             * @param view
+             * @param position
+             */
             @Override
 
             public void onClick(View view, final int position) {
+
 
                 Intent intent = new Intent(parentActivity, AddCategoryActivity.class);
                 intent.putExtra("CATEGORIA_DATA", Categoria_Controller.manejador.getCategorias().get(position));
@@ -90,6 +109,11 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
 
             }
 
+            /**
+             * Acciones para el longpress
+             * @param view
+             * @param position
+             */
             @Override
             public void onLongClick(View view, int position) {
                 Log.v("longpress",position+"");
@@ -129,8 +153,14 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
 
     }
 
+    /**
+     *Creando menu de longpress llamada al menu
+     * @param menu
+     * @param v
+     * @param menuInfo
+    */
     @Override
-    //Creando menu de longpress llamada al menu
+
     public void onCreateContextMenu(ContextMenu menu, View v,  ContextMenu.ContextMenuInfo menuInfo)
     {
 
@@ -141,8 +171,11 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
     }
 
 
-
-    //COLOCAR LASOPCIONES EXPORTAR Y ELIMINAR
+    /**
+     * Opciones del longPress Exportar y eliminar
+     * @param item
+     * @return
+     */
     @Override
     public boolean onContextItemSelected(MenuItem item) {
 
@@ -150,6 +183,8 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
 
             case R.id.exportCategoryOpcion:
 
+                /*si la opcion es Exportar se llama a ExportarCategoria
+                para crear un archivo excel o cvs*/
                 Toast.makeText(parentActivity, "Exportando...", Toast.LENGTH_SHORT).show();
                 ExportarCategoria_Controller task=new ExportarCategoria_Controller();
                 task.execute();
@@ -158,7 +193,8 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
                 return true;
 
             case R.id.deleteCategoryOption:
-
+                    /*si la opcion es Eliminar se llama a borrarCategoria
+                para eliminar la categoria seleccionada*/
                 casoRequest = 1;
                 Toast.makeText(getActivity(), "Eliminando categoria ...",Toast.LENGTH_LONG).show();
                 Categoria_Controller.borrarCategoria(positionLongPress);
@@ -179,6 +215,8 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
         public void onLongClick(View view,int position);
 
     }
+
+
 
     class RecyclerTouchListener implements RecyclerView.OnItemTouchListener{
 
@@ -244,8 +282,12 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
 
     }
 
+    /**
+     * Response WebService
+     * se llena la lista con las consultas provenientes del WebService con la BD
+     * @param response
+     */
 
-    /*---      Response WebService       --*/
 
     @Override
     public void obtuvoCorrectamente(Object response){

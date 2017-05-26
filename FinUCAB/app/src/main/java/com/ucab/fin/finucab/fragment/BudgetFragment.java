@@ -5,20 +5,31 @@ import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
+import com.ucab.fin.finucab.controllers.Categoria_Controller;
 import com.ucab.fin.finucab.controllers.Presupuesto_Controller;
+import com.ucab.fin.finucab.domain.Categoria;
+import com.ucab.fin.finucab.domain.Presupuesto;
+import com.ucab.fin.finucab.webservice.Parametros;
+import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
 
 import android.graphics.Color;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.widget.Toast;
 
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +37,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BudgetFragment extends Fragment {
+public class BudgetFragment extends Fragment implements ResponseWebServiceInterface {
 
     private AppBarLayout appBar;
     private TabLayout pestanas;
@@ -43,15 +54,14 @@ public class BudgetFragment extends Fragment {
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Presupuesto");
 
+        Presupuesto_Controller.initManejador(this);
         Presupuesto_Controller.visualizarPresupuestos(parentActivity);
-
         if (savedInstanceState == null) {
             insertarTabs(container);
-
             // Setear adaptador al viewpager.
             viewPager = (ViewPager) view.findViewById(R.id.pager);
-            poblarViewPager(viewPager);
-            pestanas.setupWithViewPager(viewPager);
+            //poblarViewPager(viewPager);
+            //pestanas.setupWithViewPager(viewPager);
         }
 
         return view;
@@ -79,6 +89,61 @@ public class BudgetFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         appBar.removeView(pestanas);
+    }
+
+    @Override
+    public void obtuvoCorrectamente(Object response) {
+        // if (casoRequest == 0) {
+        JSONArray mJsonArray = null;
+        JSONObject jObject = null;
+        String strJson;
+
+        ArrayList listaCategoria = new ArrayList<Categoria>();
+        try {
+            mJsonArray = new JSONArray(Parametros.getRespuesta());
+            int count = mJsonArray.length();
+
+            for (int i = 0; i < count; i++) {   // iterate through jsonArray
+                jObject = mJsonArray.getJSONObject(i);  // get jsonObject @ i position
+                Presupuesto pre = new Presupuesto();
+                pre.set_duracion(Integer.parseInt((String) jObject.get("Duracion")));
+                pre.set_clasificacion((String) jObject.get("Clasificacion"));
+                pre.set_monto(Float.parseFloat((String) jObject.get("Monto")));
+                pre.set_categoria((String) jObject.get("Categoria"));
+                pre.set_nombre((String) jObject.get("Nombre"));
+                if ((jObject.get("Tipo")).equals("t")) {
+                    Presupuesto_Controller.listaGanancias.add(pre);
+                    Presupuesto_Controller.ganancias = Presupuesto_Controller.ganancias + pre.get_monto();
+                } else {
+                    Presupuesto_Controller.listaGastos.add(pre);
+                    Presupuesto_Controller.gastos = Presupuesto_Controller.gastos + pre.get_monto();
+                }
+            }
+            Presupuesto_Controller.total = Presupuesto_Controller.ganancias - Presupuesto_Controller.gastos;
+            for (Presupuesto p : Presupuesto_Controller.listaGanancias){
+
+                System.out.println("BUDGETfRAGMENT: la gganancia es: "+p.get_nombre());
+            }
+            for (Presupuesto p : Presupuesto_Controller.listaGastos){
+
+                System.out.println("BUDGETfRAGMENT: el gasto es: "+p.get_nombre());
+            }
+            poblarViewPager(viewPager);
+            pestanas.setupWithViewPager(viewPager);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        //} else if (casoRequest == 1) {
+
+        //   Toast.makeText(parentActivity, Parametros.getRespuesta(), Toast.LENGTH_SHORT).show();
+
+        // }
+    }
+
+    @Override
+    public void noObtuvoCorrectamente(Object error) {
+
     }
 
     /**
@@ -111,6 +176,21 @@ public class BudgetFragment extends Fragment {
         @Override
         public CharSequence getPageTitle(int position) {
             return titulosFragmentos.get(position);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (Parametros.getRespuesta() != null) {
+            Log.v("Response-Fra",Parametros.getRespuesta());
+            if (Parametros.getRespuesta().equals("Error")||Parametros.getRespuesta().equals("ERROR") ) {
+
+                Toast.makeText(parentActivity, "Ups, ha ocurrido un error", Toast.LENGTH_SHORT).show();
+
+            }
+
+            Parametros.reset();
         }
     }
 

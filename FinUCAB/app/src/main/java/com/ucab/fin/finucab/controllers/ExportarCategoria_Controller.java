@@ -20,7 +20,11 @@ import java.io.IOException;
 
 
 /**
- * Created by juan on 21/5/2017.
+ *Modulo 4 - Modulo de  Gestion de Categorias
+ *Desarrolladores:
+ *@author Juan Ariza / Augusto Cordero / Manuel Gonzalez
+ *Descripción de la clase:
+ * Esta clase se encarga de exportar las categorias en formato Excel o Cvs
  */
 
 public class ExportarCategoria_Controller extends AsyncTask<String ,String, String> {
