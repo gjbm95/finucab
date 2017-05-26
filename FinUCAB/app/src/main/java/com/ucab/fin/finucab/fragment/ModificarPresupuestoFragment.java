@@ -27,9 +27,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
+/**Modulo 3 - Modulo de Presupuestos
+ *Desarrolladores:*Mariángel Pérez / Oswaldo López / Aquiles Pulido
+ *Descripción de la clase:
+ *Esta clase se encarga del manejo de los datos entrantes para la funcion modificar presupuesto
+ **/
+
 public class ModificarPresupuestoFragment extends Fragment implements CompoundButton.OnCheckedChangeListener,ResponseWebServiceInterface {
 
 
@@ -84,6 +87,7 @@ public class ModificarPresupuestoFragment extends Fragment implements CompoundBu
             public void onClick(View v) {
                 if(Presupuesto_Controller.validacionVacio(parentActivity)==0){
                     caso=2;
+                    obtuvoCorrectamente(null);
 
 
                 }
@@ -124,11 +128,11 @@ public class ModificarPresupuestoFragment extends Fragment implements CompoundBu
 
     @Override
     public void obtuvoCorrectamente(Object response) {
-        if(caso == 0){
-            Presupuesto_Controller.presupuesto = new Presupuesto();
-            if(Parametros.getRespuesta().equals("Error")){
-                Presupuesto_Controller.mensajeError(parentActivity,"Error de conexion con servidor!");
-            }else{
+        if(Parametros.getRespuesta().equals("Error")){
+            Presupuesto_Controller.mensajeError(parentActivity,"Error de conexion con servidor!");
+        }else {
+            if(caso == 0){
+                Presupuesto_Controller.presupuesto = new Presupuesto();
                 try {
                     JSONObject json = new JSONObject(Parametros.respuesta);
                     Presupuesto_Controller.presupuesto.set_categoria((String) json.get("IdCategoria"));
@@ -139,45 +143,30 @@ public class ModificarPresupuestoFragment extends Fragment implements CompoundBu
                     Presupuesto_Controller.presupuesto.set_tipo(((String) json.get("Tipo")));
                     caso =1;
                     Presupuesto_Controller.asignarValores();
-                    Presupuesto_Controller.asignarSpinner(parentActivity);
+                    Presupuesto_Controller.obtenerSpinner(parentActivity);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-            }
-        }else if(caso == 1){
-            JSONObject jObject = null;
-            System.out.println("Antes del try");
-            try {
-                System.out.println("Despues del try");
-                JSONArray mJsonArray = new JSONArray(Parametros.respuesta);
-                int count = mJsonArray.length();
-                String[] valores = new String[count];
-                for (int i = 0; i < count; i++) {   // iterate through jsonArray
 
-                    jObject = mJsonArray.getJSONObject(i);  // get jsonObject @ i position
-                    String categoria = ((String) jObject.get("Nombre"));
-                    System.out.println("La categoria es: " + categoria);
-                    valores[i] = categoria;
+            }else if(caso == 1){
+
+                Presupuesto_Controller.asignarSpinner(parentActivity);
+
+            }else if(caso == 2){
+                try {
+                    Presupuesto_Controller.DevolverValidacion(nameEditText,false);
+                    caso = 3;
+                    Presupuesto_Controller.modificarPresupuesto(parentActivity);
+                    //
+                } catch (NombrePresupuesto_Exception e) {
+                    e.getCampo().setError(e.getMessage());;
                 }
-                ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(),
-                        android.R.layout.simple_spinner_dropdown_item, valores);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                categorySpinner.setAdapter(adapter);
-            } catch (JSONException e) {
-                e.printStackTrace();
+            }else if (caso == 3){
+                parentActivity.changeFragment(new AgregadoFragment(), false);
             }
-        }else if(caso == 2){
-            try {
-                Presupuesto_Controller.DevolverValidacion(nameEditText,false);
-                caso = 3;
-                Presupuesto_Controller.modificarPresupuesto(parentActivity);
-                //
-            } catch (NombrePresupuesto_Exception e) {
-                e.getCampo().setError(e.getMessage());;
-            }
-        }else if (caso == 3){
-            parentActivity.changeFragment(new AgregadoFragment(), false);
         }
+
+
 
 
     }

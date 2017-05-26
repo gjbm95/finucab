@@ -7,22 +7,34 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.appdatasearch.GetRecentContextCall;
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
 import com.ucab.fin.finucab.controllers.ExportarPresupuesto_Controller;
 import com.ucab.fin.finucab.controllers.Presupuesto_Controller;
+import com.ucab.fin.finucab.domain.Presupuesto;
+import com.ucab.fin.finucab.webservice.Parametros;
+import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class TotalFragment extends Fragment {
+/**Modulo 3 - Modulo de Presupuestos
+ *Desarrolladores:*Mariángel Pérez / Oswaldo López / Aquiles Pulido
+ *Descripción de la clase:
+ *Esta clase se encarga de la visualizacion de la suma total del dinero de ganancias y gastos
+ **/
+
+public class TotalFragment extends Fragment implements ResponseWebServiceInterface{
     private static final String ARG_SECTION_NUMBER = "section_number";
     TextView gananciaTextView, gastoTextView, totalTextView;
-    FloatingActionButton exportFAB;
+    Button exportarButton;
     MainActivity parentActivity;
 
     public TotalFragment() {
@@ -45,20 +57,34 @@ public class TotalFragment extends Fragment {
 
         Presupuesto_Controller.asignarTotales();
 
+        ExportarPresupuesto_Controller.interfaz = (ResponseWebServiceInterface) this;
         parentActivity = (MainActivity) getActivity();
-        exportFAB = (FloatingActionButton) rootView.findViewById(R.id.addFloatingBtnTotal);
-        exportFAB.setOnClickListener(new View.OnClickListener() {
+        exportarButton = (Button) rootView.findViewById(R.id.exportarButton);
+        exportarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ExportarPresupuesto_Controller.presupuesto = ExportarPresupuesto_Controller.obtenerPresupuestos(parentActivity);
+                ExportarPresupuesto_Controller.obtenerPresupuestos(parentActivity);
                 Toast.makeText(parentActivity, "Exportando...", Toast.LENGTH_SHORT).show();
-                ExportarPresupuesto_Controller task=new ExportarPresupuesto_Controller();
-                task.execute();
-                Toast.makeText(parentActivity, "Exportado correctamente", Toast.LENGTH_SHORT).show();
 
             }
         });
         return rootView;
     }
 
+    @Override
+    public void obtuvoCorrectamente(Object response) {
+        if(Parametros.getRespuesta().equals("Error")){
+            Presupuesto_Controller.mensajeError(parentActivity,"Error de conexion con servidor!");
+        }else{
+            ExportarPresupuesto_Controller.utilizarPresupuesto();
+            ExportarPresupuesto_Controller task=new ExportarPresupuesto_Controller();
+            task.execute();
+            Toast.makeText(parentActivity, "Exportado correctamente", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void noObtuvoCorrectamente(Object error) {
+
+    }
 }

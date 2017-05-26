@@ -6,8 +6,10 @@ import android.os.Environment;
 import android.util.Log;
 
 import com.ucab.fin.finucab.domain.Presupuesto;
+import com.ucab.fin.finucab.webservice.ControlDatos;
 import com.ucab.fin.finucab.webservice.Parametros;
 import com.ucab.fin.finucab.webservice.Recepcion;
+import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
 
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -34,68 +36,68 @@ import java.util.Date;
 import static android.R.id.list;
 
 
-/**
- * Created by mariangel on 13/5/2017.
- */
+/**Modulo 3 - Modulo de Presupuestos
+ *Desarrolladores:*Mariángel Pérez / Oswaldo López / Aquiles Pulido
+ *Descripción de la clase:
+ *Esta clase se encarga del proceso de exportar la lista de presupuestos de un usuario
+ **/
 
 public class ExportarPresupuesto_Controller extends AsyncTask<String ,String, String> {
 
 
-//////ESTE CODIGO ES UNA PRUEBA PARA EL EXPORTAR DEL MODULO 3 DE PRESUPUESTOS, SE EXPORTAN ARCHIVOS CSV.////
-
     public static ArrayList<Presupuesto> listaPresupuestos = new ArrayList<>();
     public static Activity activity;
-    public static ArrayList<Presupuesto> presupuesto = new ArrayList<>();
+    public static ResponseWebServiceInterface interfaz;
 
 
-
+    /**
+     * @param args
+     * @return
+     * Este método se encarga de crear el archivo .csv y .xls y luego generarlo
+     **/
     protected String doInBackground(final String... args) {
 
-        File exportDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), ""); //CONSEGUIR LA RUTA DEL SDCARD
+        File exportDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "");
         if (!exportDir.exists()) {
             exportDir.mkdirs();
         }
         SimpleDateFormat s = new SimpleDateFormat("ddMMyyyyhhmmss");
         String format = s.format(new Date());
-        File fileCSV = new File(exportDir, "CSVPresupuesto"+format+".csv");   //DECLARAR UN ARCHIVO CSV
-        File fileEXCEL = new File(exportDir, "ExcelPresupuesto"+format+".xls");//DECLARAR UN ARCHIVO XML
+        File fileCSV = new File(exportDir, "CSVPresupuesto"+format+".csv");
+        File fileEXCEL = new File(exportDir, "ExcelPresupuesto"+format+".xls");
         try {
-            fileCSV.createNewFile();   //CREAR EL ARCHIVO
-            FileWriter writerCSV = new FileWriter(fileCSV); //HABILITAR LA FUNCION DE ESCRIBIR EL ARCHIVO
+            fileCSV.createNewFile();
+            FileWriter writerCSV = new FileWriter(fileCSV);
 
-            writerCSV.write("Nombre del Presupuesto;Categoria;Monto;Clasificacion;Duracion;Tipo;\n"); // ESCRIBO EN EL ARCHIVO EL HEADER
-            for(Presupuesto p : presupuesto){ //ITERACION DEL ARRAY
+            writerCSV.write("Nombre del Presupuesto;Categoria;Monto;Clasificacion;Duracion;Tipo;\n");
+            for(Presupuesto p : listaPresupuestos){
                 writerCSV.write(p.get_nombre()+";"+p.get_categoria()+";"+p.get_monto().toString()+";"+p.get_clasificacion()
-                        +";"+p.get_duracion().toString()+";"+p.get_tipo()+";"+"\n"); //LLENANDO LA FILA
+                        +";"+p.get_duracion().toString()+";"+p.get_tipo()+";"+"\n");
 
             }
             writerCSV.flush();
-            writerCSV.close();//CERRAR EL ESCRIBIR
+            writerCSV.close();
 
-            //***********PARA EXPORTAR A EXCEL*********//
 
-            fileEXCEL.createNewFile(); //CREANDO EL ARCHIVO
-            Workbook wb = new HSSFWorkbook(); //CREANDO UN WORKBOOK
+            fileEXCEL.createNewFile();
+            Workbook wb = new HSSFWorkbook();
             Cell c= null;
 
-            //Cell style for header row
             CellStyle cs = wb.createCellStyle();
             CellStyle as = wb.createCellStyle();
-            cs.setFillForegroundColor(HSSFColor.SKY_BLUE.index); // DECLARO EL COLOR DE FONDO DE LA HOJA
+            cs.setFillForegroundColor(HSSFColor.SKY_BLUE.index);
             cs.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
-            as.setFillForegroundColor(HSSFColor.PALE_BLUE.index); // DECLARO EL COLOR DE FONDO DE LA HOJA
+            as.setFillForegroundColor(HSSFColor.PALE_BLUE.index);
             as.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
 
-            //*****GENERANDO LA PAGINA******////
             Sheet sheet1 = null;
             sheet1 = wb.createSheet("Mi Presupuesto");
 
-            //***** GENERANDO COLUMNAS*****//
-            Row row0 = sheet1.createRow(0);  // CREO LA FILA HEADER
+            Row row0 = sheet1.createRow(0);
 
-            c = row0.createCell(0); // LE ASIGNO EL NUMERO DE LA CELDA
-            c.setCellValue("Nombre del Presupuesto"); // VALOR DE LA CELDA
-            c.setCellStyle(cs); // ESTABLEZCO EL ESTILO
+            c = row0.createCell(0);
+            c.setCellValue("Nombre del Presupuesto");
+            c.setCellStyle(cs);
 
             c = row0.createCell(1);
             c.setCellValue("Categoria");
@@ -117,43 +119,42 @@ public class ExportarPresupuesto_Controller extends AsyncTask<String ,String, St
             c.setCellValue("Tipo");
             c.setCellStyle(cs);
 
-            int count = presupuesto.size(); //OBTENGO LA LONGITUD DEL ARRAY
+            int count = listaPresupuestos.size();
 
-            for(int contadorFilas=0 ; contadorFilas<count; contadorFilas++){   // ITERANDO PARA COLOCAR LAS FILAS
-                Row row = sheet1.createRow(contadorFilas+1);  // CREO UNA FILA
+            for(int contadorFilas=0 ; contadorFilas<count; contadorFilas++){
+                Row row = sheet1.createRow(contadorFilas+1);
 
-                Presupuesto p = presupuesto.get(contadorFilas);
+                Presupuesto p = listaPresupuestos.get(contadorFilas);
 
-                c = row.createCell(0); // LE ASIGNO EL NUMERO DE LA CELDA
-                c.setCellValue(p.get_nombre()); // VALOR DE LA CELDA
-                c.setCellStyle(as); // ESTABLEZCO EL ESTILO
+                c = row.createCell(0);
+                c.setCellValue(p.get_nombre());
+                c.setCellStyle(as);
 
-                c = row.createCell(1); // LE ASIGNO EL NUMERO DE LA CELDA
-                c.setCellValue(p.get_categoria()); // VALOR DE LA CELDA
-                c.setCellStyle(as); // ESTABLEZCO EL ESTILO
+                c = row.createCell(1);
+                c.setCellValue(p.get_categoria());
+                c.setCellStyle(as);
 
-                c = row.createCell(2); // LE ASIGNO EL NUMERO DE LA CELDA
-                c.setCellValue(p.get_monto()); // VALOR DE LA CELDA
-                c.setCellStyle(as); // ESTABLEZCO EL ESTILO
+                c = row.createCell(2);
+                c.setCellValue(p.get_monto());
+                c.setCellStyle(as);
 
-                c = row.createCell(3); // LE ASIGNO EL NUMERO DE LA CELDA
-                c.setCellValue(p.get_clasificacion()); // VALOR DE LA CELDA
-                c.setCellStyle(as); // ESTABLEZCO EL ESTILO
+                c = row.createCell(3);
+                c.setCellValue(p.get_clasificacion());
+                c.setCellStyle(as);
 
-                c = row.createCell(4); // LE ASIGNO EL NUMERO DE LA CELDA
-                c.setCellValue(p.get_duracion()); // VALOR DE LA CELDA
-                c.setCellStyle(as); // ESTABLEZCO EL ESTILO
+                c = row.createCell(4);
+                c.setCellValue(p.get_duracion());
+                c.setCellStyle(as);
 
-                c = row.createCell(5); // LE ASIGNO EL NUMERO DE LA CELDA
-                c.setCellValue(p.get_tipo()); // VALOR DE LA CELDA
-                c.setCellStyle(as); // ESTABLEZCO EL ESTILO
+                c = row.createCell(5);
+                c.setCellValue(p.get_tipo());
+                c.setCellStyle(as);
 
             }
 
-            // CREAR UNA RUTA DONDE SE VA A GUARDAR NUESTRO OBJETO EN LA SDCARD
-            FileOutputStream os = new FileOutputStream(fileEXCEL); // DECLARO UN OBJETO DE TIPO FILEOUTPUTSTREAM
-            wb.write(os); // ESCRIBO EL ARCHIVO
-            os.close(); // CIERRO EL ARCCHIVO
+            FileOutputStream os = new FileOutputStream(fileEXCEL);
+            wb.write(os);
+            os.close();
             listaPresupuestos = new ArrayList<>();
             return "";
         } catch (IOException e) {
@@ -162,11 +163,27 @@ public class ExportarPresupuesto_Controller extends AsyncTask<String ,String, St
 
         }
     }
-    public static ArrayList<Presupuesto> obtenerPresupuestos ( Activity actividad ) {
 
-        Parametros.setMetodo("Modulo3/ListaPresupuestoExportar");
-        //Parametros.setMetodo("Modulo3/ListaPresupuestoExportar?idUsuario="+ ControlDatos.getUsuario().getIdusuario());
-        new Recepcion(actividad).execute("GET");
+    /**
+     *
+     * @param actividad
+     * Este método se encarga de hacer la llamada al web service y devolver todos los presupuestos
+     * para el proceso de exportacion
+     */
+    public static void obtenerPresupuestos ( Activity actividad ) {
+
+        System.out.println("ESTOY EN OBTENERPRESUPUESTO");
+        Parametros.setMetodo("Modulo3/ListaPresupuestoExportar?idUsuario="+ ControlDatos.getUsuario().getUsuario());
+        new Recepcion(actividad,interfaz).execute("GET");
+
+    }
+
+    /**
+     * @return
+     * Este método se encarga de llenar la lista de presupuestos que se utilizará para exportar
+     */
+    public static ArrayList<Presupuesto> utilizarPresupuesto(){
+        System.out.println("Estoy en utilizarPresupuesto(): la respuesta es: "+Parametros.getRespuesta());
         JSONObject jObject = null;
         try {
             JSONArray mJsonArray = new JSONArray(Parametros.respuesta);
@@ -175,6 +192,7 @@ public class ExportarPresupuesto_Controller extends AsyncTask<String ,String, St
             for (int i = 0; i < count; i++) {   // iterate through jsonArray
                 jObject = mJsonArray.getJSONObject(i);  // get jsonObject @ i position
                 Presupuesto pre = new Presupuesto();
+                System.out.println("NOMbre en json: "+(String) jObject.get("Nombre"));
                 pre.set_nombre((String) jObject.get("Nombre"));
                 pre.set_categoria((String) jObject.get("Categoria"));
                 pre.set_monto(Float.parseFloat((String) jObject.get("Monto")));
@@ -185,16 +203,16 @@ public class ExportarPresupuesto_Controller extends AsyncTask<String ,String, St
                 }else{
                     pre.set_tipo("Gasto");
                 }
-                listaPresupuestos.add(pre);
+                ExportarPresupuesto_Controller.listaPresupuestos.add(pre);
             }
-            for (Presupuesto p: listaPresupuestos){
-                System.out.println(p.get_nombre());}
+            for (Presupuesto p: ExportarPresupuesto_Controller.listaPresupuestos){
+                System.out.println("Nombre: "+p.get_nombre());
+            }
 
-            return listaPresupuestos;
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         return null;
     }
 

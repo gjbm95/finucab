@@ -34,9 +34,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+/**Modulo 3 - Modulo de Presupuestos
+ *Desarrolladores:*Mariángel Pérez / Oswaldo López / Aquiles Pulido
+ *Descripción de la clase:
+ *Esta clase es el contenedor del tab layout en el cual se visualizan las pestañas de los
+ * presupuestos (Total, ganancias, gastos)
+ **/
+
 public class BudgetFragment extends Fragment implements ResponseWebServiceInterface {
 
     private AppBarLayout appBar;
@@ -54,7 +58,7 @@ public class BudgetFragment extends Fragment implements ResponseWebServiceInterf
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Presupuesto");
         Presupuesto_Controller.interfaz = (ResponseWebServiceInterface) this;
-        Presupuesto_Controller.visualizarPresupuestos(parentActivity);
+        Presupuesto_Controller.obtenerListaPresupuestos(parentActivity);
         if (savedInstanceState == null) {
             insertarTabs(container);
             // Setear adaptador al viewpager.
@@ -95,42 +99,10 @@ public class BudgetFragment extends Fragment implements ResponseWebServiceInterf
         }else
         {
             // if (casoRequest == 0) {
-            JSONArray mJsonArray = null;
-            JSONObject jObject = null;
+            Presupuesto_Controller.visualizarPresupuesto();
+            poblarViewPager(viewPager);
+            pestanas.setupWithViewPager(viewPager);
 
-            ArrayList listaCategoria = new ArrayList<Categoria>();
-            try {
-                mJsonArray = new JSONArray(Parametros.getRespuesta());
-                int count = mJsonArray.length();
-
-                for (int i = 0; i < count; i++) {   // iterate through jsonArray
-                    jObject = mJsonArray.getJSONObject(i);  // get jsonObject @ i position
-                    Presupuesto pre = new Presupuesto();
-                    pre.set_duracion(Integer.parseInt((String) jObject.get("Duracion")));
-                    pre.set_clasificacion((String) jObject.get("Clasificacion"));
-                    pre.set_monto(Float.parseFloat((String) jObject.get("Monto")));
-                    pre.set_categoria((String) jObject.get("Categoria"));
-                    pre.set_nombre((String) jObject.get("Nombre"));
-                    if ((jObject.get("Tipo")).equals("t")) {
-                        Presupuesto_Controller.listaGanancias.add(pre);
-                        Presupuesto_Controller.ganancias = Presupuesto_Controller.ganancias + pre.get_monto();
-                    } else {
-                        Presupuesto_Controller.listaGastos.add(pre);
-                        Presupuesto_Controller.gastos = Presupuesto_Controller.gastos + pre.get_monto();
-                    }
-                }
-                Presupuesto_Controller.total = Presupuesto_Controller.ganancias - Presupuesto_Controller.gastos;
-                poblarViewPager(viewPager);
-                pestanas.setupWithViewPager(viewPager);
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            //} else if (casoRequest == 1) {
-
-            //   Toast.makeText(parentActivity, Parametros.getRespuesta(), Toast.LENGTH_SHORT).show();
-
-            // }
         }
 
 
