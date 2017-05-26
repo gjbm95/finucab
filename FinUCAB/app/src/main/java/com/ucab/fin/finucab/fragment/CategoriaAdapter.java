@@ -9,6 +9,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.ucab.fin.finucab.R;
+import com.ucab.fin.finucab.controllers.Categoria_Controller;
 import com.ucab.fin.finucab.domain.Categoria;
 
 import java.util.List;
@@ -54,7 +55,7 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
             switchestado.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                    //Categoria_Controller.HabilitarCategoria( 1 ,isChecked);
+                    Categoria_Controller.HabilitarCategoria( (Categoria) buttonView.getTag() ,isChecked);
 
                 }
             });
@@ -92,8 +93,13 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
         CategoriaViewHolder.nameTextView.setText(pi.getNombre());
         CategoriaViewHolder.descripcionTextView.setText(pi.getDescripcion());
         //CategoriaViewHolder.switchestado.setText(pi.getIdcategoria()+"");
+        CategoriaViewHolder.switchestado.setTag(pi);
         CategoriaViewHolder.switchestado.setChecked(pi.isEstaHabilitado());
         CategoriaViewHolder.itemView.setLongClickable(true);
+
+        if ( CategoriaList.size() == (i+1) ){
+            Categoria_Controller.setHabilitarEventoSwitch(true);
+        }
     }
 
 

@@ -11,13 +11,22 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.controllers.Categoria_Controller;
 import com.ucab.fin.finucab.domain.Categoria;
 import com.ucab.fin.finucab.exceptions.CampoVacio_Exception;
+import com.ucab.fin.finucab.fragment.CategoriaAdapter;
+import com.ucab.fin.finucab.webservice.Parametros;
+import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  *Modulo 4 - Modulo de  Gestion de Categorias
@@ -30,7 +39,7 @@ import java.io.Serializable;
  * parametros de los botones para la aplicacion.
  */
 
-public class AddCategoryActivity extends AppCompatActivity implements View.OnClickListener {
+public class AddCategoryActivity extends AppCompatActivity implements View.OnClickListener, ResponseWebServiceInterface {
 
     EditText AddDescripcionEditText; //caja de texto para almacenar la descripcion de la categoria
     EditText AgregarcategoriaEditText; //caja de texto para almacenar la categoria
@@ -58,7 +67,7 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
         actionBar.setIcon(R.mipmap.logoh);
         actionBar.setTitle("");
 
-        Categoria_Controller.initManejador(this,null);
+        Categoria_Controller.initManejador(this,this);
         //------------------------------------------------------------------------------------------
 //        BIND VIEES (Se extraen los objetos asociados a los botones en pantalla)
         acceptButton = (Button) findViewById(R.id.acceptButton);
@@ -174,4 +183,25 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
 
         }
     }
+
+
+    /**
+     * Response WebService
+     * se llena la lista con las consultas provenientes del WebService con la BD
+     * @param response
+     */
+    @Override
+    public void obtuvoCorrectamente(Object response){
+
+        Toast.makeText(this, Parametros.getRespuesta(), Toast.LENGTH_SHORT).show();
+
+        Categoria_Controller.resetCasoRequest();
+
+    }
+
+    @Override
+    public void noObtuvoCorrectamente(Object response){
+
+    }
+
 }
