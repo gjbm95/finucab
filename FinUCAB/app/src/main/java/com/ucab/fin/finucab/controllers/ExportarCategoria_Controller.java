@@ -6,8 +6,6 @@ import android.os.Environment;
 import android.util.Log;
 
 import com.ucab.fin.finucab.domain.Categoria;
-import com.ucab.fin.finucab.webservice.Parametros;
-import com.ucab.fin.finucab.webservice.Recepcion;
 
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -17,9 +15,6 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -40,9 +35,10 @@ public class ExportarCategoria_Controller extends AsyncTask<String ,String, Stri
 
 //////ESTE CODIGO ES UNA PRUEBA PARA EL EXPORTAR DEL MODULO 3 DE PRESUPUESTOS, SE EXPORTAN ARCHIVOS CSV.////
 
-    public static ArrayList<Categoria> listaCategoria = new ArrayList<>();
+    public static ArrayList<Categoria> listaCategoria ;
     public static Activity activity;
-    public static ArrayList<Categoria> categoria = new ArrayList<>();
+
+
 
 
 
@@ -59,7 +55,7 @@ public class ExportarCategoria_Controller extends AsyncTask<String ,String, Stri
             FileWriter writerCSV = new FileWriter(fileCSV); //HABILITAR LA FUNCION DE ESCRIBIR EL ARCHIVO
 
             writerCSV.write("Nombre de la Categoria;Descripcion;Estado;Tipo;\n"); // ESCRIBO EN EL ARCHIVO EL HEADER
-            for(Categoria c : categoria){ //ITERACION DEL ARRAY
+            for(Categoria c : listaCategoria){ //ITERACION DEL ARRAY
                 writerCSV.write(c.getNombre()+";"+c.getDescripcion()+";"+c.isEstaHabilitado()+";"+c.isIngreso()
                         +";"+"\n"); //LLENANDO LA FILA
 
@@ -104,12 +100,12 @@ public class ExportarCategoria_Controller extends AsyncTask<String ,String, Stri
             c.setCellValue("Tipo");
             c.setCellStyle(cs);
 
-            int count = categoria.size(); //OBTENGO LA LONGITUD DEL ARRAY
+            int count = listaCategoria.size(); //OBTENGO LA LONGITUD DEL ARRAY
 
             for(int contadorFilas=0 ; contadorFilas<count; contadorFilas++){   // ITERANDO PARA COLOCAR LAS FILAS
                 Row row = sheet1.createRow(contadorFilas+1);  // CREO UNA FILA
 
-                Categoria ca = categoria.get(contadorFilas);
+                Categoria ca = listaCategoria.get(contadorFilas);
 
                 c = row.createCell(0); // LE ASIGNO EL NUMERO DE LA CELDA
                 c.setCellValue(ca.getNombre()); // VALOR DE LA CELDA
@@ -139,34 +135,6 @@ public class ExportarCategoria_Controller extends AsyncTask<String ,String, Stri
             return "";
 
         }
-    }
-    public static ArrayList<Categoria> obtenerCategoria ( Activity actividad ) {
-
-        Parametros.setMetodo("Modulo4/ListaCategoriaExportar");
-        //Parametros.setMetodo("Modulo3/ListaPresupuestoExportar?idUsuario="+ ControlDatos.getUsuario().getIdusuario());
-        new Recepcion(actividad).execute("GET");
-        JSONObject jObject = null;
-        try {
-            JSONArray mJsonArray = new JSONArray(Parametros.respuesta);
-            int count = mJsonArray.length();
-            for (int i = 0; i < count; i++) {   // iterate through jsonArray
-                jObject = mJsonArray.getJSONObject(i);  // get jsonObject @ i position
-                Categoria ca = new Categoria();
-                ca.setNombre((String) jObject.get("Nombre"));
-                ca.setDescripcion((String) jObject.get("Descripcion"));
-                ca.setEstaHabilitado(Boolean.parseBoolean((String) jObject.get("Estado")));
-                ca.setEsIngreso(Boolean.parseBoolean((String) jObject.get("Tipo")));
-
-                listaCategoria.add(ca);
-            }
-
-
-            return listaCategoria;
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return null;
     }
 
 }
