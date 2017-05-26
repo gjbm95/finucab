@@ -156,7 +156,8 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
 
             //Colocando acciones al boton de "Aceptar":
             case R.id.acceptButton:
-                try {
+                try
+                {
 
                     Categoria_Controller.verificoVacio(AgregarcategoriaEditText);
                     Categoria_Controller.verificoVacio(AddDescripcionEditText);
@@ -172,7 +173,6 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
                     }else {
                         Categoria_Controller.registrarCategoria(categoria);
                     }
-                    //this.onBackPressed();
 
                 }catch(CampoVacio_Exception e){
                     e.getCampo().setError(e.getMessage());
@@ -188,7 +188,7 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
     /**
      * Response WebService
      * se llena la lista con las consultas provenientes del WebService con la BD
-     * @param response
+     * @param response Respuesta del WebService
      */
     @Override
     public void obtuvoCorrectamente(Object response){
@@ -198,7 +198,11 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
         Categoria_Controller.resetCasoRequest();
 
     }
-
+    /**
+     * Response WebService
+     * se llena la lista con las consultas provenientes del WebService con la BD
+     * @param response Error del WebService
+     */
     @Override
     public void noObtuvoCorrectamente(Object response){
 
