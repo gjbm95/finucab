@@ -13,6 +13,17 @@ import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.controllers.GestionUsuarios_Controller;
 
 /**
+ *Modulo 1 - Modulo de  Inicio de Sesion y registro de usuario
+ *Desarrolladores:
+ *@author Garry Jr. Bruno / Erbin Rodriguez / Alejandro Negrin
+ *Descripción de la clase:
+ * Esta clase es una herencia de la clase Fragment. Se encarga de gestionar el fragmento que se
+ * encarga asignar la nueva contraseña durante la recuperacion de la cuenta de un usuario.
+ *
+ **/
+
+
+/**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
  * {@link ContrasenaFragment.OnFragmentInteractionListener} interface
@@ -94,18 +105,7 @@ public class ContrasenaFragment extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
-/*
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-*/
+
     @Override
     public void onDetach() {
         super.onDetach();

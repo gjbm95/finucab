@@ -37,22 +37,17 @@ import static org.robolectric.shadows.support.v4.SupportFragmentTestUtil.startFr
 @Config(constants = BuildConfig.class)
 public class GestionUsuariosTest {
 
-
   /*
     private DatosSeguridadFragment fragmentregistro;
-
-
     @Before
     public void setUp() throws Exception
     {
-
         fragmentregistro = Robolectric.( DatosSeguridadFragment.class )
                 .create()
                 .resume()
                 .get();
     }
 */
-
 
     /**
      * Realizo pruebas a la validacion de preguntas y respuestas de usuarios
