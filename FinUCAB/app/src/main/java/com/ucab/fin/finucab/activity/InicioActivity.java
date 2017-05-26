@@ -187,7 +187,6 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
 
                 mensajeError("Combinacion de datos es incorrecta!");
             }
-
         }
     }
 
