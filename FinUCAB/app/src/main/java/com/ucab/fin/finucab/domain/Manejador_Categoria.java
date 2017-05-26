@@ -54,19 +54,23 @@ public class Manejador_Categoria {
      */
     public void agregarCategoria( Categoria categoria) {
 
-        JSONObject nueva_categoria = new JSONObject();
         try {
+
+            int idUsuario = 1;
+            JSONObject nueva_categoria = new JSONObject();
             nueva_categoria.put("c_nombre",categoria.getNombre());
             nueva_categoria.put("c_descripcion",categoria.getDescripcion());
             nueva_categoria.put("c_estado",categoria.isEstaHabilitado());
             nueva_categoria.put("c_ingreso",categoria.isIngreso());
+            nueva_categoria.put("c_usuario",idUsuario);
+
+            Parametros.reset();
+            Parametros.setMetodo("Modulo4/registrarCategoria?datosCategoria="+ URLEncoder.encode(nueva_categoria.toString()));
+            new Recepcion(actividad,intefaz).execute("GET");
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Parametros.reset();
-        Parametros.setMetodo("Modulo4/registrarCategoria?datosCategoria="+ URLEncoder.encode(nueva_categoria.toString()));
-        new Recepcion(actividad).execute("GET");
 
     }
 
@@ -78,20 +82,22 @@ public class Manejador_Categoria {
      */
 
     public void modificarCategoria( Categoria categoria) {
-        JSONObject nueva_categoria = new JSONObject();
         try {
+
+            JSONObject nueva_categoria = new JSONObject();
             nueva_categoria.put("c_id",categoria.getIdcategoria());
             nueva_categoria.put("c_nombre",categoria.getNombre());
             nueva_categoria.put("c_descripcion",categoria.getDescripcion());
             nueva_categoria.put("c_estado",categoria.isEstaHabilitado());
             nueva_categoria.put("c_ingreso",categoria.isIngreso());
 
+            Parametros.reset();
+            Parametros.setMetodo("Modulo4/modificarCategoria?datosCategoria="+ URLEncoder.encode(nueva_categoria.toString()));
+            new Recepcion(actividad,intefaz).execute("GET");
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Parametros.reset();
-        Parametros.setMetodo("Modulo4/modificarCategoria?datosCategoria="+ URLEncoder.encode(nueva_categoria.toString()));
-        new Recepcion(actividad).execute("GET");
 
     }
 
@@ -104,7 +110,7 @@ public class Manejador_Categoria {
 
         Parametros.reset();
         Parametros.setMetodo("Modulo4/eliminarCategoria?datosCategoria="+ String.valueOf(id));
-        new Recepcion(actividad).execute("GET");
+        new Recepcion(actividad,intefaz).execute("GET");
 
     }
 
@@ -115,9 +121,10 @@ public class Manejador_Categoria {
     public void obtenerTodasCategorias() {
 
         int idUsuario = 1;
+        Parametros.reset();
         Parametros.setMetodo("Modulo4/visualizarCategoria?datosCategoria="+ String.valueOf(idUsuario) );
         new Recepcion(actividad,intefaz).execute("GET");
-        System.out.println(Parametros.respuesta);
+
     }
 
 
