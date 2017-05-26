@@ -19,7 +19,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.ucab.fin.finucab.R;
-import com.ucab.fin.finucab.activity.AddCategoryActivity;
 import com.ucab.fin.finucab.activity.MainActivity;
 import com.ucab.fin.finucab.controllers.Categoria_Controller;
 import com.ucab.fin.finucab.controllers.ExportarCategoria_Controller;
@@ -74,7 +73,9 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity( new Intent(parentActivity, AddCategoryActivity.class));
+
+                parentActivity.changeFragment(new AgregarCategoria_Fragment(), false);
+                parentActivity.closeDrawerLayout();
             }
         });
 
@@ -97,13 +98,10 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
 
 
                 Log.v("View",view.getId()+"-"+R.id.switchestado);
-                /*
-                if(view.getId() != R.id.switchestado ) {
-                    Intent intent = new Intent(parentActivity, AddCategoryActivity.class);
-                    intent.putExtra("CATEGORIA_DATA", Categoria_Controller.getListaCategorias().get(position));
-                    startActivity(intent);
-                }
-                */
+                AgregarCategoria_Fragment modificar = new AgregarCategoria_Fragment();
+                modificar.categoria = Categoria_Controller.getListaCategorias().get(position);
+                parentActivity.changeFragment(modificar, false);
+                parentActivity.closeDrawerLayout();
 
             }
 
@@ -120,7 +118,7 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
             }
         }));
 
-        Categoria_Controller.obtenerTodasCategorias();
+        Categoria_Controller.obtenerTodasCategorias(true);
 
         return rootView;
 
@@ -133,7 +131,7 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
         if (!isInOnCreate) {
 
             Categoria_Controller.initManejador(parentActivity,this);
-            Categoria_Controller.obtenerTodasCategorias();
+            Categoria_Controller.obtenerTodasCategorias(false);
         }
 
         isInOnCreate = false;
@@ -309,13 +307,13 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
 
                     case 2:
                         Toast.makeText(parentActivity, Parametros.getRespuesta(), Toast.LENGTH_SHORT).show();
-                        Categoria_Controller.obtenerTodasCategorias();
+                        Categoria_Controller.obtenerTodasCategorias(false);
 
                         break;
                     case 3:
 
                         Toast.makeText(parentActivity, Parametros.getRespuesta(), Toast.LENGTH_SHORT).show();
-                        Categoria_Controller.obtenerTodasCategorias();
+                        Categoria_Controller.obtenerTodasCategorias(false);
 
                         break;
 

@@ -132,13 +132,15 @@ public class Manejador_Categoria {
     /**Creacion del metodo Mostrar lista de Categoria
      * conexion con WebService por medio de Json
      *
+     * @param showStatus Mostrar o no el dialog de Cargando
+     *
      */
-    public void obtenerTodasCategorias() {
+    public void obtenerTodasCategorias(boolean showStatus) {
 
         int idUsuario = 1;
         Parametros.reset();
         Parametros.setMetodo("Modulo4/visualizarCategoria?datosCategoria="+ String.valueOf(idUsuario) );
-        new Recepcion(actividad,intefaz).execute("GET");
+        new Recepcion(actividad,intefaz,showStatus).execute("GET");
 
     }
 

@@ -158,11 +158,13 @@ public class Categoria_Controller {
 
     /**
      * Metodo encargado de llamar a obtener las categorias
+     *
+     * @param showStatus Mostrar o no el dialog de Cargando
      */
-    public static void obtenerTodasCategorias(){
+    public static void obtenerTodasCategorias(boolean showStatus){
 
         casoRequest = 0;
-        manejador.obtenerTodasCategorias();
+        manejador.obtenerTodasCategorias(showStatus);
 
     }
 
