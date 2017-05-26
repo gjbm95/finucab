@@ -1,31 +1,49 @@
 package com.ucab.fin.finucab.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
+import com.ucab.fin.finucab.domain.Planificacion;
+import com.ucab.fin.finucab.domain.Planificacion_Pago;
+import com.ucab.fin.finucab.webservice.Parametros;
+import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PlanificacionFragment extends Fragment {
+public class PlanificacionFragment extends Fragment implements ResponseWebServiceInterface{
 
 
-    FloatingActionButton fab;
-    MainActivity parentActivity;
-    RecyclerView recycle;
+    private FloatingActionButton fab;
+    private MainActivity parentActivity;
+    private RecyclerView recycle;
+    private Planificacion_Pago planificacion_pago;
+
 
     public PlanificacionFragment() {
         // Required empty public constructor
     }
-
 
 
     @Override
@@ -34,9 +52,6 @@ public class PlanificacionFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_planificacion, container, false);
         parentActivity = (MainActivity) getActivity();
-
-
-
         parentActivity.getSupportActionBar().setTitle("Planificacion de pagos");
 
         recycle = (RecyclerView) rootView.findViewById(R.id.listaPlanificacion);
@@ -48,97 +63,110 @@ public class PlanificacionFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle = new Bundle();
+               /* Bundle bundle = new Bundle();
                 bundle.putString("curda","anis");
+                String val = bundle.getString("curda");*/
 
-                String val = bundle.getString("curda");
                 parentActivity.changeFragment(new PlanificacionFragment(), true);
             }
 
         });
 
 
+       /* recycleList.addOnItemTouchListener(new RecyclerTouchListener(getActivity(),
+                recycleList, new ListaCategorias_Fragment.ClickListener() {
+            @Override
+
+            public void onClick(View view, final int position) {
+
+                Intent intent = new Intent(parentActivity, AddCategoryActivity.class);
+                intent.putExtra("CATEGORIA_DATA", Categoria_Controller.manejador.getCategorias().get(position));
+                startActivity(intent);
+
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+                Log.v("longpress",position+"");
+                positionLongPress = position;
+                registerForContextMenu(recycleList);
+            }
+        }));*/
+
+        planificacion_pago = new Planificacion_Pago(parentActivity, this);
+        planificacion_pago.listaPlanificacion();
+
         return rootView;
     }
 
 
-    private void irTareaJson() {
+    @Override
+    public void onResume(){
+        super.onResume();
 
-
-       /* class HttpGetTask extends AsyncTask<String, Void, String> {
-
-
-            private ProgressDialog status;
-            private String response = "";
-            //private Util util;
-
-
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                status = new ProgressDialog(MainActivity.this);
-                status.setMessage("Cargando...");
-                status.setIndeterminate(false);
-                status.setCancelable(false);
-                status.show();
+        if (Parametros.getRespuesta() != null) {
+            Log.v("Response-Fra", Parametros.getRespuesta());
+            if (Parametros.getRespuesta().equals("Error") || Parametros.getRespuesta().equals("ERROR")){
+                Toast.makeText(parentActivity, "Algo salio mal", Toast.LENGTH_SHORT).show();
             }
-
-            @Override
-            protected String doInBackground(String... url) {
-
-                try {
-                    HttpClient client = new DefaultHttpClient();
-                    HttpGet get = new HttpGet(Util.GET_URL);
-                    HttpResponse respuesta = client.execute(get);
-                    HttpEntity entity = respuesta.getEntity();
-                    StatusLine statusLine = respuesta.getStatusLine();
-                    if (respuesta != null && statusLine.getStatusCode() == 200) {
-
-                        Log.i("StatusLine", "" + statusLine.getStatusCode());
-                        response = EntityUtils.toString(entity);
-                    } else {
-                        Log.e("Statusline", "Algo salio mal" + statusLine.getStatusCode());
-                    }
-
-                } catch (UnsupportedEncodingException e) {
-                    Log.e("EncodingException", e.getMessage());
-                } catch (ClientProtocolException e) {
-                    Log.e("ClientProtocolException", e.getMessage());
-                } catch (IOException e) {
-                    Log.e("IOException", e.getMessage());
-                }
-
-
-                return response;
-
-
-            }
-
-            @Override
-            protected void onPostExecute(String s) {
-                super.onPostExecute(s);
-
-                if (this.status.isShowing()) {
-                    this.status.dismiss();
-                }
-
-                if (!s.equals(null)) {
-                    MainActivity.main = true;
-                    convertToJson(s);
-                }
-            }
-
-
-
-            /*private void volver() {
-                Intent regresar = new Intent(getJsonActivity, MainActivity.class);
-                getJsonActivity.startActivity(regresar);
-            }
+            Parametros.reset();
         }
 
-        HttpGetTask gt = new HttpGetTask();
-        gt.execute();*/}
+        PlanificacionAdapter planificacionAdapter = new PlanificacionAdapter(planificacion_pago.getListaPlanificacion());
+        recycle.setAdapter(planificacionAdapter);
     }
+
+    private void irTareaJson() {
+
+    }
+
+
+    @Override
+    public void obtuvoCorrectamente(Object response) {
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        JSONArray array = null;
+        JSONObject object = null;
+        String respuesta;
+
+        ArrayList listaPlanificacion = new ArrayList<Planificacion>();
+        try{
+            array = new JSONArray(Parametros.getRespuesta());
+            int count = array.length();
+
+            for (int i=0; i<count; i++){
+                respuesta = array.getString(i);
+                object = new JSONObject(respuesta);
+                Planificacion pa = new Planificacion(object.getInt("Id"),
+                        format.parse(object.getString("fechaInicio")),
+                        format.parse(object.getString("fechaFin")),
+                        object.getString("Nombre"),
+                        object.getString("Descripcion"),
+                        Double.parseDouble(object.getString("Monto")),
+                        object.getInt("Categoria"),
+                        object.getBoolean("Recurrente"),
+                        object.getString("Recurrencia"),
+                        object.getBoolean("Activo"));
+
+                listaPlanificacion.add(pa);
+            }
+
+            planificacion_pago.setListaPlanificacion(listaPlanificacion);
+            PlanificacionAdapter adapter = new PlanificacionAdapter(listaPlanificacion);
+            recycle.setAdapter(adapter);
+
+        } catch (JSONException e){
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void noObtuvoCorrectamente(Object error) {
+
+    }
+}
 
 
 
