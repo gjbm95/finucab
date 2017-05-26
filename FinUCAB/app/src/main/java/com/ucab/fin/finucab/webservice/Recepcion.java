@@ -52,7 +52,6 @@ public class Recepcion extends AsyncTask<String,Void,String>{
         this.getJSONactivity=principalMJson;
         this.interfaz = interfaz;
         this.showStatus = showStatus;
-        Log.e("showStatus",showStatus+"");
     }
 
     public Recepcion(Activity principalMJson, ResponseWebServiceInterface interfaz) {
@@ -75,7 +74,6 @@ public class Recepcion extends AsyncTask<String,Void,String>{
     protected void onPreExecute(){
         super.onPreExecute();
 
-        Log.e("showStatus onPreExecute",showStatus+"");
         if (showStatus) {
             status = new ProgressDialog(getJSONactivity); //Creo el process dialog
             status.setMessage("Cargando...");
