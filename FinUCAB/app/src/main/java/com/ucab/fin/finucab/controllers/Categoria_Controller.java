@@ -1,6 +1,7 @@
 package com.ucab.fin.finucab.controllers;
 
 import android.app.Activity;
+import android.util.Log;
 import android.widget.EditText;
 
 import com.ucab.fin.finucab.domain.Categoria;
@@ -31,14 +32,18 @@ public class Categoria_Controller {
     private static boolean habilitarEventoSwitch = false ;
 
     /**
-     *
-     * @param actividad
-     * @param interfaz
+     * Inicializar de ser necesario el manejador de data
+     * @param actividad requerida para devolver la data (deprecated)
+     * @param interfaz requerida para devolver la data
      */
 
     public static void initManejador(Activity actividad, ResponseWebServiceInterface interfaz){
 
-        manejador = new Manejador_Categoria(actividad, interfaz);
+        if ( manejador == null ||  manejador.getIntefaz() != interfaz ) {
+
+            manejador = new Manejador_Categoria(actividad, interfaz);
+
+        }
 
     }
 
@@ -97,10 +102,15 @@ public class Categoria_Controller {
 
     }
 
+
+
+
+    /*------------------------------------- REQUEST ----------------------------------------*/
+
     /**
-     *  Metodo encargado de habilitar  la categoria seleccionada
-     * @param categoria
-     * @param esHabilitar
+     *  Metodo encargado de habilitar o desabilitar la categoria seleccionada
+     * @param categoria Categoria a habilitar o desabilitar
+     * @param esHabilitar accion a realizar, habilitar o deshabilitar
      */
     public static void HabilitarCategoria(Categoria categoria, boolean esHabilitar){
 
@@ -114,7 +124,7 @@ public class Categoria_Controller {
 
     /**
      * Metodo encargado de llamar a modificar  la categoria seleccionada
-     * @param categoria
+     * @param categoria Categoria a modificar
      */
     public static void modificarCategoria(Categoria categoria){
 
@@ -125,7 +135,7 @@ public class Categoria_Controller {
 
     /**
      *  Metodo encargado de llamar a agregar categoria
-     * @param categoria
+     * @param categoria Categoria a registrar
      */
     public static void registrarCategoria(Categoria categoria){
 
@@ -136,7 +146,7 @@ public class Categoria_Controller {
 
     /**
      * Metodo encargado de llamar a agregar categoria
-     * @param posicion
+     * @param posicion posicion seleccionada de la lista
      */
     public static void borrarCategoria(int posicion){
 
@@ -148,11 +158,13 @@ public class Categoria_Controller {
 
     /**
      * Metodo encargado de llamar a obtener las categorias
+     *
+     * @param showStatus Mostrar o no el dialog de Cargando
      */
-    public static void obtenerTodasCategorias(){
+    public static void obtenerTodasCategorias(boolean showStatus){
 
         casoRequest = 0;
-        manejador.obtenerTodasCategorias();
+        manejador.obtenerTodasCategorias(showStatus);
 
     }
 

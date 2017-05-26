@@ -30,10 +30,13 @@ public class Manejador_Categoria {
 
     public ArrayList<Categoria> getCategorias() {
         return categorias;
-    }
+    } // Obtener ultima lista recuperada
     public void setCategorias(ArrayList<Categoria> categorias) {
         this.categorias = categorias;
-    }
+    } // Asignar ultima lista recuperada
+
+
+    /*------------------------------------- CONSTRUCTORES ----------------------------------------*/
 
     public Manejador_Categoria(Activity actividad, ResponseWebServiceInterface intefaz){
 
@@ -41,16 +44,28 @@ public class Manejador_Categoria {
         this.intefaz = intefaz;
     }
     
-    public Manejador_Categoria(Activity actividadz){
+    public Manejador_Categoria(Activity actividad){
 
         this.actividad = actividad;
         this.intefaz = null;
     }
 
+    /*------------------------------------- GETTER Y SETTER ----------------------------------------*/
+
+    public Activity getActividad() {
+        return actividad;
+    }
+
+    public ResponseWebServiceInterface getIntefaz() {
+        return intefaz;
+    }
+
+    /*------------------------------------- REQUEST ----------------------------------------*/
+
     /**Creacion del metodo agregar Categoria
      * conexion con WebService por medio de Json
      *
-     * @param categoria
+     * @param categoria Categoria a registrar
      */
     public void agregarCategoria( Categoria categoria) {
 
@@ -78,7 +93,7 @@ public class Manejador_Categoria {
      * Creacion del metodo modificar Categoria
      * conexion con WebService por medio de Json
      *
-     * @param categoria
+     * @param categoria Categoria a modificar
      */
 
     public void modificarCategoria( Categoria categoria) {
@@ -104,7 +119,7 @@ public class Manejador_Categoria {
     /**Creacion del metodo eliminar Categoria
      * conexion con WebService por medio de Json
      *
-     * @param id
+     * @param id Id de la categoria a borrar
      */
     public void borrarCategoria( int id) {
 
@@ -117,13 +132,15 @@ public class Manejador_Categoria {
     /**Creacion del metodo Mostrar lista de Categoria
      * conexion con WebService por medio de Json
      *
+     * @param showStatus Mostrar o no el dialog de Cargando
+     *
      */
-    public void obtenerTodasCategorias() {
+    public void obtenerTodasCategorias(boolean showStatus) {
 
         int idUsuario = 1;
         Parametros.reset();
         Parametros.setMetodo("Modulo4/visualizarCategoria?datosCategoria="+ String.valueOf(idUsuario) );
-        new Recepcion(actividad,intefaz).execute("GET");
+        new Recepcion(actividad,intefaz,showStatus).execute("GET");
 
     }
 
@@ -133,7 +150,7 @@ public class Manejador_Categoria {
      la cual obtendra el id de una categoria dado un id, este metodo sera usado
      por el modulo de Pagos
      *
-     * @param id
+     * @param id Id dela categoria a obtener
      * @return la.get(i)
      */
     public Categoria obtenerCategoria( int id) {
@@ -152,8 +169,9 @@ public class Manejador_Categoria {
     }
 
 
-
-    //Creacion de un metodo que llenara una lista de categorias para probar los fragments
+    /**
+     * Creacion de un metodo que llenara una lista de categorias para probar los fragments
+     */
     public void defaultList() {
 
         //Categoria_Controller.obtenerTodasCategorias(parentActivity);
