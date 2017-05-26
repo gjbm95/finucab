@@ -32,7 +32,7 @@ public class GestionCategoriasTest {
      * @throws Exception
      */
     @Test
-    public void CampoCategoriaVacio() throws Exception {
+    public void CampoCategoriaVacio_isCorrect() throws Exception {
         AgregarCategoria_Fragment fragment = new AgregarCategoria_Fragment();
         startFragment( fragment );
 
@@ -63,7 +63,7 @@ public class GestionCategoriasTest {
      * @throws Exception
      */
     @Test
-    public void CampoDescripcionVacio() throws Exception {
+    public void CampoDescripcionVacio_isCorrect() throws Exception {
         AgregarCategoria_Fragment fragment = new AgregarCategoria_Fragment();
         startFragment( fragment );
 
@@ -90,8 +90,8 @@ public class GestionCategoriasTest {
     }
 
     @Test
-    public void AgregarCategoriaVaidacion() throws Exception{
-        
+    public void Prueba_isCorrect () throws Exception{
+
 
 
     }
