@@ -2,6 +2,7 @@ package com.ucab.fin.finucab.controllers;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.webkit.WebResourceRequest;
@@ -23,6 +24,7 @@ import com.ucab.fin.finucab.exceptions.NombrePresupuesto_Exception;
 import com.ucab.fin.finucab.fragment.AgregarPresupuesto_fragment;
 import com.ucab.fin.finucab.fragment.CategoriaAdapter;
 import com.ucab.fin.finucab.fragment.PresupuestoAdapter;
+import com.ucab.fin.finucab.webservice.ControlDatos;
 import com.ucab.fin.finucab.webservice.Parametros;
 import com.ucab.fin.finucab.webservice.Recepcion;
 import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
@@ -42,7 +44,6 @@ import static java.security.AccessController.getContext;
 public class Presupuesto_Controller {
 
     public static Presupuesto presupuesto;
-
     public static EditText nombrePresupuesto;
     public static EditText montoPresupuesto;
     public static EditText recurrenciaPresupuesto;
@@ -58,20 +59,14 @@ public class Presupuesto_Controller {
     public static boolean tipoPresupuesto;
     public static ResponseWebServiceInterface interfaz;
 
-    public static  void initManejador(ResponseWebServiceInterface interfazFragment){
 
-        interfaz = interfazFragment;
-
-
-    }
 
     //METODOS PARA AGREGAR PRESUPUESTOS
     public static void asignarSpinner(Activity actividad) {
-
         System.out.println(Parametros.respuesta);
         Parametros.setMetodo("Modulo3/ObtenerSpinnerCategoria");
-        new Recepcion(actividad).execute("GET");
-        JSONObject jObject = null;
+        new Recepcion(actividad,interfaz).execute("GET");
+        /*JSONObject jObject = null;
         System.out.println("Antes del try");
         try {
             System.out.println("Despues del try");
@@ -91,56 +86,69 @@ public class Presupuesto_Controller {
             categoriaPresupuesto.setAdapter(adapter);
         } catch (JSONException e) {
             e.printStackTrace();
-        }
+        }*/
 
     }
 
     //Realizo la validacion para verificar que el presupuesto este correcto y si no esta repetido:
 
-    public static boolean verificoNombre(Activity actividad, EditText campo) throws NombrePresupuesto_Exception{
+    public static boolean verificoNombre(Activity actividad, EditText campo){
+
+        Parametros.setMetodo("Modulo3/VerificarNombre?nombrePresupuesto="+campo.getText().toString().replace(' ','_'));
+        new Recepcion(actividad,interfaz).execute("GET");
+
+        return true;
+    }
+
+    public static boolean DevolverValidacion(EditText campo,boolean esAgregar) throws NombrePresupuesto_Exception {
         String nombre="";
-        Parametros.setMetodo("Modulo3/verificarNombre?nombrePresupuesto="+campo.getText().toString());
-        new Recepcion(actividad).execute("GET");
         nombre= Parametros.respuesta;
-        if (nombre.equals("Repetido"))
-        {
-            NombrePresupuesto_Exception repetido = new NombrePresupuesto_Exception("Nombre del presupuesto repetido");
-            repetido.setCampo(campo);
-            throw repetido;
+        if (esAgregar) {
+            if (nombre.equals("Repetido"))
+            {
+                NombrePresupuesto_Exception repetido = new NombrePresupuesto_Exception("Nombre del presupuesto repetido");
+                repetido.setCampo(campo);
+                throw repetido;
+            }
         }
+        if(!esAgregar){
+            if((!presupuesto.get_nombre().equals(campo.getText().toString()))){
+                if (nombre.equals("Repetido"))
+                {
+                    NombrePresupuesto_Exception repetido = new NombrePresupuesto_Exception("Nombre del presupuesto repetido");
+                    repetido.setCampo(campo);
+                    throw repetido;
+                }
+            }
+        }
+
         return true;
     }
 
     public static String registrarPresupuesto(Activity actividad) {
         JSONObject nuevo_presupuesto = new JSONObject();
         try {
-            System.out.println("Entro en el registrar");
             nuevo_presupuesto.put("pr_nombre", nombrePresupuesto.getText());
             nuevo_presupuesto.put("pr_monto", montoPresupuesto.getText().toString());
-            //nuevo_presupuesto.put("pr_usuarioid",ControlDatos.getUsuario().getIdusuario());
             if (unicoButton.isChecked()) {
                 nuevo_presupuesto.put("pr_duracion", "0");
-                nuevo_presupuesto.put("pr_clasificacion", unicoButton.getText());
+                nuevo_presupuesto.put("pr_clasificacion", "Unico");
             }
             if (recurrenciaButton.isChecked()) {
                 nuevo_presupuesto.put("pr_duracion", recurrenciaPresupuesto.getText().toString());
-                nuevo_presupuesto.put("pr_clasificacion", recurrenciaButton.getText());
+                nuevo_presupuesto.put("pr_clasificacion", "Recurrente");
             }
-
-            //nuevo_presupuesto.put("usuariou_id",Presupuesto.);
-
-            /*
             String categoria = categoriaPresupuesto.getSelectedItem().toString();
             String [] categoriaSplit = categoria.split("-");
             Integer categoriaid = Integer.parseInt(categoriaSplit[0]);
+            System.out.println("La categoria es: "+categoriaid);
             nuevo_presupuesto.put("categoriaca_id",categoriaid.toString());
-            */
+            nuevo_presupuesto.put("pr_usuarioid",ControlDatos.getUsuario().getUsuario());
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Parametros.reset();
-        Parametros.setMetodo("Modulo3/registrarPresupuesto?datosPresupuesto=" + URLEncoder.encode(nuevo_presupuesto.toString()));
-        new Recepcion(actividad).execute("GET");
+        Parametros.setMetodo("Modulo3/registrarPresupuesto?usuarioid="+ControlDatos.getUsuario().getUsuario()+"&datosPresupuesto=" + URLEncoder.encode(nuevo_presupuesto.toString()));
+        new Recepcion(actividad,interfaz).execute("GET");
         return Parametros.getRespuesta();
     }
 
@@ -152,24 +160,20 @@ public class Presupuesto_Controller {
 
     }
 
-    public static int validacionVacio() {
+    public static int validacionVacio(Activity actividad) {
         try {
             verificoVacio(nombrePresupuesto);
             verificoVacio(montoPresupuesto);
             if (recurrenciaButton.isChecked()) {
                 verificoVacio(recurrenciaPresupuesto);
             }
+            verificoNombre(actividad,nombrePresupuesto);
 
 
         } catch (CampoVacio_Exception e) {
             e.getCampo().setError(e.getMessage());
             return 1;
         }
-
-
-        /*
-            Falta validar si  ya existe el nombre de usuario en el sistema.
-         */
 
         return 0;
     }
@@ -226,10 +230,11 @@ public class Presupuesto_Controller {
         }
         nombrePresupuesto = nombrePresupuesto.replace(' ', '_');
         System.out.println(Parametros.respuesta);
-        Parametros.setMetodo("Modulo3/ModificarPresupuesto?nombrePresupuesto=" + nombrePresupuesto);
-        //Parametros.setMetodo("Modulo3/ModificarPresupuesto?nombrePresupuesto="+nombrePresupuesto+"&idUsuario="+ControlDatos.getUsuario().getIdusuario());
+        Parametros.setMetodo("Modulo3/ObtenerPresupuesto?nombrePresupuesto=" + nombrePresupuesto);
+        //Parametros.setMetodo("Modulo3/ModificarPresupuesto?nombrePresupuesto="+nombrePresupuesto+"&idUsuario="+ControlDatos.getUsuario().getUsuario());
 
-        new Recepcion(actividad).execute("GET");
+        new Recepcion(actividad,interfaz).execute("GET");
+        /*
         try {
             json = new JSONObject(Parametros.respuesta);
             presupuesto.set_categoria((String) json.get("IdCategoria"));
@@ -240,26 +245,53 @@ public class Presupuesto_Controller {
 
         } catch (JSONException e) {
             e.printStackTrace();
-        }
-
-
+        }*/
     }
 
     public static void asignarValores() {
 
         nombrePresupuesto.setText(presupuesto.get_nombre());
         montoPresupuesto.setText(presupuesto.get_monto().toString());
-        if (presupuesto.get_tipo().equals("Unico")) {
+        if (presupuesto.get_clasificacion().equals("Unico")) {
 
             unicoButton.setChecked(true);
             recurrenciaTextView.setVisibility(recurrenciaTextView.INVISIBLE);       //SE COLOCA INVISIBLE EL TEXTVIEW
             recurrenciaPresupuesto.setVisibility(recurrenciaPresupuesto.INVISIBLE); //SE COLOCA INVISIBLE EL EDITTEXT
-        } else if (presupuesto.get_tipo().equals("Recurrente")) {
+        } else if (presupuesto.get_clasificacion().equals("Recurrente")) {
             recurrenciaButton.setChecked(true);
             recurrenciaTextView.setVisibility(recurrenciaTextView.VISIBLE);       //SE COLOCA INVISIBLE EL TEXTVIEW
             recurrenciaPresupuesto.setVisibility(recurrenciaPresupuesto.VISIBLE); //SE COLOCA INVISIBLE EL EDITTEXT
             recurrenciaPresupuesto.setText(presupuesto.get_duracion().toString());
         }
+
+    }
+
+
+    public static void modificarPresupuesto(Activity actividad){
+        JSONObject nuevo_presupuesto = new JSONObject();
+        try {
+            nuevo_presupuesto.put("pr_nombre", nombrePresupuesto.getText());
+            nuevo_presupuesto.put("pr_monto", montoPresupuesto.getText().toString());
+            if (unicoButton.isChecked()) {
+                nuevo_presupuesto.put("pr_duracion", "0");
+                nuevo_presupuesto.put("pr_clasificacion", "Unico");
+            }
+            if (recurrenciaButton.isChecked()) {
+                nuevo_presupuesto.put("pr_duracion", recurrenciaPresupuesto.getText().toString());
+                nuevo_presupuesto.put("pr_clasificacion", "Recurrente");
+            }
+            String categoria = categoriaPresupuesto.getSelectedItem().toString();
+            String [] categoriaSplit = categoria.split("-");
+            Integer categoriaid = Integer.parseInt(categoriaSplit[0]);
+            System.out.println("La categoria es: "+categoriaid);
+            nuevo_presupuesto.put("categoriaca_id",categoriaid.toString());
+            nuevo_presupuesto.put("pr_usuarioid",ControlDatos.getUsuario().getUsuario());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Parametros.setMetodo("Modulo3/ModificarPresupuesto?nombrePresupuesto="+presupuesto.get_nombre().replace(' ','_')+"&usuarioid="+ControlDatos.getUsuario().getUsuario()+"&datosPresupuesto=" + URLEncoder.encode(nuevo_presupuesto.toString()));
+        new Recepcion(actividad,interfaz).execute("GET");
+
 
     }
 
@@ -285,10 +317,8 @@ public class Presupuesto_Controller {
         asignarTotales();
         Parametros.setMetodo("Modulo3/EliminarPresupuesto?nombrePresupuesto=" + nombrePresupuesto);
         //Parametros.setMetodo("Modulo3/EliminarPresupuesto?nombrePresupuesto="+nombrePresupuesto+
-        //                "&idUsuario="+ ControlDatos.getUsuario().getIdusuario());
-
+        //                "&idUsuario="+ ControlDatos.getUsuario().getUsuario());
         new Recepcion(actividad).execute("GET");
-
     }
 
     public static void cualquiercosa(Activity actividad, TextView cartel) {
@@ -297,7 +327,7 @@ public class Presupuesto_Controller {
     }
 
     //METODOS PARA VISUALIZAR PRESUPUESTO
-    public static void asignarRecyclerView(RecyclerView recycleList, Boolean tipo) {
+    public static void asignarRecyclerView(RecyclerView recycleList, boolean tipo) {
         PresupuestoAdapter pAdapter;
         if (tipo) {
             pAdapter = new PresupuestoAdapter(listaGanancias);
@@ -310,17 +340,16 @@ public class Presupuesto_Controller {
 
 
     public static void visualizarPresupuestos(Activity actividad) {
-
         listaGanancias = new ArrayList<>();
         listaGastos = new ArrayList<>();
         ganancias = 0.0F;
         gastos = 0.0F;
         total = 0.0F;
         System.out.println("PRESUPUESTO_CONTROLLER: estoy en visualizar presupuesto");
-        Parametros.setMetodo("Modulo3/ListaPresupuesto");
-        System.out.println("El url es: "+Parametros.url);
-        //Parametros.setMetodo("Modulo3/ListaPresupuesto?idUsuario="+ ControlDatos.getUsuario().getIdusuario());
-        //new Recepcion(actividad).execute("GET");
+        //Parametros.setMetodo("Modulo3/ListaPresupuesto");
+        //System.out.println("El url es: "+Parametros.url);
+        Parametros.setMetodo("Modulo3/ListaPresupuesto?idUsuario="+ ControlDatos.getUsuario().getUsuario());
+        //Parametros.setMetodo("Modulo3/ListaPresupuesto");
         new Recepcion(actividad,interfaz).execute("GET");
         System.out.println(Parametros.respuesta);
         /*JSONObject jObject = null;
@@ -359,6 +388,17 @@ public class Presupuesto_Controller {
         gananciaTextView.setText(ganancias.toString());
         gastoTextView.setText(gastos.toString());
         totalTextView.setText(total.toString());
+    }
+
+    /**
+     * Meotodo que se encarga de mostrar un mensaje de error.
+     * @param mensaje
+     */
+    public static void mensajeError(Activity actividad,String mensaje){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(actividad);
+        alertDialogBuilder.setMessage(mensaje);
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 
 
