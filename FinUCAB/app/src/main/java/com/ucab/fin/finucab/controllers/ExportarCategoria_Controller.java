@@ -52,8 +52,8 @@ public class ExportarCategoria_Controller extends AsyncTask<String ,String, Stri
         if (!exportDir.exists()) {
             exportDir.mkdirs();
         }
-        File fileCSV = new File(exportDir, "CSVPresupuesto.csv");   //DECLARAR UN ARCHIVO CSV
-        File fileEXCEL = new File(exportDir, "ExcelPresupuesto.xls");//DECLARAR UN ARCHIVO XML
+        File fileCSV = new File(exportDir, "CSVCategoria.csv");   //DECLARAR UN ARCHIVO CSV
+        File fileEXCEL = new File(exportDir, "ExcelCategoria.xls");//DECLARAR UN ARCHIVO XML
         try {
             fileCSV.createNewFile();   //CREAR EL ARCHIVO
             FileWriter writerCSV = new FileWriter(fileCSV); //HABILITAR LA FUNCION DE ESCRIBIR EL ARCHIVO
@@ -140,7 +140,7 @@ public class ExportarCategoria_Controller extends AsyncTask<String ,String, Stri
 
         }
     }
-    public static ArrayList<Categoria> obtenerPresupuestos ( Activity actividad ) {
+    public static ArrayList<Categoria> obtenerCategoria ( Activity actividad ) {
 
         Parametros.setMetodo("Modulo4/ListaCategoriaExportar");
         //Parametros.setMetodo("Modulo3/ListaPresupuestoExportar?idUsuario="+ ControlDatos.getUsuario().getIdusuario());
