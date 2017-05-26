@@ -49,12 +49,7 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
     RecyclerView recycleList;
 
     private int positionLongPress = -1; //posicion del menu longpress
-
-    public ListaCategorias_Fragment() {
-        // Required empty public constructor
-    }
-
-
+    private boolean isInOnCreate;
     /**
      *llamada al layout fragment_lista_categoria la cual muestra la posicion en la que
      *se mostraran las listas
@@ -66,6 +61,7 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        isInOnCreate = true;
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_lista_categorias, container, false);
         parentActivity = (MainActivity) getActivity();
@@ -134,8 +130,13 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
     public void onResume() {
         super.onResume();
 
-        Categoria_Controller.obtenerTodasCategorias();
+        if (!isInOnCreate) {
 
+            Categoria_Controller.initManejador(parentActivity,this);
+            Categoria_Controller.obtenerTodasCategorias();
+        }
+
+        isInOnCreate = false;
     }
 
     /**
@@ -274,7 +275,7 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
     public void obtuvoCorrectamente(Object response){
         try {
 
-            Log.v("CASO",Categoria_Controller.getCasoRequest()+"");
+            Log.e("CASO",Categoria_Controller.getCasoRequest()+"");
 
             if (Parametros.getRespuesta().equals("Error")||Parametros.getRespuesta().equals("ERROR") ) {
 

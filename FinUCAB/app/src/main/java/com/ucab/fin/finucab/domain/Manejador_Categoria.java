@@ -35,17 +35,34 @@ public class Manejador_Categoria {
         this.categorias = categorias;
     }
 
+
+
+
+    /*------------------------------------- CONSTRUCTORES ----------------------------------------*/
+
     public Manejador_Categoria(Activity actividad, ResponseWebServiceInterface intefaz){
 
         this.actividad = actividad;
         this.intefaz = intefaz;
     }
     
-    public Manejador_Categoria(Activity actividadz){
+    public Manejador_Categoria(Activity actividad){
 
         this.actividad = actividad;
         this.intefaz = null;
     }
+
+    /*------------------------------------- GETTER Y SETTER ----------------------------------------*/
+
+    public Activity getActividad() {
+        return actividad;
+    }
+
+    public ResponseWebServiceInterface getIntefaz() {
+        return intefaz;
+    }
+
+    /*------------------------------------- REQUEST ----------------------------------------*/
 
     /**Creacion del metodo agregar Categoria
      * conexion con WebService por medio de Json

@@ -1,6 +1,7 @@
 package com.ucab.fin.finucab.controllers;
 
 import android.app.Activity;
+import android.util.Log;
 import android.widget.EditText;
 
 import com.ucab.fin.finucab.domain.Categoria;
@@ -38,7 +39,11 @@ public class Categoria_Controller {
 
     public static void initManejador(Activity actividad, ResponseWebServiceInterface interfaz){
 
-        manejador = new Manejador_Categoria(actividad, interfaz);
+        if ( manejador == null ||  manejador.getIntefaz() != interfaz ) {
+
+            manejador = new Manejador_Categoria(actividad, interfaz);
+
+        }
 
     }
 
@@ -96,6 +101,11 @@ public class Categoria_Controller {
         }
 
     }
+
+
+
+
+    /*------------------------------------- REQUEST ----------------------------------------*/
 
     /**
      *  Metodo encargado de habilitar  la categoria seleccionada
