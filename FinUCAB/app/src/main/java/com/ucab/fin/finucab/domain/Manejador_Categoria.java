@@ -40,6 +40,12 @@ public class Manejador_Categoria {
         this.actividad = actividad;
         this.intefaz = intefaz;
     }
+    
+    public Manejador_Categoria(Activity actividadz){
+
+        this.actividad = actividad;
+        this.intefaz = null;
+    }
 
     /**Creacion del metodo agregar Categoria
      * conexion con WebService por medio de Json

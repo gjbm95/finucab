@@ -49,7 +49,7 @@ public class Categoria implements Serializable{
         return esIngreso;
     }
 
-    public void isIngreso(boolean esIngreso) {
+    public void setEsIngreso(boolean esIngreso) {
         this.esIngreso = esIngreso;
     }
 
