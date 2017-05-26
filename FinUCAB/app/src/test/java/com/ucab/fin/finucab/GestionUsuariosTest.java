@@ -13,6 +13,7 @@ import com.ucab.fin.finucab.exceptions.UsuarioInvalido_Exception;
 import com.ucab.fin.finucab.fragment.DatosCuentaFragment;
 import com.ucab.fin.finucab.fragment.DatosPersonalesFragment;
 import com.ucab.fin.finucab.fragment.DatosSeguridadFragment;
+import com.ucab.fin.finucab.webservice.ControlDatos;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,6 +23,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.FragmentController;
 import org.robolectric.annotation.Config;
 
+import static junit.framework.Assert.assertNull;
 import static org.junit.Assert.*;
 import static org.robolectric.shadows.support.v4.SupportFragmentTestUtil.startFragment;
 
@@ -393,4 +395,18 @@ public class GestionUsuariosTest {
         GestionUsuarios_Controller.resetarVariables();
         assertNull(GestionUsuarios_Controller.usuario);
     }
+    /**
+     * Realizo pruebas al metodo de descomposicion de usuarios
+     */
+    @Test
+    public void descomponerUsuario_isCorrect()throws Exception{
+
+        String datosUsuario = " {\"u_id\":\"6\",\"u_usuario\":\"erbin\",\"u_nombre\":\"Erbin\",\"u_apellido\":\"Rodriguez\",\"u_correo\":\"erbin@gmail.com\",\"u_pregunta\":\"carro\",\"u_respuesta\":\"99281774\",\"u_password\":\"48690\"} ";
+        GestionUsuarios_Controller.descomponerUsuario(datosUsuario);
+        assertEquals(ControlDatos.getUsuario().getNombre(),"Erbin");
+        assertEquals(ControlDatos.getUsuario().getUsuario(),"erbin");
+        assertEquals(ControlDatos.getUsuario().getContrasena(),"48690");
+        ControlDatos.setUsuario(null);
+    }
+
 }

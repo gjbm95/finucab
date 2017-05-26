@@ -117,6 +117,9 @@ public class Recepcion extends AsyncTask<String,Void,String>{
         }catch(IOException e){
             Log.e("IOException",e.getMessage());
             response = "Error";
+        }catch(Exception e ){
+            Log.e("IOException",e.getMessage());
+            response = "Error";
         }
 
         return null;
