@@ -1,11 +1,12 @@
-package com.ucab.fin.finucab.activity;
+package com.ucab.fin.finucab.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -14,19 +15,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ucab.fin.finucab.R;
+import com.ucab.fin.finucab.activity.MainActivity;
 import com.ucab.fin.finucab.controllers.Categoria_Controller;
 import com.ucab.fin.finucab.domain.Categoria;
 import com.ucab.fin.finucab.exceptions.CampoVacio_Exception;
-import com.ucab.fin.finucab.fragment.CategoriaAdapter;
 import com.ucab.fin.finucab.webservice.Parametros;
 import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.Serializable;
-import java.util.ArrayList;
+/**
+ * Created by Ramon on 26-May-17.
+ */
 
 /**
  *Modulo 4 - Modulo de  Gestion de Categorias
@@ -39,7 +37,10 @@ import java.util.ArrayList;
  * parametros de los botones para la aplicacion.
  */
 
-public class AddCategoryActivity extends AppCompatActivity implements View.OnClickListener, ResponseWebServiceInterface {
+public class AgregarCategoria_Fragment extends Fragment implements View.OnClickListener, ResponseWebServiceInterface {
+
+    MainActivity parentActivity;
+    Categoria categoria;
 
     EditText AddDescripcionEditText; //caja de texto para almacenar la descripcion de la categoria
     EditText AgregarcategoriaEditText; //caja de texto para almacenar la categoria
@@ -56,27 +57,27 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
      * @param savedInstanceState
      */
     @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
+        isModificando = categoria != null;
 
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_agregar_categoria);
-        //Colocando el icono en la parte superior izquierda:
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setIcon(R.mipmap.logoh);
-        actionBar.setTitle("");
+        // Inflate the layout for this fragment
+        View rootView = inflater.inflate(R.layout.fragment_agregar_categoria, container, false);
+        parentActivity = (MainActivity) getActivity();
+        parentActivity.getSupportActionBar().setTitle("Registro Categoria");
 
-        Categoria_Controller.initManejador(this,this);
+        Categoria_Controller.initManejador(parentActivity,this);
+
         //------------------------------------------------------------------------------------------
 //        BIND VIEES (Se extraen los objetos asociados a los botones en pantalla)
-        acceptButton = (Button) findViewById(R.id.acceptButton);
-        switchestado = (Switch) findViewById(R.id.habilitarSwitch);
-        switchtipo = (Switch) findViewById(R.id.tipoSwitch);
-        statusTextView = (TextView) findViewById(R.id.estadoTextView);
-        tipoTextView = (TextView) findViewById(R.id.TipoTextView);
-        AgregarcategoriaEditText =(EditText) findViewById(R.id.AgregarcategoriaEditText);
-        AddDescripcionEditText =(EditText) findViewById(R.id.AddDescripcionEditText);
+        acceptButton = (Button) rootView.findViewById(R.id.acceptButton);
+        switchestado = (Switch) rootView.findViewById(R.id.habilitarSwitch);
+        switchtipo = (Switch) rootView.findViewById(R.id.tipoSwitch);
+        statusTextView = (TextView) rootView.findViewById(R.id.estadoTextView);
+        tipoTextView = (TextView) rootView.findViewById(R.id.TipoTextView);
+        AgregarcategoriaEditText =(EditText) rootView.findViewById(R.id.AgregarcategoriaEditText);
+        AddDescripcionEditText =(EditText) rootView.findViewById(R.id.AddDescripcionEditText);
         Categoria_Controller.escribirCategoria = AgregarcategoriaEditText;
         Categoria_Controller.escribirDescripcion = AddDescripcionEditText;
 
@@ -119,7 +120,19 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
 
         cargarData();
 
+        return rootView;
+
     }
+
+    /**
+     * Asignar nuevo a la categoria
+     * @param categoria
+     */
+    public void setCategoria(Categoria categoria){
+        this.categoria = categoria;
+    }
+
+
 
     /**
      * Metodo para llenar la data y mostrar Categoria, Descripcion
@@ -128,13 +141,10 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
      */
     public void cargarData(){
 
-        Serializable s = getIntent().getSerializableExtra("CATEGORIA_DATA");
-        isModificando = s != null;
 
         if ( isModificando ) {
 
-            Categoria categoria = (Categoria) s;
-
+            parentActivity.getSupportActionBar().setTitle("Modificar Categoria");
             AgregarcategoriaEditText.setText(categoria.getNombre()); //obtener el nombre de la categoria
             AddDescripcionEditText.setText(categoria.getDescripcion()); //obtener la descripcion
             switchestado.setChecked(categoria.isEstaHabilitado());//obtener el estado de la categoria
@@ -156,7 +166,8 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
 
             //Colocando acciones al boton de "Aceptar":
             case R.id.acceptButton:
-                try {
+                try
+                {
 
                     Categoria_Controller.verificoVacio(AgregarcategoriaEditText);
                     Categoria_Controller.verificoVacio(AddDescripcionEditText);
@@ -167,12 +178,11 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
                             switchtipo.isChecked());
 
                     if (isModificando){
-                        categoria.setIdcategoria( ((Categoria) getIntent().getSerializableExtra("CATEGORIA_DATA")).getIdcategoria());
+                        categoria.setIdcategoria( categoria.getIdcategoria());
                         Categoria_Controller.modificarCategoria(categoria);
                     }else {
                         Categoria_Controller.registrarCategoria(categoria);
                     }
-                    //this.onBackPressed();
 
                 }catch(CampoVacio_Exception e){
                     e.getCampo().setError(e.getMessage());
@@ -188,17 +198,28 @@ public class AddCategoryActivity extends AppCompatActivity implements View.OnCli
     /**
      * Response WebService
      * se llena la lista con las consultas provenientes del WebService con la BD
-     * @param response
+     * @param response Respuesta del WebService
      */
     @Override
     public void obtuvoCorrectamente(Object response){
 
-        Toast.makeText(this, Parametros.getRespuesta(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(parentActivity, Parametros.getRespuesta(), Toast.LENGTH_SHORT).show();
 
-        Categoria_Controller.resetCasoRequest();
+        if(Categoria_Controller.getCasoRequest() == 1 ){
+            Categoria_Controller.resetCasoRequest();
+            parentActivity.onBackPressed();
+        }else{
+
+            Categoria_Controller.resetCasoRequest();
+        }
+
 
     }
-
+    /**
+     * Response WebService
+     * se llena la lista con las consultas provenientes del WebService con la BD
+     * @param response Error del WebService
+     */
     @Override
     public void noObtuvoCorrectamente(Object response){
 
