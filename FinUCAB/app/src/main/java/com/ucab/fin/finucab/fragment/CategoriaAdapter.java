@@ -1,7 +1,6 @@
 package com.ucab.fin.finucab.fragment;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +13,18 @@ import com.ucab.fin.finucab.controllers.Categoria_Controller;
 import com.ucab.fin.finucab.domain.Categoria;
 
 import java.util.List;
-
+/**
+*Modulo 4 - Modulo de  Gestion de Categorias
+        *Desarrolladores:
+        *@author Juan Ariza / Augusto Cordero / Manuel Gonzalez
+        *Descripción de la clase:
+        * Esta clase se encargara mostrar en pantalla el layout de las lista de caegorias
+         * dandole funcionalidad a los botones y atributos
+        */
 
 public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.CategoriaViewHolder> {
 
-    private List<Categoria> CategoriaList;
+    private List<Categoria> CategoriaList; //creacion de una lista de categorias
 
     public CategoriaAdapter(List<Categoria> CategoriaList)
     {
@@ -27,11 +33,18 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
 
     public class CategoriaViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView nameTextView;
-        private TextView descripcionTextView;
+        private TextView nameTextView; //TextView de nombre de categoria
+        private TextView descripcionTextView; //TextView de la decripcion de la categoria
         Switch switchestado;
         Categoria categoria;
 
+
+
+        /**
+         * Creacion del Metodo para acceder a los valores y asignarlos en variables
+         * para habilitar y deshabilitar las categorias
+         * @param v
+         */
         public CategoriaViewHolder(View v) {
             super(v);
 
@@ -42,7 +55,7 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
             switchestado.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                    //Categoria_Controller.HabilitarCategoria( 1 ,isChecked);
+                    Categoria_Controller.HabilitarCategoria( (Categoria) buttonView.getTag() ,isChecked);
 
                 }
             });
@@ -51,7 +64,10 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
 
     }
 
-
+    /**
+     * Saber el tamaño de la lista
+     * @return
+     */
     @Override
     public int getItemCount()
     {
@@ -63,6 +79,12 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
     }
 
 
+    /**
+     * traer el contenido de los direfentes atributos
+     * @param CategoriaViewHolder
+     * @param i
+     */
+
     @Override
     public void onBindViewHolder( final CategoriaViewHolder CategoriaViewHolder, int i)
     {
@@ -71,11 +93,25 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
         CategoriaViewHolder.nameTextView.setText(pi.getNombre());
         CategoriaViewHolder.descripcionTextView.setText(pi.getDescripcion());
         //CategoriaViewHolder.switchestado.setText(pi.getIdcategoria()+"");
+        CategoriaViewHolder.switchestado.setTag(pi);
         CategoriaViewHolder.switchestado.setChecked(pi.isEstaHabilitado());
         CategoriaViewHolder.itemView.setLongClickable(true);
+
+        if ( CategoriaList.size() == (i+1) ){
+            Categoria_Controller.setHabilitarEventoSwitch(true);
+        }
     }
 
 
+    /**
+     *
+     /**
+     * llamar al layout recycle_view donde aparece el esquema como se deberia
+     * de ver la lista de categorias
+     * @param viewGroup
+     * @param i
+     * @return
+     */
 
     @Override
     public CategoriaViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {

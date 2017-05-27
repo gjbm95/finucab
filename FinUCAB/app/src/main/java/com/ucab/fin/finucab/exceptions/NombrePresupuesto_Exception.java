@@ -2,9 +2,11 @@ package com.ucab.fin.finucab.exceptions;
 
 import android.widget.EditText;
 
-/**
- * Created by OSVALDO on 24/05/2017.
- */
+/**Modulo 3 - Modulo de Presupuestos
+ *Desarrolladores:*Mariángel Pérez / Oswaldo López / Aquiles Pulido
+ *Descripción de la clase:
+ *Esta clase es la excepcion que valida si el nombre de un presupuesto esta repetido
+ **/
 
 public class NombrePresupuesto_Exception extends Exception {
 

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.InicioActivity;
@@ -26,7 +27,9 @@ public class AsideMenuFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         parentView = inflater.inflate(R.layout.aside_menu_fragment, container, false);
         parentActivity = (MainActivity) getActivity();
-
+        //Nombre de usuario:
+        TextView nombredeusuario = (TextView)parentView.findViewById(R.id.usuario);
+        nombredeusuario.setText("Usuario: " + ControlDatos.getUsuario().getUsuario());
 //          BIND VIEWS
         myProfileBtn = (LinearLayout) parentView.findViewById(R.id.myProfileBtn);
         budgetBtn = (LinearLayout) parentView.findViewById(R.id.budgetBtn);
