@@ -1,46 +1,94 @@
 package com.ucab.fin.finucab.controllers;
 
 import android.app.Activity;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.EditText;
 
 import com.ucab.fin.finucab.domain.Categoria;
 import com.ucab.fin.finucab.domain.Manejador_Categoria;
 import com.ucab.fin.finucab.exceptions.CampoVacio_Exception;
-import com.ucab.fin.finucab.fragment.CategoriaAdapter;
-import com.ucab.fin.finucab.webservice.Parametros;
-import com.ucab.fin.finucab.webservice.Recepcion;
 import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.net.URLEncoder;
 import java.util.ArrayList;
 
 /**
- * Created by Juan on 10-05-2017.
+ *Modulo 4 - Modulo de  Gestion de Categorias
+ *Desarrolladores:
+ *@author Juan Ariza / Augusto Cordero / Manuel Gonzalez
+ *Descripción de la clase:
+ * Esta clase se encarga de gestionar y llevar a cabo las llamadas a los distintos metodos
+ * . Y de inicializar
+ * parametros de los botones para la aplicacion.
  */
 
 public class Categoria_Controller {
 
-    public static Categoria categoria;
-    public static EditText escribirCategoria;
-    public static EditText escribirDescripcion;
+    public static Categoria categoria; //Creacion de una variable categoria de tipo Categoria
+    public static EditText escribirCategoria; //EditText que contiene la categoria
+    public static EditText escribirDescripcion; //EditText que contiene la descripcion de la categoria
 
-    public static Manejador_Categoria manejador;
+    private static Manejador_Categoria manejador;
+    private static int  casoRequest = -1;
+    private static boolean habilitarEventoSwitch = false ;
+
+    /**
+     * Inicializar de ser necesario el manejador de data
+     * @param actividad requerida para devolver la data (deprecated)
+     * @param interfaz requerida para devolver la data
+     */
 
     public static void initManejador(Activity actividad, ResponseWebServiceInterface interfaz){
 
-        manejador = new Manejador_Categoria(actividad, interfaz);
+        if ( manejador == null ||  manejador.getIntefaz() != interfaz ) {
+
+            manejador = new Manejador_Categoria(actividad, interfaz);
+
+        }
 
     }
 
+    /**
+     * Colocar actul lista de categoria en el manejador
+     */
+    public static void setHabilitarEventoSwitch(Boolean activado){
+
+        habilitarEventoSwitch = activado;
+    }
+
+
+    /**
+     * Colocar actul lista de categoria en el manejador
+     */
+    public static void setListaCategorias(ArrayList<Categoria> categorias){
+
+        manejador.setCategorias(categorias);
+    }
+
+    /**
+     * Colocar actul lista de categoria en el manejador
+     * @return Lista de categoria cargada
+     */
+    public static ArrayList<Categoria> getListaCategorias(){
+
+        return manejador.getCategorias();
+    }
+
+    /**
+     * Resetea el caso del request al WebService
+     */
+    public static void resetCasoRequest(){
+        casoRequest = -1;
+    }
+
+    /**
+     * Obtener caso del request que se esta realizando
+     * @return
+     */
+    public static int getCasoRequest(){
+        return casoRequest;
+    }
+
     /**Realizo la validacion para verificar que el campo este vacio:
-     *
-     *
      * @param campo
      * @throws CampoVacio_Exception
      */
@@ -54,38 +102,69 @@ public class Categoria_Controller {
 
     }
 
-    public static void HabilitarCategoria(int id, boolean esHabilitar){
 
-        Categoria categoria = manejador.obtenerCategoria(id);
-        categoria.setEstaHabilitado(esHabilitar);
 
-        manejador.modificarCategoria(categoria);
 
+    /*------------------------------------- REQUEST ----------------------------------------*/
+
+    /**
+     *  Metodo encargado de habilitar o desabilitar la categoria seleccionada
+     * @param categoria Categoria a habilitar o desabilitar
+     * @param esHabilitar accion a realizar, habilitar o deshabilitar
+     */
+    public static void HabilitarCategoria(Categoria categoria, boolean esHabilitar){
+
+        if (habilitarEventoSwitch) {
+            casoRequest = 2;
+            categoria.setEstaHabilitado(esHabilitar);
+            manejador.modificarCategoria(categoria);
+        }
     }
 
+
+    /**
+     * Metodo encargado de llamar a modificar  la categoria seleccionada
+     * @param categoria Categoria a modificar
+     */
     public static void modificarCategoria(Categoria categoria){
 
+        casoRequest = 2;
         manejador.modificarCategoria(categoria);
 
     }
 
-    //METODO PARA REGISTRAR UNA CATEGORIA
+    /**
+     *  Metodo encargado de llamar a agregar categoria
+     * @param categoria Categoria a registrar
+     */
     public static void registrarCategoria(Categoria categoria){
 
+        casoRequest = 1;
         manejador.agregarCategoria(categoria);
 
     }
 
-    public static void borrarCategoria(int id){
+    /**
+     * Metodo encargado de llamar a agregar categoria
+     * @param posicion posicion seleccionada de la lista
+     */
+    public static void borrarCategoria(int posicion){
 
+        casoRequest = 3;
+        int id = manejador.getCategorias().get(posicion).getIdcategoria();
         manejador.borrarCategoria(id);
 
     }
 
+    /**
+     * Metodo encargado de llamar a obtener las categorias
+     *
+     * @param showStatus Mostrar o no el dialog de Cargando
+     */
+    public static void obtenerTodasCategorias(boolean showStatus){
 
-    public static void obtenerTodasCategorias(){
-
-        manejador.obtenerTodasCategorias();
+        casoRequest = 0;
+        manejador.obtenerTodasCategorias(showStatus);
 
     }
 

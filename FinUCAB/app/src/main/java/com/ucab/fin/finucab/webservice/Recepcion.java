@@ -46,26 +46,41 @@ public class Recepcion extends AsyncTask<String,Void,String>{
     private ProgressDialog status;
     private static String response="";
     private ResponseWebServiceInterface interfaz;
+    private boolean showStatus;
+    /*------------------------------------- CONSTRUCTORES ----------------------------------------*/
+    public Recepcion(Activity principalMJson, ResponseWebServiceInterface interfaz, boolean showStatus) {
+        this.getJSONactivity=principalMJson;
+        this.interfaz = interfaz;
+        this.showStatus = showStatus;
+    }
 
     public Recepcion(Activity principalMJson, ResponseWebServiceInterface interfaz) {
         this.getJSONactivity=principalMJson;
         this.interfaz = interfaz;
+        this.showStatus = true;
     }
+
     public Recepcion(Activity principalMJson) {
         this.getJSONactivity=principalMJson;
         this.interfaz = null;
+        this.showStatus = true;
     }
+
+
     /**
      * Metodo que se encarga de mostrar un feedback del proceso de carga de datos al usuario
      */
     @Override
     protected void onPreExecute(){
         super.onPreExecute();
-        status= new ProgressDialog(getJSONactivity); //Creo el process dialog
-        status.setMessage("Cargando...");
-        status.setIndeterminate(false);
-        status.setCancelable(false);
-        status.show();
+
+        if (showStatus) {
+            status = new ProgressDialog(getJSONactivity); //Creo el process dialog
+            status.setMessage("Cargando...");
+            status.setIndeterminate(false);
+            status.setCancelable(false);
+            status.show();
+        }
     }
 
     /**
@@ -102,6 +117,9 @@ public class Recepcion extends AsyncTask<String,Void,String>{
         }catch(IOException e){
             Log.e("IOException",e.getMessage());
             response = "Error";
+        }catch(Exception e ){
+            Log.e("IOException",e.getMessage());
+            response = "Error";
         }
 
         return null;
@@ -117,17 +135,17 @@ public class Recepcion extends AsyncTask<String,Void,String>{
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
 
-        if (this.status.isShowing()){
+        if (this.status != null && this.status.isShowing()){
             this.status.dismiss();
         }
         Parametros.setRespuesta(response);
         Log.v("Response",response);
 
-       /* if (interfaz == null){
+        if (interfaz == null){
             volver();
         }else {
             interfaz.obtuvoCorrectamente(response);
-        }*/
+        }
 
 
     }
