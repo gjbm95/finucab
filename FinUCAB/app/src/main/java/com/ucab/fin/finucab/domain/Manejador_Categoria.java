@@ -141,16 +141,28 @@ public class Manejador_Categoria {
 
     }
 
-
-
-    /**Creacion del metodo obtener Categoria
-     la cual obtendra el id de una categoria dado un id, este metodo sera usado
-     por el modulo de Pagos
+    /**
+     * obtener informacion de la categoria con el id.
      *
      * @param id Id dela categoria a obtener
      * @return la.get(i)
      */
-    public Categoria obtenerCategoria( int id) {
+    public void obtenerCategoria( int id) {
+
+        Parametros.reset();
+        Parametros.setMetodo("Modulo4/buscarCategoria?datosCategoria="+ String.valueOf(id));
+        new Recepcion(actividad,intefaz).execute("GET");
+
+    }
+
+    /**
+     * Obtener informacion de la categoria con el id.
+     * Este metodo funcionra solo si anteriormente ya se ha llamada el metodo obtenerTodasCategorias()
+     *
+     * @param id Id dela categoria a obtener
+     * @return la.get(i)
+     */
+    public Categoria obtenerCategoriaEnUltimaBusqueda( int id) {
 
         for(int i=0 ; i< ultimasCategoriasObtenidas.size(); i++) {
 
@@ -162,7 +174,6 @@ public class Manejador_Categoria {
 
         return  null;
     }
-
 
     /**
      * Creacion de un metodo que llenara una lista de categorias para probar los fragments
