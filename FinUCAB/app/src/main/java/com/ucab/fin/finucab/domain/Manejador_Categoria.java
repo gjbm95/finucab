@@ -25,16 +25,8 @@ import java.util.ArrayList;
 public class Manejador_Categoria {
 
     private Activity actividad;
-    private ArrayList<Categoria> categorias; //creacion de un array de tipo categoria
+    private ArrayList<Categoria> ultimasCategoriasObtenidas; //creacion de un array de tipo categoria
     private ResponseWebServiceInterface intefaz; //creacion de una interfaz para funcionalidades de vistas
-
-    public ArrayList<Categoria> getCategorias() {
-        return categorias;
-    } // Obtener ultima lista recuperada
-    public void setCategorias(ArrayList<Categoria> categorias) {
-        this.categorias = categorias;
-    } // Asignar ultima lista recuperada
-
 
     /*------------------------------------- CONSTRUCTORES ----------------------------------------*/
 
@@ -52,13 +44,18 @@ public class Manejador_Categoria {
 
     /*------------------------------------- GETTER Y SETTER ----------------------------------------*/
 
-    public Activity getActividad() {
-        return actividad;
-    }
-
     public ResponseWebServiceInterface getIntefaz() {
         return intefaz;
     }
+
+    public ArrayList<Categoria> getUltimasCategoriasObtenidas() {
+        return ultimasCategoriasObtenidas;
+    } // Obtener ultima lista recuperada
+    public void setUltimasCategoriasObtenidas(ArrayList<Categoria> categorias) {
+        this.ultimasCategoriasObtenidas = categorias;
+    } // Asignar ultima lista recuperada
+
+
 
     /*------------------------------------- REQUEST ----------------------------------------*/
 
@@ -155,12 +152,10 @@ public class Manejador_Categoria {
      */
     public Categoria obtenerCategoria( int id) {
 
-        ArrayList<Categoria> la = getCategorias();
+        for(int i=0 ; i< ultimasCategoriasObtenidas.size(); i++) {
 
-        for(int i=0 ; i< la.size(); i++) {
-
-            if( la.get(i).getIdcategoria() == id ){
-                return  la.get(i);
+            if( ultimasCategoriasObtenidas.get(i).getIdcategoria() == id ){
+                return  ultimasCategoriasObtenidas.get(i);
             }
 
         }
@@ -186,7 +181,7 @@ public class Manejador_Categoria {
         listTest.add(new Categoria(6,"Musica","Pago de servicios en la uni",true, false));
         listTest.add(new Categoria(7,"Cable","Cable de la casa",false, false));
 
-        categorias = listTest;
+        ultimasCategoriasObtenidas = listTest;
 
     }
 

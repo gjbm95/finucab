@@ -169,6 +169,7 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
 
                 /*si la opcion es Exportar se llama a ExportarCategoria
                 para crear un archivo excel o cvs*/
+                ExportarCategoria_Controller.listaCategoria = Categoria_Controller.getListaCategorias();
                 Toast.makeText(parentActivity, "Exportando...", Toast.LENGTH_SHORT).show();
                 ExportarCategoria_Controller task=new ExportarCategoria_Controller();
                 task.execute();

@@ -61,7 +61,7 @@ public class Categoria_Controller {
      */
     public static void setListaCategorias(ArrayList<Categoria> categorias){
 
-        manejador.setCategorias(categorias);
+        manejador.setUltimasCategoriasObtenidas(categorias);
     }
 
     /**
@@ -70,7 +70,7 @@ public class Categoria_Controller {
      */
     public static ArrayList<Categoria> getListaCategorias(){
 
-        return manejador.getCategorias();
+        return manejador.getUltimasCategoriasObtenidas();
     }
 
     /**
@@ -151,7 +151,7 @@ public class Categoria_Controller {
     public static void borrarCategoria(int posicion){
 
         casoRequest = 3;
-        int id = manejador.getCategorias().get(posicion).getIdcategoria();
+        int id = manejador.getUltimasCategoriasObtenidas().get(posicion).getIdcategoria();
         manejador.borrarCategoria(id);
 
     }
