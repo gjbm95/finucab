@@ -1,6 +1,11 @@
 package com.ucab.fin.finucab.domain;
 
-
+/**Modulo 3 - Modulo de Presupuestos
+ *Desarrolladores:*Mariángel Pérez / Oswaldo López / Aquiles Pulido
+ *Descripción de la clase:
+ *Esta clase se encarga de la declaracion de los datos entrantes y salientes de la aplicacion que va
+ *relacionado con los presupuestos
+ **/
 
 public class Presupuesto {
     private String _nombre;

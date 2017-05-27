@@ -105,20 +105,28 @@ public class ModificarPresupuestoFragment extends Fragment implements CompoundBu
     }
 
 
+    /**
+     * Se encarga de colocar visible o invisible los TextView y los EditText de la recurrencia
+     * verificando si un presupuesto es unico o recurrente
+     * @param buttonView
+     * @param isChecked
+     */
+
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (isChecked) {
-            if (buttonView.getId() == R.id.recurrentRadioButton) {                //VERIFICO SI EL BOTON QUE ESTA PRESIONADO ES RRECURRENTE
-                recurrentTextView.setVisibility(recurrentTextView.VISIBLE);       //SE COLOCA VISIBLE EL TEXTVIEW
-                monthsEditText.setVisibility(monthsEditText.VISIBLE);             //SE COLOCA VISIBLE EL EDIT TEXT
+            if (buttonView.getId() == R.id.recurrentRadioButton) {
+                recurrentTextView.setVisibility(recurrentTextView.VISIBLE);
+                monthsEditText.setVisibility(monthsEditText.VISIBLE);
             }
-            if (buttonView.getId() == R.id.onlyRadioButton) {                     //VERIFICO SI EL BOTON QUE ESTA PRESIONADO ES UNICO
-                recurrentTextView.setVisibility(recurrentTextView.INVISIBLE);     //SE COLOCA INVISIBLE EL TEXTVIEW
-                monthsEditText.setVisibility(monthsEditText.INVISIBLE);           //SE COLOCA INVISIBLE EL EDITTEXT
+            if (buttonView.getId() == R.id.onlyRadioButton) {
+                recurrentTextView.setVisibility(recurrentTextView.INVISIBLE);
+                monthsEditText.setVisibility(monthsEditText.INVISIBLE);
             }
         }
 
     }
+
 
     @Override
     public void onResume(){
@@ -126,28 +134,36 @@ public class ModificarPresupuestoFragment extends Fragment implements CompoundBu
 
     }
 
+    /**
+     * Se encarga de mostrar un mensaje de error si no hay conexión con el web service
+     * Además se encarga de llenar el fragment de modificar,
+     * Verificar si el nombre esta repetido y
+     * Hacer la petición al web service para modificar
+     * @param response
+     */
     @Override
     public void obtuvoCorrectamente(Object response) {
-        if(Parametros.getRespuesta().equals("Error")){
-            Presupuesto_Controller.mensajeError(parentActivity,"Error de conexion con servidor!");
-        }else {
-            if(caso == 0){
-                Presupuesto_Controller.presupuesto = new Presupuesto();
-                try {
-                    JSONObject json = new JSONObject(Parametros.respuesta);
-                    Presupuesto_Controller.presupuesto.set_categoria((String) json.get("IdCategoria"));
-                    Presupuesto_Controller.presupuesto.set_nombre((String) json.get("Nombre"));
-                    Presupuesto_Controller.presupuesto.set_monto(Float.parseFloat((String) json.get("Monto")));
-                    Presupuesto_Controller.presupuesto.set_clasificacion((String) json.get("Clasificacion"));
-                    Presupuesto_Controller.presupuesto.set_duracion(Integer.parseInt((String) json.get("Duracion")));
-                    Presupuesto_Controller.presupuesto.set_tipo(((String) json.get("Tipo")));
-                    caso =1;
-                    Presupuesto_Controller.asignarValores();
-                    Presupuesto_Controller.obtenerSpinner(parentActivity);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
 
+            if(caso == 0){
+                if(Parametros.getRespuesta().equals("Error")){
+                    Presupuesto_Controller.mensajeError(parentActivity,"Error de conexion con servidor!");
+                }else{
+                    Presupuesto_Controller.presupuesto = new Presupuesto();
+                    try {
+                        JSONObject json = new JSONObject(Parametros.respuesta);
+                        Presupuesto_Controller.presupuesto.set_categoria((String) json.get("IdCategoria"));
+                        Presupuesto_Controller.presupuesto.set_nombre((String) json.get("Nombre"));
+                        Presupuesto_Controller.presupuesto.set_monto(Float.parseFloat((String) json.get("Monto")));
+                        Presupuesto_Controller.presupuesto.set_clasificacion((String) json.get("Clasificacion"));
+                        Presupuesto_Controller.presupuesto.set_duracion(Integer.parseInt((String) json.get("Duracion")));
+                        Presupuesto_Controller.presupuesto.set_tipo(((String) json.get("Tipo")));
+                        caso =1;
+                        Presupuesto_Controller.asignarValores();
+                        Presupuesto_Controller.obtenerSpinner(parentActivity);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
             }else if(caso == 1){
 
                 Presupuesto_Controller.asignarSpinner(parentActivity);
@@ -162,9 +178,13 @@ public class ModificarPresupuestoFragment extends Fragment implements CompoundBu
                     e.getCampo().setError(e.getMessage());;
                 }
             }else if (caso == 3){
-                parentActivity.changeFragment(new AgregadoFragment(), false);
+                if(Parametros.getRespuesta().equals("Error")){
+                    Presupuesto_Controller.mensajeError(parentActivity,"Error de conexion con servidor!");
+                }else{
+                    parentActivity.changeFragment(new AgregadoFragment(), false);
+                }
             }
-        }
+
 
 
 

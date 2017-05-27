@@ -68,6 +68,11 @@ public class BudgetFragment extends Fragment implements ResponseWebServiceInterf
         return view;
     }
 
+    /**
+     * Le coloca al TabLayout el diseño deseado
+     *
+     * @param container
+     */
     private void insertarTabs(ViewGroup container) {
         View padre = (View) container.getParent();
 
@@ -78,6 +83,11 @@ public class BudgetFragment extends Fragment implements ResponseWebServiceInterf
         appBar.addView(pestanas);
     }
 
+    /**
+     * Se encarga de crear los fragments de ganancias, gastos y total
+     *
+     * @param viewPager
+     */
     private void poblarViewPager(ViewPager viewPager) {
         AdaptadorSecciones adapter = new AdaptadorSecciones(getChildFragmentManager());
         adapter.addFragment(new TotalFragment(), getString(R.string.titulo_tab_total));
@@ -86,12 +96,21 @@ public class BudgetFragment extends Fragment implements ResponseWebServiceInterf
         viewPager.setAdapter(adapter);
     }
 
+    /**
+     * Limpia los recursos asociados con esta vista
+     *
+     */
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         appBar.removeView(pestanas);
     }
 
+    /**
+     * Se encarga de mostrar un mensaje de error si no hay conexión con el web service
+     * Además se encarga de llenar la lista de presupuestos
+     * @param response
+     */
     @Override
     public void obtuvoCorrectamente(Object response) {
         if(Parametros.getRespuesta().equals("Error")){
@@ -114,8 +133,8 @@ public class BudgetFragment extends Fragment implements ResponseWebServiceInterf
     }
 
     /**
-     * Un {@link FragmentStatePagerAdapter} que gestiona las secciones, fragmentos y
-     * títulos de las pestañas
+     *Gestiona las secciones, fragmentos y títulos de las pestañas
+     *
      */
     public class AdaptadorSecciones extends FragmentStatePagerAdapter {
         private final List<Fragment> fragmentos = new ArrayList<>();
@@ -125,21 +144,40 @@ public class BudgetFragment extends Fragment implements ResponseWebServiceInterf
             super(fm);
         }
 
+        /**
+         * Se encarga de obtener el fragment que se desea generar
+         * @param position
+         * @return
+         */
         @Override
         public android.support.v4.app.Fragment getItem(int position) {
             return fragmentos.get(position);
         }
 
+        /**
+         * Retorna la cantidad de fragments
+         * @return
+         */
         @Override
         public int getCount() {
             return fragmentos.size();
         }
 
+        /**
+         * Agrega los fragments a la lista de fragmentos
+         * @param fragment
+         * @param title
+         */
         public void addFragment(android.support.v4.app.Fragment fragment, String title) {
             fragmentos.add(fragment);
             titulosFragmentos.add(title);
         }
 
+        /**
+         * Retorna los titulos de los fragmentos
+         * @param position
+         * @return
+         */
         @Override
         public CharSequence getPageTitle(int position) {
             return titulosFragmentos.get(position);

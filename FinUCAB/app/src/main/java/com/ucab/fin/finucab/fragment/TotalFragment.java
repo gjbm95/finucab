@@ -71,6 +71,11 @@ public class TotalFragment extends Fragment implements ResponseWebServiceInterfa
         return rootView;
     }
 
+    /**
+     * Se encarga de mostrar un mensaje de error si no hay conexión con el web service
+     * Ademas se encarga de comenzar la tarea del exportar
+     * @param response
+     */
     @Override
     public void obtuvoCorrectamente(Object response) {
         if(Parametros.getRespuesta().equals("Error")){
@@ -79,7 +84,7 @@ public class TotalFragment extends Fragment implements ResponseWebServiceInterfa
             ExportarPresupuesto_Controller.utilizarPresupuesto();
             ExportarPresupuesto_Controller task=new ExportarPresupuesto_Controller();
             task.execute();
-            Toast.makeText(parentActivity, "Exportado correctamente", Toast.LENGTH_SHORT).show();
+            parentActivity.changeFragment(new AgregadoFragment(), false);
         }
     }
 

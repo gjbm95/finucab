@@ -122,6 +122,12 @@ public class AgregarPresupuesto_fragment extends Fragment implements CompoundBut
 
     }
 
+    /**
+     *  Se enacarga de mostrar un mensaje de error si no hay conexion con el web Service ademas de
+     *  obtener la lista de categorias para asignarla al spinner, validar si existe el nombre de
+     *  usiaro y enviar los datos del presupuesto al webservice para ser agregado a la base de datos
+     * @param response
+     */
 
     @Override
     public void obtuvoCorrectamente(Object response) {
@@ -148,8 +154,6 @@ public class AgregarPresupuesto_fragment extends Fragment implements CompoundBut
             }
 
         }
-
-
 
     }
 

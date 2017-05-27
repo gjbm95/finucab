@@ -56,29 +56,24 @@ public class ExportarPresupuesto_Controller extends AsyncTask<String ,String, St
      * Este método se encarga de crear el archivo .csv y .xls y luego generarlo
      **/
     protected String doInBackground(final String... args) {
+        exportarCSV();
+        exportarExcel();
+        listaPresupuestos = new ArrayList<>();
+        return "";
+    }
+    /**
+     * Este método se encarga de crear el archivo .xls y luego generarlo
+     **/
 
+    public void exportarExcel(){
         File exportDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "");
         if (!exportDir.exists()) {
             exportDir.mkdirs();
         }
         SimpleDateFormat s = new SimpleDateFormat("ddMMyyyyhhmmss");
         String format = s.format(new Date());
-        File fileCSV = new File(exportDir, "CSVPresupuesto"+format+".csv");
         File fileEXCEL = new File(exportDir, "ExcelPresupuesto"+format+".xls");
         try {
-            fileCSV.createNewFile();
-            FileWriter writerCSV = new FileWriter(fileCSV);
-
-            writerCSV.write("Nombre del Presupuesto;Categoria;Monto;Clasificacion;Duracion;Tipo;\n");
-            for(Presupuesto p : listaPresupuestos){
-                writerCSV.write(p.get_nombre()+";"+p.get_categoria()+";"+p.get_monto().toString()+";"+p.get_clasificacion()
-                        +";"+p.get_duracion().toString()+";"+p.get_tipo()+";"+"\n");
-
-            }
-            writerCSV.flush();
-            writerCSV.close();
-
-
             fileEXCEL.createNewFile();
             Workbook wb = new HSSFWorkbook();
             Cell c= null;
@@ -155,14 +150,47 @@ public class ExportarPresupuesto_Controller extends AsyncTask<String ,String, St
             FileOutputStream os = new FileOutputStream(fileEXCEL);
             wb.write(os);
             os.close();
-            listaPresupuestos = new ArrayList<>();
-            return "";
+
         } catch (IOException e) {
             Log.e("MainActivity", e.getMessage(), e);
-            return "";
+
 
         }
     }
+
+    /**
+     * Este método se encarga de crear el archivo .csv y luego generarlo
+     **/
+
+    public void exportarCSV(){
+        File exportDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "");
+        if (!exportDir.exists()) {
+            exportDir.mkdirs();
+        }
+        SimpleDateFormat s = new SimpleDateFormat("ddMMyyyyhhmmss");
+        String format = s.format(new Date());
+        File fileCSV = new File(exportDir, "CSVPresupuesto"+format+".csv");
+
+        try {
+            fileCSV.createNewFile();
+            FileWriter writerCSV = new FileWriter(fileCSV);
+
+            writerCSV.write("Nombre del Presupuesto;Categoria;Monto;Clasificacion;Duracion;Tipo;\n");
+            for(Presupuesto p : listaPresupuestos){
+                writerCSV.write(p.get_nombre()+";"+p.get_categoria()+";"+p.get_monto().toString()+";"+p.get_clasificacion()
+                        +";"+p.get_duracion().toString()+";"+p.get_tipo()+";"+"\n");
+
+            }
+            writerCSV.flush();
+            writerCSV.close();
+
+        } catch (IOException e) {
+            Log.e("MainActivity", e.getMessage(), e);
+
+        }
+    }
+
+
 
     /**
      *
