@@ -7,16 +7,19 @@ package com.ucab.fin.finucab.webservice;
 import android.util.Log;
 
 import org.json.JSONObject;
-
 /**
+ *Modulo 1 - Modulo de  Inicio de Sesion y registro de usuario
+ *Desarrolladores:
+ *@author Garry Jr. Bruno / Erbin Rodriguez / Alejandro Negrin
+ *Descripción de la clase:
  * Esta clase se encarga de mantener la informacion que devuelve el servicio web y que esta
  * pueda usarse desde cualquier clase del proyecto.
- *
- */
+ **/
+
 public class Parametros {
 
-    public static String server ="http://192.168.1.4";// Almacena la direccion IP o Dominio del servidor donde se aloja el WebService
-    public static String puerto ="8080"; // Almacena el puerto
+    public static String server ="";// Almacena la direccion IP o Dominio del servidor donde se aloja el WebService
+    public static String puerto =""; // Almacena el puerto
     public static String url="";  // Almacena la URL del servicio web, con sus metodos y parametros.
     public static String respuesta=""; // Almacena la respuesta del servicio web para que se pueda consumir.
     public static JSONObject objetoJson; //Objeto a ser enviado o resibido;

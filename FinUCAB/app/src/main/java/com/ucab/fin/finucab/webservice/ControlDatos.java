@@ -3,9 +3,13 @@ package com.ucab.fin.finucab.webservice;
 import com.ucab.fin.finucab.domain.Usuario;
 
 /**
- * Created by Junior on 22/05/2017.
- */
-
+ *Modulo 1 - Modulo de  Inicio de Sesion y registro de usuario
+ *Desarrolladores:
+ *@author Garry Jr. Bruno / Erbin Rodriguez / Alejandro Negrin
+ *Descripción de la clase:
+ * Esta clase se encarga de almacenar los datos del usuario, una vez haya iniciado sesion en la
+ * aplicacion.
+ **/
 public class ControlDatos {
 
     private static Usuario usuario;

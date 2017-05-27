@@ -34,9 +34,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+/**Modulo 3 - Modulo de Presupuestos
+ *Desarrolladores:*Mariángel Pérez / Oswaldo López / Aquiles Pulido
+ *Descripción de la clase:
+ *Esta clase es el contenedor del tab layout en el cual se visualizan las pestañas de los
+ * presupuestos (Total, ganancias, gastos)
+ **/
+
 public class BudgetFragment extends Fragment implements ResponseWebServiceInterface {
 
     private AppBarLayout appBar;
@@ -54,7 +58,7 @@ public class BudgetFragment extends Fragment implements ResponseWebServiceInterf
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Presupuesto");
         Presupuesto_Controller.interfaz = (ResponseWebServiceInterface) this;
-        Presupuesto_Controller.visualizarPresupuestos(parentActivity);
+        Presupuesto_Controller.obtenerListaPresupuestos(parentActivity);
         if (savedInstanceState == null) {
             insertarTabs(container);
             // Setear adaptador al viewpager.
@@ -64,6 +68,11 @@ public class BudgetFragment extends Fragment implements ResponseWebServiceInterf
         return view;
     }
 
+    /**
+     * Le coloca al TabLayout el diseño deseado
+     *
+     * @param container
+     */
     private void insertarTabs(ViewGroup container) {
         View padre = (View) container.getParent();
 
@@ -74,6 +83,11 @@ public class BudgetFragment extends Fragment implements ResponseWebServiceInterf
         appBar.addView(pestanas);
     }
 
+    /**
+     * Se encarga de crear los fragments de ganancias, gastos y total
+     *
+     * @param viewPager
+     */
     private void poblarViewPager(ViewPager viewPager) {
         AdaptadorSecciones adapter = new AdaptadorSecciones(getChildFragmentManager());
         adapter.addFragment(new TotalFragment(), getString(R.string.titulo_tab_total));
@@ -82,12 +96,21 @@ public class BudgetFragment extends Fragment implements ResponseWebServiceInterf
         viewPager.setAdapter(adapter);
     }
 
+    /**
+     * Limpia los recursos asociados con esta vista
+     *
+     */
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         appBar.removeView(pestanas);
     }
 
+    /**
+     * Se encarga de mostrar un mensaje de error si no hay conexión con el web service
+     * Además se encarga de llenar la lista de presupuestos
+     * @param response
+     */
     @Override
     public void obtuvoCorrectamente(Object response) {
         if(Parametros.getRespuesta().equals("Error")){
@@ -95,42 +118,10 @@ public class BudgetFragment extends Fragment implements ResponseWebServiceInterf
         }else
         {
             // if (casoRequest == 0) {
-            JSONArray mJsonArray = null;
-            JSONObject jObject = null;
+            Presupuesto_Controller.visualizarPresupuesto();
+            poblarViewPager(viewPager);
+            pestanas.setupWithViewPager(viewPager);
 
-            ArrayList listaCategoria = new ArrayList<Categoria>();
-            try {
-                mJsonArray = new JSONArray(Parametros.getRespuesta());
-                int count = mJsonArray.length();
-
-                for (int i = 0; i < count; i++) {   // iterate through jsonArray
-                    jObject = mJsonArray.getJSONObject(i);  // get jsonObject @ i position
-                    Presupuesto pre = new Presupuesto();
-                    pre.set_duracion(Integer.parseInt((String) jObject.get("Duracion")));
-                    pre.set_clasificacion((String) jObject.get("Clasificacion"));
-                    pre.set_monto(Float.parseFloat((String) jObject.get("Monto")));
-                    pre.set_categoria((String) jObject.get("Categoria"));
-                    pre.set_nombre((String) jObject.get("Nombre"));
-                    if ((jObject.get("Tipo")).equals("t")) {
-                        Presupuesto_Controller.listaGanancias.add(pre);
-                        Presupuesto_Controller.ganancias = Presupuesto_Controller.ganancias + pre.get_monto();
-                    } else {
-                        Presupuesto_Controller.listaGastos.add(pre);
-                        Presupuesto_Controller.gastos = Presupuesto_Controller.gastos + pre.get_monto();
-                    }
-                }
-                Presupuesto_Controller.total = Presupuesto_Controller.ganancias - Presupuesto_Controller.gastos;
-                poblarViewPager(viewPager);
-                pestanas.setupWithViewPager(viewPager);
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            //} else if (casoRequest == 1) {
-
-            //   Toast.makeText(parentActivity, Parametros.getRespuesta(), Toast.LENGTH_SHORT).show();
-
-            // }
         }
 
 
@@ -142,8 +133,8 @@ public class BudgetFragment extends Fragment implements ResponseWebServiceInterf
     }
 
     /**
-     * Un {@link FragmentStatePagerAdapter} que gestiona las secciones, fragmentos y
-     * títulos de las pestañas
+     *Gestiona las secciones, fragmentos y títulos de las pestañas
+     *
      */
     public class AdaptadorSecciones extends FragmentStatePagerAdapter {
         private final List<Fragment> fragmentos = new ArrayList<>();
@@ -153,21 +144,40 @@ public class BudgetFragment extends Fragment implements ResponseWebServiceInterf
             super(fm);
         }
 
+        /**
+         * Se encarga de obtener el fragment que se desea generar
+         * @param position
+         * @return
+         */
         @Override
         public android.support.v4.app.Fragment getItem(int position) {
             return fragmentos.get(position);
         }
 
+        /**
+         * Retorna la cantidad de fragments
+         * @return
+         */
         @Override
         public int getCount() {
             return fragmentos.size();
         }
 
+        /**
+         * Agrega los fragments a la lista de fragmentos
+         * @param fragment
+         * @param title
+         */
         public void addFragment(android.support.v4.app.Fragment fragment, String title) {
             fragmentos.add(fragment);
             titulosFragmentos.add(title);
         }
 
+        /**
+         * Retorna los titulos de los fragmentos
+         * @param position
+         * @return
+         */
         @Override
         public CharSequence getPageTitle(int position) {
             return titulosFragmentos.get(position);

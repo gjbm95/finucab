@@ -2,11 +2,11 @@ package com.ucab.fin.finucab.fragment;
 
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v4.app.Fragment;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -19,7 +19,6 @@ import android.widget.Toast;
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
 import com.ucab.fin.finucab.controllers.Presupuesto_Controller;
-import com.ucab.fin.finucab.domain.Presupuesto;
 import com.ucab.fin.finucab.exceptions.NombrePresupuesto_Exception;
 import com.ucab.fin.finucab.webservice.Parametros;
 import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
@@ -29,9 +28,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
+/**Modulo 3 - Modulo de Presupuestos
+ *Desarrolladores:*Mariángel Pérez / Oswaldo López / Aquiles Pulido
+ *Descripción de la clase:
+ *Esta clase se encarga del manejo de los datos entrantes para la funcion agregar presupuesto
+ **/
+
 public class AgregarPresupuesto_fragment extends Fragment implements CompoundButton.OnCheckedChangeListener,ResponseWebServiceInterface{
     TextView recurrentTextView;
     EditText monthsEditText, nameEditText,amountEditText;
@@ -85,7 +87,7 @@ public class AgregarPresupuesto_fragment extends Fragment implements CompoundBut
         onlyRadioButton.setOnCheckedChangeListener(this);
         recurrentRadioButton.setOnCheckedChangeListener(this);
 
-        Presupuesto_Controller.asignarSpinner(parentActivity);
+        Presupuesto_Controller.obtenerSpinner(parentActivity);
 
         return rootView;
     }
@@ -120,35 +122,20 @@ public class AgregarPresupuesto_fragment extends Fragment implements CompoundBut
 
     }
 
+    /**
+     *  Se enacarga de mostrar un mensaje de error si no hay conexion con el web Service ademas de
+     *  obtener la lista de categorias para asignarla al spinner, validar si existe el nombre de
+     *  usiaro y enviar los datos del presupuesto al webservice para ser agregado a la base de datos
+     * @param response
+     */
 
     @Override
     public void obtuvoCorrectamente(Object response) {
         if(caso==0){
-            JSONObject jObject = null;
-            System.out.println("Antes del try");
             if(Parametros.getRespuesta().equals("Error")){
                 Presupuesto_Controller.mensajeError(parentActivity,"Error de conexion con servidor!");
             }else{
-                try {
-                    System.out.println("Despues del try");
-                    JSONArray mJsonArray = new JSONArray(Parametros.respuesta);
-                    int count = mJsonArray.length();
-                    String[] valores = new String[count];
-                    for (int i = 0; i < count; i++) {   // iterate through jsonArray
-
-                        jObject = mJsonArray.getJSONObject(i);  // get jsonObject @ i position
-                        String categoria = ((String) jObject.get("Nombre"));
-                        System.out.println("La categoria es: " + categoria);
-                        valores[i] = categoria;
-                    }
-                    ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(),
-                            android.R.layout.simple_spinner_dropdown_item, valores);
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    categorySpinner.setAdapter(adapter);
-                    Parametros.reset();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                Presupuesto_Controller.asignarSpinner(parentActivity);
             }
         }else if (caso==1){
             try {
@@ -160,10 +147,13 @@ public class AgregarPresupuesto_fragment extends Fragment implements CompoundBut
                 e.getCampo().setError(e.getMessage());;
             }
         }else if (caso == 2) {
-            parentActivity.changeFragment(new AgregadoFragment(), false);
+            if(Parametros.getRespuesta().equals("Error")){
+                Presupuesto_Controller.mensajeError(parentActivity,"Error de conexion con servidor!");
+            }else{
+                parentActivity.changeFragment(new AgregadoFragment(), false);
+            }
+
         }
-
-
 
     }
 

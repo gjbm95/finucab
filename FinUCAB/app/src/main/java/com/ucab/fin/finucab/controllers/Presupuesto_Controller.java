@@ -38,9 +38,12 @@ import java.util.ArrayList;
 
 import static java.security.AccessController.getContext;
 
-/**
- * Created by Oswaldo on 06/05/2017.
- */
+/**Modulo 3 - Modulo de Presupuestos
+ *Desarrolladores:*Mariángel Pérez / Oswaldo López / Aquiles Pulido
+ *Descripción de la clase:
+ *Esta clase se encarga del manejo de los datos entrantes y salientes de la aplicacion que va
+ *relacionado con los presupuestos
+ **/
 public class Presupuesto_Controller {
 
     public static Presupuesto presupuesto;
@@ -60,14 +63,25 @@ public class Presupuesto_Controller {
     public static ResponseWebServiceInterface interfaz;
 
 
-
-    //METODOS PARA AGREGAR PRESUPUESTOS
-    public static void asignarSpinner(Activity actividad) {
+    /**
+     * Método que se encarga de obtener en el web service las categorías asociadas a un usuario
+     * @param actividad
+     */
+    public static void obtenerSpinner(Activity actividad) {
         System.out.println(Parametros.respuesta);
-        Parametros.setMetodo("Modulo3/ObtenerSpinnerCategoria");
+        Parametros.setMetodo("Modulo3/ObtenerSpinnerCategoria?usuarioid="+ControlDatos.getUsuario().getUsuario());
         new Recepcion(actividad,interfaz).execute("GET");
-        /*JSONObject jObject = null;
+
+    }
+
+    /**
+     * Metodo que se encarga de asignar las categorías asociadas a un usuario al spinner
+     * @param actividad
+     */
+    public static void asignarSpinner(Activity actividad) {
+        JSONObject jObject = null;
         System.out.println("Antes del try");
+
         try {
             System.out.println("Despues del try");
             JSONArray mJsonArray = new JSONArray(Parametros.respuesta);
@@ -77,20 +91,26 @@ public class Presupuesto_Controller {
 
                 jObject = mJsonArray.getJSONObject(i);  // get jsonObject @ i position
                 String categoria = ((String) jObject.get("Nombre"));
-                System.out.println("La categoria es: " + categoria);
                 valores[i] = categoria;
             }
             ArrayAdapter adapter = new ArrayAdapter<String>(actividad,
                     android.R.layout.simple_spinner_dropdown_item, valores);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             categoriaPresupuesto.setAdapter(adapter);
+            Parametros.reset();
         } catch (JSONException e) {
             e.printStackTrace();
-        }*/
+        }
+
 
     }
 
-    //Realizo la validacion para verificar que el presupuesto este correcto y si no esta repetido:
+    /**
+     * Método que se encarga de verificar en la base de datos si el nombre de un presupuesto está repetido
+     * @param actividad
+     * @param campo
+     * @return
+     */
 
     public static boolean verificoNombre(Activity actividad, EditText campo){
 
@@ -99,6 +119,14 @@ public class Presupuesto_Controller {
 
         return true;
     }
+
+    /**
+     * Método que se encarga de validar si el nombre del presupuesto esta repetido, si es así, lanza una excepcion
+     * @param campo
+     * @param esAgregar
+     * @return
+     * @throws NombrePresupuesto_Exception
+     */
 
     public static boolean DevolverValidacion(EditText campo,boolean esAgregar) throws NombrePresupuesto_Exception {
         String nombre="";
@@ -125,6 +153,13 @@ public class Presupuesto_Controller {
         return true;
     }
 
+    /**
+     * Este método se encarga de recoger los datos de la aplicación y enviarlos al web service
+     * para ser almacenados en la base de datos
+     * @param actividad
+     * @return
+     */
+
     public static String registrarPresupuesto(Activity actividad) {
         JSONObject nuevo_presupuesto = new JSONObject();
         try {
@@ -141,7 +176,6 @@ public class Presupuesto_Controller {
             String categoria = categoriaPresupuesto.getSelectedItem().toString();
             String [] categoriaSplit = categoria.split("-");
             Integer categoriaid = Integer.parseInt(categoriaSplit[0]);
-            System.out.println("La categoria es: "+categoriaid);
             nuevo_presupuesto.put("categoriaca_id",categoriaid.toString());
             nuevo_presupuesto.put("pr_usuarioid",ControlDatos.getUsuario().getUsuario());
         } catch (JSONException e) {
@@ -152,14 +186,11 @@ public class Presupuesto_Controller {
         return Parametros.getRespuesta();
     }
 
-    public static void vaciarCasillas() {
-        nombrePresupuesto.setText("");
-        montoPresupuesto.setText("");
-        recurrenciaPresupuesto.setText("");
-        unicoButton.isChecked();
-
-    }
-
+    /**
+     * Este metodo se encarga de hacer las llamadas para verificar por cada atributo si se encuentra vacio
+     * @param actividad
+     * @return
+     */
     public static int validacionVacio(Activity actividad) {
         try {
             verificoVacio(nombrePresupuesto);
@@ -178,6 +209,11 @@ public class Presupuesto_Controller {
         return 0;
     }
 
+    /**
+     * Este metodo se encarga de verificar si un atributo se encuentra vacio
+     * @param campo
+     * @throws CampoVacio_Exception
+     */
     public static void verificoVacio(EditText campo) throws CampoVacio_Exception {
         if (campo.getText().toString().isEmpty()) {
             CampoVacio_Exception campovacio = new CampoVacio_Exception("Este campo esta vacio");
@@ -186,38 +222,20 @@ public class Presupuesto_Controller {
         }
     }
 
+    /**
+     * Este metodo se encarga de volver el TextView y el EditText de la recurrencia invisibles
+     */
     public static void volverInvisibleRecurrencia() {
-        recurrenciaTextView.setVisibility(recurrenciaTextView.INVISIBLE);       //SE COLOCA INVISIBLE EL TEXTVIEW
-        recurrenciaPresupuesto.setVisibility(recurrenciaPresupuesto.INVISIBLE); //SE COLOCA INVISIBLE EL EDITTEXT
+        recurrenciaTextView.setVisibility(recurrenciaTextView.INVISIBLE);
+        recurrenciaPresupuesto.setVisibility(recurrenciaPresupuesto.INVISIBLE);
     }
 
-    public static int validacionPresupuestoVacio() {
 
-        //TEXTVIEW
-
-        if (nombrePresupuesto.getText().toString().isEmpty()) {
-            nombrePresupuesto.setError("Debe colocar un Nombre de Presupuesto");
-        }
-        if (montoPresupuesto.getText().toString().isEmpty()) {
-            montoPresupuesto.setError("Debe colocar un Monto");
-        }
-
-        //SPINNER
-        if (categoriaPresupuesto.getSelectedItemPosition() == 0) {
-            TextView errorText = (TextView) categoriaPresupuesto.getSelectedView();
-            errorText.setError("Debe colocar una categoria");
-        }
-
-        if (recurrenciaButton.isChecked()) {
-            if (recurrenciaPresupuesto.getText().toString().isEmpty()) {
-                recurrenciaPresupuesto.setError("Debe colocar un numero de meses");
-            }
-        }
-
-        return 0;
-    }
-
-    //METODOS PARA MODIFICAR EL PRESUPUESTO
+    /**
+     * Este método se encarga de conseguir desde el web service el presupuesto seleccionado
+     * para obtener sus datos
+     * @param actividad
+     */
     public static void obtenerPresupuesto(Activity actividad) {
 
         String nombrePresupuesto = "";
@@ -234,20 +252,13 @@ public class Presupuesto_Controller {
         //Parametros.setMetodo("Modulo3/ModificarPresupuesto?nombrePresupuesto="+nombrePresupuesto+"&idUsuario="+ControlDatos.getUsuario().getUsuario());
 
         new Recepcion(actividad,interfaz).execute("GET");
-        /*
-        try {
-            json = new JSONObject(Parametros.respuesta);
-            presupuesto.set_categoria((String) json.get("IdCategoria"));
-            presupuesto.set_nombre((String) json.get("Nombre"));
-            presupuesto.set_monto(Float.parseFloat((String) json.get("Monto")));
-            presupuesto.set_clasificacion((String) json.get("Clasificacion"));
-            presupuesto.set_duracion(Integer.parseInt((String) json.get("Duracion")));
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }*/
     }
 
+    /**
+     * Este metodo se encarga de llenar el fragment de modificar con los datos del
+     * presupuesto obtenido
+     */
     public static void asignarValores() {
 
         nombrePresupuesto.setText(presupuesto.get_nombre());
@@ -255,18 +266,21 @@ public class Presupuesto_Controller {
         if (presupuesto.get_clasificacion().equals("Unico")) {
 
             unicoButton.setChecked(true);
-            recurrenciaTextView.setVisibility(recurrenciaTextView.INVISIBLE);       //SE COLOCA INVISIBLE EL TEXTVIEW
-            recurrenciaPresupuesto.setVisibility(recurrenciaPresupuesto.INVISIBLE); //SE COLOCA INVISIBLE EL EDITTEXT
+            recurrenciaTextView.setVisibility(recurrenciaTextView.INVISIBLE);
+            recurrenciaPresupuesto.setVisibility(recurrenciaPresupuesto.INVISIBLE);
         } else if (presupuesto.get_clasificacion().equals("Recurrente")) {
             recurrenciaButton.setChecked(true);
-            recurrenciaTextView.setVisibility(recurrenciaTextView.VISIBLE);       //SE COLOCA INVISIBLE EL TEXTVIEW
-            recurrenciaPresupuesto.setVisibility(recurrenciaPresupuesto.VISIBLE); //SE COLOCA INVISIBLE EL EDITTEXT
+            recurrenciaTextView.setVisibility(recurrenciaTextView.VISIBLE);
+            recurrenciaPresupuesto.setVisibility(recurrenciaPresupuesto.VISIBLE);
             recurrenciaPresupuesto.setText(presupuesto.get_duracion().toString());
         }
 
     }
 
-
+    /**
+     * Se encarga de enviar los datos al web service para actualizarlos en la base de datos
+     * @param actividad
+     */
     public static void modificarPresupuesto(Activity actividad){
         JSONObject nuevo_presupuesto = new JSONObject();
         try {
@@ -295,7 +309,12 @@ public class Presupuesto_Controller {
 
     }
 
-    //METODOS PARA ELIMINAR EL PRESUPUESTO
+    /**
+     * Encargado de enviar los datos del presupuesto al web service para así eliminar el presupuesto
+     * Actualiza la lista del total
+     * @param actividad
+     * @param tipo
+     */
     public static void eliminarPresupuestos(Activity actividad, boolean tipo) {
         Parametros.reset();
         String nombrePresupuesto = "";
@@ -315,10 +334,9 @@ public class Presupuesto_Controller {
         nombrePresupuesto = nombrePresupuesto.replace(' ', '_');
         asignarRecyclerView(recyclerList, tipo);
         asignarTotales();
-        Parametros.setMetodo("Modulo3/EliminarPresupuesto?nombrePresupuesto=" + nombrePresupuesto);
-        //Parametros.setMetodo("Modulo3/EliminarPresupuesto?nombrePresupuesto="+nombrePresupuesto+
-        //                "&idUsuario="+ ControlDatos.getUsuario().getUsuario());
-        new Recepcion(actividad).execute("GET");
+        Parametros.setMetodo("Modulo3/EliminarPresupuesto?nombrePresupuesto="+nombrePresupuesto+
+                          "&idUsuario="+ ControlDatos.getUsuario().getUsuario());
+        new Recepcion(actividad,interfaz).execute("GET");
     }
 
     public static void cualquiercosa(Activity actividad, TextView cartel) {
@@ -326,7 +344,11 @@ public class Presupuesto_Controller {
         new Recepcion(actividad).execute(Parametros.getUrl());
     }
 
-    //METODOS PARA VISUALIZAR PRESUPUESTO
+    /**
+     * Asigna a los recycler view las listas de los presupuestos dependiendo si es de ganancia o gastos
+     * @param recycleList
+     * @param tipo
+     */
     public static void asignarRecyclerView(RecyclerView recycleList, boolean tipo) {
         PresupuestoAdapter pAdapter;
         if (tipo) {
@@ -338,29 +360,31 @@ public class Presupuesto_Controller {
         recycleList.setAdapter(pAdapter);
     }
 
-
-    public static void visualizarPresupuestos(Activity actividad) {
-        listaGanancias = new ArrayList<>();
-        listaGastos = new ArrayList<>();
-        ganancias = 0.0F;
-        gastos = 0.0F;
-        total = 0.0F;
-        System.out.println("PRESUPUESTO_CONTROLLER: estoy en visualizar presupuesto");
-        //Parametros.setMetodo("Modulo3/ListaPresupuesto");
-        //System.out.println("El url es: "+Parametros.url);
+    /**
+     * Hace la solicitud al web service la lista de presupuestos por usuario
+     * @param actividad
+     */
+    public static void obtenerListaPresupuestos(Activity actividad) {
+        listaGanancias = new ArrayList<>(); listaGastos = new ArrayList<>();
+        ganancias = 0.0F; gastos = 0.0F; total = 0.0F;
         Parametros.setMetodo("Modulo3/ListaPresupuesto?idUsuario="+ ControlDatos.getUsuario().getUsuario());
-        //Parametros.setMetodo("Modulo3/ListaPresupuesto");
         new Recepcion(actividad,interfaz).execute("GET");
-        System.out.println(Parametros.respuesta);
-        /*JSONObject jObject = null;
+    }
+
+    /**
+     * Se encarga de recibir la lista de presupuestos y las asigna a un ArrayList
+     */
+    public static void visualizarPresupuesto(){
+        JSONArray mJsonArray = null;
+        JSONObject jObject = null;
+
+        ArrayList listaCategoria = new ArrayList<Categoria>();
         try {
-            JSONArray mJsonArray = new JSONArray(Parametros.getRespuesta());
+            mJsonArray = new JSONArray(Parametros.getRespuesta());
             int count = mJsonArray.length();
-            String strJson ="";
+
             for (int i = 0; i < count; i++) {   // iterate through jsonArray
-                strJson = mJsonArray.getString(i);
-                jObject = new JSONObject(strJson);
-                //jObject = mJsonArray.getJSONObject(i);  // get jsonObject @ i position
+                jObject = mJsonArray.getJSONObject(i);  // get jsonObject @ i position
                 Presupuesto pre = new Presupuesto();
                 pre.set_duracion(Integer.parseInt((String) jObject.get("Duracion")));
                 pre.set_clasificacion((String) jObject.get("Clasificacion"));
@@ -368,22 +392,24 @@ public class Presupuesto_Controller {
                 pre.set_categoria((String) jObject.get("Categoria"));
                 pre.set_nombre((String) jObject.get("Nombre"));
                 if ((jObject.get("Tipo")).equals("t")) {
-                    listaGanancias.add(pre);
-                    ganancias = ganancias + pre.get_monto();
+                    Presupuesto_Controller.listaGanancias.add(pre);
+                    Presupuesto_Controller.ganancias = Presupuesto_Controller.ganancias + pre.get_monto();
                 } else {
-                    listaGastos.add(pre);
-                    gastos = gastos + pre.get_monto();
+                    Presupuesto_Controller.listaGastos.add(pre);
+                    Presupuesto_Controller.gastos = Presupuesto_Controller.gastos + pre.get_monto();
                 }
             }
-            total = ganancias - gastos;
+            Presupuesto_Controller.total = Presupuesto_Controller.ganancias - Presupuesto_Controller.gastos;
+
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-*/
     }
 
-
+    /**
+     * Se encarga de asignar la suma de los presupuestos para el fragment de Total
+     */
     public static void asignarTotales() {
         gananciaTextView.setText(ganancias.toString());
         gastoTextView.setText(gastos.toString());

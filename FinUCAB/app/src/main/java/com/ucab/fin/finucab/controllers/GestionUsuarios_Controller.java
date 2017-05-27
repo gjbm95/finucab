@@ -25,7 +25,7 @@ import static org.apache.commons.codec.binary.Base64.encodeBase64;
 /**
  *Modulo 1 - Modulo de  Inicio de Sesion y registro de usuario
  *Desarrolladores:
- *@author Garry Jr. Bruno / Erbin Rodriguez / Alejadandro Negrin
+ *@author Garry Jr. Bruno / Erbin Rodriguez / Alejandro Negrin
  *Descripción de la clase:
  * Esta clase se encarga de gestionar los datos entrantes y salientes de la aplicacion que va
  * relacionado con los usuarios del sistema.

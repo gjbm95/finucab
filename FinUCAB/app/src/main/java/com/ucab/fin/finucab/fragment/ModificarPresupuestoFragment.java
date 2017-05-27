@@ -27,9 +27,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
+/**Modulo 3 - Modulo de Presupuestos
+ *Desarrolladores:*Mariángel Pérez / Oswaldo López / Aquiles Pulido
+ *Descripción de la clase:
+ *Esta clase se encarga del manejo de los datos entrantes para la funcion modificar presupuesto
+ **/
+
 public class ModificarPresupuestoFragment extends Fragment implements CompoundButton.OnCheckedChangeListener,ResponseWebServiceInterface {
 
 
@@ -84,6 +87,7 @@ public class ModificarPresupuestoFragment extends Fragment implements CompoundBu
             public void onClick(View v) {
                 if(Presupuesto_Controller.validacionVacio(parentActivity)==0){
                     caso=2;
+                    obtuvoCorrectamente(null);
 
 
                 }
@@ -101,20 +105,28 @@ public class ModificarPresupuestoFragment extends Fragment implements CompoundBu
     }
 
 
+    /**
+     * Se encarga de colocar visible o invisible los TextView y los EditText de la recurrencia
+     * verificando si un presupuesto es unico o recurrente
+     * @param buttonView
+     * @param isChecked
+     */
+
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (isChecked) {
-            if (buttonView.getId() == R.id.recurrentRadioButton) {                //VERIFICO SI EL BOTON QUE ESTA PRESIONADO ES RRECURRENTE
-                recurrentTextView.setVisibility(recurrentTextView.VISIBLE);       //SE COLOCA VISIBLE EL TEXTVIEW
-                monthsEditText.setVisibility(monthsEditText.VISIBLE);             //SE COLOCA VISIBLE EL EDIT TEXT
+            if (buttonView.getId() == R.id.recurrentRadioButton) {
+                recurrentTextView.setVisibility(recurrentTextView.VISIBLE);
+                monthsEditText.setVisibility(monthsEditText.VISIBLE);
             }
-            if (buttonView.getId() == R.id.onlyRadioButton) {                     //VERIFICO SI EL BOTON QUE ESTA PRESIONADO ES UNICO
-                recurrentTextView.setVisibility(recurrentTextView.INVISIBLE);     //SE COLOCA INVISIBLE EL TEXTVIEW
-                monthsEditText.setVisibility(monthsEditText.INVISIBLE);           //SE COLOCA INVISIBLE EL EDITTEXT
+            if (buttonView.getId() == R.id.onlyRadioButton) {
+                recurrentTextView.setVisibility(recurrentTextView.INVISIBLE);
+                monthsEditText.setVisibility(monthsEditText.INVISIBLE);
             }
         }
 
     }
+
 
     @Override
     public void onResume(){
@@ -122,62 +134,59 @@ public class ModificarPresupuestoFragment extends Fragment implements CompoundBu
 
     }
 
+    /**
+     * Se encarga de mostrar un mensaje de error si no hay conexión con el web service
+     * Además se encarga de llenar el fragment de modificar,
+     * Verificar si el nombre esta repetido y
+     * Hacer la petición al web service para modificar
+     * @param response
+     */
     @Override
     public void obtuvoCorrectamente(Object response) {
-        if(caso == 0){
-            Presupuesto_Controller.presupuesto = new Presupuesto();
-            if(Parametros.getRespuesta().equals("Error")){
-                Presupuesto_Controller.mensajeError(parentActivity,"Error de conexion con servidor!");
-            }else{
-                try {
-                    JSONObject json = new JSONObject(Parametros.respuesta);
-                    Presupuesto_Controller.presupuesto.set_categoria((String) json.get("IdCategoria"));
-                    Presupuesto_Controller.presupuesto.set_nombre((String) json.get("Nombre"));
-                    Presupuesto_Controller.presupuesto.set_monto(Float.parseFloat((String) json.get("Monto")));
-                    Presupuesto_Controller.presupuesto.set_clasificacion((String) json.get("Clasificacion"));
-                    Presupuesto_Controller.presupuesto.set_duracion(Integer.parseInt((String) json.get("Duracion")));
-                    Presupuesto_Controller.presupuesto.set_tipo(((String) json.get("Tipo")));
-                    caso =1;
-                    Presupuesto_Controller.asignarValores();
-                    Presupuesto_Controller.asignarSpinner(parentActivity);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }else if(caso == 1){
-            JSONObject jObject = null;
-            System.out.println("Antes del try");
-            try {
-                System.out.println("Despues del try");
-                JSONArray mJsonArray = new JSONArray(Parametros.respuesta);
-                int count = mJsonArray.length();
-                String[] valores = new String[count];
-                for (int i = 0; i < count; i++) {   // iterate through jsonArray
 
-                    jObject = mJsonArray.getJSONObject(i);  // get jsonObject @ i position
-                    String categoria = ((String) jObject.get("Nombre"));
-                    System.out.println("La categoria es: " + categoria);
-                    valores[i] = categoria;
+            if(caso == 0){
+                if(Parametros.getRespuesta().equals("Error")){
+                    Presupuesto_Controller.mensajeError(parentActivity,"Error de conexion con servidor!");
+                }else{
+                    Presupuesto_Controller.presupuesto = new Presupuesto();
+                    try {
+                        JSONObject json = new JSONObject(Parametros.respuesta);
+                        Presupuesto_Controller.presupuesto.set_categoria((String) json.get("IdCategoria"));
+                        Presupuesto_Controller.presupuesto.set_nombre((String) json.get("Nombre"));
+                        Presupuesto_Controller.presupuesto.set_monto(Float.parseFloat((String) json.get("Monto")));
+                        Presupuesto_Controller.presupuesto.set_clasificacion((String) json.get("Clasificacion"));
+                        Presupuesto_Controller.presupuesto.set_duracion(Integer.parseInt((String) json.get("Duracion")));
+                        Presupuesto_Controller.presupuesto.set_tipo(((String) json.get("Tipo")));
+                        caso =1;
+                        Presupuesto_Controller.asignarValores();
+                        Presupuesto_Controller.obtenerSpinner(parentActivity);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
-                ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(),
-                        android.R.layout.simple_spinner_dropdown_item, valores);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                categorySpinner.setAdapter(adapter);
-            } catch (JSONException e) {
-                e.printStackTrace();
+            }else if(caso == 1){
+
+                Presupuesto_Controller.asignarSpinner(parentActivity);
+
+            }else if(caso == 2){
+                try {
+                    Presupuesto_Controller.DevolverValidacion(nameEditText,false);
+                    caso = 3;
+                    Presupuesto_Controller.modificarPresupuesto(parentActivity);
+                    //
+                } catch (NombrePresupuesto_Exception e) {
+                    e.getCampo().setError(e.getMessage());;
+                }
+            }else if (caso == 3){
+                if(Parametros.getRespuesta().equals("Error")){
+                    Presupuesto_Controller.mensajeError(parentActivity,"Error de conexion con servidor!");
+                }else{
+                    parentActivity.changeFragment(new AgregadoFragment(), false);
+                }
             }
-        }else if(caso == 2){
-            try {
-                Presupuesto_Controller.DevolverValidacion(nameEditText,false);
-                caso = 3;
-                Presupuesto_Controller.modificarPresupuesto(parentActivity);
-                //
-            } catch (NombrePresupuesto_Exception e) {
-                e.getCampo().setError(e.getMessage());;
-            }
-        }else if (caso == 3){
-            parentActivity.changeFragment(new AgregadoFragment(), false);
-        }
+
+
+
 
 
     }

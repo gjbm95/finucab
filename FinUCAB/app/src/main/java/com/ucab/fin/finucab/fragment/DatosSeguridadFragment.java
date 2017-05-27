@@ -13,6 +13,15 @@ import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.controllers.GestionUsuarios_Controller;
 
 /**
+ *Modulo 1 - Modulo de  Inicio de Sesion y registro de usuario
+ *Desarrolladores:
+ *@author Garry Jr. Bruno / Erbin Rodriguez / Alejandro Negrin
+ *Descripción de la clase:
+ * Esta clase presenta un formulario para el registro de datos de seguridad durante el registro de +
+ * usuarios.
+ **/
+
+/**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
  * {@link DatosSeguridadFragment.OnFragmentInteractionListener} interface

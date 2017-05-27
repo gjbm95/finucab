@@ -15,6 +15,15 @@ import com.ucab.fin.finucab.controllers.GestionUsuarios_Controller;
 import com.ucab.fin.finucab.webservice.ControlDatos;
 
 /**
+ *Modulo 1 - Modulo de  Inicio de Sesion y registro de usuario
+ *Desarrolladores:
+ *@author Garry Jr. Bruno / Erbin Rodriguez / Alejandro Negrin
+ *Descripción de la clase:
+ * Esta clase presenta un formulario para colocar la respuesta secreta durante la recuperacion de
+ * cuentas de usuario.
+ **/
+
+/**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
  * {@link RespuestaFragment.OnFragmentInteractionListener} interface
