@@ -21,27 +21,28 @@
         android:textSize="20sp"
         android:textStyle="bold"/>
 
-    <android.support.design.widget.TextInputLayout
+
+    <RelativeLayout
         android:id="@+id/descripcionLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/agregarDescripcionTextView"
+        android:layout_toRightOf="@id/agregarDescripcionTextView"
         >
 
-        <EditText
-            android:id="@+id/descripcionPaEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/descripcionLayout"
-            android:background="@drawable/caja"
-            android:ems="10"
-            android:gravity="end"
-            android:inputType="text"
-            android:maxLines="1"
-            android:padding="12dp"
-            android:textColor="@color/black"
-            />
-    </android.support.design.widget.TextInputLayout>
+    <EditText
+        android:id="@+id/descripcionPaEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/caja"
+        android:ems="10"
+        android:gravity="end"
+        android:inputType="text"
+        android:maxLines="1"
+        android:padding="12dp"
+        android:textColor="@color/black"
+        />
+
+    </RelativeLayout>
 
 
     <TextView
@@ -55,29 +56,32 @@
         android:textSize="20sp"
         android:textStyle="bold"/>
 
-    <android.support.design.widget.TextInputLayout
+    <RelativeLayout
         android:id="@+id/montoLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_alignLeft="@+id/descripcionLayout"
         android:layout_alignStart="@+id/descripcionLayout"
-        android:layout_below="@+id/descripcionLayout"
+        android:layout_below="@id/descripcionLayout"
         >
 
-        <EditText
-            android:id="@+id/montoPaEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/descripcionLayout"
-            android:background="@drawable/caja"
-            android:ems="10"
-            android:gravity="end"
-            android:inputType="text"
-            android:maxLines="1"
-            android:padding="12dp"
-            android:textColor="@color/black"
-            />
-    </android.support.design.widget.TextInputLayout>
+    <EditText
+        android:id="@+id/montoPaEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/caja"
+        android:ems="10"
+        android:gravity="end"
+        android:inputType="numberDecimal"
+        android:maxLines="1"
+        android:padding="12dp"
+        android:textColor="@color/black"
+        />
+
+    </RelativeLayout>
+
+
 
     <RelativeLayout
         android:id="@+id/spinnerLayout"
@@ -117,6 +121,7 @@
         android:layout_below="@id/agregarCategoriaPaTextView"
         android:padding="12dp"
         android:text="Tipo de pago"
+        android:layout_marginTop="5dp"
         android:textColor="@color/colorPrimary"
         android:textSize="20sp"
         android:textStyle="bold"/>
@@ -182,36 +187,38 @@
         android:textSize="20sp"
         android:textStyle="bold"/>
 
-
-
-    <android.support.design.widget.TextInputLayout
+    <RelativeLayout
         android:id="@+id/fechaLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/descripcionLayout"
-        android:layout_alignStart="@+id/descripcionLayout"
+        android:layout_marginTop="10dp"
+        android:layout_alignLeft="@+id/montoLayout"
+        android:layout_alignStart="@+id/montoLayout"
         android:layout_below="@+id/radioGrpPlanificacion"
         >
 
-        <EditText
-            android:id="@+id/fechaPaEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/caja"
-            android:ems="10"
-            android:gravity="center"
-            android:inputType="date"
-            android:maxLines="1"
-            android:padding="12dp"
-            android:textColor="@color/black"
-            />
-    </android.support.design.widget.TextInputLayout>
+    <EditText
+        android:id="@+id/fechaPaEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/caja"
+        android:focusable="false"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="none"
+        android:maxLines="1"
+        android:padding="12dp"
+        android:textColor="@color/black"
+        />
+
+    </RelativeLayout>
 
 
-    <android.support.design.widget.TextInputLayout
+    <RelativeLayout
         android:id="@+id/hastaLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_alignLeft="@+id/fechaLayout"
         android:layout_alignStart="@+id/fechaLayout"
         android:layout_below="@+id/fechaLayout"
@@ -222,15 +229,46 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/caja"
+            android:focusable="false"
             android:ems="10"
             android:gravity="center"
-            android:inputType="date"
+            android:inputType="none"
             android:maxLines="1"
             android:padding="12dp"
             android:textColor="@color/black"
             />
-    </android.support.design.widget.TextInputLayout>
 
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/recurrenciaPaTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/spinnerRecurrenteLayout"
+        android:padding="12dp"
+        android:text="@string/repetir"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+    <RelativeLayout
+        android:id="@+id/spinnerRecurrenteLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/hastaLayout"
+        android:layout_alignStart="@+id/hastaLayout"
+        android:layout_below="@+id/hastaLayout"
+        android:paddingTop="10dp">
+
+        <Spinner
+
+            android:id="@+id/recurrenciaPaSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/spinner"
+            android:entries="@array/recurrenciaArray"
+            android:textSize="14sp"/>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

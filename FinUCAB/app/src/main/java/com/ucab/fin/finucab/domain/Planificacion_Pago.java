@@ -13,6 +13,8 @@ import org.json.JSONObject;
 
 import java.net.URLEncoder;
 import java.sql.SQLOutput;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -41,18 +43,19 @@ public class Planificacion_Pago {
 
     public void agregarPlanificacion( Planificacion planificacion ){
 
+        DateFormat format = new SimpleDateFormat("d-M-yyyy");
         usuario = ControlDatos.getUsuario();
         JSONObject object = new JSONObject();
-
+        String fechaIni = format.format(planificacion.getFechaInicio());
+        String fechaFin = format.format(planificacion.getFechaFin());
        //  usuariou_id, categoriaca_id, pa_activo
 
         try {
-            object.put("pa_id", planificacion.getId());
             object.put("pa_nombre", planificacion.getNombre());
             object.put("pa_descripcion", planificacion.getDescripcion());
             object.put("pa_monto", planificacion.getMonto().toString());
-            object.put("pa_fechainicio", planificacion.getFechaInicio().toString());
-            object.put("pa_fechafin", planificacion.getFechaFin().toString());
+            object.put("pa_fechainicio", fechaIni);
+            object.put("pa_fechafin", fechaFin);
             object.put("pa_recurrente", planificacion.getRecurrente().booleanValue());
             object.put("pa_recurrencia", planificacion.getRecurrencia());
             object.put("usuariou_id", usuario.getIdusuario());
@@ -63,7 +66,7 @@ public class Planificacion_Pago {
         }
         Parametros.reset();
         Parametros.setMetodo("Modulo6/registrarPlanificacion?datosPlanificacion=" + URLEncoder.encode(object.toString()));
-        new Recepcion(activity).execute("GET");
+        new Recepcion(activity, interfaz).execute("GET");
 
     }
 
