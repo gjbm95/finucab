@@ -63,11 +63,11 @@ public class PlanificacionFragment extends Fragment implements ResponseWebServic
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* Bundle bundle = new Bundle();
+                /*Bundle bundle = new Bundle();
                 bundle.putString("curda","anis");
                 String val = bundle.getString("curda");*/
 
-                parentActivity.changeFragment(new PlanificacionFragment(), true);
+                parentActivity.changeFragment(new AgregarPlanificacionFragment(), true);
             }
 
         });
@@ -116,9 +116,6 @@ public class PlanificacionFragment extends Fragment implements ResponseWebServic
         recycle.setAdapter(planificacionAdapter);
     }
 
-    private void irTareaJson() {
-
-    }
 
 
     @Override

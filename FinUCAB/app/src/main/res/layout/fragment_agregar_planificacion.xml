@@ -1,0 +1,259 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_agregar_planificacion"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0895E0"
+    android:padding="10dp"
+    tools:context="com.ucab.fin.finucab.fragment.AgregarPlanificacionFragment">
+
+
+    <TextView
+        android:id="@+id/agregarDescripcionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/descripcionLayout"
+        android:padding="12dp"
+        android:text="@string/descripcion"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/descripcionLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/agregarDescripcionTextView"
+        >
+
+        <EditText
+            android:id="@+id/descripcionPaEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/descripcionLayout"
+            android:background="@drawable/caja"
+            android:ems="10"
+            android:gravity="end"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="12dp"
+            android:textColor="@color/black"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <TextView
+        android:id="@+id/agregarMontoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/montoLayout"
+        android:padding="12dp"
+        android:text="@string/monto"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/montoLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/descripcionLayout"
+        android:layout_alignStart="@+id/descripcionLayout"
+        android:layout_below="@+id/descripcionLayout"
+        >
+
+        <EditText
+            android:id="@+id/montoPaEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/descripcionLayout"
+            android:background="@drawable/caja"
+            android:ems="10"
+            android:gravity="end"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="12dp"
+            android:textColor="@color/black"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+    <RelativeLayout
+        android:id="@+id/spinnerLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/montoLayout"
+        android:layout_alignStart="@+id/montoLayout"
+        android:layout_below="@+id/montoLayout"
+        android:paddingTop="10dp">
+
+        <Spinner
+
+            android:id="@+id/categoriaPaSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/spinner"
+            android:entries="@array/categoryArray"
+            android:textSize="14sp"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/agregarCategoriaPaTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/spinnerLayout"
+        android:padding="12dp"
+        android:text="@string/categoria"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+
+    <TextView
+        android:id="@+id/textTipoPago"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/agregarCategoriaPaTextView"
+        android:padding="12dp"
+        android:text="Tipo de pago"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+    <RadioGroup
+        android:id="@+id/radioGrpPlanificacion"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textTipoPago"
+        android:background="#0895e0"
+        android:orientation="horizontal"
+        >
+
+        <RadioButton
+            android:id="@+id/radioUnico"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_weight="1"
+            app:buttonTint="#fff"
+            android:checked="true"
+            android:text="@string/unicoPa"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+
+        <RadioButton
+            android:id="@+id/radioRecurrente"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_weight="1"
+            app:buttonTint="#fff"
+            android:checked="false"
+            android:text="@string/recurrente"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+    </RadioGroup>
+
+
+    <TextView
+        android:id="@+id/fechaPlanificacionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/fechaLayout"
+        android:padding="12dp"
+        android:text="@string/fecha"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/fechaHastaTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/hastaLayout"
+        android:padding="12dp"
+        android:text="@string/hastaFecha"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/fechaLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/descripcionLayout"
+        android:layout_alignStart="@+id/descripcionLayout"
+        android:layout_below="@+id/radioGrpPlanificacion"
+        >
+
+        <EditText
+            android:id="@+id/fechaPaEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/caja"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="date"
+            android:maxLines="1"
+            android:padding="12dp"
+            android:textColor="@color/black"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/hastaLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/fechaLayout"
+        android:layout_alignStart="@+id/fechaLayout"
+        android:layout_below="@+id/fechaLayout"
+        >
+
+        <EditText
+            android:id="@+id/hastaPaEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/caja"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="date"
+            android:maxLines="1"
+            android:padding="12dp"
+            android:textColor="@color/black"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/volverPlanificacionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/volver"
+            android:textSize="20sp"/>
+
+        <Button
+            android:id="@+id/aceptarPlanificacionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/aceptar"
+            android:textSize="20sp"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
