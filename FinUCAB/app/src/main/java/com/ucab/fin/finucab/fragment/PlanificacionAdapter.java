@@ -9,6 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ucab.fin.finucab.R;
+import com.ucab.fin.finucab.controllers.Categoria_Controller;
+import com.ucab.fin.finucab.domain.Categoria;
+import com.ucab.fin.finucab.domain.Manejador_Categoria;
 import com.ucab.fin.finucab.domain.Planificacion;
 
 import java.text.DateFormat;
@@ -22,6 +25,8 @@ import java.util.List;
 public class PlanificacionAdapter extends RecyclerView.Adapter<PlanificacionAdapter.ViewHolder>{
 
     private List<Planificacion> items;
+    Manejador_Categoria manejador;
+
 
 
     public PlanificacionAdapter(List<Planificacion> planificacionList){
@@ -42,6 +47,7 @@ public class PlanificacionAdapter extends RecyclerView.Adapter<PlanificacionAdap
 
         DateFormat date = new SimpleDateFormat("yyyy-MM-dd");
         Planificacion lista = items.get(position);
+
 
         holder.textViewCategoria.setText(String.valueOf(lista.getIdCategoria()));
         holder.textViewDescripcion.setText(lista.getDescripcion());

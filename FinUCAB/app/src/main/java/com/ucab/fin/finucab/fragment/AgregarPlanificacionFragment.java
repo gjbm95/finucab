@@ -3,6 +3,7 @@ package com.ucab.fin.finucab.fragment;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
@@ -21,13 +23,15 @@ import com.ucab.fin.finucab.controllers.Planificacion_Controller;
 import com.ucab.fin.finucab.domain.Planificacion;
 import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 
-public class AgregarPlanificacionFragment extends Fragment implements ResponseWebServiceInterface{
+public class AgregarPlanificacionFragment extends Fragment implements ResponseWebServiceInterface {
 
+    private TextView recurrenciaTV, fechaHastaTV;
     private EditText descripcion, monto, fechaDesde, fechaHasta;
     private Spinner categoria, recurrencia;
     private RadioGroup tipoGrupo;
@@ -37,11 +41,11 @@ public class AgregarPlanificacionFragment extends Fragment implements ResponseWe
     private Calendar calendar;
     private Planificacion planificacion;
     private boolean recurrente;
+    private DateFormat format;
 
     public AgregarPlanificacionFragment() {
         // Required empty public constructor
     }
-
 
 
     @Override
@@ -52,8 +56,10 @@ public class AgregarPlanificacionFragment extends Fragment implements ResponseWe
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Agregar planificacion de pago");
         Planificacion_Controller.init(parentActivity, this);
-        final SimpleDateFormat format = new SimpleDateFormat("d-M-yyyy");
+        format = new SimpleDateFormat("d-M-yyyy");
 
+        recurrenciaTV = (TextView) rootView.findViewById(R.id.recurrenciaPaTextView);
+        fechaHastaTV = (TextView) rootView.findViewById(R.id.fechaHastaTextView);
         descripcion = (EditText) rootView.findViewById(R.id.descripcionPaEditText);
         monto = (EditText) rootView.findViewById(R.id.montoPaEditText);
         categoria = (Spinner) rootView.findViewById(R.id.categoriaPaSpinner);
@@ -72,21 +78,30 @@ public class AgregarPlanificacionFragment extends Fragment implements ResponseWe
                 int selectedId = tipoGrupo.getCheckedRadioButtonId();
                 tipoBoton = (RadioButton) rootView.findViewById(selectedId);
                 String tipo = tipoBoton.getText().toString();
-                if (tipo.equals("Recurrente"))
-                    recurrente = true;
-                else recurrente = false;
-                try {
-                    if(!campoVacio(descripcion, monto, fechaDesde, fechaHasta)) {
-                        planificacion = new Planificacion(format.parse(fechaDesde.getText().toString()), format.parse(fechaHasta
-                                .getText().toString()), " ", descripcion.getText().toString(), Double.valueOf
-                                (monto.getText().toString()),1, recurrente, recurrencia.getSelectedItem().toString(), true);
-                        Planificacion_Controller.agregarPlanificacion(planificacion);
+                if (tipo.equals("Recurrente")) {
+                    try {
+                        recurrente = true;
+                        if (!campoVacio(descripcion, monto, fechaDesde, fechaHasta)) {
+                            planificacion = new Planificacion(format.parse(fechaDesde.getText().toString()), format.parse(fechaHasta
+                                    .getText().toString()), " ", descripcion.getText().toString(), Double.valueOf
+                                    (monto.getText().toString()), 1, recurrente, recurrencia.getSelectedItem().toString(), true);
+                            Planificacion_Controller.agregarPlanificacion(planificacion);
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
                     }
-                } catch (ParseException e) {
-                    e.printStackTrace();
+                } else {
+                    try {
+                        recurrente = false;
+                        if (!campoVacio(descripcion, monto, fechaDesde, fechaDesde)) {
+                            planificacion = new Planificacion(format.parse(fechaDesde.getText().toString()), format.parse(fechaDesde.getText().toString()), " ", descripcion.getText().toString(), Double.valueOf
+                                    (monto.getText().toString()), 1, recurrente, "", true);
+                            Planificacion_Controller.agregarPlanificacion(planificacion);
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                 }
-
-
             }
         });
 
@@ -103,13 +118,23 @@ public class AgregarPlanificacionFragment extends Fragment implements ResponseWe
                 showDatePicker(fechaDesde.getId());
             }
         });
-
         fechaHasta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDatePicker(fechaHasta.getId());
             }
         });
+        tipoGrupo.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                if (checkedId == R.id.radioUnico) {
+                    ocultarCampos();
+                } else if (checkedId == R.id.radioRecurrente) {
+                    mostrarCampos();
+                }
+            }
+        });
+
 
         return rootView;
     }
@@ -118,24 +143,34 @@ public class AgregarPlanificacionFragment extends Fragment implements ResponseWe
             ParseException {
 
 
-            if (descripcion1.getText().toString().equals("")) {
-                descripcion.setError("Este campo es requerido");
-            } else if (monto1.getText().toString().equals("")) {
-                monto.setError("Este campo es requerido");
-            } else if (fechaIni.getText().toString().equals("")) {
-                fechaDesde.setError("Debe seleccionar una fecha");
-            } else if (fechaFin.getText().toString().equals("")) {
-                fechaHasta.setError("Debe seleccionar una fecha");
-            } else{
-                return false;
+        if (descripcion1.getText().toString().equals("")) {
+            descripcion.setError("Este campo es requerido");
+        } else if (monto1.getText().toString().equals("")) {
+            monto.setError("Este campo es requerido");
+        } else if (fechaIni.getText().toString().equals("")) {
+            fechaDesde.setError("Debe seleccionar una fecha");
+        } else if (fechaFin.getText().toString().equals("")) {
+            fechaHasta.setError("Debe seleccionar una fecha");
+        } else {
+            return false;
 
-            }
-            return true;
         }
+        return true;
+    }
 
+    private void ocultarCampos() {
+        recurrencia.setVisibility(recurrencia.INVISIBLE);
+        fechaHasta.setVisibility(fechaHasta.INVISIBLE);
+        recurrenciaTV.setVisibility(recurrenciaTV.INVISIBLE);
+        fechaHastaTV.setVisibility(fechaHastaTV.INVISIBLE);
+    }
 
-
-
+    private void mostrarCampos() {
+        recurrencia.setVisibility(recurrencia.VISIBLE);
+        fechaHasta.setVisibility(fechaHasta.VISIBLE);
+        recurrenciaTV.setVisibility(recurrenciaTV.VISIBLE);
+        fechaHastaTV.setVisibility(fechaHastaTV.VISIBLE);
+    }
 
 
     @Override
@@ -163,9 +198,9 @@ public class AgregarPlanificacionFragment extends Fragment implements ResponseWe
         alert.show();
     }
 
-    private void showDatePicker(int id){
+    private void showDatePicker(int id) {
 
-        switch (id){
+        switch (id) {
 
             case R.id.fechaPaEditText:
                 DatePickerDialog datePicker = new DatePickerDialog(parentActivity, datePickerListener, calendar.get(Calendar
@@ -200,7 +235,6 @@ public class AgregarPlanificacionFragment extends Fragment implements ResponseWe
 
         }
     };
-
 
 
     private DatePickerDialog.OnDateSetListener datePickerHasta = new DatePickerDialog.OnDateSetListener() {
