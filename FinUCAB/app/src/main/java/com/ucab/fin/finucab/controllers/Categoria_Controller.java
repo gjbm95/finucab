@@ -56,7 +56,8 @@ public class Categoria_Controller {
 
 
     /**
-     * Colocar actual lista de categoria en el manejador
+      * Colocar actual lista de categoria en el manejador
+     * @param categorias
      */
     public static void setListaCategorias(ArrayList<Categoria> categorias){
 
@@ -64,7 +65,7 @@ public class Categoria_Controller {
     }
 
     /**
-     * Colocar actula lista de categoria en el manejador
+     * Colocar actual lista de categoria en el manejador
      * @return Lista de categoria cargada
      */
     public static ArrayList<Categoria> getListaCategorias(){
