@@ -24,7 +24,6 @@ public class PagoAdapter extends RecyclerView.Adapter<PagoAdapter.PagoViewHolder
     }
 
 
-
     @Override
     public int getItemCount()
     {
