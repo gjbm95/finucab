@@ -2,6 +2,7 @@ package com.ucab.fin.finucab.domain;
 
 import android.app.Activity;
 
+import com.ucab.fin.finucab.webservice.ControlDatos;
 import com.ucab.fin.finucab.webservice.Parametros;
 import com.ucab.fin.finucab.webservice.Recepcion;
 import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
@@ -68,7 +69,7 @@ public class Manejador_Categoria {
 
         try {
 
-            int idUsuario = 1;
+            int idUsuario = ControlDatos.getUsuario().getIdusuario();
             JSONObject nueva_categoria = new JSONObject();
             nueva_categoria.put("c_nombre",categoria.getNombre());
             nueva_categoria.put("c_descripcion",categoria.getDescripcion());
@@ -134,7 +135,7 @@ public class Manejador_Categoria {
      */
     public void obtenerTodasCategorias(boolean showStatus) {
 
-        int idUsuario = 1;
+        int idUsuario = ControlDatos.getUsuario().getIdusuario();;
         Parametros.reset();
         Parametros.setMetodo("Modulo4/visualizarCategoria?datosCategoria="+ String.valueOf(idUsuario) );
         new Recepcion(actividad,intefaz,showStatus).execute("GET");
