@@ -3,8 +3,14 @@ package com.ucab.fin.finucab.exceptions;
 import android.widget.EditText;
 
 /**
- * Created by Junior on 09/05/2017.
- */
+ *Modulo 1 - Modulo de  Inicio de Sesion y registro de usuario
+ *Desarrolladores:
+ *@author Garry Jr. Bruno / Erbin Rodriguez / Alejandro Negrin
+ *Descripción de la clase:
+ * Esta clase es una excepcion que se dispara al no encontrar un nombre de usuario suministrado por
+ * el usuario al iniciar sesion.
+ *
+ **/
 
 public class UsuarioInvalido_Exception extends Exception {
 

@@ -17,7 +17,14 @@ import com.ucab.fin.finucab.controllers.GestionUsuarios_Controller;
 import com.ucab.fin.finucab.fragment.ContrasenaFragment;
 import com.ucab.fin.finucab.fragment.RespuestaFragment;
 import com.ucab.fin.finucab.webservice.Parametros;
-
+/**
+ *Modulo 1 - Modulo de  Inicio de Sesion y registro de usuario
+ *Desarrolladores:
+ *@author Garry Jr. Bruno / Erbin Rodriguez / Alejandro Negrin
+ *Descripción de la clase:
+ * Esta clase se encarga de gestionar la actividad de recuperacion de cuenta de usuario.
+ *
+ **/
 public class RecuperacionActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button siguiente;

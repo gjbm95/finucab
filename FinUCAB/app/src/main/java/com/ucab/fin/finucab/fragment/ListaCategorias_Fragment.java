@@ -19,7 +19,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.ucab.fin.finucab.R;
-import com.ucab.fin.finucab.activity.AddCategoryActivity;
 import com.ucab.fin.finucab.activity.MainActivity;
 import com.ucab.fin.finucab.controllers.Categoria_Controller;
 import com.ucab.fin.finucab.controllers.ExportarCategoria_Controller;
@@ -49,13 +48,7 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
     RecyclerView recycleList;
 
     private int positionLongPress = -1; //posicion del menu longpress
-    private int casoRequest = -1;
-
-    public ListaCategorias_Fragment() {
-        // Required empty public constructor
-    }
-
-
+    private boolean isInOnCreate;
     /**
      *llamada al layout fragment_lista_categoria la cual muestra la posicion en la que
      *se mostraran las listas
@@ -67,6 +60,7 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        isInOnCreate = true;
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_lista_categorias, container, false);
         parentActivity = (MainActivity) getActivity();
@@ -79,7 +73,9 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity( new Intent(parentActivity, AddCategoryActivity.class));
+
+                parentActivity.changeFragment(new AgregarCategoria_Fragment(), false);
+                parentActivity.closeDrawerLayout();
             }
         });
 
@@ -92,20 +88,20 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
         recycleList.setLayoutManager(myLayoutManager);
         recycleList.addOnItemTouchListener(new RecyclerTouchListener(getActivity(),
                 recycleList, new ListaCategorias_Fragment.ClickListener() {
-
             /**
              * se llama al controlador de categoria
              * @param view
              * @param position
              */
             @Override
-
             public void onClick(View view, final int position) {
 
 
-                Intent intent = new Intent(parentActivity, AddCategoryActivity.class);
-                intent.putExtra("CATEGORIA_DATA", Categoria_Controller.manejador.getCategorias().get(position));
-                startActivity(intent);
+                Log.v("View",view.getId()+"-"+R.id.switchestado);
+                AgregarCategoria_Fragment modificar = new AgregarCategoria_Fragment();
+                modificar.categoria = Categoria_Controller.getListaCategorias().get(position);
+                parentActivity.changeFragment(modificar, false);
+                parentActivity.closeDrawerLayout();
 
             }
 
@@ -116,17 +112,13 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
              */
             @Override
             public void onLongClick(View view, int position) {
-                Log.v("longpress",position+"");
+
                 positionLongPress = position;
                 registerForContextMenu(recycleList);
             }
         }));
-            //celdas
 
-
-        casoRequest = 0;
-        Categoria_Controller.manejador.obtenerTodasCategorias();
-
+        Categoria_Controller.obtenerTodasCategorias(true);
 
         return rootView;
 
@@ -136,21 +128,13 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
     public void onResume() {
         super.onResume();
 
-        if (Parametros.getRespuesta() != null) {
+        if (!isInOnCreate) {
 
-            Log.v("Response-Fra",Parametros.getRespuesta());
-            if (Parametros.getRespuesta().equals("Error")||Parametros.getRespuesta().equals("ERROR") ) {
-
-                Toast.makeText(parentActivity, "Ups, ha ocurrido un error", Toast.LENGTH_SHORT).show();
-
-            }
-
-            Parametros.reset();
+            Categoria_Controller.initManejador(parentActivity,this);
+            Categoria_Controller.obtenerTodasCategorias(false);
         }
 
-        CategoriaAdapter cAdapter =new CategoriaAdapter(Categoria_Controller.manejador.getCategorias());
-        recycleList.setAdapter(cAdapter);
-
+        isInOnCreate = false;
     }
 
     /**
@@ -195,8 +179,8 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
             case R.id.deleteCategoryOption:
                     /*si la opcion es Eliminar se llama a borrarCategoria
                 para eliminar la categoria seleccionada*/
-                casoRequest = 1;
                 Toast.makeText(getActivity(), "Eliminando categoria ...",Toast.LENGTH_LONG).show();
+
                 Categoria_Controller.borrarCategoria(positionLongPress);
                 positionLongPress = -1;
 
@@ -268,8 +252,6 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
 
         }
 
-
-
         @Override
         public void onTouchEvent(RecyclerView rv, MotionEvent e) {
 
@@ -287,47 +269,62 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
      * se llena la lista con las consultas provenientes del WebService con la BD
      * @param response
      */
-
-
     @Override
     public void obtuvoCorrectamente(Object response){
+        try {
 
-        if ( casoRequest == 0 ) {
-            JSONArray mJsonArray = null;
-            JSONObject jObject = null;
-            String strJson;
+            Log.e("CASO",Categoria_Controller.getCasoRequest()+"");
 
-            ArrayList listaCategoria = new ArrayList<Categoria>();
-            try {
-                mJsonArray = new JSONArray(Parametros.getRespuesta());
-                int count = mJsonArray.length();
+            if (Parametros.getRespuesta().equals("Error")||Parametros.getRespuesta().equals("ERROR") ) {
 
-                for(int i=0 ; i< count; i++){   // iterate through jsonArray
-                    //jObject = mJsonArray.getJSONObject(i);  // get jsonObject @ i position
-                    strJson = mJsonArray.getString(i);
-                    jObject = new JSONObject(strJson);
+                Toast.makeText(parentActivity, "Ups, ha ocurrido un error", Toast.LENGTH_SHORT).show();
 
-                    Categoria cat = new Categoria((int)jObject.get("Id"),
-                            (String)jObject.get("Nombre"),
-                            (String)jObject.get("Descripcion"),
-                            (Boolean) jObject.get("esHabilitado"),
-                            (Boolean) jObject.get("esIngreso"));
+            }else {
+                switch (Categoria_Controller.getCasoRequest()) {
 
-                    listaCategoria.add(cat);
+                    case 0:
+                        ArrayList listaCategoria = new ArrayList<Categoria>();
+                        JSONArray mJsonArray = new JSONArray(Parametros.getRespuesta());
 
+                        for (int i = 0; i < mJsonArray.length(); i++) {   // iterate through jsonArray
+                            String strJson = mJsonArray.getString(i);
+                            JSONObject jObject = new JSONObject(strJson);
+
+                            listaCategoria.add(new Categoria((int) jObject.get("Id"),
+                                    (String) jObject.get("Nombre"),
+                                    (String) jObject.get("Descripcion"),
+                                    (Boolean) jObject.get("esHabilitado"),
+                                    (Boolean) jObject.get("esIngreso")));
+
+                        }
+
+                        Categoria_Controller.setHabilitarEventoSwitch(false);
+                        Categoria_Controller.setListaCategorias(listaCategoria);
+                        recycleList.setAdapter(new CategoriaAdapter(listaCategoria));
+                        Categoria_Controller.resetCasoRequest();
+
+                        break;
+
+                    case 2:
+                        Toast.makeText(parentActivity, Parametros.getRespuesta(), Toast.LENGTH_SHORT).show();
+                        Categoria_Controller.obtenerTodasCategorias(false);
+
+                        break;
+                    case 3:
+
+                        Toast.makeText(parentActivity, Parametros.getRespuesta(), Toast.LENGTH_SHORT).show();
+                        Categoria_Controller.obtenerTodasCategorias(false);
+
+                        break;
+
+                    default:
+                        break;
                 }
-
-                Categoria_Controller.manejador.setCategorias(listaCategoria);
-                CategoriaAdapter cAdapter =new CategoriaAdapter(listaCategoria);
-                recycleList.setAdapter(cAdapter);
-
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
-        }else if ( casoRequest == 1 ) {
 
-            Toast.makeText(parentActivity, Parametros.getRespuesta(), Toast.LENGTH_SHORT).show();
 
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 

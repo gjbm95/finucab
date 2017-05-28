@@ -53,15 +53,12 @@ public class BudgetFragment extends Fragment implements ResponseWebServiceInterf
         View view = inflater.inflate(R.layout.budget_fragment, container, false);
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Presupuesto");
-
-        Presupuesto_Controller.initManejador(this);
+        Presupuesto_Controller.interfaz = (ResponseWebServiceInterface) this;
         Presupuesto_Controller.visualizarPresupuestos(parentActivity);
         if (savedInstanceState == null) {
             insertarTabs(container);
             // Setear adaptador al viewpager.
             viewPager = (ViewPager) view.findViewById(R.id.pager);
-            //poblarViewPager(viewPager);
-            //pestanas.setupWithViewPager(viewPager);
         }
 
         return view;
@@ -93,52 +90,50 @@ public class BudgetFragment extends Fragment implements ResponseWebServiceInterf
 
     @Override
     public void obtuvoCorrectamente(Object response) {
-        // if (casoRequest == 0) {
-        JSONArray mJsonArray = null;
-        JSONObject jObject = null;
-        String strJson;
+        if(Parametros.getRespuesta().equals("Error")){
+            Presupuesto_Controller.mensajeError(parentActivity,"Error de conexion con servidor!");
+        }else
+        {
+            // if (casoRequest == 0) {
+            JSONArray mJsonArray = null;
+            JSONObject jObject = null;
 
-        ArrayList listaCategoria = new ArrayList<Categoria>();
-        try {
-            mJsonArray = new JSONArray(Parametros.getRespuesta());
-            int count = mJsonArray.length();
+            ArrayList listaCategoria = new ArrayList<Categoria>();
+            try {
+                mJsonArray = new JSONArray(Parametros.getRespuesta());
+                int count = mJsonArray.length();
 
-            for (int i = 0; i < count; i++) {   // iterate through jsonArray
-                jObject = mJsonArray.getJSONObject(i);  // get jsonObject @ i position
-                Presupuesto pre = new Presupuesto();
-                pre.set_duracion(Integer.parseInt((String) jObject.get("Duracion")));
-                pre.set_clasificacion((String) jObject.get("Clasificacion"));
-                pre.set_monto(Float.parseFloat((String) jObject.get("Monto")));
-                pre.set_categoria((String) jObject.get("Categoria"));
-                pre.set_nombre((String) jObject.get("Nombre"));
-                if ((jObject.get("Tipo")).equals("t")) {
-                    Presupuesto_Controller.listaGanancias.add(pre);
-                    Presupuesto_Controller.ganancias = Presupuesto_Controller.ganancias + pre.get_monto();
-                } else {
-                    Presupuesto_Controller.listaGastos.add(pre);
-                    Presupuesto_Controller.gastos = Presupuesto_Controller.gastos + pre.get_monto();
+                for (int i = 0; i < count; i++) {   // iterate through jsonArray
+                    jObject = mJsonArray.getJSONObject(i);  // get jsonObject @ i position
+                    Presupuesto pre = new Presupuesto();
+                    pre.set_duracion(Integer.parseInt((String) jObject.get("Duracion")));
+                    pre.set_clasificacion((String) jObject.get("Clasificacion"));
+                    pre.set_monto(Float.parseFloat((String) jObject.get("Monto")));
+                    pre.set_categoria((String) jObject.get("Categoria"));
+                    pre.set_nombre((String) jObject.get("Nombre"));
+                    if ((jObject.get("Tipo")).equals("t")) {
+                        Presupuesto_Controller.listaGanancias.add(pre);
+                        Presupuesto_Controller.ganancias = Presupuesto_Controller.ganancias + pre.get_monto();
+                    } else {
+                        Presupuesto_Controller.listaGastos.add(pre);
+                        Presupuesto_Controller.gastos = Presupuesto_Controller.gastos + pre.get_monto();
+                    }
                 }
-            }
-            Presupuesto_Controller.total = Presupuesto_Controller.ganancias - Presupuesto_Controller.gastos;
-            for (Presupuesto p : Presupuesto_Controller.listaGanancias){
+                Presupuesto_Controller.total = Presupuesto_Controller.ganancias - Presupuesto_Controller.gastos;
+                poblarViewPager(viewPager);
+                pestanas.setupWithViewPager(viewPager);
 
-                System.out.println("BUDGETfRAGMENT: la gganancia es: "+p.get_nombre());
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-            for (Presupuesto p : Presupuesto_Controller.listaGastos){
+            //} else if (casoRequest == 1) {
 
-                System.out.println("BUDGETfRAGMENT: el gasto es: "+p.get_nombre());
-            }
-            poblarViewPager(viewPager);
-            pestanas.setupWithViewPager(viewPager);
+            //   Toast.makeText(parentActivity, Parametros.getRespuesta(), Toast.LENGTH_SHORT).show();
 
-        } catch (JSONException e) {
-            e.printStackTrace();
+            // }
         }
-        //} else if (casoRequest == 1) {
 
-        //   Toast.makeText(parentActivity, Parametros.getRespuesta(), Toast.LENGTH_SHORT).show();
 
-        // }
     }
 
     @Override
@@ -185,7 +180,6 @@ public class BudgetFragment extends Fragment implements ResponseWebServiceInterf
         if (Parametros.getRespuesta() != null) {
             Log.v("Response-Fra",Parametros.getRespuesta());
             if (Parametros.getRespuesta().equals("Error")||Parametros.getRespuesta().equals("ERROR") ) {
-
                 Toast.makeText(parentActivity, "Ups, ha ocurrido un error", Toast.LENGTH_SHORT).show();
 
             }

@@ -3,9 +3,13 @@ package com.ucab.fin.finucab.domain;
 import java.util.ArrayList;
 
 /**
- * Created by Junior on 01/05/2017.
- */
-
+ *Modulo 1 - Modulo de  Inicio de Sesion y registro de usuario
+ *Desarrolladores:
+ *@author Garry Jr. Bruno / Erbin Rodriguez / Alejandro Negrin
+ *Descripción de la clase:
+ * Esta clase se encarga de almacenar los datos del usuario.
+ *
+ **/
 public class Usuario {
     //Estas variables almacenan los datos personasles de los usuarios en memoria.
     private int idusuario;
@@ -20,12 +24,12 @@ public class Usuario {
     private ArrayList<Planificacion_Pago> planes = new ArrayList<Planificacion_Pago>();
     private ArrayList<Presupuesto> presupuestos = new ArrayList<Presupuesto>();
 
-
+   //Contructor por defecto:
     public Usuario()
     {
 
     }
-
+    //Contructor
     public Usuario(int idusuario, String nombre, String apellido, String correo, String usuario, String contrasena, String pregunta, String respuesta, ArrayList<Cuenta_Bancaria> cuentas, ArrayList<Planificacion_Pago> planes) {
         this.idusuario = idusuario;
         this.nombre = nombre;
@@ -39,6 +43,7 @@ public class Usuario {
         this.planes = planes;
     }
 
+     //Getter and Setter:
     public int getIdusuario() {
         return idusuario;
     }

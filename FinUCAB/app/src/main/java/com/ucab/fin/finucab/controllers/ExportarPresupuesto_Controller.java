@@ -27,7 +27,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import static android.R.id.list;
 
@@ -53,8 +55,10 @@ public class ExportarPresupuesto_Controller extends AsyncTask<String ,String, St
         if (!exportDir.exists()) {
             exportDir.mkdirs();
         }
-        File fileCSV = new File(exportDir, "CSVPresupuesto.csv");   //DECLARAR UN ARCHIVO CSV
-        File fileEXCEL = new File(exportDir, "ExcelPresupuesto.xls");//DECLARAR UN ARCHIVO XML
+        SimpleDateFormat s = new SimpleDateFormat("ddMMyyyyhhmmss");
+        String format = s.format(new Date());
+        File fileCSV = new File(exportDir, "CSVPresupuesto"+format+".csv");   //DECLARAR UN ARCHIVO CSV
+        File fileEXCEL = new File(exportDir, "ExcelPresupuesto"+format+".xls");//DECLARAR UN ARCHIVO XML
         try {
             fileCSV.createNewFile();   //CREAR EL ARCHIVO
             FileWriter writerCSV = new FileWriter(fileCSV); //HABILITAR LA FUNCION DE ESCRIBIR EL ARCHIVO
@@ -150,6 +154,7 @@ public class ExportarPresupuesto_Controller extends AsyncTask<String ,String, St
             FileOutputStream os = new FileOutputStream(fileEXCEL); // DECLARO UN OBJETO DE TIPO FILEOUTPUTSTREAM
             wb.write(os); // ESCRIBO EL ARCHIVO
             os.close(); // CIERRO EL ARCCHIVO
+            listaPresupuestos = new ArrayList<>();
             return "";
         } catch (IOException e) {
             Log.e("MainActivity", e.getMessage(), e);
@@ -166,6 +171,7 @@ public class ExportarPresupuesto_Controller extends AsyncTask<String ,String, St
         try {
             JSONArray mJsonArray = new JSONArray(Parametros.respuesta);
             int count = mJsonArray.length();
+
             for (int i = 0; i < count; i++) {   // iterate through jsonArray
                 jObject = mJsonArray.getJSONObject(i);  // get jsonObject @ i position
                 Presupuesto pre = new Presupuesto();
@@ -181,7 +187,8 @@ public class ExportarPresupuesto_Controller extends AsyncTask<String ,String, St
                 }
                 listaPresupuestos.add(pre);
             }
-
+            for (Presupuesto p: listaPresupuestos){
+                System.out.println(p.get_nombre());}
 
             return listaPresupuestos;
         } catch (JSONException e) {
