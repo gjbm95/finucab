@@ -16,11 +16,12 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
-import com.ucab.fin.finucab.controllers.Categoria_Controller;
+import com.ucab.fin.finucab.controllers.ExportarPago_Controller;
 import com.ucab.fin.finucab.controllers.Pago_Controller;
 import com.ucab.fin.finucab.domain.Manejador_Categoria;
 import com.ucab.fin.finucab.domain.Pago;
@@ -115,21 +116,21 @@ public class PaymentFragment extends Fragment implements ResponseWebServiceInter
         switch (item.getItemId()) {
 
             case R.id.modifyPagoOption:
-
-                Pago p = new Pago();
-                p.setCategoria("Universidad");
-                p.setDescripcion("Semestre2");
-                p.setTotal((float) 222.222);
-                p.setTipo("Egreso");
-                Pago_Controller.pago = p;
+                /*si la opcion es Modificar se llama a modificarPago
+                para modificar el pago seleccionado*/
+                Pago pago = Pago_Controller.getPago(positionLongPress);
+                Pago_Controller.pago = pago;
                 parentActivity.changeFragment(new ModificarPago_Fragment(), false);
-
+                positionLongPress = -1;
                 return true;
 
             case R.id.exportPagoOpcion:
-
-                Toast.makeText(getActivity(), "Opcion Exportar seleccionada", Toast.LENGTH_LONG).show();
-
+                /*si la opcion es Exportar se llama a ExportarCategoria
+                para crear un archivo excel o cvs*/
+                Toast.makeText(parentActivity, "Exportando...", Toast.LENGTH_LONG).show();
+                ExportarPago_Controller task=new ExportarPago_Controller(Pago_Controller.getListaPagos());
+                task.execute();
+                Toast.makeText(parentActivity, "Exportado correctamente", Toast.LENGTH_SHORT).show();
                 return true;
 
             default:
@@ -253,7 +254,7 @@ public class PaymentFragment extends Fragment implements ResponseWebServiceInter
                                     //(String) jObject.get("pg_categoria"),
                                     "Sueldo",
                                     (String) jObject.get("pg_descripcion"),
-                                    (float) jObject.get("pg_monto"),
+                                    (float) Float.valueOf(jObject.get("pg_monto").toString()),
                                     (String) jObject.get("pg_tipoTransaccion")));
 
                         }
@@ -261,7 +262,6 @@ public class PaymentFragment extends Fragment implements ResponseWebServiceInter
                         Pago_Controller.setListaPagos(listaPago);
                         recycleList.setAdapter(new PagoAdapter(listaPago));
                         Pago_Controller.resetCasoRequest();
-
                         break;
 
                     case 2:
