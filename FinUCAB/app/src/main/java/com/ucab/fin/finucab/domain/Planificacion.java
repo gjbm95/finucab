@@ -112,4 +112,37 @@ public class Planificacion implements Serializable{
         this.recurrencia = recurrencia;
         this.activo = activo;
     }
+
+    public Planificacion(Date fechaInicio, Date fechaFin, String descripcion, Double monto, Boolean recurrente, String recurrencia, Boolean activo) {
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.descripcion = descripcion;
+        this.monto = monto;
+        this.recurrente = recurrente;
+        this.recurrencia = recurrencia;
+        this.activo = activo;
+    }
+
+    public Planificacion(Date fechaInicio, Date fechaFin, String descripcion, Double monto, int idCategoria, Boolean recurrente, String recurrencia, Boolean activo) {
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.descripcion = descripcion;
+        this.monto = monto;
+        this.idCategoria = idCategoria;
+        this.recurrente = recurrente;
+        this.recurrencia = recurrencia;
+        this.activo = activo;
+    }
+
+    public Planificacion(Date fechaInicio, Date fechaFin, String nombre, String descripcion, Double monto, int idCategoria, Boolean recurrente, String recurrencia, Boolean activo) {
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.monto = monto;
+        this.idCategoria = idCategoria;
+        this.recurrente = recurrente;
+        this.recurrencia = recurrencia;
+        this.activo = activo;
+    }
 }
