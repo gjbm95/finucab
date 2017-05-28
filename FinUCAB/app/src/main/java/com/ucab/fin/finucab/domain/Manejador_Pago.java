@@ -27,7 +27,6 @@ public class Manejador_Pago {
     private Activity actividad;
     private ArrayList<Pago> pagos; //creacion de un array de tipo pago
     private ResponseWebServiceInterface intefaz; //creacion de una interfaz para funcionalidades de vistas
-
     public ArrayList<Pago> getPagos() {
         return pagos;
     } // Obtener ultima lista recuperada
@@ -94,7 +93,19 @@ public class Manejador_Pago {
      */
 
     public void modificarPago( Pago pago) {
-
+        try {
+            JSONObject nuevo_pago = new JSONObject();
+            nuevo_pago.put("pg_id",pago.getIdPago());
+            nuevo_pago.put("pg_monto",pago.getTotal());
+            nuevo_pago.put("pg_tipoTransaccion",pago.getTipo());
+            nuevo_pago.put("pg_categoria",1);
+            nuevo_pago.put("pg_descripcion",pago.getDescripcion());
+            Parametros.reset();
+            Parametros.setMetodo("Modulo5/modificarPago?datosPago="+URLEncoder.encode(nuevo_pago.toString()));
+            new Recepcion(actividad,intefaz).execute("GET");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -106,12 +117,10 @@ public class Manejador_Pago {
      */
     public void obtenerTodosPagos(boolean showStatus) {
 
-        int idUsuario = 1;
+        int idUsuario = 3;
         Parametros.reset();
         Parametros.setMetodo("Modulo5/visualizarPago?datosPago="+idUsuario);
         new Recepcion(actividad,intefaz,showStatus).execute("GET");
-        System.out.println(Parametros.getRespuesta());
-        System.out.println("luismapajuo");
     }
 
 
@@ -122,11 +131,8 @@ public class Manejador_Pago {
      * @return la.get(i)
      */
     public Pago obtenerPago( int id) {
-
         ArrayList<Pago> la = getPagos();
-
         for(int i=0 ; i< la.size(); i++) {
-
             if( la.get(i).getIdPago() == id ){
                 return  la.get(i);
             }
