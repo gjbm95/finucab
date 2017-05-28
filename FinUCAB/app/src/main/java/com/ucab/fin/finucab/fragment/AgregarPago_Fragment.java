@@ -12,17 +12,20 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
+import com.ucab.fin.finucab.controllers.Categoria_Controller;
 import com.ucab.fin.finucab.controllers.Pago_Controller;
 import com.ucab.fin.finucab.domain.Pago;
 import com.ucab.fin.finucab.webservice.Parametros;
+import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
 
 import java.net.URLEncoder;
 
 
-public class AgregarPago_Fragment extends Fragment {
+public class AgregarPago_Fragment extends Fragment implements ResponseWebServiceInterface {
 
     MainActivity parentActivity;
     Button agregarButton;
@@ -35,7 +38,7 @@ public class AgregarPago_Fragment extends Fragment {
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Agregar Pago");
 
-
+        Pago_Controller.initManejador(parentActivity,this);
 
         descripcionEditText = (EditText) rootView.findViewById(R.id.descripccionEditText);
         montoEditText = (EditText) rootView.findViewById(R.id.montoEditText);
@@ -63,7 +66,7 @@ public class AgregarPago_Fragment extends Fragment {
                     pago.setDescripcion(Pago_Controller.descripcionPago.getText().toString());
                     pago.setTotal(Float.valueOf(Pago_Controller.montoPago.getText().toString()));
                     pago.setTipo(Pago_Controller.tipoTransaccion.getSelectedItem().toString());
-                    Pago_Controller.registrarPago(pago,parentActivity);
+                    Pago_Controller.registrarPago(pago);
                     parentActivity.changeFragment(new PaymentFragment(), false);
                 }
             }
@@ -71,5 +74,35 @@ public class AgregarPago_Fragment extends Fragment {
 
 
         return rootView;
+    }
+
+    /**
+     * Response WebService
+     * se llena la lista con las consultas provenientes del WebService con la BD
+     * @param response Respuesta del WebService
+     */
+    @Override
+    public void obtuvoCorrectamente(Object response){
+
+        Toast.makeText(parentActivity, Parametros.getRespuesta(), Toast.LENGTH_SHORT).show();
+
+        if(Pago_Controller.getCasoRequest() == 1 ){
+            Pago_Controller.resetCasoRequest();
+            parentActivity.onBackPressed();
+        }else{
+
+            Categoria_Controller.resetCasoRequest();
+        }
+
+
+    }
+    /**
+     * Response WebService
+     * se llena la lista con las consultas provenientes del WebService con la BD
+     * @param response Error del WebService
+     */
+    @Override
+    public void noObtuvoCorrectamente(Object response){
+
     }
 }
