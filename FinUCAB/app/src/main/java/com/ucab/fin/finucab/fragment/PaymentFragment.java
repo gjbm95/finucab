@@ -37,21 +37,25 @@ public class PaymentFragment extends Fragment implements ResponseWebServiceInter
     FloatingActionButton fab;
     MainActivity parentActivity;
     RecyclerView recycleList;
+    private int positionLongPress = -1; //posicion del menu longpress
     private boolean isInOnCreate;
-
-    public PaymentFragment() {
-        // Required empty public constructor
-    }
-
+    /**
+     *llamada al layout fragment_paymentfragment la cual muestra la posicion en la que
+     *se mostraran las listas
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
+        isInOnCreate = true;
         View rootView = inflater.inflate(R.layout.payment_fragment, container, false);
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Pagos");
-
+        Pago_Controller.fragment = this;
         Pago_Controller.initManejador(parentActivity,this);
 
         // Configuracion inicial del boton flotante
@@ -59,11 +63,12 @@ public class PaymentFragment extends Fragment implements ResponseWebServiceInter
         fab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 parentActivity.changeFragment(new AgregarPago_Fragment(), false);
+                parentActivity.closeDrawerLayout();
             }
         });
 
 
-        final RecyclerView recycleList = (RecyclerView) rootView.findViewById(R.id.pagosReList);
+        recycleList = (RecyclerView) rootView.findViewById(R.id.pagosReList);
         LinearLayoutManager myLayoutManager = new LinearLayoutManager(getActivity());
         myLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
@@ -71,15 +76,13 @@ public class PaymentFragment extends Fragment implements ResponseWebServiceInter
         recycleList.addOnItemTouchListener(new RecyclerTouchListener(getActivity(),
                 recycleList, new PaymentFragment.ClickListener() {
             @Override
-
             public void onClick(View view, final int position) {
-                //Values are passing to activity & to fragment as well
-                //Toast.makeText(getActivity(), "Single Click on position :"+position,
-                //        Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
             public void onLongClick(View view, int position) {
+                positionLongPress = position;
                 registerForContextMenu(recycleList);
             }
         }));
@@ -99,11 +102,7 @@ public class PaymentFragment extends Fragment implements ResponseWebServiceInter
     {
 
         super.onCreateContextMenu(menu, v, menuInfo);
-
-
-
         MenuInflater inflater = getActivity().getMenuInflater();
-
         inflater.inflate(R.menu.pago_menu, menu);
     }
     @Override
@@ -127,7 +126,7 @@ public class PaymentFragment extends Fragment implements ResponseWebServiceInter
 
             case R.id.exportPagoOpcion:
 
-                Toast.makeText(getActivity(), "Opcion Exportar seleccionada",Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Opcion Exportar seleccionada", Toast.LENGTH_LONG).show();
 
                 return true;
 
@@ -137,27 +136,10 @@ public class PaymentFragment extends Fragment implements ResponseWebServiceInter
 
         }
     }
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        if (!isInOnCreate) {
-
-            Pago_Controller.initManejador(parentActivity,this);
-            Pago_Controller.obtenerTodosPagos(false);
-        }
-
-        isInOnCreate = false;
-    }
-
-
-
-
 
     public static interface ClickListener{
 
         public void onClick(View view,int position);
-
         public void onLongClick(View view,int position);
 
     }
@@ -176,17 +158,13 @@ public class PaymentFragment extends Fragment implements ResponseWebServiceInter
             gestureDetector=new GestureDetector(context,new GestureDetector.SimpleOnGestureListener(){
 
                 @Override
-
                 public boolean onSingleTapUp(MotionEvent e) {
 
                     return true;
 
                 }
 
-
-
                 @Override
-
                 public void onLongPress(MotionEvent e) {
 
                     View child=recycleView.findChildViewUnder(e.getX(),e.getY());

@@ -110,8 +110,6 @@ public class Manejador_Pago {
         Parametros.reset();
         Parametros.setMetodo("Modulo5/visualizarPago?datosPago="+idUsuario);
         new Recepcion(actividad,intefaz,showStatus).execute("GET");
-        System.out.println(Parametros.getRespuesta());
-        System.out.println("luismapajuo");
     }
 
 

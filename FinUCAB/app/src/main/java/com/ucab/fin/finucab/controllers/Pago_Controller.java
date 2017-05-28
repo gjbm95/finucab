@@ -39,6 +39,7 @@ public class Pago_Controller {
     private ArrayList<Pago> pagos;
     private static Manejador_Pago manejador;
     private static int  casoRequest = -1;
+    public static Object fragment; //Fragment que se esta controlando
 
     /**
      * Inicializar de ser necesario el manejador de data
