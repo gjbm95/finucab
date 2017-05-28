@@ -1,5 +1,6 @@
 package com.ucab.fin.finucab;
 import android.app.Fragment;
+import android.os.Build;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -36,7 +37,7 @@ import static org.robolectric.shadows.support.v4.SupportFragmentTestUtil.startFr
  *
  **/
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(constants = BuildConfig.class,manifest = "src/main/AndroidManifest.xml")
 public class GestionUsuariosTest {
 
   /*
