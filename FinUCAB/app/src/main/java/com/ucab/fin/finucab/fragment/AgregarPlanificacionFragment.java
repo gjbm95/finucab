@@ -218,8 +218,6 @@ public class AgregarPlanificacionFragment extends Fragment implements ResponseWe
                     spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     categoria.setAdapter(spinner_adapter);
 
-
-                    Planificacion_Controller.managementRequest = -1;
                 }catch (JSONException e){
                     e.printStackTrace();
                 }

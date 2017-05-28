@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.controllers.Categoria_Controller;
+import com.ucab.fin.finucab.controllers.Planificacion_Controller;
 import com.ucab.fin.finucab.domain.Categoria;
 import com.ucab.fin.finucab.domain.Manejador_Categoria;
 import com.ucab.fin.finucab.domain.Planificacion;
@@ -22,21 +23,20 @@ import java.util.List;
  * Created by William on 25/5/2017.
  */
 
-public class PlanificacionAdapter extends RecyclerView.Adapter<PlanificacionAdapter.ViewHolder>{
+public class PlanificacionAdapter extends RecyclerView.Adapter<PlanificacionAdapter.ViewHolder> {
 
     private List<Planificacion> items;
     Manejador_Categoria manejador;
 
 
-
-    public PlanificacionAdapter(List<Planificacion> planificacionList){
+    public PlanificacionAdapter(List<Planificacion> planificacionList) {
         super();
         this.items = planificacionList;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v =  LayoutInflater.from(parent.getContext())
+        View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recycle_view_planificacion, parent, false);
         ViewHolder viewHolder = new ViewHolder(v);
         return viewHolder;
@@ -47,12 +47,15 @@ public class PlanificacionAdapter extends RecyclerView.Adapter<PlanificacionAdap
 
         DateFormat date = new SimpleDateFormat("yyyy-MM-dd");
         Planificacion lista = items.get(position);
-
-
-        holder.textViewCategoria.setText(String.valueOf(lista.getIdCategoria()));
+        String nombreCategoria = Planificacion_Controller.nombreCategoria(lista.getIdCategoria());
+        String fecha;
+        if (lista.getRecurrente()) {
+            fecha = date.format(lista.getFechaInicio()) + " hasta " + date.format(lista.getFechaFin());
+        } else fecha = (date.format(lista.getFechaInicio()));
+        holder.textViewCategoria.setText(nombreCategoria);
         holder.textViewDescripcion.setText(lista.getDescripcion());
-        holder.textViewFecha.setText(date.format(lista.getFechaInicio()) + " hasta "+ date.format(lista.getFechaFin()));
-        holder.textViewMonto.setText(String.format("%.2f",lista.getMonto()));
+        holder.textViewFecha.setText(fecha);
+        holder.textViewMonto.setText(String.format("%.2f", lista.getMonto()));
         holder.textViewRecurrente.setText(lista.getRecurrencia());
 
 
@@ -60,15 +63,15 @@ public class PlanificacionAdapter extends RecyclerView.Adapter<PlanificacionAdap
 
     @Override
     public int getItemCount() {
-        if (items == null){
+        if (items == null) {
             return 0;
-        }else {
+        } else {
             return items.size();
         }
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
-            View.OnLongClickListener{
+            View.OnLongClickListener {
         private final String TAG = ViewHolder.class.getSimpleName();
         private TextView textViewCategoria;
         private TextView textViewDescripcion;
@@ -100,7 +103,7 @@ public class PlanificacionAdapter extends RecyclerView.Adapter<PlanificacionAdap
             int i = getPosition();
             items.remove(i);
             notifyItemRemoved(i);
-            Log.d(TAG, "Item long-clicked at position " + i );
+            Log.d(TAG, "Item long-clicked at position " + i);
             return true;
         }
     }
