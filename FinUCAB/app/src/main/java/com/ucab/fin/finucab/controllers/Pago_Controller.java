@@ -39,6 +39,7 @@ public class Pago_Controller {
     private ArrayList<Pago> pagos;
     private static Manejador_Pago manejador;
     private static int  casoRequest = -1;
+    public static Object fragment; //Fragment que se esta controlando
 
     /**
      * Inicializar de ser necesario el manejador de data
@@ -57,7 +58,7 @@ public class Pago_Controller {
     }
 
     /**
-     * Colocar actul lista de categoria en el manejador
+     * Colocar actul lista de pagos en el manejador
      */
     public static void setListaPagos(ArrayList<Pago> pagos){
 
@@ -68,6 +69,8 @@ public class Pago_Controller {
 
         descripcionPago.setText(pago.getDescripcion());
         montoPago.setText(Float.toString(pago.getTotal()));
+
+
 
     }
 
@@ -106,8 +109,17 @@ public class Pago_Controller {
      * @param pago Pago a registrar
      */
     public static void registrarPago(Pago pago){
-        System.out.println(pago.getDescripcion());
         manejador.agregarPago(pago);
+
+    }
+    /**
+     *  Metodo encargado de llamar a modificar pago
+     * @param pago Pago a registrar
+     */
+    public static void modificarPago(Pago pago){
+
+        casoRequest = 2;
+        manejador.modificarPago(pago);
 
     }
 
@@ -125,11 +137,14 @@ public class Pago_Controller {
 
         return manejador.getPagos();
     }
-
-
-
-
-
+    /**
+     * obtener pago en el manejador
+     * @return pago seleccionado
+     */
+    public static Pago getPago(int position){
+        int id = manejador.getPagos().get(position).getIdPago();
+        return manejador.obtenerPago(id);
+    }
 
 
 

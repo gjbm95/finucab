@@ -16,11 +16,14 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
+import com.ucab.fin.finucab.controllers.ExportarPago_Controller;
 import com.ucab.fin.finucab.controllers.Pago_Controller;
+import com.ucab.fin.finucab.domain.Manejador_Categoria;
 import com.ucab.fin.finucab.domain.Pago;
 import com.ucab.fin.finucab.webservice.Parametros;
 import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
@@ -37,21 +40,25 @@ public class PaymentFragment extends Fragment implements ResponseWebServiceInter
     FloatingActionButton fab;
     MainActivity parentActivity;
     RecyclerView recycleList;
+    private int positionLongPress = -1; //posicion del menu longpress
     private boolean isInOnCreate;
-
-    public PaymentFragment() {
-        // Required empty public constructor
-    }
-
+    /**
+     *llamada al layout fragment_paymentfragment la cual muestra la posicion en la que
+     *se mostraran las listas
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
+        isInOnCreate = true;
         View rootView = inflater.inflate(R.layout.payment_fragment, container, false);
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Pagos");
-
+        Pago_Controller.fragment = this;
         Pago_Controller.initManejador(parentActivity,this);
 
         // Configuracion inicial del boton flotante
@@ -59,11 +66,12 @@ public class PaymentFragment extends Fragment implements ResponseWebServiceInter
         fab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 parentActivity.changeFragment(new AgregarPago_Fragment(), false);
+                parentActivity.closeDrawerLayout();
             }
         });
 
 
-        final RecyclerView recycleList = (RecyclerView) rootView.findViewById(R.id.pagosReList);
+        recycleList = (RecyclerView) rootView.findViewById(R.id.pagosReList);
         LinearLayoutManager myLayoutManager = new LinearLayoutManager(getActivity());
         myLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
@@ -71,15 +79,13 @@ public class PaymentFragment extends Fragment implements ResponseWebServiceInter
         recycleList.addOnItemTouchListener(new RecyclerTouchListener(getActivity(),
                 recycleList, new PaymentFragment.ClickListener() {
             @Override
-
             public void onClick(View view, final int position) {
-                //Values are passing to activity & to fragment as well
-                //Toast.makeText(getActivity(), "Single Click on position :"+position,
-                //        Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
             public void onLongClick(View view, int position) {
+                positionLongPress = position;
                 registerForContextMenu(recycleList);
             }
         }));
@@ -99,11 +105,7 @@ public class PaymentFragment extends Fragment implements ResponseWebServiceInter
     {
 
         super.onCreateContextMenu(menu, v, menuInfo);
-
-
-
         MenuInflater inflater = getActivity().getMenuInflater();
-
         inflater.inflate(R.menu.pago_menu, menu);
     }
     @Override
@@ -114,21 +116,21 @@ public class PaymentFragment extends Fragment implements ResponseWebServiceInter
         switch (item.getItemId()) {
 
             case R.id.modifyPagoOption:
-
-                Pago p = new Pago();
-                p.setCategoria("Universidad");
-                p.setDescripcion("Semestre2");
-                p.setTotal((float) 222.222);
-                p.setTipo("Egreso");
-                Pago_Controller.pago = p;
+                /*si la opcion es Modificar se llama a modificarPago
+                para modificar el pago seleccionado*/
+                Pago pago = Pago_Controller.getPago(positionLongPress);
+                Pago_Controller.pago = pago;
                 parentActivity.changeFragment(new ModificarPago_Fragment(), false);
-
+                positionLongPress = -1;
                 return true;
 
             case R.id.exportPagoOpcion:
-
-                Toast.makeText(getActivity(), "Opcion Exportar seleccionada",Toast.LENGTH_LONG).show();
-
+                /*si la opcion es Exportar se llama a ExportarCategoria
+                para crear un archivo excel o cvs*/
+                Toast.makeText(parentActivity, "Exportando...", Toast.LENGTH_LONG).show();
+                ExportarPago_Controller task=new ExportarPago_Controller(Pago_Controller.getListaPagos());
+                task.execute();
+                Toast.makeText(parentActivity, "Exportado correctamente", Toast.LENGTH_SHORT).show();
                 return true;
 
             default:
@@ -137,27 +139,10 @@ public class PaymentFragment extends Fragment implements ResponseWebServiceInter
 
         }
     }
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        if (!isInOnCreate) {
-
-            Pago_Controller.initManejador(parentActivity,this);
-            Pago_Controller.obtenerTodosPagos(false);
-        }
-
-        isInOnCreate = false;
-    }
-
-
-
-
 
     public static interface ClickListener{
 
         public void onClick(View view,int position);
-
         public void onLongClick(View view,int position);
 
     }
@@ -176,17 +161,13 @@ public class PaymentFragment extends Fragment implements ResponseWebServiceInter
             gestureDetector=new GestureDetector(context,new GestureDetector.SimpleOnGestureListener(){
 
                 @Override
-
                 public boolean onSingleTapUp(MotionEvent e) {
 
                     return true;
 
                 }
 
-
-
                 @Override
-
                 public void onLongPress(MotionEvent e) {
 
                     View child=recycleView.findChildViewUnder(e.getX(),e.getY());
@@ -268,12 +249,12 @@ public class PaymentFragment extends Fragment implements ResponseWebServiceInter
                         for (int i = 0; i < mJsonArray.length(); i++) {   // iterate through jsonArray
                             String strJson = mJsonArray.getString(i);
                             JSONObject jObject = new JSONObject(strJson);
-
                             listaPago.add(new Pago(
                                     (int) jObject.get("pg_id"),
-                                    (String) jObject.get("pg_categoria"),
+                                    //(String) jObject.get("pg_categoria"),
+                                    "Sueldo",
                                     (String) jObject.get("pg_descripcion"),
-                                    (float) jObject.get("pg_monto"),
+                                    (float) Float.valueOf(jObject.get("pg_monto").toString()),
                                     (String) jObject.get("pg_tipoTransaccion")));
 
                         }
@@ -281,7 +262,6 @@ public class PaymentFragment extends Fragment implements ResponseWebServiceInter
                         Pago_Controller.setListaPagos(listaPago);
                         recycleList.setAdapter(new PagoAdapter(listaPago));
                         Pago_Controller.resetCasoRequest();
-
                         break;
 
                     case 2:
