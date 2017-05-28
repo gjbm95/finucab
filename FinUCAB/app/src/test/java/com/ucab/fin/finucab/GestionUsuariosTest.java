@@ -37,7 +37,7 @@ import static org.robolectric.shadows.support.v4.SupportFragmentTestUtil.startFr
  *
  **/
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class,manifest = "src/main/AndroidManifest.xml")
+@Config(constants = BuildConfig.class)
 public class GestionUsuariosTest {
 
   /*
