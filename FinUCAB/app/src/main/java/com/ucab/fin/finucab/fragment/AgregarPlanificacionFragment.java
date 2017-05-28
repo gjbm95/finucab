@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -19,14 +22,24 @@ import android.widget.TextView;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
+import com.ucab.fin.finucab.controllers.Categoria_Controller;
 import com.ucab.fin.finucab.controllers.Planificacion_Controller;
+import com.ucab.fin.finucab.domain.Categoria;
+import com.ucab.fin.finucab.domain.CategoriaSpinner;
 import com.ucab.fin.finucab.domain.Planificacion;
+import com.ucab.fin.finucab.webservice.Parametros;
 import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.LinkedList;
 
 
 public class AgregarPlanificacionFragment extends Fragment implements ResponseWebServiceInterface {
@@ -71,6 +84,9 @@ public class AgregarPlanificacionFragment extends Fragment implements ResponseWe
         recurrencia = (Spinner) rootView.findViewById(R.id.recurrenciaPaSpinner);
         calendar = Calendar.getInstance();
 
+        Planificacion_Controller.listaCategoriasPa();
+
+
 
         aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,13 +94,17 @@ public class AgregarPlanificacionFragment extends Fragment implements ResponseWe
                 int selectedId = tipoGrupo.getCheckedRadioButtonId();
                 tipoBoton = (RadioButton) rootView.findViewById(selectedId);
                 String tipo = tipoBoton.getText().toString();
+                CategoriaSpinner sp = (CategoriaSpinner) categoria.getSelectedItem();
+
+
                 if (tipo.equals("Recurrente")) {
                     try {
                         recurrente = true;
                         if (!campoVacio(descripcion, monto, fechaDesde, fechaHasta)) {
                             planificacion = new Planificacion(format.parse(fechaDesde.getText().toString()), format.parse(fechaHasta
                                     .getText().toString()), " ", descripcion.getText().toString(), Double.valueOf
-                                    (monto.getText().toString()), 1, recurrente, recurrencia.getSelectedItem().toString(), true);
+                                    (monto.getText().toString()), sp.getId(), recurrente, recurrencia.getSelectedItem()
+                                    .toString(), true);
                             Planificacion_Controller.agregarPlanificacion(planificacion);
                         }
                     } catch (ParseException e) {
@@ -95,7 +115,7 @@ public class AgregarPlanificacionFragment extends Fragment implements ResponseWe
                         recurrente = false;
                         if (!campoVacio(descripcion, monto, fechaDesde, fechaDesde)) {
                             planificacion = new Planificacion(format.parse(fechaDesde.getText().toString()), format.parse(fechaDesde.getText().toString()), " ", descripcion.getText().toString(), Double.valueOf
-                                    (monto.getText().toString()), 1, recurrente, "", true);
+                                    (monto.getText().toString()), sp.getId(), recurrente, "", true);
                             Planificacion_Controller.agregarPlanificacion(planificacion);
                         }
                     } catch (ParseException e) {
@@ -175,8 +195,43 @@ public class AgregarPlanificacionFragment extends Fragment implements ResponseWe
 
     @Override
     public void obtuvoCorrectamente(Object response) {
-        String respuesta = (String) response;
-        showDialogResponse(respuesta);
+
+        Log.i("Caso ", String.valueOf(Planificacion_Controller.managementRequest));
+
+        switch (Planificacion_Controller.managementRequest) {
+
+            case 1:
+                try {
+                    JSONArray mJsonArray = new JSONArray(Parametros.getRespuesta());
+                    LinkedList category = new LinkedList();
+
+
+                    for (int i = 0; i < mJsonArray.length(); i++) {
+                        String strJson = mJsonArray.getString(i);
+                        JSONObject jsonObject = new JSONObject(strJson);
+
+                        category.add( new CategoriaSpinner(jsonObject.getInt("Id"), jsonObject.getString("Nombre")));
+
+                    }
+                    ArrayAdapter spinner_adapter = new ArrayAdapter(parentActivity, android.R.layout
+                            .simple_spinner_item, category);
+                    spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    categoria.setAdapter(spinner_adapter);
+
+
+                    Planificacion_Controller.managementRequest = -1;
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+                Planificacion_Controller.managementRequest = -1;
+                break;
+
+            case 2:
+                String respuesta = (String) response;
+                showDialogResponse(respuesta);
+                Planificacion_Controller.managementRequest = -1;
+                break;
+        }
     }
 
     @Override

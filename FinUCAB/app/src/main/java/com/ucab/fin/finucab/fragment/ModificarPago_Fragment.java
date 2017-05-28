@@ -14,6 +14,7 @@ import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
 import com.ucab.fin.finucab.controllers.Pago_Controller;
 import com.ucab.fin.finucab.controllers.Presupuesto_Controller;
+import com.ucab.fin.finucab.domain.Pago;
 
 
 public class ModificarPago_Fragment extends Fragment {
@@ -47,6 +48,14 @@ public class ModificarPago_Fragment extends Fragment {
             public void onClick(View v) {
                 Resp = Pago_Controller.validacionPagoVacio();
                 if (Resp == 1) {
+                    Pago pago = new Pago();
+                    pago.setIdPago(Pago_Controller.pago.getIdPago());
+                    pago.setCategoria(Pago_Controller.categoriaPago.getSelectedItem().toString());
+                    pago.setDescripcion(Pago_Controller.descripcionPago.getText().toString());
+                    pago.setTotal(Float.valueOf(Pago_Controller.montoPago.getText().toString()));
+                    pago.setTipo(Pago_Controller.tipoTransaccion.getSelectedItem().toString());
+                    System.out.println(pago);
+                    Pago_Controller.modificarPago(pago);
                     parentActivity.changeFragment(new PaymentFragment(), false);
                 }
             }
