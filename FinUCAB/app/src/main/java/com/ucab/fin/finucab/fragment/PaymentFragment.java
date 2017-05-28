@@ -7,26 +7,37 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.ContextMenu;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ContextMenu;
-import android.view.MenuInflater;
 import android.widget.Toast;
+
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
 import com.ucab.fin.finucab.controllers.Pago_Controller;
 import com.ucab.fin.finucab.domain.Pago;
+import com.ucab.fin.finucab.webservice.Parametros;
+import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
-public class PaymentFragment extends Fragment {
+public class PaymentFragment extends Fragment implements ResponseWebServiceInterface {
 
 
     FloatingActionButton fab;
     MainActivity parentActivity;
+    RecyclerView recycleList;
+    private boolean isInOnCreate;
 
     public PaymentFragment() {
         // Required empty public constructor
@@ -40,6 +51,8 @@ public class PaymentFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.payment_fragment, container, false);
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Pagos");
+
+        Pago_Controller.initManejador(parentActivity,this);
 
         // Configuracion inicial del boton flotante
         fab = (FloatingActionButton) rootView.findViewById(R.id.addFloatingBtnPago);
@@ -70,9 +83,7 @@ public class PaymentFragment extends Fragment {
                 registerForContextMenu(recycleList);
             }
         }));
-
-        PagoAdapter pAdapter =new PagoAdapter(populatedList());
-        recycleList.setAdapter(pAdapter);
+        Pago_Controller.obtenerTodosPagos(true);
         return rootView;
 
 
@@ -126,29 +137,17 @@ public class PaymentFragment extends Fragment {
 
         }
     }
-    //BORRAR CUANDO SE IMPLEMENTE LA CLASE PAGO
-    private ArrayList<Pago> populatedList(){
+    @Override
+    public void onResume() {
+        super.onResume();
 
-        ArrayList<Pago> listOfPersona = new ArrayList<Pago>();
+        if (!isInOnCreate) {
 
-        for(int i=0;i<5;i++)
-
-        {
-
-            Pago pi = new Pago();
-
-            pi.setCategoria("Universidad");
-            pi.setDescripcion("Semestre");
-            pi.setTotal(10);
-            pi.setTipo("ingreso");
-            pi.setIdPago(0);
-
-            listOfPersona.add(pi);
-
+            Pago_Controller.initManejador(parentActivity,this);
+            Pago_Controller.obtenerTodosPagos(false);
         }
 
-        return listOfPersona;
-
+        isInOnCreate = false;
     }
 
 
@@ -242,6 +241,74 @@ public class PaymentFragment extends Fragment {
 
 
         }
+
+    }
+    /**
+     * Response WebService
+     * se llena la lista con las consultas provenientes del WebService con la BD
+     * @param response
+     */
+    @Override
+    public void obtuvoCorrectamente(Object response){
+        try {
+
+            Log.e("CASO",Pago_Controller.getCasoRequest()+"");
+
+            if (Parametros.getRespuesta().equals("Error")||Parametros.getRespuesta().equals("ERROR") ) {
+
+                Toast.makeText(parentActivity, "Ups, ha ocurrido un error", Toast.LENGTH_SHORT).show();
+
+            }else {
+                switch (Pago_Controller.getCasoRequest()) {
+
+                    case 0:
+                        ArrayList listaPago = new ArrayList<Pago>();
+                        JSONArray mJsonArray = new JSONArray(Parametros.getRespuesta());
+                        System.out.println(Parametros.getRespuesta());
+                        for (int i = 0; i < mJsonArray.length(); i++) {   // iterate through jsonArray
+                            String strJson = mJsonArray.getString(i);
+                            JSONObject jObject = new JSONObject(strJson);
+
+                            listaPago.add(new Pago(
+                                    (int) jObject.get("pg_id"),
+                                    (String) jObject.get("pg_categoria"),
+                                    (String) jObject.get("pg_descripcion"),
+                                    (float) jObject.get("pg_monto"),
+                                    (String) jObject.get("pg_tipoTransaccion")));
+
+                        }
+
+                        Pago_Controller.setListaPagos(listaPago);
+                        recycleList.setAdapter(new PagoAdapter(listaPago));
+                        Pago_Controller.resetCasoRequest();
+
+                        break;
+
+                    case 2:
+                        Toast.makeText(parentActivity, Parametros.getRespuesta(), Toast.LENGTH_SHORT).show();
+                        Pago_Controller.obtenerTodosPagos(false);
+
+                        break;
+                    case 3:
+
+                        Toast.makeText(parentActivity, Parametros.getRespuesta(), Toast.LENGTH_SHORT).show();
+                        Pago_Controller.obtenerTodosPagos(false);
+
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void noObtuvoCorrectamente(Object response){
 
     }
 
