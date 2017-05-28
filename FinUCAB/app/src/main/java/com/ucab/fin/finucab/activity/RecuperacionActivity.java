@@ -1,6 +1,7 @@
 package com.ucab.fin.finucab.activity;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
@@ -37,6 +38,7 @@ public class RecuperacionActivity extends AppCompatActivity implements View.OnCl
         setContentView(R.layout.activity_forgot);
         activarPaso(1);
         conteo=1;
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         //Colocando el icono en la parte superior izquierda:
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(true);

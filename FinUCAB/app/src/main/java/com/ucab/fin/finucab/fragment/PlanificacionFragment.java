@@ -14,6 +14,9 @@ import android.widget.Toast;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
+import com.ucab.fin.finucab.controllers.Categoria_Controller;
+import com.ucab.fin.finucab.controllers.Planificacion_Controller;
+import com.ucab.fin.finucab.domain.Categoria;
 import com.ucab.fin.finucab.domain.Planificacion;
 import com.ucab.fin.finucab.domain.Planificacion_Pago;
 import com.ucab.fin.finucab.webservice.Parametros;
@@ -32,13 +35,12 @@ import java.util.Date;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PlanificacionFragment extends Fragment implements ResponseWebServiceInterface{
+public class PlanificacionFragment extends Fragment implements ResponseWebServiceInterface {
 
 
     private FloatingActionButton fab;
     private MainActivity parentActivity;
     private RecyclerView recycle;
-    private Planificacion_Pago planificacion_pago;
 
 
     public PlanificacionFragment() {
@@ -53,6 +55,8 @@ public class PlanificacionFragment extends Fragment implements ResponseWebServic
         View rootView = inflater.inflate(R.layout.fragment_planificacion, container, false);
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Planificacion de pagos");
+        Planificacion_Controller.init(parentActivity, this);
+        Planificacion_Controller.managementRequest = 0;
 
         recycle = (RecyclerView) rootView.findViewById(R.id.listaPlanificacion);
         LinearLayoutManager myLayoutManager = new LinearLayoutManager(getActivity());
@@ -63,11 +67,11 @@ public class PlanificacionFragment extends Fragment implements ResponseWebServic
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* Bundle bundle = new Bundle();
+                /*Bundle bundle = new Bundle();
                 bundle.putString("curda","anis");
                 String val = bundle.getString("curda");*/
 
-                parentActivity.changeFragment(new PlanificacionFragment(), true);
+                parentActivity.changeFragment(new AgregarPlanificacionFragment(), true);
             }
 
         });
@@ -93,69 +97,89 @@ public class PlanificacionFragment extends Fragment implements ResponseWebServic
             }
         }));*/
 
-        planificacion_pago = new Planificacion_Pago(parentActivity, this);
-        planificacion_pago.listaPlanificacion();
+        Planificacion_Controller.obtenerListaPlanificacion();
 
         return rootView;
     }
 
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
 
         if (Parametros.getRespuesta() != null) {
             Log.v("Response-Fra", Parametros.getRespuesta());
-            if (Parametros.getRespuesta().equals("Error") || Parametros.getRespuesta().equals("ERROR")){
+            if (Parametros.getRespuesta().equals("Error") || Parametros.getRespuesta().equals("ERROR")) {
                 Toast.makeText(parentActivity, "Algo salio mal", Toast.LENGTH_SHORT).show();
             }
             Parametros.reset();
         }
 
-        PlanificacionAdapter planificacionAdapter = new PlanificacionAdapter(planificacion_pago.getListaPlanificacion());
+        PlanificacionAdapter planificacionAdapter = new PlanificacionAdapter(Planificacion_Controller.planificacion_pago
+                .getListaPlanificacion());
         recycle.setAdapter(planificacionAdapter);
-    }
-
-    private void irTareaJson() {
-
     }
 
 
     @Override
     public void obtuvoCorrectamente(Object response) {
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            JSONArray array = null;
+            JSONObject object = null;
+            String respuesta;
+            Log.i("Caso ", String.valueOf(Planificacion_Controller.managementRequest));
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        JSONArray array = null;
-        JSONObject object = null;
-        String respuesta;
+            switch (Planificacion_Controller.managementRequest) {
 
-        ArrayList listaPlanificacion = new ArrayList<Planificacion>();
-        try{
-            array = new JSONArray(Parametros.getRespuesta());
-            int count = array.length();
+                case 0:
 
-            for (int i=0; i<count; i++){
-                respuesta = array.getString(i);
-                object = new JSONObject(respuesta);
-                Planificacion pa = new Planificacion(object.getInt("Id"),
-                        format.parse(object.getString("fechaInicio")),
-                        format.parse(object.getString("fechaFin")),
-                        object.getString("Nombre"),
-                        object.getString("Descripcion"),
-                        Double.parseDouble(object.getString("Monto")),
-                        object.getInt("Categoria"),
-                        object.getBoolean("Recurrente"),
-                        object.getString("Recurrencia"),
-                        object.getBoolean("Activo"));
+                    ArrayList listaPlanificacion = new ArrayList<Planificacion>();
 
-                listaPlanificacion.add(pa);
+                    array = new JSONArray(Parametros.getRespuesta());
+                    int count = array.length();
+
+                    for (int i = 0; i < count; i++) {
+                        respuesta = array.getString(i);
+                        object = new JSONObject(respuesta);
+                        Planificacion pa = new Planificacion(object.getInt("Id"),
+                                format.parse(object.getString("fechaInicio")),
+                                format.parse(object.getString("fechaFin")),
+                                object.getString("Nombre"),
+                                object.getString("Descripcion"),
+                                Double.parseDouble(object.getString("Monto")),
+                                object.getInt("Categoria"),
+                                object.getBoolean("Recurrente"),
+                                object.getString("Recurrencia"),
+                                object.getBoolean("Activo"));
+
+                        listaPlanificacion.add(pa);
+                    }
+
+                    Planificacion_Controller.planificacion_pago.setListaPlanificacion(listaPlanificacion);
+                    PlanificacionAdapter adapter = new PlanificacionAdapter(listaPlanificacion);
+                    recycle.setAdapter(adapter);
+                    Planificacion_Controller.managementRequest = -1;
+                    break;
+
+                case 1:
+
+                    ArrayList listaCategoria = new ArrayList<Categoria>();
+                    JSONArray mJsonArray = new JSONArray(Parametros.getRespuesta());
+
+                    for (int i = 0; i< mJsonArray.length(); i++){
+                        String strJson = mJsonArray.getString(i);
+                        JSONObject jsonObject = new JSONObject(strJson);
+
+                        listaCategoria.add(new Categoria((int) jsonObject.get("Id"), (String) jsonObject.get
+                                ("Nombre"), (String) jsonObject.get("Descripcion"), (Boolean) jsonObject.get
+                                ("esHabilitado"), (Boolean) jsonObject.get("esIngreso")));
+                    }
+                    Categoria_Controller.setListaCategorias(listaCategoria);
+                    Planificacion_Controller.managementRequest = -1;
+                    break;
             }
-
-            planificacion_pago.setListaPlanificacion(listaPlanificacion);
-            PlanificacionAdapter adapter = new PlanificacionAdapter(listaPlanificacion);
-            recycle.setAdapter(adapter);
-
-        } catch (JSONException e){
+        } catch (JSONException e) {
             e.printStackTrace();
         } catch (ParseException e) {
             e.printStackTrace();

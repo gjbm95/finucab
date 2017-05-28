@@ -3,6 +3,7 @@ package com.ucab.fin.finucab.activity;
 import android.content.Intent;
 
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -51,7 +52,7 @@ public class RegistroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         inicioOnboarding();
         activarPaso(1);
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         //Inicio el contador de etapas:
         //---------------------------------------------------------------------------------
         conteo = 1; //Esta variable se encarga de indicar que paso del registro de usuario se debe ejecutar
