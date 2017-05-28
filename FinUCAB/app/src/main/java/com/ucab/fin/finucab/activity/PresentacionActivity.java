@@ -45,7 +45,7 @@ public class PresentacionActivity extends AppCompatActivity {
         //Configuraciones de Red: (Coloque aqui la IP y puerto de su servidor)
         //-------------------------------------------------------------------
         if(datos.equals("vacio")) {
-            Parametros.setServer("http://192.168.1.105"); // Asigno direccion IP a parametros de red.
+            Parametros.setServer("http://192.168.1.104"); // Asigno direccion IP a parametros de red.
             Parametros.setPuerto("8080"); // Asigno puerto por el cual el servidor escucha.
             //-------------------------------------------------------
             logo = (ImageView) findViewById(R.id.logoPresentacion); //Asigno las imagenes
@@ -59,11 +59,6 @@ public class PresentacionActivity extends AppCompatActivity {
             touch.setOnClickListener(new View.OnClickListener() {
                                          @Override
                                          public void onClick(View v) {
-                                             //Desplazo las imagenes nuevamente.
-                                             Animation animation = new TranslateAnimation(0, 0, 150, 0);
-                                             animation.setDuration(2000);
-                                             animation.setFillAfter(true);
-                                             logo.setAnimation(animation);
                                              Intent inicio = new Intent(PresentacionActivity.this, InicioActivity.class);
                                              startActivity(inicio); // Inicio la ventana de inicio de sesion.
                                          }
