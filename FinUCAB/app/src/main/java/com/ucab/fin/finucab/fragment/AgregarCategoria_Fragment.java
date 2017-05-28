@@ -78,8 +78,6 @@ public class AgregarCategoria_Fragment extends Fragment implements View.OnClickL
         tipoTextView = (TextView) rootView.findViewById(R.id.TipoTextView);
         AgregarcategoriaEditText =(EditText) rootView.findViewById(R.id.AgregarcategoriaEditText);
         AddDescripcionEditText =(EditText) rootView.findViewById(R.id.AddDescripcionEditText);
-        Categoria_Controller.escribirCategoria = AgregarcategoriaEditText;
-        Categoria_Controller.escribirDescripcion = AddDescripcionEditText;
 
 //        SET LISTENERS (Se le asigna la actividad en el cual funcionaran)
 

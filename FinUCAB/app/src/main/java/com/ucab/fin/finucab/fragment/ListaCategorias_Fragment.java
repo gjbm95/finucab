@@ -8,7 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.ContextMenu;
+import android.view.ContextMenu; 
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -66,6 +66,7 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Categorias");
 
+        Categoria_Controller.fragment = this;
         Categoria_Controller.initManejador(parentActivity,this);
 
         // Configuracion inicial del boton flotante
@@ -96,13 +97,6 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
             @Override
             public void onClick(View view, final int position) {
 
-
-                Log.v("View",view.getId()+"-"+R.id.switchestado);
-                AgregarCategoria_Fragment modificar = new AgregarCategoria_Fragment();
-                modificar.categoria = Categoria_Controller.getListaCategorias().get(position);
-                parentActivity.changeFragment(modificar, false);
-                parentActivity.closeDrawerLayout();
-
             }
 
             /**
@@ -121,6 +115,18 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
         Categoria_Controller.obtenerTodasCategorias(true);
 
         return rootView;
+
+    }
+
+    /**
+     * Metodo para redirecciona al AgregarCategoria_Fragment para editarla
+     * @param categoria Categoria a mostrar
+     */
+    public void redireccionarAgregarCategoria(Categoria categoria){
+        AgregarCategoria_Fragment modificar = new AgregarCategoria_Fragment();
+        modificar.categoria = categoria;
+        parentActivity.changeFragment(modificar, false);
+        parentActivity.closeDrawerLayout();
 
     }
 
@@ -169,8 +175,8 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
 
                 /*si la opcion es Exportar se llama a ExportarCategoria
                 para crear un archivo excel o cvs*/
-                Toast.makeText(parentActivity, "Exportando...", Toast.LENGTH_SHORT).show();
-                ExportarCategoria_Controller task=new ExportarCategoria_Controller();
+                Toast.makeText(parentActivity, "Exportando...", Toast.LENGTH_LONG).show();
+                ExportarCategoria_Controller task=new ExportarCategoria_Controller(Categoria_Controller.getListaCategorias());
                 task.execute();
                 Toast.makeText(parentActivity, "Exportado correctamente", Toast.LENGTH_SHORT).show();
 

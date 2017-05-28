@@ -87,9 +87,6 @@ public class ModificarPresupuestoFragment extends Fragment implements CompoundBu
             public void onClick(View v) {
                 if(Presupuesto_Controller.validacionVacio(parentActivity)==0){
                     caso=2;
-                    obtuvoCorrectamente(null);
-
-
                 }
             }
         });

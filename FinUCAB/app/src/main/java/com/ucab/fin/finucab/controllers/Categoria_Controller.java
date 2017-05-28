@@ -1,12 +1,15 @@
 package com.ucab.fin.finucab.controllers;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.util.Log;
 import android.widget.EditText;
 
 import com.ucab.fin.finucab.domain.Categoria;
 import com.ucab.fin.finucab.domain.Manejador_Categoria;
 import com.ucab.fin.finucab.exceptions.CampoVacio_Exception;
+import com.ucab.fin.finucab.fragment.AgregarCategoria_Fragment;
+import com.ucab.fin.finucab.fragment.ListaCategorias_Fragment; 
 import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
 
 import java.util.ArrayList;
@@ -23,9 +26,7 @@ import java.util.ArrayList;
 
 public class Categoria_Controller {
 
-    public static Categoria categoria; //Creacion de una variable categoria de tipo Categoria
-    public static EditText escribirCategoria; //EditText que contiene la categoria
-    public static EditText escribirDescripcion; //EditText que contiene la descripcion de la categoria
+    public static Object fragment; //Fragment que se esta controlando
 
     private static Manejador_Categoria manejador;
     private static int  casoRequest = -1;
@@ -61,7 +62,7 @@ public class Categoria_Controller {
      */
     public static void setListaCategorias(ArrayList<Categoria> categorias){
 
-        manejador.setCategorias(categorias);
+        manejador.setUltimasCategoriasObtenidas(categorias);
     }
 
     /**
@@ -70,7 +71,7 @@ public class Categoria_Controller {
      */
     public static ArrayList<Categoria> getListaCategorias(){
 
-        return manejador.getCategorias();
+        return manejador.getUltimasCategoriasObtenidas();
     }
 
     /**
@@ -99,6 +100,16 @@ public class Categoria_Controller {
             campovacio.setCampo(campo);
             throw campovacio;
         }
+
+    }
+
+    public static void redireccionarAgregarCategoria(Categoria categoria){
+
+        if (fragment != null ){
+            ListaCategorias_Fragment listaCategorias_fragment = (ListaCategorias_Fragment) fragment;
+            listaCategorias_fragment.redireccionarAgregarCategoria(categoria);
+        }
+
 
     }
 
@@ -151,7 +162,7 @@ public class Categoria_Controller {
     public static void borrarCategoria(int posicion){
 
         casoRequest = 3;
-        int id = manejador.getCategorias().get(posicion).getIdcategoria();
+        int id = manejador.getUltimasCategoriasObtenidas().get(posicion).getIdcategoria();
         manejador.borrarCategoria(id);
 
     }

@@ -5,9 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.Space;
 import android.widget.Switch;
 import android.widget.TextView;
-
+ 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.controllers.Categoria_Controller;
 import com.ucab.fin.finucab.domain.Categoria;
@@ -35,7 +36,8 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
 
         private TextView nameTextView; //TextView de nombre de categoria
         private TextView descripcionTextView; //TextView de la decripcion de la categoria
-        Switch switchestado;
+        private Switch switchestado;
+        private Space spaceToCLick;
         Categoria categoria;
 
 
@@ -51,11 +53,23 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
             nameTextView = (TextView) v.findViewById(R.id.categoriasTextView);
             descripcionTextView = (TextView) v.findViewById(R.id.descripcionTextView);
             switchestado = (Switch) v.findViewById(R.id.switchestado);
+            spaceToCLick = (Space) v.findViewById(R.id.spaceToClick);
 
             switchestado.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
                     Categoria_Controller.HabilitarCategoria( (Categoria) buttonView.getTag() ,isChecked);
+
+                }
+            });
+
+            spaceToCLick.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Categoria_Controller.redireccionarAgregarCategoria((Categoria) v.getTag());
+
+
 
                 }
             });
@@ -96,6 +110,7 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
         CategoriaViewHolder.switchestado.setTag(pi);
         CategoriaViewHolder.switchestado.setChecked(pi.isEstaHabilitado());
         CategoriaViewHolder.itemView.setLongClickable(true);
+        CategoriaViewHolder.spaceToCLick.setTag(pi);
 
         if ( CategoriaList.size() == (i+1) ){
             Categoria_Controller.setHabilitarEventoSwitch(true);
