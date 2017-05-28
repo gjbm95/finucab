@@ -93,7 +93,7 @@ public class Categoria_Controller {
      * @throws CampoVacio_Exception
      */
     public static void verificoVacio(EditText campo) throws CampoVacio_Exception {  //ya hice la prueba
-        if (campo.getText().toString().isEmpty())
+        if (campo.getText().toString().isEmpty() )
         {
             CampoVacio_Exception campovacio = new CampoVacio_Exception("Este campo esta vacio");
             campovacio.setCampo(campo);
