@@ -8,7 +8,7 @@ import android.widget.CompoundButton;
 import android.widget.Space;
 import android.widget.Switch;
 import android.widget.TextView;
-
+ 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.controllers.Categoria_Controller;
 import com.ucab.fin.finucab.domain.Categoria;
@@ -67,7 +67,9 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
                 @Override
                 public void onClick(View v) {
 
-                    v.getTag();
+                    Categoria_Controller.redireccionarAgregarCategoria((Categoria) v.getTag());
+
+
 
                 }
             });

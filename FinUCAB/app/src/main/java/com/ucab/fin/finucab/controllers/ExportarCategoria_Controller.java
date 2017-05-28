@@ -33,14 +33,12 @@ import java.util.ArrayList;
 
 public class ExportarCategoria_Controller extends AsyncTask<String ,String, String> {
 
-//////ESTE CODIGO ES UNA PRUEBA PARA EL EXPORTAR DEL MODULO 3 DE PRESUPUESTOS, SE EXPORTAN ARCHIVOS CSV.////
+    public ArrayList<Categoria> listaCategoria ;
 
-    public static ArrayList<Categoria> listaCategoria ;
-    public static Activity activity;
+    public ExportarCategoria_Controller(ArrayList<Categoria> listaCategoria) {
 
-
-
-
+        this.listaCategoria = listaCategoria;
+    }
 
     protected String doInBackground(final String... args) {
 
@@ -48,13 +46,20 @@ public class ExportarCategoria_Controller extends AsyncTask<String ,String, Stri
         if (!exportDir.exists()) {
             exportDir.mkdirs();
         }
-        File fileCSV = new File(exportDir, "CSVCategoria.csv");   //DECLARAR UN ARCHIVO CSV
-        File fileEXCEL = new File(exportDir, "ExcelCategoria.xls");//DECLARAR UN ARCHIVO XML
+
+        exportarCSV(exportDir);
+        exportarExcel(exportDir);
+
+        return "";
+    }
+
+    public void exportarCSV(File exportDir){
         try {
+            File fileCSV = new File(exportDir, "CSVCategoria.csv");   //DECLARAR UN ARCHIVO CSV
             fileCSV.createNewFile();   //CREAR EL ARCHIVO
             FileWriter writerCSV = new FileWriter(fileCSV); //HABILITAR LA FUNCION DE ESCRIBIR EL ARCHIVO
 
-            writerCSV.write("Nombre de la Categoria;Descripcion;Estado;Tipo;\n"); // ESCRIBO EN EL ARCHIVO EL HEADER
+            writerCSV.write("Nombre de la Categoria;Descripcion;Habilitado;Ingreso;\n"); // ESCRIBO EN EL ARCHIVO EL HEADER
             for(Categoria c : listaCategoria){ //ITERACION DEL ARRAY
                 writerCSV.write(c.getNombre()+";"+c.getDescripcion()+";"+c.isEstaHabilitado()+";"+c.isIngreso()
                         +";"+"\n"); //LLENANDO LA FILA
@@ -63,11 +68,21 @@ public class ExportarCategoria_Controller extends AsyncTask<String ,String, Stri
             writerCSV.flush();
             writerCSV.close();//CERRAR EL ESCRIBIR
 
-            //***********PARA EXPORTAR A EXCEL*********//
+        } catch (IOException e) {
+            Log.e("MainActivity", e.getMessage(), e);
 
+
+        }
+    }
+
+
+    public void exportarExcel(File exportDir){
+
+        try {
+
+            File fileEXCEL = new File(exportDir, "ExcelCategoria.xls");//DECLARAR UN ARCHIVO XLS
             fileEXCEL.createNewFile(); //CREANDO EL ARCHIVO
             Workbook wb = new HSSFWorkbook(); //CREANDO UN WORKBOOK
-            Cell c= null;
 
             //Cell style for header row
             CellStyle cs = wb.createCellStyle();
@@ -78,13 +93,12 @@ public class ExportarCategoria_Controller extends AsyncTask<String ,String, Stri
             as.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
 
             //*****GENERANDO LA PAGINA******////
-            Sheet sheet1 = null;
-            sheet1 = wb.createSheet("Mis Categorias");
+            Sheet sheet1 = wb.createSheet("Mis Categorias");
 
             //***** GENERANDO COLUMNAS*****//
             Row row0 = sheet1.createRow(0);  // CREO LA FILA HEADER
 
-            c = row0.createCell(0); // LE ASIGNO EL NUMERO DE LA CELDA
+            Cell c = row0.createCell(0); // LE ASIGNO EL NUMERO DE LA CELDA
             c.setCellValue("Nombre de la Categoria"); // VALOR DE LA CELDA
             c.setCellStyle(cs); // ESTABLEZCO EL ESTILO
 
@@ -129,10 +143,10 @@ public class ExportarCategoria_Controller extends AsyncTask<String ,String, Stri
             FileOutputStream os = new FileOutputStream(fileEXCEL); // DECLARO UN OBJETO DE TIPO FILEOUTPUTSTREAM
             wb.write(os); // ESCRIBO EL ARCHIVO
             os.close(); // CIERRO EL ARCCHIVO
-            return "";
+
         } catch (IOException e) {
             Log.e("MainActivity", e.getMessage(), e);
-            return "";
+
 
         }
     }
