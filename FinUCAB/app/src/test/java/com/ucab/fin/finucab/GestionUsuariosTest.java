@@ -40,18 +40,6 @@ import static org.robolectric.shadows.support.v4.SupportFragmentTestUtil.startFr
 @Config(constants = BuildConfig.class)
 public class GestionUsuariosTest {
 
-  /*
-    private DatosSeguridadFragment fragmentregistro;
-    @Before
-    public void setUp() throws Exception
-    {
-        fragmentregistro = Robolectric.( DatosSeguridadFragment.class )
-                .create()
-                .resume()
-                .get();
-    }
-*/
-
     /**
      * Realizo pruebas a la validacion de preguntas y respuestas de usuarios
      *
@@ -189,7 +177,9 @@ public class GestionUsuariosTest {
         assertEquals(GestionUsuarios_Controller.validacionEtapaDatos(),1);
         //Situacion 5:
         GestionUsuarios_Controller.nombre = (EditText)fragment.getView().findViewById(R.id.nameREditText);
-        GestionUsuarios_Controller.nombre.setText("Pruebaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        GestionUsuarios_Controller.nombre.setText("Pruebaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         GestionUsuarios_Controller.apellido = (EditText)fragment.getView().findViewById(R.id.lastnameREditText);
         GestionUsuarios_Controller.apellido.setText("Prueba");
         GestionUsuarios_Controller.correo = (EditText)fragment.getView().findViewById(R.id.emailR2EditText);
@@ -210,7 +200,9 @@ public class GestionUsuariosTest {
         startFragment( fragment );
         //Situacion 1:
         GestionUsuarios_Controller.nombre = (EditText)fragment.getView().findViewById(R.id.nameREditText);
-        GestionUsuarios_Controller.nombre.setText("Pruebaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        GestionUsuarios_Controller.nombre.setText("Pruebaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         boolean paso = false ;
         try{
             GestionUsuarios_Controller.verificoLongitud(GestionUsuarios_Controller.nombre,50,"string");
@@ -308,7 +300,8 @@ public class GestionUsuariosTest {
         GestionUsuarios_Controller.contrasena2.setText("Hola2");
         boolean paso = false ;
         try{
-            GestionUsuarios_Controller.verificoIgualdad(GestionUsuarios_Controller.contrasena1,GestionUsuarios_Controller.contrasena2);
+            GestionUsuarios_Controller.verificoIgualdad(GestionUsuarios_Controller.contrasena1,
+                    GestionUsuarios_Controller.contrasena2);
         }catch(ContrasenasDiferentes_Exception e){
             paso = true;
         }
@@ -320,7 +313,8 @@ public class GestionUsuariosTest {
         GestionUsuarios_Controller.contrasena2.setText("Hola");
         paso = false ;
         try{
-            GestionUsuarios_Controller.verificoIgualdad(GestionUsuarios_Controller.contrasena1,GestionUsuarios_Controller.contrasena2);
+            GestionUsuarios_Controller.verificoIgualdad(GestionUsuarios_Controller.contrasena1,
+                    GestionUsuarios_Controller.contrasena2);
         }catch(ContrasenasDiferentes_Exception e){
             paso = true;
         }
@@ -402,7 +396,8 @@ public class GestionUsuariosTest {
     @Test
     public void descomponerUsuario_isCorrect()throws Exception{
 
-        String datosUsuario = " {\"u_id\":\"6\",\"u_usuario\":\"erbin\",\"u_nombre\":\"Erbin\",\"u_apellido\":\"Rodriguez\",\"u_correo\":\"erbin@gmail.com\",\"u_pregunta\":\"carro\",\"u_respuesta\":\"99281774\",\"u_password\":\"48690\"} ";
+        String datosUsuario = " {\"u_id\":\"6\",\"u_usuario\":\"erbin\",\"u_nombre\":\"Erbin\",\"u_apellido\":\"Rodriguez\"," +
+                "\"u_correo\":\"erbin@gmail.com\",\"u_pregunta\":\"carro\",\"u_respuesta\":\"99281774\",\"u_password\":\"48690\"} ";
         GestionUsuarios_Controller.descomponerUsuario(datosUsuario);
         assertEquals(ControlDatos.getUsuario().getNombre(),"Erbin");
         assertEquals(ControlDatos.getUsuario().getUsuario(),"erbin");
