@@ -80,10 +80,7 @@ public class Presupuesto_Controller {
      */
     public static void asignarSpinner(Activity actividad) {
         JSONObject jObject = null;
-        System.out.println("Antes del try");
-
         try {
-            System.out.println("Despues del try");
             JSONArray mJsonArray = new JSONArray(Parametros.respuesta);
             int count = mJsonArray.length();
             String[] valores = new String[count];
