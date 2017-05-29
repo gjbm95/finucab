@@ -78,7 +78,8 @@ public class Planificacion_Pago {
 
     public void listaPlanificacion() {
 
-        int id = 1;
+        usuario = ControlDatos.getUsuario();
+        int id = usuario.getIdusuario();
         Parametros.setMetodo("Modulo6/visualizarPlanificacion?datosPlanificacion=" + String.valueOf(id));
         new Recepcion(activity, interfaz).execute("GET");
     }

@@ -1,15 +1,12 @@
 package com.ucab.fin.finucab.controllers;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.util.Log;
 import android.widget.EditText;
 
 import com.ucab.fin.finucab.domain.Categoria;
 import com.ucab.fin.finucab.domain.Manejador_Categoria;
 import com.ucab.fin.finucab.exceptions.CampoVacio_Exception;
-import com.ucab.fin.finucab.fragment.AgregarCategoria_Fragment;
-import com.ucab.fin.finucab.fragment.ListaCategorias_Fragment; 
+import com.ucab.fin.finucab.fragment.ListaCategorias_Fragment;
 import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
 
 import java.util.ArrayList;
@@ -31,6 +28,7 @@ public class Categoria_Controller {
     private static Manejador_Categoria manejador;
     private static int  casoRequest = -1;
     private static boolean habilitarEventoSwitch = false ;
+    EditText prueba;
 
     /**
      * Inicializar de ser necesario el manejador de data
@@ -49,7 +47,7 @@ public class Categoria_Controller {
     }
 
     /**
-     * Colocar actul lista de categoria en el manejador
+     * Colocar actual lista de categoria en el manejador
      */
     public static void setHabilitarEventoSwitch(Boolean activado){
 
@@ -58,7 +56,8 @@ public class Categoria_Controller {
 
 
     /**
-     * Colocar actul lista de categoria en el manejador
+      * Colocar actual lista de categoria en el manejador
+     * @param categorias
      */
     public static void setListaCategorias(ArrayList<Categoria> categorias){
 
@@ -66,7 +65,7 @@ public class Categoria_Controller {
     }
 
     /**
-     * Colocar actul lista de categoria en el manejador
+     * Colocar actual lista de categoria en el manejador
      * @return Lista de categoria cargada
      */
     public static ArrayList<Categoria> getListaCategorias(){
@@ -93,8 +92,8 @@ public class Categoria_Controller {
      * @param campo
      * @throws CampoVacio_Exception
      */
-    public static void verificoVacio(EditText campo) throws CampoVacio_Exception {
-        if (campo.getText().toString().isEmpty())
+    public static void verificoVacio(EditText campo) throws CampoVacio_Exception {  //ya hice la prueba
+        if (campo.getText().toString().isEmpty() )
         {
             CampoVacio_Exception campovacio = new CampoVacio_Exception("Este campo esta vacio");
             campovacio.setCampo(campo);
