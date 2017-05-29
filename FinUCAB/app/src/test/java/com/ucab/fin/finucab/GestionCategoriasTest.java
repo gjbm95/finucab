@@ -19,7 +19,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -390,21 +389,20 @@ public class GestionCategoriasTest {
             categoria.setEsIngreso(true);
             categorias.add(categoria);
 
-            if (categoria != null){
-                Categoria_Controller.registrarCategoria(categoria);
-                assertNotNull(categoria);
-            }
+            // if (categoria != null){
+            Categoria_Controller.registrarCategoria(categoria);
+            assertNotNull(categorias);
+            // }
 
-            else if (categoria == null){
-
-                Categoria_Controller.registrarCategoria(categoria);
-
-                assertNull(categoria);
-            }
-
-        } catch (Exception e) {
+            //else if (categoria == null){
+        }
+        catch (Exception e) {
 
         }
+
+        //} catch (Exception e) {
+
+       // }
     }
 }
 
