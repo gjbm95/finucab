@@ -1,1 +1,1 @@
-﻿INSERT INTO TABLE () VALUES () 
+﻿INSERT INTO Categoria VALUES (-1, 'Vacio', 'Categoria por defecto', true, true, null);
