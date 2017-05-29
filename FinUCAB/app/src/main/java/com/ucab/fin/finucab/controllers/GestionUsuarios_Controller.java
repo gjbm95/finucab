@@ -433,7 +433,9 @@ public class GestionUsuarios_Controller {
 
         try {
             JSONObject usuario = new JSONObject(datos);
-            ControlDatos.setUsuario(new Usuario(usuario.getInt("u_id"), usuario.getString("u_nombre"), usuario.getString("u_apellido"), usuario.getString("u_correo"), usuario.getString("u_usuario"), usuario.getString("u_password"),usuario.getString("u_pregunta"), usuario.getString("u_respuesta"), null, null));
+            ControlDatos.setUsuario(new Usuario(usuario.getInt("u_id"), usuario.getString("u_nombre"),
+            usuario.getString("u_apellido"), usuario.getString("u_correo"), usuario.getString("u_usuario"),
+            usuario.getString("u_password"),usuario.getString("u_pregunta"), usuario.getString("u_respuesta"), null, null));
         } catch (JSONException e) {
             e.printStackTrace();
         }
