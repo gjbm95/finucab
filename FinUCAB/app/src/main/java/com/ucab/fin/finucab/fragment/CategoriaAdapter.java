@@ -55,7 +55,7 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
             nameTextView = (TextView) v.findViewById(R.id.categoriasTextView);
             descripcionTextView = (TextView) v.findViewById(R.id.descripcionTextView);
             switchestado = (Switch) v.findViewById(R.id.switchestado);
-            spaceToClick = (Button) v.findViewById(R.id.spaceToClick);
+            //spaceToClick = (Button) v.findViewById(R.id.spaceToClick);
 
             switchestado.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -65,6 +65,7 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
                 }
             });
 
+            /*
             spaceToClick.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -77,6 +78,13 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
                 }
             });
 
+            spaceToClick.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    return false;
+                }
+            });
+*/
         }
 
     }
@@ -112,7 +120,7 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
         CategoriaViewHolder.switchestado.setTag(pi);
         CategoriaViewHolder.switchestado.setChecked(pi.isEstaHabilitado());
         CategoriaViewHolder.itemView.setLongClickable(true);
-        CategoriaViewHolder.spaceToClick.setTag(pi);
+        //CategoriaViewHolder.spaceToClick.setTag(pi);
 
         if ( CategoriaList.size() == (i+1) ){
             Categoria_Controller.setHabilitarEventoSwitch(true);
