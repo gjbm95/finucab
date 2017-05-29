@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -58,7 +60,7 @@ public class GestionCategoriasTest {
 
     @Test
     public void CampoDescripcionVacio_isCorrect() throws Exception {
-       EditText campo2 = null;
+        EditText campo2 = null;
 
         boolean aceptado = true;
 
@@ -71,6 +73,7 @@ public class GestionCategoriasTest {
 
     /**
      * realizo prueba al evento habilitar
+     *
      * @throws Exception
      */
     @Test
@@ -180,6 +183,7 @@ public class GestionCategoriasTest {
 
     /**
      * realizo prueba al metodo  habilitar la categoria
+     *
      * @throws Exception
      */
     @Test
@@ -200,8 +204,6 @@ public class GestionCategoriasTest {
             boolean habilitar = categoria.isEstaHabilitado();
 
 
-
-
             if (habilitar == false && categoria != null) {
                 try {
                     int casoRequet = 2;
@@ -210,7 +212,7 @@ public class GestionCategoriasTest {
                     Categoria_Controller.HabilitarCategoria(categoria, habilitar);
                     habilitar = true;
                     assertTrue(habilitar);
-                    } catch (Exception e) {
+                } catch (Exception e) {
 
                 }
 
@@ -246,6 +248,7 @@ public class GestionCategoriasTest {
 
     /**
      * realizo prueba a modificar categoria
+     *
      * @throws Exception
      */
     @Test
@@ -286,6 +289,7 @@ public class GestionCategoriasTest {
 
     /**
      * realizo prueba al metodo borrar Categoria
+     *
      * @throws Exception
      */
     @Test
@@ -293,8 +297,6 @@ public class GestionCategoriasTest {
 
         Categoria categoria = new Categoria();
         ArrayList<Categoria> categorias = new ArrayList<Categoria>();
-
-
 
 
         try {
@@ -309,19 +311,16 @@ public class GestionCategoriasTest {
             int id = categoria.getIdcategoria();
 
 
-               if (id ==1 ){
-                    boolean respuesta = true;
-                   Categoria_Controller.borrarCategoria(id);
-                   assertTrue(respuesta);
+            if (id == 1) {
+                boolean respuesta = true;
+                Categoria_Controller.borrarCategoria(id);
+                assertTrue(respuesta);
 
 
-
-               }
-
-               else {
-                   boolean respuesta = true;
-                   assertFalse(respuesta);
-               }
+            } else {
+                boolean respuesta = true;
+                assertFalse(respuesta);
+            }
 
 
         } catch (Exception e) {
@@ -331,6 +330,7 @@ public class GestionCategoriasTest {
 
     /**
      * realizo prueba al metodo obtener Categorias
+     *
      * @throws Exception
      */
     @Test
@@ -338,8 +338,6 @@ public class GestionCategoriasTest {
 
         Categoria categoria = new Categoria();
         ArrayList<Categoria> categorias = new ArrayList<Categoria>();
-
-
 
 
         try {
@@ -354,21 +352,55 @@ public class GestionCategoriasTest {
             Boolean id = categoria.isEstaHabilitado();
 
 
-
-            if (id ==true ){
+            if (id == true) {
                 boolean respuesta = true;
                 Categoria_Controller.obtenerTodasCategorias(id);
                 assertTrue(respuesta);
 
 
-
-            }
-
-            else if (id == false) {
+            } else if (id == false) {
                 boolean respuesta = true;
                 assertTrue(respuesta);
             }
 
+
+        } catch (Exception e) {
+
+        }
+    }
+
+    /**
+     * realizo prueba al metodo registrar Categorias
+     *
+     * @throws Exception
+     */
+    @Test
+    public void registrarCategoria_isCorrect() throws Exception {
+
+        Categoria categoria = new Categoria();
+        ArrayList<Categoria> categorias = new ArrayList<Categoria>();
+
+
+        try {
+
+            categoria.setIdcategoria(1);
+            categoria.setNombre("Comida");
+            categoria.setDescripcion("Gastos en la universidad");
+            categoria.setEstaHabilitado(true);
+            categoria.setEsIngreso(true);
+            categorias.add(categoria);
+
+            if (categoria != null){
+                Categoria_Controller.registrarCategoria(categoria);
+                assertNotNull(categoria);
+            }
+
+            else if (categoria == null){
+
+                Categoria_Controller.registrarCategoria(categoria);
+
+                assertNull(categoria);
+            }
 
         } catch (Exception e) {
 
