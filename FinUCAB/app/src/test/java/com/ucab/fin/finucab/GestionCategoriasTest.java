@@ -203,7 +203,7 @@ public class GestionCategoriasTest {
             boolean habilitar = categoria.isEstaHabilitado();
 
 
-            if (habilitar == false && categoria != null) {
+            if (habilitar == false ) {
                 try {
                     int casoRequet = 2;
 
@@ -229,7 +229,7 @@ public class GestionCategoriasTest {
         try {
 
             boolean habilitar = true;
-            if (habilitar == true && categoria2 == null)
+            if (habilitar2 == true )
 
                 try {
                     Categoria_Controller.HabilitarCategoria(categoria2, habilitar2);
@@ -257,33 +257,19 @@ public class GestionCategoriasTest {
 
             Categoria categoria = new Categoria();
 
+            categoria.setIdcategoria(1);
             categoria.setNombre("comida");
             categoria.setDescripcion("gastando dinero en la universidad");
             categoria.setEstaHabilitado(true);
             categoria.setEsIngreso(false);
 
-            Boolean prueba;
-
-
-            if (categoria != null) {
-
-                try {
-                    prueba = true;
-                    Categoria_Controller.modificarCategoria(categoria);
-                    assertTrue(prueba);
-
-                } catch (Exception e) {
-
-                }
-            } else {
-                prueba = false;
-
-                assertFalse(prueba);
-            }
-
-        } catch (Exception e) {
+            Categoria_Controller.modificarCategoria(categoria);
+            assertNotNull(categoria);
+        }
+        catch (Exception e){
 
         }
+
     }
 
     /**
@@ -359,7 +345,8 @@ public class GestionCategoriasTest {
 
             } else if (id == false) {
                 boolean respuesta = true;
-                assertTrue(respuesta);
+                Categoria_Controller.obtenerTodasCategorias(id);
+                assertFalse(respuesta);
             }
 
 
@@ -389,20 +376,14 @@ public class GestionCategoriasTest {
             categoria.setEsIngreso(true);
             categorias.add(categoria);
 
-            // if (categoria != null){
+
             Categoria_Controller.registrarCategoria(categoria);
             assertNotNull(categorias);
-            // }
 
-            //else if (categoria == null){
         }
         catch (Exception e) {
 
         }
-
-        //} catch (Exception e) {
-
-       // }
     }
 }
 
