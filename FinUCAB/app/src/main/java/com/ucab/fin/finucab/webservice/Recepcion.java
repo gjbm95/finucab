@@ -66,6 +66,10 @@ public class Recepcion extends AsyncTask<String,Void,String>{
         this.showStatus = true;
     }
 
+    public static String obtenerRespuesta() {
+        return response;
+    }
+
 
     /**
      * Metodo que se encarga de mostrar un feedback del proceso de carga de datos al usuario

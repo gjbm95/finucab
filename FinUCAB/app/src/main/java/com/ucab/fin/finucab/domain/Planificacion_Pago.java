@@ -33,6 +33,19 @@ public class Planificacion_Pago {
         return listaPlanificacion;
     }
 
+    /**
+     * @description Retorna el primer objeto de la lista de planificaciones. Deberia
+     * ser uno solo, no una lista.
+     */
+    public Planificacion obtenerPlanificacion() {
+        return !this.listaPlanificacion.isEmpty() ? this.listaPlanificacion.get(0) : null;
+    }
+
+    public void resetearPlanificacion() {
+        this.listaPlanificacion = new ArrayList<Planificacion>();
+        this.listaPlanificacion.add(new Planificacion());
+    }
+
     public void setListaPlanificacion(ArrayList<Planificacion> listaPlanificacion) {
         this.listaPlanificacion = listaPlanificacion;
     }
@@ -41,6 +54,9 @@ public class Planificacion_Pago {
     public Planificacion_Pago(Activity actividad, ResponseWebServiceInterface interfaz) {
         this.activity = actividad;
         this.interfaz = interfaz;
+
+        // Hardcodeamos la listaPlanificacion para que tenga un valor
+        this.listaPlanificacion.add(new Planificacion());
     }
 
     public void agregarPlanificacion(Planificacion planificacion) {

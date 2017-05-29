@@ -145,4 +145,17 @@ public class Planificacion implements Serializable{
         this.recurrencia = recurrencia;
         this.activo = activo;
     }
+
+    public Planificacion() {
+        // Constructor vacio
+        this.fechaInicio = new Date();
+        this.fechaFin = new Date();
+        this.nombre = "";
+        this.descripcion = "";
+        this.monto = 0.0;
+        this.idCategoria = -1;
+        this.recurrente = false;
+        this.recurrencia = "";
+        this.activo = true;
+    }
 }

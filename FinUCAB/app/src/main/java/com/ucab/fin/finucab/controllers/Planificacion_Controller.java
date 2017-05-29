@@ -43,6 +43,10 @@ public class Planificacion_Controller {
         planificacion_pago.listaPlanificacion();
     }
 
+    public static Planificacion obtenerPlanificacion() {
+        return planificacion_pago.obtenerPlanificacion();
+    }
+
     public static void agregarPlanificacion(Planificacion planificacion) {
         managementRequest = 2;
         planificacion_pago.agregarPlanificacion(planificacion);
@@ -62,6 +66,31 @@ public class Planificacion_Controller {
             }
         }
         return nombre;
+    }
+
+    public static boolean validarCamposRequeridos() {
+        return
+                !planificacion_pago.obtenerPlanificacion().getDescripcion().isEmpty()
+                && planificacion_pago.obtenerPlanificacion().getMonto() > (double)0
+                && planificacion_pago.obtenerPlanificacion().getIdCategoria() > -1
+                && !planificacion_pago.obtenerPlanificacion().getFechaInicio().toString().isEmpty()
+                && (planificacion_pago.obtenerPlanificacion().getRecurrente()
+                    ? !planificacion_pago.obtenerPlanificacion().getFechaFin().toString().isEmpty()
+                    : true)
+                && (planificacion_pago.obtenerPlanificacion().getRecurrente()
+                    ? !planificacion_pago.obtenerPlanificacion().getRecurrencia().isEmpty()
+                    : true);
+    }
+
+    public static void resetearCampos() {
+        planificacion_pago.resetearPlanificacion();
+    }
+
+    public static boolean validarFechas() {
+        return planificacion_pago.obtenerPlanificacion().getRecurrente()
+                ? planificacion_pago.obtenerPlanificacion().getFechaInicio().before(
+                        planificacion_pago.obtenerPlanificacion().getFechaFin())
+                : true;
     }
 
 
