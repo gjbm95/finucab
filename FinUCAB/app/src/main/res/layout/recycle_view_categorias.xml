@@ -53,14 +53,4 @@
         android:visibility="visible"
         android:showText="false"/>
 
-    <Space
-        android:id="@+id/spaceToClick"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/switchestado" />
-
-
 </RelativeLayout>

@@ -26,8 +26,8 @@ public class Categoria_Controller {
     public static Object fragment; //Fragment que se esta controlando
 
     private static Manejador_Categoria manejador;
-    private static int  casoRequest = -1;
-    private static boolean habilitarEventoSwitch = false ;
+    public static int  casoRequest = -1;
+    public static boolean habilitarEventoSwitch = false ;
     EditText prueba;
 
     /**

@@ -1,9 +1,11 @@
 package com.ucab.fin.finucab.fragment;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Space;
 import android.widget.Switch;
@@ -37,7 +39,7 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
         private TextView nameTextView; //TextView de nombre de categoria
         private TextView descripcionTextView; //TextView de la decripcion de la categoria
         private Switch switchestado;
-        private Space spaceToCLick;
+        private Button spaceToClick;
         Categoria categoria;
 
 
@@ -53,7 +55,7 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
             nameTextView = (TextView) v.findViewById(R.id.categoriasTextView);
             descripcionTextView = (TextView) v.findViewById(R.id.descripcionTextView);
             switchestado = (Switch) v.findViewById(R.id.switchestado);
-            spaceToCLick = (Space) v.findViewById(R.id.spaceToClick);
+            //spaceToClick = (Button) v.findViewById(R.id.spaceToClick);
 
             switchestado.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -63,10 +65,12 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
                 }
             });
 
-            spaceToCLick.setOnClickListener(new View.OnClickListener() {
+            /*
+            spaceToClick.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
+                    Log.e("Evento - Space",String.valueOf(v));
                     Categoria_Controller.redireccionarAgregarCategoria((Categoria) v.getTag());
 
 
@@ -74,6 +78,13 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
                 }
             });
 
+            spaceToClick.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    return false;
+                }
+            });
+*/
         }
 
     }
@@ -106,11 +117,10 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
         CategoriaViewHolder.categoria = pi;
         CategoriaViewHolder.nameTextView.setText(pi.getNombre());
         CategoriaViewHolder.descripcionTextView.setText(pi.getDescripcion());
-        //CategoriaViewHolder.switchestado.setText(pi.getIdcategoria()+"");
         CategoriaViewHolder.switchestado.setTag(pi);
         CategoriaViewHolder.switchestado.setChecked(pi.isEstaHabilitado());
         CategoriaViewHolder.itemView.setLongClickable(true);
-        CategoriaViewHolder.spaceToCLick.setTag(pi);
+        //CategoriaViewHolder.spaceToClick.setTag(pi);
 
         if ( CategoriaList.size() == (i+1) ){
             Categoria_Controller.setHabilitarEventoSwitch(true);
