@@ -53,14 +53,17 @@
         android:visibility="visible"
         android:showText="false"/>
 
-    <Space
+    <Button
         android:id="@+id/spaceToClick"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/switchestado" />
+        android:layout_toLeftOf="@+id/switchestado"
+        android:layout_toStartOf="@+id/switchestado"
+        android:layout_alignParentBottom="true"
+        android:alpha="0"
+        style="?android:attr/borderlessButtonStyle"/>
 
 
 </RelativeLayout>
