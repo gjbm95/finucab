@@ -10,7 +10,6 @@ import android.widget.EditText;
 import com.ucab.fin.finucab.controllers.Categoria_Controller;
 import com.ucab.fin.finucab.domain.Categoria;
 import com.ucab.fin.finucab.fragment.AgregarCategoria_Fragment;
-import com.ucab.fin.finucab.fragment.ListaCategorias_Fragment;
 
 import org.junit.Test;
 
@@ -127,7 +126,6 @@ public class GestionCategoriasTest {
 
     }
 
-
     /**
      * realizo pruebas al metodo colocar alcual las listas en el manejador
      *
@@ -135,9 +133,6 @@ public class GestionCategoriasTest {
      */
     @Test
     public void getListaCategorias_isCorrect() throws Exception {
-        ListaCategorias_Fragment fragment = new ListaCategorias_Fragment();
-        //startFragment( fragment );
-
         Categoria categoria = new Categoria();
         ArrayList<Categoria> prueba = new ArrayList<Categoria>();
         ArrayList<Categoria> categorias = new ArrayList<Categoria>();
@@ -371,7 +366,6 @@ public class GestionCategoriasTest {
 
             else if (id == false) {
                 boolean respuesta = true;
-                System.out.printf("estoy aca");
                 assertTrue(respuesta);
             }
 
