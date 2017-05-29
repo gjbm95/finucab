@@ -70,6 +70,7 @@ public class AgregarPresupuesto_fragment extends Fragment implements CompoundBut
         Presupuesto_Controller.recurrenciaButton=recurrentRadioButton;
         Presupuesto_Controller.unicoButton=onlyRadioButton;
         Presupuesto_Controller.recurrenciaTextView = recurrentTextView;
+        Presupuesto_Controller.agregarButton = agregarButton;
 
         Presupuesto_Controller.volverInvisibleRecurrencia();
 
