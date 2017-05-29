@@ -111,7 +111,7 @@ public class Modulo3sResource {
 
             ResultSet rs = st.executeQuery("Select ca_id|| '- ' || ca_nombre " +
                     "from categoria " +
-                    "where usuariou_id=1 and ca_habilitado = true "
+                    "where usuariou_id=1 and ca_eshabilitado = true "
                     + "and ca_id <> -1;");
             JsonObjectBuilder usuarioBuilder = Json.createObjectBuilder();
             JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
