@@ -12,6 +12,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import javax.json.JsonReader;
@@ -61,7 +63,7 @@ public class Modulo5sResource {
        return usuarioJsonObject.toString();
     }
     
-        @GET
+    @GET
     @Produces(MediaType.TEXT_PLAIN)
     @Path("/pruebaDB")
     public String getPruebaDataBase() {
@@ -93,6 +95,16 @@ public class Modulo5sResource {
         }
     }
     
+    /**
+     * Función que registra un pago en la base de datos.
+     *
+     * @param datosPago JSON.toString() con los atributos: pg_monto, pg_tipoTransaccion,
+     * pg_categoria , pg_descripcion
+     *
+     * @return Si se inserta el pago devuelve un String con el mensaje
+     * "Registro Exitoso", De lo contrario devuelve el mensaje "No se pudo
+     * registrar"
+     */
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     @Path("/registrarPago")
@@ -108,7 +120,8 @@ public class Modulo5sResource {
             reader.close();
             String query = "INSERT INTO pago ( pg_monto , pg_tipoTransaccion , categoriaca_id , pg_descripcion ) "
                     + "VALUES ( '" + pagoJSON.getInt("pg_monto") + "' , '" + pagoJSON.getString("pg_tipoTransaccion") + "' , '"
-                    + pagoJSON.getString("pg_categoria") + "' , '" + pagoJSON.getString("pg_descripcion") + "' );";
+                    + pagoJSON.getInt("pg_categoria") 
+                    + "' , '" + pagoJSON.getString("pg_descripcion") + "' );";
 
             if (st.executeUpdate(query) > 0) {
                 st.close();
@@ -124,6 +137,170 @@ public class Modulo5sResource {
 
         }
     }
+    
+    /**
+     * Función que consulta un pago seleccionado en la base de datos.
+     *
+     * @param consultarPago con los atributos: pg_monto, pg_tipoTransaccion,
+     * pg_categoria , pg_descripcion
+     *
+     * @return Si encuentra el pago devuelve los datos del pago.
+     */
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("/consultarPago")
+    public String consultarPago(@QueryParam("datosPago") int idPago) {
+
+        System.out.println(idPago);
+        String respuesta ="";
+
+        try {
+            Connection conn = Conexion.conectarADb();
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT pg_id, pg_monto, pg_tipoTransaccion, categoriaca_id, pg_descripcion"
+                         + " FROM pago WHERE pg_id = " + idPago);
+
+             JsonObjectBuilder pagoBuilder = Json.createObjectBuilder();
+             //int cont = 1;
+            while (rs.next())
+            {
+                //Creo el objeto Json!             
+                 pagoBuilder.add("pg_id",rs.getInt(1));
+                 System.out.println(rs.getInt(1));
+                 pagoBuilder.add("pg_monto",rs.getFloat(2));
+                 System.out.println(rs.getFloat(2));
+                 pagoBuilder.add("pg_tipoTransaccion",rs.getString(3));
+                 pagoBuilder.add("pg_categoria",rs.getInt(4));
+                 System.out.println(rs.getString(4));
+                 pagoBuilder.add("pg_descripcion",rs.getString(5));
+                 System.out.println(rs.getString(5));
+                 JsonObject pagoJsonObject = pagoBuilder.build();  
+                 respuesta = pagoJsonObject.toString();
+                 
+            }
+            rs.close();
+            st.close();
+            System.out.println(respuesta);
+            return respuesta;
+        
+
+        } catch (Exception e) {
+
+            return e.getMessage();
+
+        }
+    }
+   
+    /**
+     * Función que visualiza los pagos.
+     *
+     * @param visualizarPago con los atributos: pg_id, pg_monto, pg_tipoTransaccion,
+     * pg_categoria , pg_descripcion
+     *
+     * @return Lista de pagos por Usuario
+     */
+     @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("/visualizarPago")
+    public String visualizarPago(@QueryParam("datosPago") int idUsuario) {
+   
+        String respuesta ="";
+        
+        try{
+                    
+            Connection conn = Conexion.conectarADb();
+            Statement st = conn.createStatement();
+            //Se coloca el query
+            ResultSet rs = st.executeQuery("SELECT pg_id, pg_monto, pg_tipoTransaccion, categoriaca_id, pg_descripcion "
+                    + "FROM Pago, Categoria WHERE categoriaca_id = ca_id AND usuariou_id = "+ idUsuario);
+
+             JsonObjectBuilder pagoBuilder = Json.createObjectBuilder();
+             JsonArrayBuilder list = Json.createArrayBuilder();
+        
+            while (rs.next())
+            {
+                //Creo el objeto Json!             
+                 pagoBuilder.add("pg_id",rs.getInt(1));
+                 System.out.println(rs.getInt(1));
+                 pagoBuilder.add("pg_monto",rs.getFloat(2));
+                 System.out.println(rs.getFloat(2));
+                 pagoBuilder.add("pg_tipoTransaccion",rs.getString(3));
+                 pagoBuilder.add("pg_categoria",rs.getInt(4));
+                 System.out.println(rs.getString(4));
+                 pagoBuilder.add("pg_descripcion",rs.getString(5));
+                 System.out.println(rs.getString(5));
+                 JsonObject pagoJsonObject = pagoBuilder.build();  
+                 respuesta = pagoJsonObject.toString();
+                 
+                 list.add( respuesta);
+                
+            }
+            rs.close();
+            st.close();
+            JsonArray listJsonObject = list.build();
+            String resp = listJsonObject.toString();
+            System.out.println(resp);
+            return resp;
+        }
+        catch(Exception e) {
+            return e.getMessage();
+        }
+    }
+      
+    /**
+     * Función que modificar un pago.
+     *
+     * @param modificararPago con los atributos: pg_id, pg_monto, pg_tipoTransaccion,
+     * pg_categoria , pg_descripcion
+     *
+     * @return Lista de pagos por Usuario
+     */
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("/modificarPago")
+    public String modificarPago(@QueryParam("datosPago") String datosPagos) {
+        System.out.println(datosPagos);
+        String decodifico = URLDecoder.decode(datosPagos);
+
+        try {
+           
+            Connection conn = Conexion.conectarADb();
+           
+            Statement st = conn.createStatement();
+            JsonReader reader = Json.createReader(new StringReader(decodifico));
+            JsonObject pagoJSON = reader.readObject();
+            System.out.println(pagoJSON);
+            reader.close();
+            String query = "UPDATE pago SET "
+                    + "pg_monto = '" + pagoJSON.getInt("pg_monto")
+                    + "', pg_tipoTransaccion = '" + pagoJSON.getString("pg_tipoTransaccion") 
+                    + "', categoriaca_id= " + pagoJSON.getInt("pg_categoria")
+                    + ",pg_descripcion = '" + pagoJSON.getString("pg_descripcion") +
+                    "' WHERE "
+                    + "pg_id = " + pagoJSON.getInt("pg_id");
+            
+               System.out.println(query);
+                       
+            //System.out.println(query);
+           
+            if (st.executeUpdate(query) > 0) {
+                st.close();
+                System.out.println("modificacion exitosa");
+                return "Modificacion exitosa";
+            } else {
+                st.close();
+                System.out.println("no se pudo modificar");
+                return "No se pudo modificar";
+                
+            }
+
+        } catch (Exception e) {
+
+            return e.getMessage();
+
+        }
+    }
+    
     
     /**
      * POST method for creating an instance of Modulo5Resource

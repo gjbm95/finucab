@@ -1,4 +1,3 @@
-
 package Services;
 
 import DataBase.Conexion;
@@ -11,6 +10,8 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import javax.json.JsonReader;
@@ -92,23 +93,39 @@ public class Modulo4sResource {
         }
     }
     
+     /**
+     * Funcion que registra una categoria creada por el usuario en la base de datos
+     * 
+     *
+     * @param datosCategoria JSON.toString() con los atributos: c_uduario, c_nombre, c_descripcion
+     * , c_ingreso, c_estado
+     *
+     * @return Si se inserta la categoria devuelve un String con el mensaje
+     * "Registro Exitoso", De lo contrario devuelve el mensaje "No se pudo
+     * registrar"
+     */
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     @Path("/registrarCategoria")
     public String registrarCategoria(@QueryParam("datosCategoria") String datosCategoria) {
-
+        System.out.println(datosCategoria);
         String decodifico = URLDecoder.decode(datosCategoria);
 
         try {
+           
             Connection conn = Conexion.conectarADb();
+           
             Statement st = conn.createStatement();
             JsonReader reader = Json.createReader(new StringReader(decodifico));
             JsonObject categoriaJSON = reader.readObject();
+           
             reader.close();
-            String query = "INSERT INTO categoria ( ca_nombre , c_descripcion , ca_tipo , ca_habilitado , usuariou_id ) "
-                    + "VALUES ( '" + categoriaJSON.getString("ca_nombre") + "' , '" + categoriaJSON.getString("c_descripcion") + "' , "
-                    + "'" + categoriaJSON.getString("ca_tipo") + "' , '" + categoriaJSON.getString("ca_habilitado") + "' , '" + categoriaJSON.getString("usuariou_id") + "');";
-
+            String query = "INSERT INTO categoria (usuariou_id, ca_nombre , c_descripcion , ca_esingreso , ca_eshabilitado  ) "
+                    + "VALUES ( " + categoriaJSON.getInt("c_usuario") + " , '" + categoriaJSON.getString("c_nombre") + "' , '" + categoriaJSON.getString("c_descripcion") 
+                    + "' , " + "'" + categoriaJSON.getBoolean("c_ingreso") + "' , '" + categoriaJSON.getBoolean("c_estado")  + "');";
+                       
+            System.out.println(query);
+           
             if (st.executeUpdate(query) > 0) {
                 st.close();
                 return "Registro exitoso";
@@ -124,21 +141,31 @@ public class Modulo4sResource {
         }
     }
     
+    /**
+     * Función que elimina una categoria y modifica las tablas donde se encontraba esa categoria
+     * Siempre debe existir una categoria con id -1 para modificar cuando se elimine la categoria
+     *
+     * @param datosCategoria JSON.toString() con los atributos: c_id
+     * @metodo eliminarCategoria2 para modificar todas las tablas donde aparecia la categoria.
+     *
+     * @return Si el registro fue borrado exitosamente devuelve un String
+     *"Borado exitoso" de lo contrario devuelve "No se pudo borrar"
+     * 
+     */
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     @Path("/eliminarCategoria")
     public String eliminarCategoria(@QueryParam("datosCategoria") String datosCategoria) {
 
         String decodifico = URLDecoder.decode(datosCategoria);
-
+        EliminarCategoria2(decodifico, "presupuesto");
+        EliminarCategoria2(decodifico,"pago");
         try {
             Connection conn = Conexion.conectarADb();
             Statement st = conn.createStatement();
-            JsonReader reader = Json.createReader(new StringReader(decodifico));
-            JsonObject categoriaJSON = reader.readObject();
-            reader.close();
-            String query = "DELETE FROM categoria WHERE ca_id ='" + categoriaJSON.getString("ca_id")  + "');";
-
+           
+            String query = "DELETE FROM categoria WHERE ca_id =" + decodifico  + ";";
+            
             if (st.executeUpdate(query) > 0) {
                 st.close();
                 return "Borrado exitoso";
@@ -154,41 +181,199 @@ public class Modulo4sResource {
         }
     }
     
-     @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    @Path("/eliminarCategoria")
-    public String mostrarCategoria(@QueryParam("datosCategoria") String datosCategoria , String usuario) {
-        //TODO return proper representation object
-    
-        String decodifico = URLDecoder.decode(datosCategoria);
-        String respuesta = "";
-        
-        try {
+        /**
+     * Función que modifica todas las tablas donde aparecia la categoria a eliminar
+     * 
+     *
+     * @param  id, tabla
+     * 
+     * 
+     *
+     * @return si se modifica las tablas donde aparecia la categoria a eliminar
+     * devuelve un boolean true, en caso contrario devuelve false
+     * 
+     */
+    public boolean EliminarCategoria2 (String id, String tabla){
+        try{
+            Connection conn = Conexion.conectarADb();
+            Statement st = conn.createStatement();
+            String query = "UPDATE "+tabla+" SET "
+                    + "categoriaca_id = " + -1 + 
+                    " WHERE "
+                    + "categoriaca_id = " + id + ";";
+            if (st.executeUpdate(query) > 0) {
+                st.close();
+                return true;
+            } else {
+                st.close();
+                return false;
+            }
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false ;
 
+        }
+    }
+    
+      /**
+     * Función que permite visualizar todas las categoria que posee un usuaria
+     * 
+     *
+     * @param usuario JSON.toString() con los atributos: c_id
+     * 
+     * 
+     *
+     * @return devuelve una lista con todas las categoria que posee un usuario
+     * en caso de no poseer categorias creadas devuelve null
+     * 
+     */
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("/visualizarCategoria")
+    public String VisualizarCategoria(@QueryParam("datosCategoria") String usuario) {
+              
+        String decodifico = URLDecoder.decode(usuario);
+       
+        String respuesta ="";
+        
+        try{
+                    
             Connection conn = Conexion.conectarADb();
             Statement st = conn.createStatement();
             //Se coloca el query
-            ResultSet rs = st.executeQuery ("SELECT ca_nombre, c_descripcion  FROM Usuario Categoria WHERE u_usuario = usuariou_id AND  u_usuario ='" + usuario + "';");
-            while (rs.next()) {
+            ResultSet rs = st.executeQuery("SELECT * FROM Categoria WHERE ca_id <> -1  AND usuariou_id = '" + decodifico + "';");
+            
+            
+             JsonObjectBuilder categoriaBuilder = Json.createObjectBuilder();
+             JsonArrayBuilder list = Json.createArrayBuilder();
+             int cont = 1;
+            while (rs.next())
+            {
                 //Creo el objeto Json!             
-                JsonObjectBuilder categoriaBuilder = Json.createObjectBuilder();
-                categoriaBuilder.add("Nombre", rs.getString(0));
-                categoriaBuilder.add("Descripcion", rs.getString(1));
-                categoriaBuilder.add("Estado", rs.getString(2));
-                JsonObject categoriaJsonObject = categoriaBuilder.build();
-                respuesta = categoriaJsonObject.toString();
-
+                 
+                 categoriaBuilder.add("Id",rs.getInt(1));
+                 System.out.println(rs.getInt(1));
+                 categoriaBuilder.add("Nombre",rs.getString(2));
+                 System.out.println(rs.getString(2));
+                 categoriaBuilder.add("Descripcion",rs.getString(3));
+                 categoriaBuilder.add("esIngreso",rs.getBoolean(4));
+                 categoriaBuilder.add("esHabilitado",rs.getBoolean(5));
+                 JsonObject categoriaJsonObject = categoriaBuilder.build();  
+                 respuesta = categoriaJsonObject.toString();
+                 
+                 list.add( respuesta);
+                
             }
             rs.close();
             st.close();
-
-            return respuesta;
+            JsonArray listJsonObject = list.build();
+            String resp = listJsonObject.toString();
+            System.out.println(resp);
+            return resp;
         }
         catch(Exception e) {
             return e.getMessage();
         }
     }
 
+     /**
+     * Función que modifica en la base de datos atributos de categoria creados por el usuario
+     * 
+     *
+     * @param datosCategoria JSON.toString() con los atributos: c_id, c_nombre, c_descripcion
+     * ,c_ingreso, c_estado
+     * 
+     * 
+     *
+     * @return Si se modifica la categoria devuelve un String con el mensaje
+     * "Modificacion exitosa", De lo contrario devuelve el mensaje "No se pudo
+     * modificar"
+     */
+   @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("/modificarCategoria")
+    public String modificarCategoria(@QueryParam("datosCategoria") String datosCategoria) {
+        String decodifico = URLDecoder.decode(datosCategoria);
+
+        try {
+           
+            Connection conn = Conexion.conectarADb();
+           
+            Statement st = conn.createStatement();
+            JsonReader reader = Json.createReader(new StringReader(decodifico));
+            JsonObject categoriaJSON = reader.readObject();
+            reader.close();
+            String query = "UPDATE categoria SET "
+                    + "ca_nombre = '" + categoriaJSON.getString("c_nombre")
+                    + "', c_descripcion = '" + categoriaJSON.getString("c_descripcion") 
+                    + "', ca_esingreso = " + categoriaJSON.getBoolean("c_ingreso")
+                    + ",ca_eshabilitado = " + categoriaJSON.getBoolean("c_estado") +
+                    " WHERE "
+                    + "ca_id = " + categoriaJSON.getInt("c_id") + ";";
+            
+               
+                       
+            //System.out.println(query);
+           
+            if (st.executeUpdate(query) > 0) {
+                st.close();
+                return "Modificacion exitosa";
+            } else {
+                st.close();
+                return "No se pudo modificar";
+                
+            }
+
+        } catch (Exception e) {
+
+            return e.getMessage();
+
+        }
+    }
+    
+        /**
+     * Función que busca y devuelve una categoria por su id
+     *
+     * @param datosCategoria JSON.toString() con los atributos: c_id
+     * @metodo eliminarCategoria2 para modificar todas las tablas donde aparecia la categoria.
+     *
+     * @return Si el registro fue borrado exitosamente devuelve un String
+     *con la categoria si se encontro de lo contrario devuelve null
+     * 
+     */
+    
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("/buscarCategoria")
+    public String buscarCategoria(@QueryParam("datosCategoria") String datosCategoria){
+        String decodifico = URLDecoder.decode(datosCategoria);
+        try{
+            Connection conn = Conexion.conectarADb();
+            Statement st = conn.createStatement();
+            //Se coloca el query
+            ResultSet rs = st.executeQuery("SELECT * FROM Categoria WHERE ca_id = '" + decodifico + "';");
+            JsonObjectBuilder categoriaBuilder = Json.createObjectBuilder();
+            while (rs.next())
+            {
+            categoriaBuilder.add("Id",rs.getInt(1));
+            System.out.println(rs.getInt(1));
+            categoriaBuilder.add("Nombre",rs.getString(2));
+            System.out.println(rs.getString(2));
+            categoriaBuilder.add("Descripcion",rs.getString(3));
+            categoriaBuilder.add("esIngreso",rs.getBoolean(4));
+            categoriaBuilder.add("esHabilitado",rs.getBoolean(5));
+            categoriaBuilder.add("usuariou_id",rs.getInt(6));
+            JsonObject categoriaJsonObject = categoriaBuilder.build();  
+            String  respuesta = categoriaJsonObject.toString();
+            System.out.println(respuesta);
+            return respuesta;
+            }
+        }
+        catch(Exception e) {
+            return e.getMessage();
+        }
+        return null;
+    }
 
     /**
      * POST method for creating an instance of Modulo4Resource
@@ -212,6 +397,3 @@ public class Modulo4sResource {
     }
 
 }
-
-
-
