@@ -56,14 +56,10 @@ public class GestionCategoriasTest {
      *
      * @throws Exception
      */
-    //@Test
-    @Test//(expected = CampoVacio_Exception.class)
+
+    @Test
     public void CampoDescripcionVacio_isCorrect() throws Exception {
-        AgregarCategoria_Fragment fragment = new AgregarCategoria_Fragment();
-//        startFragment( fragment );
-        //EditText campo2 = AgregarCategoria_Fragment.AddDescripcionEditText = (EditText) fragment.getView().findViewById(R.id.AddDescripcionEditText);
-        //AgregarCategoria_Fragment.AddDescripcionEditText.setText("La comida de la universidad");
-        EditText campo2 = null;
+       EditText campo2 = null;
 
         boolean aceptado = true;
 
@@ -74,11 +70,12 @@ public class GestionCategoriasTest {
     }
 
 
+    /**
+     * realizo prueba al evento habilitar
+     * @throws Exception
+     */
     @Test
     public void HabilitarEventoSwitch_isCorrect() throws Exception {
-        // ListaCategorias_Fragment fragment = new ListaCategorias_Fragment();
-        //startFragment( fragment );
-
         boolean prueba = false;
         try {
             Categoria_Controller.setHabilitarEventoSwitch(prueba);
@@ -106,9 +103,6 @@ public class GestionCategoriasTest {
      */
     @Test
     public void setListaCategorias_isCorrect() throws Exception {
-        //  ListaCategorias_Fragment fragment = new ListaCategorias_Fragment();
-        // startFragment( fragment );
-
         Categoria categoria = new Categoria();
         ArrayList<Categoria> prueba = new ArrayList<Categoria>();
         ArrayList<Categoria> categorias = new ArrayList<Categoria>();
@@ -174,7 +168,6 @@ public class GestionCategoriasTest {
      * @throws Exception
      */
     @Test
-
     public void getCasoRequest_isCorrect() throws Exception {
         int prueba = Categoria_Controller.casoRequest;
 
@@ -190,8 +183,11 @@ public class GestionCategoriasTest {
 
     }
 
+    /**
+     * realizo prueba al metodo  habilitar la categoria
+     * @throws Exception
+     */
     @Test
-
     public void HabilitarCategoria_isCorrect() throws Exception {
 
         Categoria categoria = new Categoria();
@@ -237,7 +233,7 @@ public class GestionCategoriasTest {
         try {
 
             boolean habilitar = true;
-            if (habilitar == true || categoria2 == null)
+            if (habilitar == true && categoria2 == null)
 
                 try {
                     Categoria_Controller.HabilitarCategoria(categoria2, habilitar2);
@@ -253,8 +249,11 @@ public class GestionCategoriasTest {
         }
     }
 
+    /**
+     * realizo prueba a modificar categoria
+     * @throws Exception
+     */
     @Test
-
     public void modificarCategoria_isCorrect() throws Exception {
 
         try {
@@ -290,8 +289,11 @@ public class GestionCategoriasTest {
         }
     }
 
+    /**
+     * realizo prueba al metodo borrar Categoria
+     * @throws Exception
+     */
     @Test
-
     public void borrarCategoria_isCorrect() throws Exception {
 
         Categoria categoria = new Categoria();
@@ -332,9 +334,11 @@ public class GestionCategoriasTest {
         }
     }
 
-
+    /**
+     * realizo prueba al metodo obtener Categorias
+     * @throws Exception
+     */
     @Test
-
     public void obtenerTodasCategorias_isCorrect() throws Exception {
 
         Categoria categoria = new Categoria();
