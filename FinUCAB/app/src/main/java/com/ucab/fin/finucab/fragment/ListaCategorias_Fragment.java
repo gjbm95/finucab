@@ -279,7 +279,6 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
     public void obtuvoCorrectamente(Object response){
         try {
 
-            Log.e("CASO",Categoria_Controller.getCasoRequest()+"");
 
             if (Parametros.getRespuesta().equals("Error")||Parametros.getRespuesta().equals("ERROR") ) {
 
