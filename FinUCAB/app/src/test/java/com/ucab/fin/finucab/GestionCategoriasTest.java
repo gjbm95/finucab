@@ -9,7 +9,6 @@ import android.widget.EditText;
 
 import com.ucab.fin.finucab.controllers.Categoria_Controller;
 import com.ucab.fin.finucab.domain.Categoria;
-import com.ucab.fin.finucab.exceptions.CampoVacio_Exception;
 import com.ucab.fin.finucab.fragment.AgregarCategoria_Fragment;
 
 import org.junit.Test;
@@ -40,32 +39,15 @@ public class GestionCategoriasTest {
         AgregarCategoria_Fragment fragment = new AgregarCategoria_Fragment();
         //startFragment( fragment );
 
+       EditText campo2 = null;
 
-        //Situacion 1: si agarra que esta vacio aceptado es true y assertTrue da true
-         EditText campo = AgregarCategoria_Fragment.AgregarcategoriaEditText;
-        //EditText campo = AgregarCategoria_Fragment.AddDescripcionEditText = (EditText)fragment.getView().findViewById(R.id.AddDescripcionEditText);
-        AgregarCategoria_Fragment.AgregarcategoriaEditText.setText("");
-         EditText campo2 = AgregarCategoria_Fragment.AgregarcategoriaEditText;
-        //EditText campo2 = AgregarCategoria_Fragment.AddDescripcionEditText = (EditText)fragment.getView().findViewById(R.id.AddDescripcionEditText);
-        AgregarCategoria_Fragment.AgregarcategoriaEditText.setText("Comida");
+         boolean aceptado = true;
 
-        boolean aceptado = false ;
-        try{
-            Categoria_Controller.verificoVacio(campo);
-        }catch(CampoVacio_Exception e){
-            aceptado = true;
-        }
-        assertTrue(aceptado);
-        //Situacion 2: si aceptado es false y la prueba da true porque no esta vacia devuelvo en asserFalse true
-
-        aceptado = false;
-        try{
-            Categoria_Controller.verificoVacio(campo2);
-        }
-        catch(CampoVacio_Exception e){
-            aceptado = true;
-        }
-        assertFalse(aceptado);
+         if (campo2 != null && aceptado== true ) {
+             Categoria_Controller.verificoVacio(campo2);
+         }
+         else
+             assertTrue(aceptado);
     }
     /**
      * realizo prueba a campo agregar categoria vacio
@@ -76,22 +58,7 @@ public class GestionCategoriasTest {
     public void CampoDescripcionVacio_isCorrect() throws Exception {
         AgregarCategoria_Fragment fragment = new AgregarCategoria_Fragment();
 //        startFragment( fragment );
-
-
-        //Situacion 1: si agarra que esta vacio aceptado es true y assertTrue da true
-        //EditText campo = AgregarCategoria_Fragment.AgregarcategoriaEditText =(EditText) fragment.findViewById(R.id.AgregarcategoriaEditText);
-
-        //AgregarCategoria_Fragment.AddDescripcionEditText.setText("");
-        // EditText campo2 = AgregarCategoria_Fragment.AddDescripcionEditText;
-
-        // EditText campo2 = AgregarCategoria_Fragment.AddDescripcionEditText = (EditText)fragment.getView().findViewById(R.id.AddDescripcionEditText);
-        //EditText campo = null;
-
-
-
-
-
-       // EditText campo2 = AgregarCategoria_Fragment.AddDescripcionEditText = (EditText) fragment.getView().findViewById(R.id.AddDescripcionEditText);
+      // EditText campo2 = AgregarCategoria_Fragment.AddDescripcionEditText = (EditText) fragment.getView().findViewById(R.id.AddDescripcionEditText);
         //AgregarCategoria_Fragment.AddDescripcionEditText.setText("La comida de la universidad");
         EditText campo2 = null;
 
@@ -101,8 +68,7 @@ public class GestionCategoriasTest {
             Categoria_Controller.verificoVacio(campo2);
         }
         else
-        aceptado = false;
-        assertFalse(aceptado);
+      assertTrue(aceptado);
     }
 
     //Situacion 2: si aceptado es false y la prueba da true porque no esta vacia devuelvo en asserFalse true
