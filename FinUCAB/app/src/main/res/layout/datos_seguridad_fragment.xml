@@ -23,6 +23,17 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:text="@string/respuesta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/questionREditText"
+        android:layout_alignLeft="@+id/answerREditText"
+        android:layout_alignStart="@+id/answerREditText"
+        android:layout_marginTop="13dp"
+        android:id="@+id/textView18"
+        android:textColor="@color/colorAccent" />
+
     <EditText
         android:layout_width="250dp"
         android:layout_height="55dp"
@@ -34,8 +45,19 @@
         android:ems="10"
         android:background="@drawable/caja"
         android:id="@+id/answerREditText"
-        android:layout_marginTop="18dp"
-        android:layout_below="@+id/questionREditText"
+        android:layout_marginTop="11dp"
+        android:layout_below="@+id/textView18"
+        android:layout_alignLeft="@+id/questionREditText"
+        android:layout_alignStart="@+id/questionREditText" />
+
+    <TextView
+        android:text="@string/pregunta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:id="@+id/textView17"
+        android:textColor="@color/colorAccent"
+        android:layout_alignParentTop="true"
         android:layout_alignLeft="@+id/questionREditText"
         android:layout_alignStart="@+id/questionREditText" />
 </RelativeLayout>
