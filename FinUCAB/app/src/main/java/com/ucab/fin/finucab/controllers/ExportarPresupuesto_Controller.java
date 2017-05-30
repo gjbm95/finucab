@@ -65,11 +65,13 @@ public class ExportarPresupuesto_Controller extends AsyncTask<String ,String, St
      * Este método se encarga de crear el archivo .xls y luego generarlo
      **/
 
-    public void exportarExcel(){
+    public static boolean exportarExcel(){
+        /*-----------------Creando la direccion donde se almacenara el archivo-----------------*/
         File exportDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "");
         if (!exportDir.exists()) {
             exportDir.mkdirs();
         }
+         /*------------------------------Creando el archivo-------------------------------------*/
         SimpleDateFormat s = new SimpleDateFormat("ddMMyyyyhhmmss");
         String format = s.format(new Date());
         File fileEXCEL = new File(exportDir, "ExcelPresupuesto"+format+".xls");
@@ -77,6 +79,7 @@ public class ExportarPresupuesto_Controller extends AsyncTask<String ,String, St
             fileEXCEL.createNewFile();
             Workbook wb = new HSSFWorkbook();
             Cell c= null;
+         /*----------------------Estableciendo el estilo de celda del archivo--------------------*/
 
             CellStyle cs = wb.createCellStyle();
             CellStyle as = wb.createCellStyle();
@@ -84,7 +87,7 @@ public class ExportarPresupuesto_Controller extends AsyncTask<String ,String, St
             cs.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
             as.setFillForegroundColor(HSSFColor.PALE_BLUE.index);
             as.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
-
+         /*--------------------Estableciendo el nombre de la hoja y el header--------------------*/
             Sheet sheet1 = null;
             sheet1 = wb.createSheet("Mi Presupuesto");
 
@@ -113,12 +116,12 @@ public class ExportarPresupuesto_Controller extends AsyncTask<String ,String, St
             c = row0.createCell(5);
             c.setCellValue("Tipo");
             c.setCellStyle(cs);
-
+        /*----------------Estableciendo un contador para comenzar a iterar (Filas)-----------------*/
             int count = listaPresupuestos.size();
 
             for(int contadorFilas=0 ; contadorFilas<count; contadorFilas++){
                 Row row = sheet1.createRow(contadorFilas+1);
-
+        /*---------------------------Iterando para colocar las columnas---------------------------*/
                 Presupuesto p = listaPresupuestos.get(contadorFilas);
 
                 c = row.createCell(0);
@@ -147,26 +150,30 @@ public class ExportarPresupuesto_Controller extends AsyncTask<String ,String, St
 
             }
 
+        /*--------------------------------Cerranndo el archivo------------------------------------*/
             FileOutputStream os = new FileOutputStream(fileEXCEL);
             wb.write(os);
             os.close();
-
+            return true;
         } catch (IOException e) {
             Log.e("MainActivity", e.getMessage(), e);
-
+            return false;
 
         }
+
     }
 
     /**
      * Este método se encarga de crear el archivo .csv y luego generarlo
      **/
 
-    public void exportarCSV(){
+    public static boolean exportarCSV(){
+        /*------------------Creando la direccion donde se almacenara el archivo-------------------*/
         File exportDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "");
         if (!exportDir.exists()) {
             exportDir.mkdirs();
         }
+         /*-------------------------------Creando el archivo--------------------------------------*/
         SimpleDateFormat s = new SimpleDateFormat("ddMMyyyyhhmmss");
         String format = s.format(new Date());
         File fileCSV = new File(exportDir, "CSVPresupuesto"+format+".csv");
@@ -174,19 +181,21 @@ public class ExportarPresupuesto_Controller extends AsyncTask<String ,String, St
         try {
             fileCSV.createNewFile();
             FileWriter writerCSV = new FileWriter(fileCSV);
-
+        /*----------------------Estableciendo el header y comenzando a iterar---------------------*/
             writerCSV.write("Nombre del Presupuesto;Categoria;Monto;Clasificacion;Duracion;Tipo;\n");
             for(Presupuesto p : listaPresupuestos){
-                writerCSV.write(p.get_nombre()+";"+p.get_categoria()+";"+p.get_monto().toString()+";"+p.get_clasificacion()
-                        +";"+p.get_duracion().toString()+";"+p.get_tipo()+";"+"\n");
+                writerCSV.write(p.get_nombre()+";"+p.get_categoria()+";"+p.get_monto().toString()
+                        +";"+p.get_clasificacion() +";"+p.get_duracion().toString()+";"+p.get_tipo()
+                        +";"+"\n");
 
             }
+         /*--------------------------------Cerranndo el archivo-----------------------------------*/
             writerCSV.flush();
             writerCSV.close();
-
+            return true;
         } catch (IOException e) {
             Log.e("MainActivity", e.getMessage(), e);
-
+            return false;
         }
     }
 
@@ -200,7 +209,6 @@ public class ExportarPresupuesto_Controller extends AsyncTask<String ,String, St
      */
     public static void obtenerPresupuestos ( Activity actividad ) {
 
-        System.out.println("ESTOY EN OBTENERPRESUPUESTO");
         Parametros.setMetodo("Modulo3/ListaPresupuestoExportar?idUsuario="+ ControlDatos.getUsuario().getUsuario());
         new Recepcion(actividad,interfaz).execute("GET");
 
@@ -211,16 +219,14 @@ public class ExportarPresupuesto_Controller extends AsyncTask<String ,String, St
      * Este método se encarga de llenar la lista de presupuestos que se utilizará para exportar
      */
     public static ArrayList<Presupuesto> utilizarPresupuesto(){
-        System.out.println("Estoy en utilizarPresupuesto(): la respuesta es: "+Parametros.getRespuesta());
         JSONObject jObject = null;
         try {
             JSONArray mJsonArray = new JSONArray(Parametros.respuesta);
             int count = mJsonArray.length();
-
-            for (int i = 0; i < count; i++) {   // iterate through jsonArray
-                jObject = mJsonArray.getJSONObject(i);  // get jsonObject @ i position
+        /*----------------------------Iterando para llenar el ArrayList---------------------------*/
+            for (int i = 0; i < count; i++) {
+                jObject = mJsonArray.getJSONObject(i);
                 Presupuesto pre = new Presupuesto();
-                System.out.println("NOMbre en json: "+(String) jObject.get("Nombre"));
                 pre.set_nombre((String) jObject.get("Nombre"));
                 pre.set_categoria((String) jObject.get("Categoria"));
                 pre.set_monto(Float.parseFloat((String) jObject.get("Monto")));
@@ -233,10 +239,6 @@ public class ExportarPresupuesto_Controller extends AsyncTask<String ,String, St
                 }
                 ExportarPresupuesto_Controller.listaPresupuestos.add(pre);
             }
-            for (Presupuesto p: ExportarPresupuesto_Controller.listaPresupuestos){
-                System.out.println("Nombre: "+p.get_nombre());
-            }
-
 
         } catch (JSONException e) {
             e.printStackTrace();

@@ -32,6 +32,10 @@ public class RecuperacionActivity extends AppCompatActivity implements View.OnCl
     private Button cancelar;
     private int conteo;
 
+
+    /**
+     * Metodo encargado de crear la actividad.
+     **/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,17 +56,20 @@ public class RecuperacionActivity extends AppCompatActivity implements View.OnCl
     }
 
 
-    //Agrego un menu Overflow al Action Bar:
-    @Override
+    /**
+     * Agrego un menu Overflow al Action Bar:
+    **/
+     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.overflow, menu);
         return true;
 
     }
 
-
-    //Se le coloca acciones a las funcionalidades que ofrece el Menu overflow del action bar.
-    @Override
+    /**
+    *Se le coloca acciones a las funcionalidades que ofrece el Menu overflow del action bar.
+    **/
+     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.exit:
@@ -77,6 +84,11 @@ public class RecuperacionActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
+
+    /**
+     * Metodo cambiar el formulario para la recuperacion de contraseña.
+     * @Param indicador numero de formulario a mostrar. (Del 1 al 2)
+     */
     public void activarPaso(int indicador) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -95,7 +107,9 @@ public class RecuperacionActivity extends AppCompatActivity implements View.OnCl
 
         }
     }
-
+    /**
+     * Metodo encargado de darle funcionalidades a los botones de la pantalla de recuperacion de contraseña.
+     */
     @Override
     public void onClick(View view) {
         switch (view.getId()){
@@ -124,6 +138,10 @@ public class RecuperacionActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
+
+    /**
+     * Metodo encargado de recargar la actividad y recibir los datos enviados desde el Web Service
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -143,7 +161,7 @@ public class RecuperacionActivity extends AppCompatActivity implements View.OnCl
     }
 
     /**
-     * Meotodo que se encarga de mostrar un mensaje de error.
+     * Metodo que se encarga de mostrar un mensaje de error.
      * @param mensaje
      */
     private void mensajeError(String mensaje){

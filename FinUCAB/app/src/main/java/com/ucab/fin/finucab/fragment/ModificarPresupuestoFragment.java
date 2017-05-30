@@ -64,7 +64,7 @@ public class ModificarPresupuestoFragment extends Fragment implements CompoundBu
         categorySpinner= (Spinner) rootView.findViewById(R.id.categorySpinner) ;
         onlyRadioButton= (RadioButton) rootView.findViewById(R.id.onlyRadioButton);
         recurrentRadioButton= (RadioButton) rootView.findViewById(R.id.recurrentRadioButton);
-
+        agregarButton = (Button) rootView.findViewById(R.id.acceptButton);
 
         Presupuesto_Controller.nombrePresupuesto = nameEditText;
         Presupuesto_Controller.montoPresupuesto = amountEditText;
@@ -73,7 +73,7 @@ public class ModificarPresupuestoFragment extends Fragment implements CompoundBu
         Presupuesto_Controller.recurrenciaButton = recurrentRadioButton;
         Presupuesto_Controller.unicoButton = onlyRadioButton;
         Presupuesto_Controller.recurrenciaTextView = recurrentTextView;
-
+        Presupuesto_Controller.agregarButton = agregarButton;
 
         Presupuesto_Controller.interfaz = (ResponseWebServiceInterface) this;
         Presupuesto_Controller.volverInvisibleRecurrencia();
@@ -81,7 +81,7 @@ public class ModificarPresupuestoFragment extends Fragment implements CompoundBu
 
 
 
-        agregarButton = (Button) rootView.findViewById(R.id.acceptButton);
+
         agregarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

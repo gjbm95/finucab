@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.webkit.WebResourceRequest;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -61,7 +62,7 @@ public class Presupuesto_Controller {
     public static ArrayList<Presupuesto> listaGastos = new ArrayList<>();
     public static boolean tipoPresupuesto;
     public static ResponseWebServiceInterface interfaz;
-
+    public static Button agregarButton;
 
     /**
      * Método que se encarga de obtener en el web service las categorías asociadas a un usuario
@@ -80,10 +81,7 @@ public class Presupuesto_Controller {
      */
     public static void asignarSpinner(Activity actividad) {
         JSONObject jObject = null;
-        System.out.println("Antes del try");
-
         try {
-            System.out.println("Despues del try");
             JSONArray mJsonArray = new JSONArray(Parametros.respuesta);
             int count = mJsonArray.length();
             String[] valores = new String[count];
@@ -96,6 +94,10 @@ public class Presupuesto_Controller {
             ArrayAdapter adapter = new ArrayAdapter<String>(actividad,
                     android.R.layout.simple_spinner_dropdown_item, valores);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            if(count == 0){
+                agregarButton.setEnabled(false);
+                Toast.makeText(actividad,"Debe agregar Categorias primero",Toast.LENGTH_LONG);
+            }
             categoriaPresupuesto.setAdapter(adapter);
             Parametros.reset();
         } catch (JSONException e) {
