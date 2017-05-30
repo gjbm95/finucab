@@ -115,7 +115,7 @@ public class AgregarPlanificacionFragment extends Fragment implements ResponseWe
                                     .getText().toString()), " ", descripcion.getText().toString(), Double.valueOf
                                     (monto.getText().toString()), sp.getId(), recurrente, recurrencia.getSelectedItem()
                                     .toString(), true);
-                            Planificacion_Controller.agregarPlanificacion(planificacion);
+                            //Planificacion_Controller.agregarPlanificacion(planificacion);
                         }
                     } catch (ParseException e) {
                         e.printStackTrace();
@@ -126,12 +126,21 @@ public class AgregarPlanificacionFragment extends Fragment implements ResponseWe
                         if (!campoVacio(descripcion, monto, fechaDesde, fechaDesde)) {
                             planificacion = new Planificacion(format.parse(fechaDesde.getText().toString()), format.parse(fechaDesde.getText().toString()), " ", descripcion.getText().toString(), Double.valueOf
                                     (monto.getText().toString()), sp.getId(), recurrente, "", true);
-                            Planificacion_Controller.agregarPlanificacion(planificacion);
+                            //Planificacion_Controller.agregarPlanificacion(planificacion);
                         }
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
                 }
+
+                if (modificar) {
+                    planificacion.setId(idPlanificacion);
+                    Planificacion_Controller.modicarPlanificacion(planificacion);
+                } else {
+                    Planificacion_Controller.agregarPlanificacion(planificacion);
+                }
+
+
             }
         });
 
@@ -253,13 +262,12 @@ public class AgregarPlanificacionFragment extends Fragment implements ResponseWe
                     categoria.setAdapter(spinner_adapter);
 
 
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 Planificacion_Controller.managementRequest = -1;
                 if (idPlanificacion != 0)
-                Planificacion_Controller.buscaPlanificacion(idPlanificacion);
+                    Planificacion_Controller.buscaPlanificacion(idPlanificacion);
                 break;
 
             case 2:
@@ -286,7 +294,7 @@ public class AgregarPlanificacionFragment extends Fragment implements ResponseWe
                     Planificacion_Controller.planificacion_pago.setPlanificacion(pa);
                 } catch (JSONException e) {
                     e.printStackTrace();
-                } catch (ParseException e){
+                } catch (ParseException e) {
                     e.printStackTrace();
                 }
                 Planificacion_Controller.managementRequest = -1;
@@ -294,6 +302,13 @@ public class AgregarPlanificacionFragment extends Fragment implements ResponseWe
 
                 break;
 
+            case 5:
+
+                String respuesta1 = (String) response;
+                Planificacion_Controller.managementRequest = -1;
+                showDialogResponse(respuesta1);
+
+                break;
 
 
         }

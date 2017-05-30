@@ -146,7 +146,7 @@ public class PlanificacionFragment extends Fragment implements ResponseWebServic
 
                 pa = Planificacion_Controller.planificacion_pago.getListaPlanificacion().get(positionLongPress);
                 Toast.makeText(getActivity(), "Eliminando planificacion ...", Toast.LENGTH_LONG).show();
-                Planificacion_Controller.eliminarCategoria(pa.getId());
+                Planificacion_Controller.eliminarPlanificacion(pa.getId());
                 positionLongPress = -1;
 
                 return true;
@@ -156,7 +156,7 @@ public class PlanificacionFragment extends Fragment implements ResponseWebServic
                 pa = Planificacion_Controller.planificacion_pago.getListaPlanificacion().get
                         (positionLongPress);
                 positionLongPress = -1;
-                modificarCategoria(pa.getId());
+                modificarPlanificacion(pa.getId());
 
                 return true;
 
@@ -167,7 +167,7 @@ public class PlanificacionFragment extends Fragment implements ResponseWebServic
 
     }
 
-    private void modificarCategoria(int id) {
+    private void modificarPlanificacion(int id) {
         Bundle bundle = new Bundle();
         bundle.putBoolean("modificar",true);
         bundle.putInt("planificacionId", id);

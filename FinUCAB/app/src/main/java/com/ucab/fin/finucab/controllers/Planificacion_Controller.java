@@ -82,9 +82,14 @@ public class Planificacion_Controller {
         return pos;
     }
 
-    public static void eliminarCategoria(int id){
+    public static void eliminarPlanificacion(int id){
         managementRequest = 4;
         planificacion_pago.borrarPlanificacion(id);
+    }
+
+    public static void modicarPlanificacion(Planificacion planificacion){
+        managementRequest = 5;
+        planificacion_pago.modificarPlanificacion(planificacion);
     }
 
 
