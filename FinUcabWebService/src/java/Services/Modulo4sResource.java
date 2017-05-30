@@ -256,8 +256,8 @@ public class Modulo4sResource {
                  categoriaBuilder.add("Nombre",rs.getString(2));
                  System.out.println(rs.getString(2));
                  categoriaBuilder.add("Descripcion",rs.getString(3));
-                 categoriaBuilder.add("esIngreso",rs.getBoolean(4));
-                 categoriaBuilder.add("esHabilitado",rs.getBoolean(5));
+                 categoriaBuilder.add("esIngreso",rs.getBoolean(5));
+                 categoriaBuilder.add("esHabilitado",rs.getBoolean(4));
                  JsonObject categoriaJsonObject = categoriaBuilder.build();  
                  respuesta = categoriaJsonObject.toString();
                  
@@ -360,8 +360,8 @@ public class Modulo4sResource {
             categoriaBuilder.add("Nombre",rs.getString(2));
             System.out.println(rs.getString(2));
             categoriaBuilder.add("Descripcion",rs.getString(3));
-            categoriaBuilder.add("esIngreso",rs.getBoolean(4));
-            categoriaBuilder.add("esHabilitado",rs.getBoolean(5));
+            categoriaBuilder.add("esIngreso",rs.getBoolean(5));
+            categoriaBuilder.add("esHabilitado",rs.getBoolean(4));
             categoriaBuilder.add("usuariou_id",rs.getInt(6));
             JsonObject categoriaJsonObject = categoriaBuilder.build();  
             String  respuesta = categoriaJsonObject.toString();
