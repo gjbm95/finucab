@@ -1,4 +1,4 @@
-package com.ucab.fin.finucab.activity;
+﻿package com.ucab.fin.finucab.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -30,7 +30,7 @@ public class PresentacionActivity extends AppCompatActivity {
     /**
      * Metodo de inicializacion de la actividad
      *
-     * @param savedInstanceState
+     *   @param savedInstanceState
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
