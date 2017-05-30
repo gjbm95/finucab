@@ -18,8 +18,7 @@
         android:padding="12dp"
         android:text="@string/descripcion"
         android:textColor="@color/colorPrimary"
-        android:textSize="20sp"
-        android:textStyle="bold"/>
+        android:textSize="20sp"/>
 
 
     <RelativeLayout
@@ -53,8 +52,7 @@
         android:padding="12dp"
         android:text="@string/monto"
         android:textColor="@color/colorPrimary"
-        android:textSize="20sp"
-        android:textStyle="bold"/>
+        android:textSize="20sp"/>
 
     <RelativeLayout
         android:id="@+id/montoLayout"
@@ -110,8 +108,7 @@
         android:padding="12dp"
         android:text="@string/categoria"
         android:textColor="@color/colorPrimary"
-        android:textSize="20sp"
-        android:textStyle="bold"/>
+        android:textSize="20sp"/>
 
 
     <TextView
@@ -123,8 +120,7 @@
         android:text="Tipo de pago"
         android:layout_marginTop="5dp"
         android:textColor="@color/colorPrimary"
-        android:textSize="20sp"
-        android:textStyle="bold"/>
+        android:textSize="20sp"/>
 
     <RadioGroup
         android:id="@+id/radioGrpPlanificacion"
@@ -146,7 +142,6 @@
             android:text="@string/unicoPa"
             android:textColor="@color/colorPrimary"
             android:textSize="20sp"
-            android:textStyle="bold"
             />
 
         <RadioButton
@@ -160,7 +155,6 @@
             android:text="@string/recurrente"
             android:textColor="@color/colorPrimary"
             android:textSize="20sp"
-            android:textStyle="bold"
             />
     </RadioGroup>
 
@@ -173,8 +167,7 @@
         android:padding="12dp"
         android:text="@string/fecha"
         android:textColor="@color/colorPrimary"
-        android:textSize="20sp"
-        android:textStyle="bold"/>
+        android:textSize="20sp"/>
 
     <TextView
         android:id="@+id/fechaHastaTextView"
@@ -251,8 +244,7 @@
         android:text="@string/repetir"
         android:textColor="@color/colorPrimary"
         android:visibility="invisible"
-        android:textSize="20sp"
-        android:textStyle="bold"/>
+        android:textSize="20sp"/>
 
     <RelativeLayout
         android:id="@+id/spinnerRecurrenteLayout"
@@ -286,7 +278,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/volver"
-            android:textSize="20sp"/>
+            android:textSize="14sp"/>
 
         <Button
             android:id="@+id/aceptarPlanificacionButton"
@@ -294,7 +286,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/aceptar"
-            android:textSize="20sp"/>
+            android:textSize="14sp"/>
 
     </LinearLayout>
 
