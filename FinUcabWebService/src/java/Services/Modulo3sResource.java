@@ -97,7 +97,7 @@ public class Modulo3sResource {
      * @param Usuario
      * @return 
      */
-   @GET
+  @GET
     @Produces(MediaType.TEXT_PLAIN)
     @Path("/ObtenerSpinnerCategoria")
    public String ObtenerSpinnerCategoria(@QueryParam("usuarioid") String Usuario) {
@@ -111,7 +111,7 @@ public class Modulo3sResource {
 
             ResultSet rs = st.executeQuery("Select ca_id|| '- ' || ca_nombre " +
                     "from categoria " +
-                    "where usuariou_id=1 and ca_eshabilitado = true "
+                    "where usuariou_id="+idUsuario+" and ca_eshabilitado = true "
                     + "and ca_id <> -1;");
             JsonObjectBuilder usuarioBuilder = Json.createObjectBuilder();
             JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
@@ -135,6 +135,7 @@ public class Modulo3sResource {
             return e.getMessage();
         }
     }
+    
    
    /**
     * Se encarga de devolver la lista de presupuesto por usuario
@@ -421,7 +422,10 @@ public class Modulo3sResource {
         } catch (Exception e) {
             return e.getMessage();
         }
-    }     
+    }    
+    
+    
+    
     /**
      * POST method for creating an instance of Modulo3Resource
      * @param content representation for the new resource

@@ -33,6 +33,7 @@ public class ApplicationConfig extends Application {
         resources.add(Services.Modulo1sResource.class);
         resources.add(Services.Modulo2Resource.class);
         resources.add(Services.Modulo2sResource.class);
+        resources.add(Services.Modulo3Resource.class);
         resources.add(Services.Modulo3sResource.class);
         resources.add(Services.Modulo4Resource.class);
         resources.add(Services.Modulo4sResource.class);
