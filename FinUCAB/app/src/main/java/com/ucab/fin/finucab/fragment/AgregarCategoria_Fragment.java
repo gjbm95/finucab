@@ -42,8 +42,8 @@ public class AgregarCategoria_Fragment extends Fragment implements View.OnClickL
     MainActivity parentActivity;
     Categoria categoria;
 
-    EditText AddDescripcionEditText; //caja de texto para almacenar la descripcion de la categoria
-    EditText AgregarcategoriaEditText; //caja de texto para almacenar la categoria
+    public static EditText AddDescripcionEditText; //caja de texto para almacenar la descripcion de la categoria
+    public static EditText AgregarcategoriaEditText; //caja de texto para almacenar la categoria
     Button acceptButton; //Boton para activar el guardado de categoria
     Switch switchestado; //Switch para cambiar las opciones Habilitado y Deshabilitado
     Switch switchtipo; //Switch para cambiar las opciones Ingreso y Egreso
