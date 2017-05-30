@@ -65,6 +65,14 @@ public class DatosPersonalesFragment extends Fragment {
 
     }
 
+    /**
+     * Metodo encargado de crear el fragmento:
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
