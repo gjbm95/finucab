@@ -52,9 +52,12 @@ public class AgregarPlanificacionFragment extends Fragment implements ResponseWe
     private MainActivity parentActivity;
     private Button aceptar, volver;
     private Calendar calendar;
-    private Planificacion planificacion;
+    private Planificacion planificacion, pa;
     private boolean recurrente;
     private DateFormat format;
+    private boolean modificar;
+    private int idPlanificacion;
+    private ArrayAdapter spinner_adapter;
 
     public AgregarPlanificacionFragment() {
         // Required empty public constructor
@@ -71,6 +74,7 @@ public class AgregarPlanificacionFragment extends Fragment implements ResponseWe
         Planificacion_Controller.init(parentActivity, this);
         format = new SimpleDateFormat("d-M-yyyy");
 
+
         recurrenciaTV = (TextView) rootView.findViewById(R.id.recurrenciaPaTextView);
         fechaHastaTV = (TextView) rootView.findViewById(R.id.fechaHastaTextView);
         descripcion = (EditText) rootView.findViewById(R.id.descripcionPaEditText);
@@ -84,8 +88,14 @@ public class AgregarPlanificacionFragment extends Fragment implements ResponseWe
         recurrencia = (Spinner) rootView.findViewById(R.id.recurrenciaPaSpinner);
         calendar = Calendar.getInstance();
 
-        Planificacion_Controller.listaCategoriasPa();
 
+        modificar = getArguments() != null && getArguments().getBoolean("modificar");
+        if (getArguments() != null) {
+            idPlanificacion = getArguments().getInt("planificacionId");
+        }
+
+
+        Planificacion_Controller.listaCategoriasPa();
 
 
         aceptar.setOnClickListener(new View.OnClickListener() {
@@ -155,8 +165,32 @@ public class AgregarPlanificacionFragment extends Fragment implements ResponseWe
             }
         });
 
-
+        //llenarCampos();
         return rootView;
+    }
+
+    private void llenarCampos() {
+        if (modificar) {
+            DateFormat date = new SimpleDateFormat("d-M-yyyy");
+            parentActivity.getSupportActionBar().setTitle("Modificar planificacion");
+
+            Planificacion pa = Planificacion_Controller.planificacion_pago.getPlanificacion();
+            descripcion.setText(pa.getDescripcion());
+            monto.setText(String.format("%.2f", pa.getMonto()));
+            categoria.setSelection(Planificacion_Controller.posCategoria(pa.getId()));
+            fechaDesde.setText(date.format(pa.getFechaInicio()));
+
+            if (pa.getRecurrente()) {
+                mostrarCampos();
+                tipoGrupo.check(R.id.radioRecurrente);
+                fechaHasta.setText(date.format(pa.getFechaFin()));
+                recurrencia.setSelection(spinner_adapter.getPosition(pa.getRecurrencia()));
+            } else {
+                ocultarCampos();
+                tipoGrupo.check(R.id.radioUnico);
+            }
+
+        }
     }
 
     private boolean campoVacio(EditText descripcion1, EditText monto1, EditText fechaIni, EditText fechaFin) throws
@@ -195,7 +229,7 @@ public class AgregarPlanificacionFragment extends Fragment implements ResponseWe
 
     @Override
     public void obtuvoCorrectamente(Object response) {
-
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Log.i("Caso ", String.valueOf(Planificacion_Controller.managementRequest));
 
         switch (Planificacion_Controller.managementRequest) {
@@ -210,25 +244,58 @@ public class AgregarPlanificacionFragment extends Fragment implements ResponseWe
                         String strJson = mJsonArray.getString(i);
                         JSONObject jsonObject = new JSONObject(strJson);
 
-                        category.add( new CategoriaSpinner(jsonObject.getInt("Id"), jsonObject.getString("Nombre")));
+                        category.add(new CategoriaSpinner(jsonObject.getInt("Id"), jsonObject.getString("Nombre")));
 
                     }
-                    ArrayAdapter spinner_adapter = new ArrayAdapter(parentActivity, android.R.layout
+                    spinner_adapter = new ArrayAdapter(parentActivity, android.R.layout
                             .simple_spinner_item, category);
                     spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     categoria.setAdapter(spinner_adapter);
 
-                }catch (JSONException e){
+
+
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 Planificacion_Controller.managementRequest = -1;
+                if (idPlanificacion != 0)
+                Planificacion_Controller.buscaPlanificacion(idPlanificacion);
                 break;
 
             case 2:
                 String respuesta = (String) response;
-                showDialogResponse(respuesta);
                 Planificacion_Controller.managementRequest = -1;
+                showDialogResponse(respuesta);
+
                 break;
+
+            case 3:
+
+                try {
+                    JSONObject object = new JSONObject(Parametros.getRespuesta());
+                    Planificacion pa = new Planificacion(object.getInt("Id"),
+                            format.parse(object.getString("fechaInicio")),
+                            format.parse(object.getString("fechaFin")),
+                            object.getString("Nombre"),
+                            object.getString("Descripcion"),
+                            Double.parseDouble(object.getString("Monto")),
+                            object.getInt("Categoria"),
+                            object.getBoolean("Recurrente"),
+                            object.getString("Recurrencia"),
+                            object.getBoolean("Activo"));
+                    Planificacion_Controller.planificacion_pago.setPlanificacion(pa);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (ParseException e){
+                    e.printStackTrace();
+                }
+                Planificacion_Controller.managementRequest = -1;
+                llenarCampos();
+
+                break;
+
+
+
         }
     }
 
