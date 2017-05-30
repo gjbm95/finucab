@@ -223,11 +223,10 @@ public class Modulo6sResource {
         }
     }
     
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
+@GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/modificarPlanificacion")
-    public boolean modificarPlanificacion (@QueryParam("datosPlanificacion") String datosPlanificacion)
+    public String modificarPlanificacion (@QueryParam("datosPlanificacion") String datosPlanificacion)
             throws SQLException, SQLTimeoutException
     {
         System.out.println(datosPlanificacion);
@@ -252,27 +251,25 @@ public class Modulo6sResource {
                     + ", pa_recurrente = " + planificacionJSON.getBoolean("pa_recurrente")
                     + ", pa_recurrencia = '" + planificacionJSON.getString("pa_recurrencia")
                     + "', usuariou_id = " + planificacionJSON.getInt("usuariou_id")
-                    + ", categoriaca_id = " + planificacionJSON.getInt("categoriaId")
-                    + ", pa_activo = " + planificacionJSON.getBoolean("Pa_activo")
+                    + ", categoriaca_id = " + planificacionJSON.getInt("categoriaca_id")
+                    + ", pa_activo = " + planificacionJSON.getBoolean("pa_activo")
                     + " WHERE "
-                    + "pa_id = " + planificacionJSON.getString("pa_id") + ";";
+                    + "pa_id = " + planificacionJSON.getInt("pa_id") + ";";
             System.out.println(query);
            
             if (st.executeUpdate(query) > 0) {
                 st.close();
                 System.out.println("modificacion exitosa");
-                return true;
+                return "Modificacion exitosa";
             } else {
                 st.close();
                 System.out.println("no se pudo modificar");
-                return false;
+                return "Hubo un problema";
                 
             }
-
         } catch (Exception e) {
-
             e.printStackTrace();
-            return false;
+            return "Hubo un problema";
         }
         
     }
