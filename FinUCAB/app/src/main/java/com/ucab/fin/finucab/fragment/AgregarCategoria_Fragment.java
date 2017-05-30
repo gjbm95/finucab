@@ -173,7 +173,7 @@ public class AgregarCategoria_Fragment extends Fragment implements View.OnClickL
                             switchtipo.isChecked());
 
                     if (isModificando){
-                        categoria.setIdcategoria( categoria.getIdcategoria());
+                        categoria.setIdcategoria(this.categoria.getIdcategoria());
                         Categoria_Controller.modificarCategoria(categoria);
                     }else {
                         Categoria_Controller.registrarCategoria(categoria);
