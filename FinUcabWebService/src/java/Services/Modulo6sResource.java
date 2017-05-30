@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package Services;
-
-
 import DataBase.Conexion;
 import java.io.StringReader;
 import java.math.BigDecimal;
@@ -240,20 +238,26 @@ public class Modulo6sResource {
             JsonReader reader = Json.createReader(new StringReader(decodifico));
             JsonObject planificacionJSON = reader.readObject();
             Connection conn = Conexion.conectarADb();
+            
+            Double monto = Double.parseDouble(planificacionJSON.getString("pa_monto"));
            
             Statement st = conn.createStatement();
             
             String query = "UPDATE Planificacion SET "
-                    + "Pa_nombre = '" + planificacionJSON.getString("Pa_nombre")
-                    + "', Pa_descripcion = '" + planificacionJSON.getString("Pa_descripcion")
-                    + "', Pa_monto = " + planificacionJSON.getJsonNumber("Pa_monto").doubleValue()
-                    + ", CategoriaCa = " + planificacionJSON.getInt("categoriaId")
-                    + ", Pa_activo = " + planificacionJSON.getBoolean("Pa_activo")
+                    + "pa_nombre = '" + planificacionJSON.getString("pa_nombre")
+                    + "', pa_descripcion = '" + planificacionJSON.getString("pa_descripcion")
+                    + "', pa_monto = " + monto
+                    + ", pa_fechainicio = " + " to_date('" + planificacionJSON.getString("pa_fechainicio") + "', 'DD-MM-YYYY') "
+                    + ", pa_fechafin = " + " to_date('" + planificacionJSON.getString("pa_fechafin") + "', 'DD-MM-YYYY') "
+                    + ", pa_recurrente = " + planificacionJSON.getBoolean("pa_recurrente")
+                    + ", pa_recurrencia = '" + planificacionJSON.getString("pa_recurrencia")
+                    + "', usuariou_id = " + planificacionJSON.getInt("usuariou_id")
+                    + ", categoriaca_id = " + planificacionJSON.getInt("categoriaId")
+                    + ", pa_activo = " + planificacionJSON.getBoolean("Pa_activo")
                     + " WHERE "
-                    + "Pa_id = " + planificacionJSON.getString("Pa_id") + ";";
+                    + "pa_id = " + planificacionJSON.getString("pa_id") + ";";
             System.out.println(query);
-            
-            
+           
             if (st.executeUpdate(query) > 0) {
                 st.close();
                 System.out.println("modificacion exitosa");
@@ -360,6 +364,75 @@ public class Modulo6sResource {
             } else {
                 st.close();
                 return "Ha ocurrido un problema";
+            }
+
+        } catch (Exception e) {
+
+            return e.getMessage();
+
+        }
+    }
+    
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("/buscarPlanificacion")
+    public String buscarPlanificacion(@QueryParam("datosPlanificacion") String datosPlanificacion){
+        String decodifico = URLDecoder.decode(datosPlanificacion);
+        try{
+            Connection conn = Conexion.conectarADb();
+            Statement st = conn.createStatement();
+            //Se coloca el query
+            ResultSet rs = st.executeQuery("SELECT * FROM Planificacion WHERE pa_id = '" + decodifico + "';");
+            JsonObjectBuilder planificacionBuilder = Json.createObjectBuilder();
+            while (rs.next())
+            {
+        
+            planificacionBuilder.add("Id",rs.getInt(1));
+                 System.out.println(rs.getInt(1));
+                 planificacionBuilder.add("Nombre",rs.getString(2));
+                 System.out.println(rs.getString(2));
+                 planificacionBuilder.add("Descripcion",rs.getString(3));
+                 planificacionBuilder.add("Monto",rs.getDouble(4));
+                 planificacionBuilder.add("fechaInicio",  rs.getString(5));
+                 planificacionBuilder.add("fechaFin", rs.getString(6));
+                 planificacionBuilder.add("Recurrente",rs.getBoolean(7));
+                 planificacionBuilder.add("Recurrencia",rs.getString(8));
+                 planificacionBuilder.add("Usuario",rs.getInt(9));
+                 planificacionBuilder.add("Categoria",rs.getInt(10));
+                 planificacionBuilder.add("Activo",rs.getBoolean(11));
+                 JsonObject planificacionJsonObject = planificacionBuilder.build();  
+                 String respuesta = planificacionJsonObject.toString();
+                 
+                 System.out.println(respuesta);
+                 return respuesta;
+            
+            }
+        }
+        catch(Exception e) {
+            return e.getMessage();
+        }
+        return null;
+    }
+    
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("/eliminarPlanificacion")
+    public String eliminarPlanificacion(@QueryParam("datosPlanificacion") String datosPlanificacion) {
+
+        String decodifico = URLDecoder.decode(datosPlanificacion);
+        
+        try {
+            Connection conn = Conexion.conectarADb();
+            Statement st = conn.createStatement();
+           
+            String query = "DELETE FROM Planificacion WHERE pa_id =" + decodifico  + ";";
+            
+            if (st.executeUpdate(query) > 0) {
+                st.close();
+                return "Borrado exitoso";
+            } else {
+                st.close();
+                return "No se pudo borrar";
             }
 
         } catch (Exception e) {
