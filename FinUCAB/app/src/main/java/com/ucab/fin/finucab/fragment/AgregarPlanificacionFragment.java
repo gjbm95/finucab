@@ -115,7 +115,7 @@ public class AgregarPlanificacionFragment extends Fragment implements ResponseWe
                                     .getText().toString()), " ", descripcion.getText().toString(), Double.valueOf
                                     (monto.getText().toString()), sp.getId(), recurrente, recurrencia.getSelectedItem()
                                     .toString(), true);
-                            //Planificacion_Controller.agregarPlanificacion(planificacion);
+                            aceptar();
                         }
                     } catch (ParseException e) {
                         e.printStackTrace();
@@ -126,19 +126,15 @@ public class AgregarPlanificacionFragment extends Fragment implements ResponseWe
                         if (!campoVacio(descripcion, monto, fechaDesde, fechaDesde)) {
                             planificacion = new Planificacion(format.parse(fechaDesde.getText().toString()), format.parse(fechaDesde.getText().toString()), " ", descripcion.getText().toString(), Double.valueOf
                                     (monto.getText().toString()), sp.getId(), recurrente, "", true);
-                            //Planificacion_Controller.agregarPlanificacion(planificacion);
+                            aceptar();
                         }
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
                 }
 
-                if (modificar) {
-                    planificacion.setId(idPlanificacion);
-                    Planificacion_Controller.modicarPlanificacion(planificacion);
-                } else {
-                    Planificacion_Controller.agregarPlanificacion(planificacion);
-                }
+
+
 
 
             }
@@ -177,6 +173,16 @@ public class AgregarPlanificacionFragment extends Fragment implements ResponseWe
         //llenarCampos();
         return rootView;
     }
+
+    private void aceptar(){
+        if (modificar) {
+            planificacion.setId(idPlanificacion);
+            Planificacion_Controller.modicarPlanificacion(planificacion);
+        } else {
+            Planificacion_Controller.agregarPlanificacion(planificacion);
+        }
+    }
+
 
     private void llenarCampos() {
         if (modificar) {
