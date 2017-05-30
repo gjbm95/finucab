@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.ucab.fin.finucab.R;
@@ -87,6 +88,7 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
 
 
         recycleList.setLayoutManager(myLayoutManager);
+
         recycleList.addOnItemTouchListener(new RecyclerTouchListener(getActivity(),
                 recycleList, new ListaCategorias_Fragment.ClickListener() {
             /**
@@ -97,8 +99,16 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
             @Override
             public void onClick(View view, final int position) {
 
+/*
+                Categoria cat = Categoria_Controller.getListaCategorias().get(position);
+                if ( view.getTag() == null ) {
+                    redireccionarAgregarCategoria(cat);
+                }else{
+                    Switch s = (Switch) view;
+                    Categoria_Controller.HabilitarCategoria( cat , !s.isChecked());
+                }
+                */
             }
-
             /**
              * Acciones para el longpress
              * @param view
@@ -192,6 +202,15 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
 
                 return true;
 
+            case R.id.editarCategoryOption:
+
+                Categoria cat = Categoria_Controller.getListaCategorias().get(positionLongPress);
+                positionLongPress = -1;
+
+                redireccionarAgregarCategoria(cat);
+
+                return true;
+
             default:
                 return super.onContextItemSelected(item);
 
@@ -279,7 +298,6 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
     public void obtuvoCorrectamente(Object response){
         try {
 
-            Log.e("CASO",Categoria_Controller.getCasoRequest()+"");
 
             if (Parametros.getRespuesta().equals("Error")||Parametros.getRespuesta().equals("ERROR") ) {
 
@@ -313,7 +331,6 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
 
                     case 2:
                         Toast.makeText(parentActivity, Parametros.getRespuesta(), Toast.LENGTH_SHORT).show();
-                        Categoria_Controller.obtenerTodasCategorias(false);
 
                         break;
                     case 3:

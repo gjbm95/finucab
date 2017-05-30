@@ -1,8 +1,11 @@
 package com.ucab.fin.finucab.controllers;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
 import com.ucab.fin.finucab.domain.Categoria;
@@ -22,6 +25,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static com.ucab.fin.finucab.controllers.ExportarPresupuesto_Controller.activity;
+
 
 /**
  *Modulo 4 - Modulo de  Gestion de Categorias
@@ -34,6 +39,12 @@ import java.util.ArrayList;
 public class ExportarCategoria_Controller extends AsyncTask<String ,String, String> {
 
     public ArrayList<Categoria> listaCategoria ;
+    // Storage Permissions
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
 
     public ExportarCategoria_Controller(ArrayList<Categoria> listaCategoria) {
 
@@ -42,14 +53,26 @@ public class ExportarCategoria_Controller extends AsyncTask<String ,String, Stri
 
     protected String doInBackground(final String... args) {
 
-        File exportDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), ""); //CONSEGUIR LA RUTA DEL SDCARD
-        if (!exportDir.exists()) {
-            exportDir.mkdirs();
+        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        Log.e("Permission",String.valueOf(permission));
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(
+                    activity,
+                    PERMISSIONS_STORAGE,
+                    REQUEST_EXTERNAL_STORAGE
+            );
+
+        }else {
+
+            File exportDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), ""); //CONSEGUIR LA RUTA DEL SDCARD
+            if (!exportDir.exists()) {
+                exportDir.mkdirs();
+            }
+
+            exportarCSV(exportDir);
+            exportarExcel(exportDir);
         }
-
-        exportarCSV(exportDir);
-        exportarExcel(exportDir);
-
         return "";
     }
 

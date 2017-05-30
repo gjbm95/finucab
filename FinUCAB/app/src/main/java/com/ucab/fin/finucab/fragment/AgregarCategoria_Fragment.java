@@ -22,9 +22,6 @@ import com.ucab.fin.finucab.exceptions.CampoVacio_Exception;
 import com.ucab.fin.finucab.webservice.Parametros;
 import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
 
-/**
- * Created by Ramon on 26-May-17.
- */
 
 /**
  *Modulo 4 - Modulo de  Gestion de Categorias

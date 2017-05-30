@@ -26,8 +26,8 @@ public class Categoria_Controller {
     public static Object fragment; //Fragment que se esta controlando
 
     private static Manejador_Categoria manejador;
-    private static int  casoRequest = -1;
-    private static boolean habilitarEventoSwitch = false ;
+    public static int  casoRequest = -1;
+    public static boolean habilitarEventoSwitch = false ;
     EditText prueba;
 
     /**
@@ -56,7 +56,8 @@ public class Categoria_Controller {
 
 
     /**
-     * Colocar actual lista de categoria en el manejador
+      * Colocar actual lista de categoria en el manejador
+     * @param categorias
      */
     public static void setListaCategorias(ArrayList<Categoria> categorias){
 
@@ -64,7 +65,7 @@ public class Categoria_Controller {
     }
 
     /**
-     * Colocar actula lista de categoria en el manejador
+     * Colocar actual lista de categoria en el manejador
      * @return Lista de categoria cargada
      */
     public static ArrayList<Categoria> getListaCategorias(){
@@ -92,7 +93,7 @@ public class Categoria_Controller {
      * @throws CampoVacio_Exception
      */
     public static void verificoVacio(EditText campo) throws CampoVacio_Exception {  //ya hice la prueba
-        if (campo.getText().toString().isEmpty())
+        if (campo.getText().toString().isEmpty() )
         {
             CampoVacio_Exception campovacio = new CampoVacio_Exception("Este campo esta vacio");
             campovacio.setCampo(campo);
