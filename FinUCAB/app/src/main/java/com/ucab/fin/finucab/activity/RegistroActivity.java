@@ -111,9 +111,11 @@ public class RegistroActivity extends AppCompatActivity {
                                                      usuario.setApellido(GestionUsuarios_Controller.apellido.getText().toString());
                                                      usuario.setCorreo(GestionUsuarios_Controller.correo.getText().toString());
                                                      usuario.setUsuario(GestionUsuarios_Controller.usuario.getText().toString());
-                                                     usuario.setContrasena(Integer.toString(GestionUsuarios_Controller.encriptarDatos(GestionUsuarios_Controller.contrasena1.getText().toString())));
+                                                     usuario.setContrasena(Integer.toString(GestionUsuarios_Controller.encriptarDatos
+                                                             (GestionUsuarios_Controller.contrasena1.getText().toString())));
                                                      usuario.setPregunta(GestionUsuarios_Controller.pregunta.getText().toString());
-                                                     usuario.setRespuesta(Integer.toString(GestionUsuarios_Controller.encriptarDatos(GestionUsuarios_Controller.respuesta.getText().toString())));
+                                                     usuario.setRespuesta(Integer.toString(GestionUsuarios_Controller.encriptarDatos
+                                                             (GestionUsuarios_Controller.respuesta.getText().toString())));
                                                      GestionUsuarios_Controller.registrarUsuario(usuario, RegistroActivity.this);
                                                  }
 
@@ -180,9 +182,9 @@ public class RegistroActivity extends AppCompatActivity {
         if (indicador == 1) {
             //Ajusto el titulo de los botones.
             anterior = (Button) findViewById(R.id.cancelButton);
-            anterior.setText("CANCELAR");
+            anterior.setText(getString(R.string.cancelar));
             siguiente = (Button) findViewById(R.id.nextButton);
-            siguiente.setText("SIGUIENTE");
+            siguiente.setText(getString(R.string.siguiente2));
             //Modifico la posicion del grafico de onBoarding.
             posicionEtapa = (ImageView) findViewById(R.id.onboardindImageView);
             posicionEtapa.setImageResource(R.mipmap.onboarding1);
@@ -195,9 +197,9 @@ public class RegistroActivity extends AppCompatActivity {
             //Ajusto el titulo de los botones.
             fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left);
             anterior = (Button) findViewById(R.id.cancelButton);
-            anterior.setText("ANTERIOR");
+            anterior.setText(getString(R.string.anterior));
             siguiente = (Button) findViewById(R.id.nextButton);
-            siguiente.setText("SIGUIENTE");
+            siguiente.setText(getString(R.string.siguiente2));
             //Modifico la posicion del grafico de onBoarding.
             posicionEtapa = (ImageView) findViewById(R.id.onboardindImageView);
             posicionEtapa.setImageResource(R.mipmap.onboarding2);
@@ -211,9 +213,9 @@ public class RegistroActivity extends AppCompatActivity {
             //Ajusto el titulo de los botones.
             fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left);
             anterior = (Button) findViewById(R.id.cancelButton);
-            anterior.setText("ANTERIOR");
+            anterior.setText(getString(R.string.anterior));
             siguiente = (Button) findViewById(R.id.nextButton);
-            siguiente.setText("LISTO");
+            siguiente.setText(getString(R.string.listo));
             //Modifico la posicion del grafico de onBoarding.
             posicionEtapa = (ImageView) findViewById(R.id.onboardindImageView);
             posicionEtapa.setImageResource(R.mipmap.onboarding3);
@@ -330,7 +332,10 @@ public class RegistroActivity extends AppCompatActivity {
 
     }
 
-    //Iniciar Sesion
+    /**
+     *  Metodo encargado de recibir los datos luego de iniciar sesion, son el fin de que se mantengan en el
+     *  telefono .
+     */
     private boolean iniciarSesion(){
         String[] datos = Parametros.getRespuesta().split(":-:");
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
@@ -346,19 +351,22 @@ public class RegistroActivity extends AppCompatActivity {
         return true;
     }
 
-     //Validaciones en servidor
+    /**
+     *  Metodo que se encarga de validar datos del usuario que provienen del servidor.
+     *  @param mensaje mensaje qued proviene del web service
+     */
     private boolean validarUsuario(String mensaje){
         if(mensaje!=null) {
             if (mensaje.equals("Error")&&(GestionUsuarios_Controller.pasoRegistro+1)==2) {
                 conteo=GestionUsuarios_Controller.pasoRegistro+1;
                 activarPaso(conteo);
                 GestionUsuarios_Controller.pasoRegistro = conteo-1;
-                mensajeError("Error de conexion con servidor!");
+                mensajeError(getString(R.string.conexion));
                 return true;
             }else if (mensaje.equals("No Disponible")){
                 activarPaso(2);
                 conteo++;
-                mensajeError("El nombre de usuario suministrado se encuentra en uso!");
+                mensajeError(getString(R.string.usuarioenuso));
                 return true;
             }else if (mensaje.equals("Usuario Disponible")){
                 if (conteo!=3)
@@ -370,6 +378,13 @@ public class RegistroActivity extends AppCompatActivity {
         }
         return false;
     }
+
+    /**
+     * Metodo que se encarga de activa validaciones de los campos relacionados con la cuentas de usuario.
+     * @param mensaje mensaje que llega del web service.
+     * @return
+     */
+
     private boolean validarCuenta (String mensaje){
         if (mensaje!=null) {
             if (mensaje.equals("Registro exitoso")) {
@@ -378,7 +393,7 @@ public class RegistroActivity extends AppCompatActivity {
             } else if (mensaje.equals("Error") && (GestionUsuarios_Controller.pasoRegistro + 1) == 3) {
                 conteo = GestionUsuarios_Controller.pasoRegistro + 1;
                 activarPaso(conteo);
-                mensajeError("Error de conexion con servidor!");
+                mensajeError(getString(R.string.conexion));
                 return true;
             }
         }
@@ -391,10 +406,12 @@ public class RegistroActivity extends AppCompatActivity {
      * @param mensaje
      */
     private void mensajeError(String mensaje){
+        Toast.makeText(RegistroActivity.this,mensaje,Toast.LENGTH_LONG);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setMessage(mensaje);
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
+
     }
 
 }

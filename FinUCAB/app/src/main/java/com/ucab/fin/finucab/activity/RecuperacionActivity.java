@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.controllers.GestionUsuarios_Controller;
@@ -154,7 +155,8 @@ public class RecuperacionActivity extends AppCompatActivity implements View.OnCl
                 Parametros.reset();
                 finish();
             } else {
-                mensajeError("Ocurrio un Error Inesperado!");
+                mensajeError(getString(R.string.inesperado));
+
             }
         }
 
@@ -165,6 +167,7 @@ public class RecuperacionActivity extends AppCompatActivity implements View.OnCl
      * @param mensaje
      */
     private void mensajeError(String mensaje){
+        Toast.makeText(RecuperacionActivity.this,mensaje,Toast.LENGTH_LONG);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setMessage(mensaje);
         AlertDialog alertDialog = alertDialogBuilder.create();

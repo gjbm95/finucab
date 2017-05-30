@@ -14,6 +14,7 @@ import android.webkit.CookieManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.controllers.GestionUsuarios_Controller;
@@ -155,7 +156,7 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
 
             if (Parametros.getRespuesta().equals("Error")||Parametros.getRespuesta().equals("ERROR") ) {
 
-                mensajeError("Error de conexion con servidor!");
+                mensajeError(getString(R.string.conexion));
                 GestionUsuarios_Controller.resetarVariables();
                 Parametros.reset();
             } else if (Parametros.getRespuesta().equals("No Disponible")) {
@@ -163,7 +164,7 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
 
             } else if (Parametros.getRespuesta().equals("Usuario Disponible")) {
 
-                mensajeError("El nombre de usuario suministrado no existe!");
+                mensajeError(getString(R.string.usuarionoexiste));
                 GestionUsuarios_Controller.resetarVariables();
                 Parametros.reset();
             }else if (Parametros.getRespuesta().contains("recuperarclave")){
@@ -187,12 +188,13 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
 
             }else if (Parametros.getRespuesta().equals("DATOSMAL") ) {
 
-                mensajeError("Combinacion de datos es incorrecta!");
+                mensajeError(getString(R.string.datosincorrectos));
             }
         }
     }
 
     private void mensajeError(String mensaje){
+        Toast.makeText(InicioActivity.this,mensaje,Toast.LENGTH_LONG);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setMessage(mensaje);
         AlertDialog alertDialog = alertDialogBuilder.create();
