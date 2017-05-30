@@ -29,9 +29,9 @@ import com.ucab.fin.finucab.webservice.Parametros;
  **/
 public class RecuperacionActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button siguiente;
-    private Button cancelar;
-    private int conteo;
+    private Button siguiente; //Boton de siguiente
+    private Button cancelar;  //Boron de cancelar
+    private int conteo;  // Contador que indica el numero de formulario a mostrar
 
 
     /**

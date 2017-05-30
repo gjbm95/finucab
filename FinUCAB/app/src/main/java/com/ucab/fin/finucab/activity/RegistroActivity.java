@@ -34,11 +34,11 @@ import static com.ucab.fin.finucab.controllers.GestionUsuarios_Controller.verifi
 public class RegistroActivity extends AppCompatActivity {
 
 
-    private Button siguiente;
-    private Button anterior;
-    private Button comenzar;
-    private ImageView posicionEtapa;
-    private int conteo;
+    private Button siguiente;  // Boton para ir al paso siguiente del registro
+    private Button anterior; // Boton para ir al paso anterior del registro
+    private Button comenzar; //Boton para comenzar
+    private ImageView posicionEtapa; // Imagen que contiene graficamente el proceso onBoarding del registro
+    private int conteo;  // Contador que indica el numero de formulario a mostrar
 
 
     /**
