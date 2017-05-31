@@ -151,7 +151,9 @@ public class AgregarPresupuesto_fragment extends Fragment implements CompoundBut
             if(Parametros.getRespuesta().equals("Error")){
                 Presupuesto_Controller.mensajeError(parentActivity,"Error de conexion con servidor!");
             }else{
-                parentActivity.changeFragment(new AgregadoFragment(), false);
+                Toast.makeText(parentActivity,"Agregado Exitosamente",Toast.LENGTH_LONG).show();
+                parentActivity.changeFragment(new BudgetFragment(), false);
+
             }
 
         }

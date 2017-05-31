@@ -96,7 +96,7 @@ public class Presupuesto_Controller {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             if(count == 0){
                 agregarButton.setEnabled(false);
-                Toast.makeText(actividad,"Debe agregar Categorias primero",Toast.LENGTH_LONG);
+                Toast.makeText(actividad,"Debe agregar Categorias primero",Toast.LENGTH_LONG).show();
             }
             categoriaPresupuesto.setAdapter(adapter);
             Parametros.reset();

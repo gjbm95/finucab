@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
@@ -178,7 +179,8 @@ public class ModificarPresupuestoFragment extends Fragment implements CompoundBu
                 if(Parametros.getRespuesta().equals("Error")){
                     Presupuesto_Controller.mensajeError(parentActivity,"Error de conexion con servidor!");
                 }else{
-                    parentActivity.changeFragment(new AgregadoFragment(), false);
+                    Toast.makeText(parentActivity,"Modificado Exitosamente",Toast.LENGTH_LONG).show();
+                    parentActivity.changeFragment(new BudgetFragment(), false);
                 }
             }
 
