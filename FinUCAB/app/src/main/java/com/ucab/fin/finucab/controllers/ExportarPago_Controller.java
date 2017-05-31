@@ -41,18 +41,17 @@ public class ExportarPago_Controller extends AsyncTask<String ,String, String> {
 
     protected String doInBackground(final String... args) {
 
+
+        exportarCSV();
+        exportarExcel();
+        return "";
+    }
+
+    public void exportarCSV(){
         File exportDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), ""); //CONSEGUIR LA RUTA DEL SDCARD
         if (!exportDir.exists()) {
             exportDir.mkdirs();
         }
-
-        exportarCSV(exportDir);
-        exportarExcel(exportDir);
-
-        return "";
-    }
-
-    public void exportarCSV(File exportDir){
         try {
             File fileCSV = new File(exportDir, "CSVPago.csv");   //DECLARAR UN ARCHIVO CSV
             fileCSV.createNewFile();   //CREAR EL ARCHIVO
@@ -75,7 +74,11 @@ public class ExportarPago_Controller extends AsyncTask<String ,String, String> {
     }
 
 
-    public void exportarExcel(File exportDir){
+    public void exportarExcel(){
+        File exportDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), ""); //CONSEGUIR LA RUTA DEL SDCARD
+        if (!exportDir.exists()) {
+            exportDir.mkdirs();
+        }
 
         try {
 
