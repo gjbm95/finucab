@@ -10,6 +10,7 @@ import com.ucab.fin.finucab.domain.Planificacion;
 import com.ucab.fin.finucab.domain.Planificacion_Pago;
 import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -32,6 +33,7 @@ public class Planificacion_Controller {
         Planificacion_Controller.categorias = categorias;
     }
 
+
     public static void init(Activity activity, ResponseWebServiceInterface interfaz) {
         planificacion_pago = new Planificacion_Pago(activity, interfaz);
         categoriaC = new Manejador_Categoria(activity, interfaz);
@@ -53,6 +55,11 @@ public class Planificacion_Controller {
         categoriaC.obtenerTodasCategorias(true);
     }
 
+    public static void buscaPlanificacion(int id){
+        managementRequest = 3;
+        planificacion_pago.obtenerPlanificacion(id);
+    }
+
     public static String nombreCategoria(int id) {
         String nombre = "";
         for (int i=0; i<categorias.size(); i++){
@@ -62,6 +69,27 @@ public class Planificacion_Controller {
             }
         }
         return nombre;
+    }
+
+    public static int posCategoria(int id){
+        int pos = 0;
+        for (int i=0; i<categorias.size(); i++){
+            categoriaSpinner = categorias.get(i);
+            if (categoriaSpinner.getId() == id){
+                pos = i;
+            }
+        }
+        return pos;
+    }
+
+    public static void eliminarPlanificacion(int id){
+        managementRequest = 4;
+        planificacion_pago.borrarPlanificacion(id);
+    }
+
+    public static void modicarPlanificacion(Planificacion planificacion){
+        managementRequest = 5;
+        planificacion_pago.modificarPlanificacion(planificacion);
     }
 
 

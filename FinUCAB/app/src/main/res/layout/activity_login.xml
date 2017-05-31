@@ -10,7 +10,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.ucab.fin.finucab.activity.LoginActivity">
+    tools:context="com.ucab.fin.finucab.activity.InicioActivity">
 
     <ImageView
         android:id="@+id/appIconImageView"
@@ -27,7 +27,7 @@
         android:layout_height="55dp"
         android:layout_below="@+id/appIconImageView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/rounded_white_border"
         android:ems="10"
         android:hint="@string/user_name"
@@ -40,7 +40,7 @@
         android:layout_alignEnd="@+id/userNameEditText"
         android:layout_alignRight="@+id/userNameEditText"
         android:layout_below="@+id/userNameEditText"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/rounded_white_border"
         android:ems="10"
         android:hint="@string/user_password"
@@ -75,4 +75,27 @@
         android:layout_marginTop="20dp"
         android:text="@string/forgot_password"
         android:textColor="@android:color/background_light" />
+
+    <TextView
+        android:text="@string/contrasena"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userNameEditText"
+        android:layout_alignLeft="@+id/userPwdEditText"
+        android:layout_alignStart="@+id/userPwdEditText"
+        android:layout_marginTop="10dp"
+        android:id="@+id/textView9"
+        android:textColor="@color/colorAccent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView8"
+        android:text="@string/usuario"
+        android:textColor="@color/colorAccent"
+        android:layout_below="@+id/appIconImageView"
+        android:layout_alignLeft="@+id/userNameEditText"
+        android:layout_alignStart="@+id/userNameEditText"
+        android:layout_marginTop="10dp"
+        />
 </RelativeLayout>

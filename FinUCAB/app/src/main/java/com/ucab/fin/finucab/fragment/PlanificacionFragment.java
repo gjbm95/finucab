@@ -1,13 +1,21 @@
 package com.ucab.fin.finucab.fragment;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -43,6 +51,7 @@ public class PlanificacionFragment extends Fragment implements ResponseWebServic
     private FloatingActionButton fab;
     private MainActivity parentActivity;
     private RecyclerView recycle;
+    private int positionLongPress = -1;
 
 
     public PlanificacionFragment() {
@@ -63,6 +72,7 @@ public class PlanificacionFragment extends Fragment implements ResponseWebServic
         LinearLayoutManager myLayoutManager = new LinearLayoutManager(getActivity());
         myLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recycle.setLayoutManager(myLayoutManager);
+        registerForContextMenu(recycle);
 
         fab = (FloatingActionButton) rootView.findViewById(R.id.addPlanificacionFloatingBtn);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -78,25 +88,23 @@ public class PlanificacionFragment extends Fragment implements ResponseWebServic
         });
 
 
-            /* recycleList.addOnItemTouchListener(new RecyclerTouchListener(getActivity(),
-                recycleList, new ListaCategorias_Fragment.ClickListener() {
-            @Override
+        recycle.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recycle, new PlanificacionFragment.ClickListener() {
 
+            @Override
             public void onClick(View view, final int position) {
 
-                Intent intent = new Intent(parentActivity, AddCategoryActivity.class);
+                /*Intent intent = new Intent(parentActivity, AddCategoryActivity.class);
                 intent.putExtra("CATEGORIA_DATA", Categoria_Controller.manejador.getCategorias().get(position));
-                startActivity(intent);
+                startActivity(intent);*/
 
             }
 
             @Override
             public void onLongClick(View view, int position) {
-                Log.v("longpress",position+"");
                 positionLongPress = position;
-                registerForContextMenu(recycleList);
+                //registerForContextMenu(recycle);
             }
-        }));*/
+        }));
 
         Planificacion_Controller.listaCategoriasPa();
         //Planificacion_Controller.obtenerListaPlanificacion();
@@ -117,9 +125,55 @@ public class PlanificacionFragment extends Fragment implements ResponseWebServic
             Parametros.reset();
         }
 
-        PlanificacionAdapter planificacionAdapter = new PlanificacionAdapter(Planificacion_Controller.planificacion_pago
+        PlanificacionAdapter planificacionAdapter = new PlanificacionAdapter(Planificacion_Controller
+                .planificacion_pago
                 .getListaPlanificacion());
         recycle.setAdapter(planificacionAdapter);
+    }
+
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+    }
+
+    public boolean onContextItemSelected(MenuItem item) {
+        Planificacion pa;
+
+        switch (item.getItemId()) {
+
+            case R.id.eliminarItem:
+
+                pa = Planificacion_Controller.planificacion_pago.getListaPlanificacion().get(positionLongPress);
+                Toast.makeText(getActivity(), "Eliminando planificacion ...", Toast.LENGTH_LONG).show();
+                Planificacion_Controller.eliminarPlanificacion(pa.getId());
+                positionLongPress = -1;
+
+                return true;
+
+            case R.id.modificarItem:
+
+                pa = Planificacion_Controller.planificacion_pago.getListaPlanificacion().get
+                        (positionLongPress);
+                positionLongPress = -1;
+                modificarPlanificacion(pa.getId());
+
+                return true;
+
+            default:
+                return super.onContextItemSelected(item);
+
+        }
+
+    }
+
+    private void modificarPlanificacion(int id) {
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("modificar",true);
+        bundle.putInt("planificacionId", id);
+        AgregarPlanificacionFragment fragInfo = new AgregarPlanificacionFragment();
+        fragInfo.setArguments(bundle);
+        parentActivity.changeFragment(fragInfo,false);
     }
 
 
@@ -162,6 +216,7 @@ public class PlanificacionFragment extends Fragment implements ResponseWebServic
                     Planificacion_Controller.planificacion_pago.setListaPlanificacion(listaPlanificacion);
                     PlanificacionAdapter adapter = new PlanificacionAdapter(listaPlanificacion);
                     recycle.setAdapter(adapter);
+
                     Planificacion_Controller.managementRequest = -1;
                     break;
 
@@ -187,6 +242,13 @@ public class PlanificacionFragment extends Fragment implements ResponseWebServic
                     Planificacion_Controller.obtenerListaPlanificacion();
                     break;
 
+                case 4:
+
+                    String respuesta1 = (String) response;
+                    Planificacion_Controller.managementRequest = -1;
+                    showDialogResponse(respuesta1);
+                    break;
+
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -199,6 +261,91 @@ public class PlanificacionFragment extends Fragment implements ResponseWebServic
     public void noObtuvoCorrectamente(Object error) {
 
     }
+
+    private void showDialogResponse(String respuesta) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(parentActivity);
+        builder.setMessage(respuesta).setTitle("AVISO").
+                setPositiveButton("Aceptar ", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        parentActivity.changeFragment(new PlanificacionFragment(), false);
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    public static interface ClickListener {
+
+        public void onClick(View view, int position);
+
+        public void onLongClick(View view, int position);
+
+    }
+
+    class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
+
+        private PlanificacionFragment.ClickListener clicklistener;
+        private GestureDetector gestureDetector;
+
+        public RecyclerTouchListener(Context context, final RecyclerView recycleView, final PlanificacionFragment.ClickListener
+                clicklistener) {
+
+            this.clicklistener = clicklistener;
+
+            gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
+
+                @Override
+                public boolean onSingleTapUp(MotionEvent e) {
+
+                    return true;
+
+                }
+
+                @Override
+                public void onLongPress(MotionEvent e) {
+
+                    View child = recycleView.findChildViewUnder(e.getX(), e.getY());
+
+                    if (child != null && clicklistener != null) {
+                        clicklistener.onLongClick(child, recycleView.getChildAdapterPosition(child));
+
+                    }
+
+                }
+
+            });
+
+        }
+
+        @Override
+        public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+
+            View child = rv.findChildViewUnder(e.getX(), e.getY());
+
+            if (child != null && clicklistener != null && gestureDetector.onTouchEvent(e)) {
+
+                clicklistener.onClick(child, rv.getChildAdapterPosition(child));
+
+            }
+
+            return false;
+
+        }
+
+        @Override
+        public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+
+        }
+
+        @Override
+        public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+        }
+
+    }
+
 }
 
 
