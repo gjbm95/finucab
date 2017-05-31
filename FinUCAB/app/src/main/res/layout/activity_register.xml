@@ -59,14 +59,14 @@
 
     <fragment
         android:layout_width="match_parent"
-        android:layout_height="280dp"
         android:name="com.ucab.fin.finucab.fragment.DatosPersonalesFragment"
         android:id="@+id/fragment"
         android:layout_gravity="center"
 
         android:layout_below="@+id/onboardindImageView"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_height="300dp" />
 
     <Button
         android:layout_width="wrap_content"
