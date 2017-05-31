@@ -42,7 +42,7 @@ public class PresentacionActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         //Configuraciones de Red: (Coloque aqui la IP y puerto de su servidor)
         //-------------------------------------------------------------------
-            Parametros.setServer("http://192.168.1.3"); // Asigno direccion IP a parametros de red.
+            Parametros.setServer("http://192.168.1.101"); // Asigno direccion IP a parametros de red.
             Parametros.setPuerto("8080"); // Asigno puerto por el cual el servidor escucha.
         if(datos.equals("vacio")) {
             //-------------------------------------------------------
