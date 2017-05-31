@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
@@ -24,6 +25,7 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.EnumSet;
 
 import static com.ucab.fin.finucab.controllers.ExportarPresupuesto_Controller.activity;
 
@@ -53,26 +55,15 @@ public class ExportarCategoria_Controller extends AsyncTask<String ,String, Stri
 
     protected String doInBackground(final String... args) {
 
-        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        Log.e("Permission",String.valueOf(permission));
-        if (permission != PackageManager.PERMISSION_GRANTED) {
-            // We don't have permission so prompt the user
-            ActivityCompat.requestPermissions(
-                    activity,
-                    PERMISSIONS_STORAGE,
-                    REQUEST_EXTERNAL_STORAGE
-            );
-
-        }else {
-
-            File exportDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), ""); //CONSEGUIR LA RUTA DEL SDCARD
-            if (!exportDir.exists()) {
-                exportDir.mkdirs();
-            }
-
-            exportarCSV(exportDir);
-            exportarExcel(exportDir);
+        File root = new File(Environment.getExternalStorageDirectory(), "FinUCAB");
+        if (!root.exists()) {
+            root.mkdirs();
         }
+
+        Log.d("State", Environment.getExternalStorageState() );
+        exportarCSV(root);
+        exportarExcel(root);
+
         return "";
     }
 

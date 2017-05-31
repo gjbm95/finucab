@@ -1,12 +1,15 @@
 package com.ucab.fin.finucab.fragment;
 
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.controllers.Categoria_Controller;
@@ -57,6 +60,7 @@ public class PlanificacionAdapter extends RecyclerView.Adapter<PlanificacionAdap
         holder.textViewFecha.setText(fecha);
         holder.textViewMonto.setText(String.format("%.2f", lista.getMonto()));
         holder.textViewRecurrente.setText(lista.getRecurrencia());
+        holder.itemView.setLongClickable(true);
 
 
     }
@@ -70,8 +74,7 @@ public class PlanificacionAdapter extends RecyclerView.Adapter<PlanificacionAdap
         }
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
-            View.OnLongClickListener {
+    class ViewHolder extends RecyclerView.ViewHolder {
         private final String TAG = ViewHolder.class.getSimpleName();
         private TextView textViewCategoria;
         private TextView textViewDescripcion;
@@ -88,23 +91,8 @@ public class PlanificacionAdapter extends RecyclerView.Adapter<PlanificacionAdap
             textViewFecha = (TextView) itemView.findViewById(R.id.fechaPaTextView);
             textViewMonto = (TextView) itemView.findViewById(R.id.montoPaTextView);
             textViewRecurrente = (TextView) itemView.findViewById(R.id.recurrenteTextView);
-
-            itemView.setOnLongClickListener(this);
+            //itemView.setOnLongClickListener(this);
         }
 
-
-        @Override
-        public void onClick(View v) {
-
-        }
-
-        @Override
-        public boolean onLongClick(View v) {
-            int i = getPosition();
-            items.remove(i);
-            notifyItemRemoved(i);
-            Log.d(TAG, "Item long-clicked at position " + i);
-            return true;
-        }
     }
 }
