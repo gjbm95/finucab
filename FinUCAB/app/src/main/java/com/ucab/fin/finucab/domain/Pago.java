@@ -6,6 +6,7 @@ package com.ucab.fin.finucab.domain;
 
 public class Pago {
     private int idPago;
+    private int idCategoria;
     private String categoria;
     private String descripcion;
     private float total;
@@ -21,6 +22,9 @@ public class Pago {
 
     public String getCategoria() {
         return categoria;
+    }
+    public int getIdCategoria() {
+        return idCategoria;
     }
 
     public void setCategoria(String categoria) {
@@ -51,9 +55,9 @@ public class Pago {
         this.tipo = tipo;
     }
 
-    public Pago(int idPago, String categoria, String descripcion, float total, String tipo) {
+    public Pago(int idPago, int idCategoria, String descripcion, float total, String tipo) {
         this.idPago = idPago;
-        this.categoria = categoria;
+        this.idCategoria = idCategoria;
         this.descripcion = descripcion;
         this.total = total;
         this.tipo = tipo;
