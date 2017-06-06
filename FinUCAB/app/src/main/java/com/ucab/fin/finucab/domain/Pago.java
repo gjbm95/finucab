@@ -23,6 +23,7 @@ public class Pago {
     public String getCategoria() {
         return categoria;
     }
+
     public int getIdCategoria() {
         return idCategoria;
     }
