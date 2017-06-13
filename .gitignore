@@ -40,8 +40,8 @@ gen-external-apklibs
 .mtj.tmp/
 
 # Package Files #
-*.jar
-*.war
+#*.jar
+#*.war
 *.ear
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
@@ -96,3 +96,7 @@ atlassian-ide-plugin.xml
 com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
+
+##Archivo de Configuracion de NetBeans
+FinUcabWebService/nbproject
+
