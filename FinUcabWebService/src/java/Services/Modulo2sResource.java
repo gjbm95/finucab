@@ -6,16 +6,12 @@
 package Services;
 
 import DataBase.Conexion;
-import java.io.StringReader;
-import java.math.BigDecimal;
-import java.net.URLDecoder;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
-import javax.json.JsonReader;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.PathParam;
@@ -24,7 +20,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -51,115 +46,18 @@ public class Modulo2sResource {
      */
    @GET
     @Produces(MediaType.TEXT_PLAIN)
-    @Path("/modificarUsuario")
-    public String modificarUsuario(@QueryParam("datosUsuario") String datosCuenta) {
-
-        String decodifico = URLDecoder.decode(datosCuenta);
-
-        try {
-            Connection conn = Conexion.conectarADb();
-            Statement st = conn.createStatement();
-            JsonReader reader = Json.createReader(new StringReader(decodifico));
-            JsonObject usuarioJSON = reader.readObject();
-            reader.close();
-            String query = "UPDATE FROM TABLE usuario SET u_nombre = '"
-                    +usuarioJSON.getString("u_nombre")+"', u_apellido = '" 
-                    +usuarioJSON.getString("u_apellido")+"', u_correo = '"
-                    +usuarioJSON.getString("u_correo")+"', u_pregunta = '"
-                    +usuarioJSON.getString("u_pregunta")+"', u_respuesta = '"
-                    +usuarioJSON.getString("u_respuesta") +"', u_password = '"
-                    +usuarioJSON.getString("u_password")+"' WHERE u_usuario = '"
-                    +usuarioJSON.getString("u_usuario")+"';";
-
-            if (st.executeUpdate(query) > 0) {
-                st.close();
-                return "Se modifico usuario"+ usuarioJSON.getString("u_usuario") ;
-            } else {
-                st.close();
-                return "No se pudo modificar";
-            }
-
-        } catch (Exception e) {
-
-            return e.getMessage();
-
-        }
-    }
-    
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    @Path("/consultarUsuario")
-    public String consultarUsuario(@QueryParam("nombreUsuario") String usuario) {
+    @Path("/prueba")
+    public String getPruebaJson() {
         //TODO return proper representation object
-        String respuesta ="";
-        try{
-
-            Connection conn = Conexion.conectarADb();
-            Statement st = conn.createStatement();
-            //Se coloca el query
-            ResultSet rs = st.executeQuery("SELECT u_nombre, u_apellido, u_correo, u_pregunta, u_respuesta, u_password FROM Usuario WHERE u_usuario = '"+usuario+"'");
-            while (rs.next())
-            {
-                //Creo el objeto Json!             
-                 JsonObjectBuilder usuarioBuilder = Json.createObjectBuilder();
-                 usuarioBuilder.add("Nombre",rs.getString(1));
-                 usuarioBuilder.add("Apellido",rs.getString(2));
-                 usuarioBuilder.add("Correo",rs.getString(3));
-                 usuarioBuilder.add("Pregunta",rs.getString(4));
-                 usuarioBuilder.add("Respuesta", rs.getString(5));
-                 usuarioBuilder.add("Contrasena",rs.getString(6));
-                 
-                 JsonObject usuarioJsonObject = usuarioBuilder.build();  
-                 respuesta = usuarioJsonObject.toString();
-            }
-            rs.close();
-            st.close();
-
-            return respuesta+"-:-Perfil";
-        }
-        catch(Exception e) {
-            return e.getMessage();
-        }
+        JsonObjectBuilder usuarioBuilder = Json.createObjectBuilder();
+        usuarioBuilder.add("Nombre","Jose");
+        usuarioBuilder.add("Apellido","Rodriguez");
+        usuarioBuilder.add("Usuario","jose123");
+        JsonObject usuarioJsonObject = usuarioBuilder.build();
+       return usuarioJsonObject.toString();
     }
     
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    @Path("/pruebaConsultar")
-    public String pruebaConsultar() {
-        //TODO return proper representation object
-        String respuesta ="";
-        try{
-
-            Connection conn = Conexion.conectarADb();
-            Statement st = conn.createStatement();
-            //Se coloca el query
-            ResultSet rs = st.executeQuery("SELECT u_nombre, u_apellido, u_correo, u_pregunta, u_respuesta, u_password FROM Usuario WHERE u_usuario = 'q';");
-            while (rs.next())
-            {
-                //Creo el objeto Json!             
-                 JsonObjectBuilder usuarioBuilder = Json.createObjectBuilder();
-                 usuarioBuilder.add("Nombre",rs.getString(1));
-                 usuarioBuilder.add("Apellido",rs.getString(2));
-                 usuarioBuilder.add("Correo",rs.getString(3));
-                 usuarioBuilder.add("Pregunta",rs.getString(4));
-                 usuarioBuilder.add("Respuesta", rs.getString(5));
-                 usuarioBuilder.add("Contrasena",rs.getString(6));
-                 
-                 JsonObject usuarioJsonObject = usuarioBuilder.build();  
-                 respuesta = usuarioJsonObject.toString();
-            }
-            rs.close();
-            st.close();
-
-            return respuesta;
-        }
-        catch(Exception e) {
-            return e.getMessage();
-        }
-    }
-    
-    
-    @GET
+        @GET
     @Produces(MediaType.TEXT_PLAIN)
     @Path("/pruebaDB")
     public String getPruebaDataBase() {
