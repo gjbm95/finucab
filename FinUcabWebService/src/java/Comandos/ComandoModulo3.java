@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package BaseDatosDAO;
+package Comandos;
 
 /**
  *
  * @author Junior
  */
-public class Modulo2DAO extends ModuloDAO{
-    
-    
-    
+public class ComandoModulo3 extends Comando{
     
 }
