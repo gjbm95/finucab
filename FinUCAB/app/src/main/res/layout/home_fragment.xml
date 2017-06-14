@@ -6,32 +6,62 @@
     android:background="@color/colorBackground"
     >
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignBottom="@+id/bAffiliations"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:text="Bienvenido"
-        android:textColor="#FFF"
-        android:textSize="20dp" />
-    <TextView
-        android:id="@+id/separator"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/black"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/datosPersonales"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/caja"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+    </android.support.v7.widget.CardView>
 
     <Button
-        android:id="@+id/bAffiliations"
-        android:layout_width="120dp"
-        android:layout_height="60dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:text="VER AFILIACIONES" />
+        android:text="@string/aflTarjetas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btntarjetas"
+        android:layout_marginRight="71dp"
+        android:layout_marginEnd="71dp"
+        android:layout_alignBaseline="@+id/btnafiliaciones"
+        android:layout_alignBottom="@+id/btnafiliaciones"
+        android:layout_alignRight="@+id/datosPersonales"
+        android:layout_alignEnd="@+id/datosPersonales" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:id="@+id/btnafiliaciones"
+        android:layout_marginRight="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_below="@+id/datosPersonales"
+        android:layout_toLeftOf="@+id/btntarjetas"
+        android:layout_toStartOf="@+id/btntarjetas"
+        android:text="@string/aflBancarias" />
+
+    <TextView
+        android:text="@string/pagosRecientes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:id="@+id/tituloPagos"
+        android:textColor="@color/colorAccent"
+        android:textSize="14sp"
+        android:layout_below="@+id/btnafiliaciones"
+        android:layout_alignLeft="@+id/datosPersonales"
+        android:layout_alignStart="@+id/datosPersonales" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/pagosrecientes"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:background="@drawable/caja"
+        android:layout_below="@+id/tituloPagos"
+        android:layout_alignLeft="@+id/tituloPagos"
+        android:layout_alignStart="@+id/tituloPagos"
+        android:layout_marginTop="12dp" />
 
 
 </RelativeLayout>
