@@ -6,62 +6,181 @@
     android:background="@color/colorBackground"
     >
 
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/datosPersonales"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="28dp"
-        android:background="@drawable/caja"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true">
-    </android.support.v7.widget.CardView>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
-    <Button
-        android:text="@string/aflTarjetas"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/listado"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btntarjetas"
-        android:layout_marginRight="71dp"
-        android:layout_marginEnd="71dp"
-        android:layout_alignBaseline="@+id/btnafiliaciones"
-        android:layout_alignBottom="@+id/btnafiliaciones"
-        android:layout_alignRight="@+id/datosPersonales"
-        android:layout_alignEnd="@+id/datosPersonales" />
+        android:orientation="vertical"
+        android:layout_alignTop="@+id/scrollView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:id="@+id/btnafiliaciones"
-        android:layout_marginRight="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_below="@+id/datosPersonales"
-        android:layout_toLeftOf="@+id/btntarjetas"
-        android:layout_toStartOf="@+id/btntarjetas"
-        android:text="@string/aflBancarias" />
+        <TextView
+            android:text="@string/pagosRecientes"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tituloPagos"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
+            android:layout_marginTop="25dp"
+            android:layout_below="@+id/btntarjetas"
+            android:layout_alignLeft="@+id/pagosrecientes"
+            android:layout_alignStart="@+id/pagosrecientes" />
 
-    <TextView
-        android:text="@string/pagosRecientes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="26dp"
-        android:id="@+id/tituloPagos"
-        android:textColor="@color/colorAccent"
-        android:textSize="14sp"
-        android:layout_below="@+id/btnafiliaciones"
-        android:layout_alignLeft="@+id/datosPersonales"
-        android:layout_alignStart="@+id/datosPersonales" />
+        <android.support.v7.widget.CardView
+            android:id="@+id/pagosrecientes"
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:background="@drawable/esquinas"
+            android:layout_marginTop="17dp"
+            android:layout_below="@+id/tituloPagos"
+            android:layout_alignLeft="@+id/datosPersonales"
+            android:layout_alignStart="@+id/datosPersonales" >
+         <TextView
+             android:layout_width="100dp"
+             android:layout_height="25dp"
+             android:textColor="@color/black"
+             android:text="@string/fechaPagos"
+             android:textSize="20sp"
+             android:textStyle="bold"
+             android:layout_marginLeft="10dp"
+             android:layout_marginTop="10dp"
+             />
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="25dp"
+                android:textColor="@color/black"
+                android:text="@string/transaccion"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="130dp"
+                android:layout_marginTop="10dp"
+                />
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/pagosrecientes"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        android:background="@drawable/caja"
-        android:layout_below="@+id/tituloPagos"
-        android:layout_alignLeft="@+id/tituloPagos"
-        android:layout_alignStart="@+id/tituloPagos"
-        android:layout_marginTop="12dp" />
+        </android.support.v7.widget.CardView>
+        <TextView
+            android:text="2017"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView21"
+            android:textSize="@dimen/fab_margin"
+            android:textColor="@color/colorAccent"
+            android:layout_marginTop="17dp"
+            android:layout_below="@+id/pagosrecientes"
+            android:layout_centerHorizontal="true" />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/datosPersonales"
+            android:layout_width="300dp"
+            android:layout_height="180dp"
+            android:layout_marginTop="31dp"
+            android:background="@drawable/esquinas"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true">
+            <ImageView
+                android:layout_marginTop="10dp"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:background="@mipmap/user"/>
+            <TextView
+                android:id="@+id/bienvenido"
+                android:layout_marginLeft="70dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="200dp"
+                android:layout_height="25dp"
+                android:text="@string/bienvenenida"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:id="@+id/nombrecompleto"
+                android:layout_marginLeft="70dp"
+                android:layout_marginTop="30dp"
+                android:layout_width="200dp"
+                android:layout_height="25dp"
+                android:text="Arturo Michelena"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                />
+            <TextView
+                android:id="@+id/tituloSaldo"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="70dp"
+                android:layout_width="200dp"
+                android:layout_height="25dp"
+                android:text="@string/saldoBancario"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:id="@+id/saldoactual"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="98dp"
+                android:layout_width="200dp"
+                android:layout_height="25dp"
+                android:text="1.000.000 Bs."
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                />
+            <TextView
+                android:id="@+id/titulDeuda"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="120dp"
+                android:layout_width="200dp"
+                android:layout_height="25dp"
+                android:text="@string/deudasTarjetas"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:id="@+id/saldotarjetas"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="145dp"
+                android:layout_width="200dp"
+                android:layout_height="25dp"
+                android:text="1.000 Bs."
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                />
+
+        </android.support.v7.widget.CardView>
+
+        <ImageButton
+            android:layout_width="120dp"
+            android:layout_height="90dp"
+            android:id="@+id/btnafiliaciones"
+            android:background="@mipmap/bancos"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/datosPersonales"
+            android:layout_alignRight="@+id/textView21"
+            android:layout_alignEnd="@+id/textView21"
+            android:layout_marginRight="23dp"
+            android:layout_marginEnd="23dp" />
+
+        <ImageButton
+            android:text="@string/aflTarjetas"
+            android:layout_width="120dp"
+            android:layout_height="90dp"
+            android:id="@+id/btntarjetas"
+            android:background="@mipmap/tarjetas"
+            android:layout_alignTop="@+id/btnafiliaciones"
+            android:layout_toRightOf="@+id/textView21"
+            android:layout_toEndOf="@+id/textView21" />
+
+
+    </RelativeLayout>
+    </ScrollView>
 
 
 </RelativeLayout>

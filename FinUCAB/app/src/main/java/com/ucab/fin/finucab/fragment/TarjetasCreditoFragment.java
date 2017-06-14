@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ucab.fin.finucab.R;
+import com.ucab.fin.finucab.activity.MainActivity;
 
 public class TarjetasCreditoFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -19,6 +20,7 @@ public class TarjetasCreditoFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private MainActivity parentActivity;
 
 
     public TarjetasCreditoFragment() {
@@ -56,7 +58,11 @@ public class TarjetasCreditoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.tarjetas_credito_fragment, container, false);
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.tarjetas_credito_fragment, container, false);
+        parentActivity = (MainActivity) getActivity();
+        parentActivity.getSupportActionBar().setTitle("Tarjetas de Credito");
+        return view;
     }
 
 
