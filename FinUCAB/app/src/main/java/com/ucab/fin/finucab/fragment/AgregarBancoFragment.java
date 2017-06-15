@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ucab.fin.finucab.R;
+import com.ucab.fin.finucab.activity.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +24,7 @@ public class AgregarBancoFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    MainActivity parentActivity;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -65,7 +67,13 @@ public class AgregarBancoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.agregar_banco_fragment, container, false);
+        View view = inflater.inflate(R.layout.agregar_banco_fragment, container, false);
+        parentActivity = (MainActivity) getActivity();
+        parentActivity.getSupportActionBar().setTitle("Registro Banco");
+
+
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

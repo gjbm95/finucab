@@ -6,6 +6,8 @@ package com.ucab.fin.finucab.webservice;
 
 import android.util.Log;
 
+import com.ucab.fin.finucab.registros.Registro;
+
 import org.json.JSONObject;
 /**
  *Modulo 1 - Modulo de  Inicio de Sesion y registro de usuario
@@ -18,14 +20,9 @@ import org.json.JSONObject;
 
 public class Parametros {
 
-    public static String server ="http://192.168.1.105";// Almacena la direccion IP o Dominio del servidor donde se
-    // aloja
-    // el
-    // WebService
-    public static String puerto ="8080"; // Almacena el puerto
-    public static String url="";  // Almacena la URL del servicio web, con sus metodos y parametros.
-    public static String respuesta=""; // Almacena la respuesta del servicio web para que se pueda consumir.
-    public static JSONObject objetoJson; //Objeto a ser enviado o resibido;
+    private static String url="";  // Almacena la URL del servicio web, con sus metodos y parametros.
+    private static String respuesta=""; // Almacena la respuesta del servicio web para que se pueda consumir.
+    private static JSONObject objetoJson; //Objeto a ser enviado o resibido;
 
     public Parametros () {
 
@@ -55,24 +52,9 @@ public class Parametros {
         Parametros.objetoJson = objetoJson;
     }
 
-    public static String getServer() {
-        return server;
-    }
-
-    public static void setServer(String server) {
-        Parametros.server = server;
-    }
-
-    public static String getPuerto() {
-        return puerto;
-    }
-
-    public static void setPuerto(String puerto) {
-        Parametros.puerto = puerto;
-    }
     public static void setMetodo(String direccion){
 
-        Parametros.url = server +":"+puerto+"/FinUcabWebService/webresources/"+direccion;
+        Parametros.url = Registro.server +":"+Registro.puerto+"/FinUcabWebService/webresources/"+direccion;
 
         Log.v("Request",Parametros.url);
     }
