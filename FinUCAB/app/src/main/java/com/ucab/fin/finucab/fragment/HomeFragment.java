@@ -10,13 +10,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
+import com.ucab.fin.finucab.webservice.ControlDatos;
+import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment  implements ResponseWebServiceInterface {
 
     private View parentView;
+    private TextView nombrecompleto;
     private MainActivity parentActivity;
     private ImageButton bancos;
     private ImageButton tarjetas;
@@ -29,6 +33,9 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.home_fragment, container, false);
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Home");
+        nombrecompleto = (TextView)view.findViewById(R.id.nombrecompleto);
+        nombrecompleto.setText(ControlDatos.getUsuario().getNombre() + " "
+        +ControlDatos.getUsuario().getApellido());
         //Botones de la seccion:
         bancos = (ImageButton)view.findViewById(R.id.btnafiliaciones);
         bancos.setOnClickListener(new View.OnClickListener() {
@@ -50,5 +57,13 @@ public class HomeFragment extends Fragment {
     }
 
 
+    @Override
+    public void obtuvoCorrectamente(Object response) {
 
+    }
+
+    @Override
+    public void noObtuvoCorrectamente(Object error) {
+
+    }
 }

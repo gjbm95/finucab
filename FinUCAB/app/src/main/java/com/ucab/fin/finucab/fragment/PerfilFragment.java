@@ -7,9 +7,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
+import com.ucab.fin.finucab.webservice.ControlDatos;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,6 +30,10 @@ public class PerfilFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private TextView nombre;
+    private TextView apellido;
+    private TextView correo;
+    private TextView usuario;
 
     private OnFragmentInteractionListener mListener;
 
@@ -69,6 +75,15 @@ public class PerfilFragment extends Fragment {
         View view = inflater.inflate(R.layout.perfil_fragment, container, false);
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Mi Perfil");
+        nombre = (TextView)view.findViewById(R.id.nombrePerfil);
+        nombre.setText("Nombre: " + ControlDatos.getUsuario().getNombre());
+        apellido = (TextView)view.findViewById(R.id.apellidoPerfil);
+        apellido.setText("Apellido: " + ControlDatos.getUsuario().getApellido());
+        correo = (TextView)view.findViewById(R.id.correoPerfil);
+        correo.setText("Correo: " + ControlDatos.getUsuario().getCorreo());
+        usuario = (TextView)view.findViewById(R.id.usuarioPerfil);
+        usuario.setText("Usuario: " + ControlDatos.getUsuario().getUsuario());
+
 
         return view;
     }
