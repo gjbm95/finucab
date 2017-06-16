@@ -7,9 +7,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
+import com.ucab.fin.finucab.controllers.Banco_Controller;
+import com.ucab.fin.finucab.controllers.GestionUsuarios_Controller;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -69,7 +74,27 @@ public class AgregarBancoFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.agregar_banco_fragment, container, false);
         parentActivity = (MainActivity) getActivity();
-        parentActivity.getSupportActionBar().setTitle("Registro Banco");
+        parentActivity.getSupportActionBar().setTitle("Registrar Banco");
+        EditText nombrebanco = (EditText)view.findViewById(R.id.AddnombreBancoEditText);
+        EditText numerocuenta = (EditText)view.findViewById(R.id.numerocuentaEditText);
+        Spinner tipocuenta = (Spinner) view.findViewById(R.id.tipocuentaSpinner);
+        EditText saldoinicial = (EditText)view.findViewById(R.id.saldoinicialEditText);
+        Banco_Controller.nombrebanco = nombrebanco;
+        Banco_Controller.numerocuenta = numerocuenta;
+        Banco_Controller.saldoinicial = saldoinicial;
+        Banco_Controller.tipocuenta = tipocuenta;
+
+        Button botonaceptar = (Button)view.findViewById(R.id.agregarBancoButton);
+        botonaceptar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Banco_Controller.validacionBancos(AgregarBancoFragment.this)==0){
+                    parentActivity.changeFragment(new BancosAfiliadosFragment(), false);
+                    parentActivity.closeDrawerLayout();
+                }
+
+            }
+        });
 
 
 

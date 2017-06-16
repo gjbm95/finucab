@@ -7,8 +7,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.ucab.fin.finucab.R;
+import com.ucab.fin.finucab.activity.MainActivity;
+import com.ucab.fin.finucab.controllers.Banco_Controller;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,7 +32,7 @@ public class ModificarBancoFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    MainActivity parentActivity;
     private OnFragmentInteractionListener mListener;
 
     public ModificarBancoFragment() {
@@ -65,7 +70,32 @@ public class ModificarBancoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.modificar_banco_fragment, container, false);
+        View view = inflater.inflate(R.layout.modificar_banco_fragment, container, false);
+        parentActivity = (MainActivity) getActivity();
+        parentActivity.getSupportActionBar().setTitle("Modificar Banco");
+        EditText nombrebanco = (EditText)view.findViewById(R.id.AddnombreBancoEditText);
+        EditText numerocuenta = (EditText)view.findViewById(R.id.numerocuentaEditText);
+        Spinner tipocuenta = (Spinner) view.findViewById(R.id.tipocuentaSpinner);
+        EditText saldoinicial = (EditText)view.findViewById(R.id.saldoinicialEditText);
+        Banco_Controller.nombrebanco = nombrebanco;
+        Banco_Controller.numerocuenta = numerocuenta;
+        Banco_Controller.saldoinicial = saldoinicial;
+        Banco_Controller.tipocuenta = tipocuenta;
+
+        Button botonaceptar = (Button)view.findViewById(R.id.agregarBancoButton);
+        botonaceptar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Banco_Controller.validacionBancos(ModificarBancoFragment.this)==0){
+                    parentActivity.changeFragment(new BancosAfiliadosFragment(), false);
+                    parentActivity.closeDrawerLayout();
+                }
+
+            }
+        });
+
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

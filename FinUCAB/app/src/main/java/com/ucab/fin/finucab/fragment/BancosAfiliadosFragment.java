@@ -122,15 +122,49 @@ public class BancosAfiliadosFragment extends Fragment implements ResponseWebServ
 
             @Override
             public void onLongClick(View view, int position) {
+                positionLongPress = position;
                 registerForContextMenu(recycleList);
             }
 
 
         }));
-        
+
+        llenadoPrueba();
+
         return fragview;
     }
 
+
+
+
+   private void llenadoPrueba(){
+       ArrayList<Cuenta_Bancaria>listaBancos = new ArrayList<Cuenta_Bancaria>();
+       listaBancos.add(new Cuenta_Bancaria(1,"Mercantil","934658973433489",200000,"Corriente"));
+       listaBancos.add(new Cuenta_Bancaria(2,"Banesco","934658973433489",200000,"Ahorro"));
+       listaBancos.add(new Cuenta_Bancaria(3,"Banco de Venezuela","934658973433489",200000,"Corriente"));
+       listaBancos.add(new Cuenta_Bancaria(4,"Exterior","934658973433489",200000,"Ahorro"));
+       //Banco_Controller.setListaBancos(listaBancos);
+       recycleList.setAdapter(new BancoAdapter(listaBancos));
+
+
+   }
+
+    /**
+     *Creando menu de longpress llamada al menu
+     * @param menu
+     * @param v
+     * @param menuInfo
+     */
+    @Override
+
+    public void onCreateContextMenu(ContextMenu menu, View v,  ContextMenu.ContextMenuInfo menuInfo)
+    {
+
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.banco_menu, menu);
+
+    }
 
 
 
@@ -144,15 +178,14 @@ public class BancosAfiliadosFragment extends Fragment implements ResponseWebServ
 
         switch (item.getItemId()) {
 
-            case R.id.deleteCategoryOption:
+            case R.id.deleteBancoOption:
 
 
                 return true;
 
-            case R.id.editarCategoryOption:
-
-
-
+            case R.id.editarBancoOption:
+                parentActivity.changeFragment(new ModificarBancoFragment(), false);
+                parentActivity.closeDrawerLayout();
                 return true;
 
             default:

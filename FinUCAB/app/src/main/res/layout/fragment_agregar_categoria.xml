@@ -59,7 +59,7 @@
 
     <EditText
 
-        android:id="@+id/AddDescripcionEditText"
+        android:id="@+id/AddnombreBancoEditText"
         android:layout_width="0dp"
         android:layout_height="47dp"
         android:layout_marginLeft="16dp"
