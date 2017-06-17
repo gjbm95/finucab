@@ -221,7 +221,7 @@ public class ExportarPresupuesto_Controller extends AsyncTask<String ,String, St
     public static ArrayList<Presupuesto> utilizarPresupuesto(){
         JSONObject jObject = null;
         try {
-            JSONArray mJsonArray = new JSONArray(Parametros.respuesta);
+            JSONArray mJsonArray = new JSONArray(Parametros.getRespuesta());
             int count = mJsonArray.length();
         /*----------------------------Iterando para llenar el ArrayList---------------------------*/
             for (int i = 0; i < count; i++) {

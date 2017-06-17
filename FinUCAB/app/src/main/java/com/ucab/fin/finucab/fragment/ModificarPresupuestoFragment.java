@@ -148,7 +148,7 @@ public class ModificarPresupuestoFragment extends Fragment implements CompoundBu
                 }else{
                     Presupuesto_Controller.presupuesto = new Presupuesto();
                     try {
-                        JSONObject json = new JSONObject(Parametros.respuesta);
+                        JSONObject json = new JSONObject(Parametros.getRespuesta());
                         Presupuesto_Controller.presupuesto.set_categoria((String) json.get("IdCategoria"));
                         Presupuesto_Controller.presupuesto.set_nombre((String) json.get("Nombre"));
                         Presupuesto_Controller.presupuesto.set_monto(Float.parseFloat((String) json.get("Monto")));

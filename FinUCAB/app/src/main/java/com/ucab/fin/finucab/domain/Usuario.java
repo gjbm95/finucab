@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * Esta clase se encarga de almacenar los datos del usuario.
  *
  **/
-public class Usuario {
+public class    Usuario {
     //Estas variables almacenan los datos personasles de los usuarios en memoria.
     private int idusuario;
     private String nombre;

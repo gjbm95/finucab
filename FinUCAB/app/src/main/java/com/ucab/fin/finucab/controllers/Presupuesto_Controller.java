@@ -69,7 +69,7 @@ public class Presupuesto_Controller {
      * @param actividad
      */
     public static void obtenerSpinner(Activity actividad) {
-        System.out.println(Parametros.respuesta);
+        System.out.println(Parametros.getRespuesta());
         Parametros.setMetodo("Modulo3/ObtenerSpinnerCategoria?usuarioid="+ControlDatos.getUsuario().getUsuario());
         new Recepcion(actividad,interfaz).execute("GET");
 
@@ -82,7 +82,7 @@ public class Presupuesto_Controller {
     public static void asignarSpinner(Activity actividad) {
         JSONObject jObject = null;
         try {
-            JSONArray mJsonArray = new JSONArray(Parametros.respuesta);
+            JSONArray mJsonArray = new JSONArray(Parametros.getRespuesta());
             int count = mJsonArray.length();
             String[] valores = new String[count];
             for (int i = 0; i < count; i++) {   // iterate through jsonArray
@@ -132,7 +132,7 @@ public class Presupuesto_Controller {
 
     public static boolean DevolverValidacion(EditText campo,boolean esAgregar) throws NombrePresupuesto_Exception {
         String nombre="";
-        nombre= Parametros.respuesta;
+        nombre= Parametros.getRespuesta();
         if (esAgregar) {
             if (nombre.equals("Repetido"))
             {
@@ -249,7 +249,7 @@ public class Presupuesto_Controller {
             nombrePresupuesto = listaGastos.get(posicionLista).get_nombre();
         }
         nombrePresupuesto = nombrePresupuesto.replace(' ', '_');
-        System.out.println(Parametros.respuesta);
+        System.out.println(Parametros.getRespuesta());
         Parametros.setMetodo("Modulo3/ObtenerPresupuesto?nombrePresupuesto=" + nombrePresupuesto);
         //Parametros.setMetodo("Modulo3/ModificarPresupuesto?nombrePresupuesto="+nombrePresupuesto+"&idUsuario="+ControlDatos.getUsuario().getUsuario());
 

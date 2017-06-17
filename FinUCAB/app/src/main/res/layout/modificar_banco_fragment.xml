@@ -1,0 +1,142 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorBackground"
+    tools:context="com.ucab.fin.finucab.fragment.ModificarBancoFragment">
+
+    <TextView
+
+        android:id="@+id/nombreBancoTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:text="@string/NombreBanco"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+
+        android:id="@+id/AddnombreBancoEditText"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:hint="@string/indicacionNombre"
+        android:background="@drawable/rounded_white_border"
+        android:textSize="14sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="11dp"
+        android:layout_below="@+id/nombreBancoTextView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+
+        android:id="@+id/numeroCuentaTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:text="@string/numeroCuenta"
+        android:layout_marginTop="14dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_below="@+id/AddnombreBancoEditText"
+        android:layout_alignLeft="@+id/AddnombreBancoEditText"
+        android:layout_alignStart="@+id/AddnombreBancoEditText" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:inputType="number"
+        android:ems="10"
+        android:textColor="#000"
+        android:textSize="14sp"
+        android:background="@drawable/rounded_white_border"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_height="47dp"
+        android:hint="@string/indicacionCuenta"
+        android:id="@+id/numerocuentaEditText"
+        android:layout_below="@+id/numeroCuentaTextView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+
+        android:id="@+id/tipoCuentaTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:text="@string/tipoCuenta"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="14dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_below="@+id/numerocuentaEditText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/tipocuentaSpinner"
+        android:background="@drawable/spinner"
+        android:entries="@array/tipoCuentaArray"
+        android:layout_below="@+id/tipoCuentaTextView"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="@string/saldoCuenta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:id="@+id/textView22"
+        android:layout_marginTop="41dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@+id/tipocuentaSpinner"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:inputType="number"
+        android:ems="10"
+        android:textColor="#000"
+        android:textSize="14sp"
+        android:hint="@string/indicacionSaldoInicial"
+        android:background="@drawable/rounded_white_border"
+        android:layout_marginTop="13dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/saldoinicialEditText"
+        android:layout_below="@+id/textView22"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Aceptar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="26dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginTop="33dp"
+        android:id="@+id/agregarBancoButton"
+        android:layout_below="@+id/saldoinicialEditText"
+        android:layout_alignRight="@+id/saldoinicialEditText"
+        android:layout_alignEnd="@+id/saldoinicialEditText" />
+
+
+
+</RelativeLayout>

@@ -22,7 +22,7 @@ public class AsideMenuFragment extends Fragment implements View.OnClickListener{
     private MainActivity parentActivity;
 
     LinearLayout myProfileBtn, budgetBtn, categorybtn,paysBtn,logoutbtn, planificationBtn;
-
+    LinearLayout homeBtn;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         parentView = inflater.inflate(R.layout.aside_menu_fragment, container, false);
@@ -31,6 +31,7 @@ public class AsideMenuFragment extends Fragment implements View.OnClickListener{
         TextView nombredeusuario = (TextView)parentView.findViewById(R.id.usuario);
         nombredeusuario.setText("Usuario: " + ControlDatos.getUsuario().getUsuario());
 //          BIND VIEWS
+        homeBtn = (LinearLayout)parentView.findViewById(R.id.HomeBtn);
         myProfileBtn = (LinearLayout) parentView.findViewById(R.id.myProfileBtn);
         budgetBtn = (LinearLayout) parentView.findViewById(R.id.budgetBtn);
         categorybtn = (LinearLayout) parentView.findViewById(R.id.categoryBtn);
@@ -39,6 +40,7 @@ public class AsideMenuFragment extends Fragment implements View.OnClickListener{
         planificationBtn = (LinearLayout) parentView.findViewById(R.id.planificationBtn);
 
 //        SET LISTENERS
+        homeBtn.setOnClickListener(this);
         myProfileBtn.setOnClickListener(this);
         budgetBtn.setOnClickListener(this);
         categorybtn.setOnClickListener(this);
@@ -55,8 +57,12 @@ public class AsideMenuFragment extends Fragment implements View.OnClickListener{
 
         switch (view.getId()){
 
+            case R.id.HomeBtn:
+                parentActivity.changeFragment(new HomeFragment(), false);
+                parentActivity.closeDrawerLayout();
+                break;
             case R.id.myProfileBtn:
-                parentActivity.changeFragment(new MyProfileFragment(), false);
+                parentActivity.changeFragment(new PerfilFragment(), false);
                 parentActivity.closeDrawerLayout();
                 break;
             case R.id.budgetBtn:
