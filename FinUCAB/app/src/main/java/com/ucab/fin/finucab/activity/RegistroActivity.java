@@ -385,9 +385,11 @@ public class RegistroActivity extends AppCompatActivity {
      * @return
      */
 
+
     private boolean validarCuenta (String mensaje){
         if (mensaje!=null) {
-            if (mensaje.equals("Registro exitoso")) {
+            int a=Integer.parseInt(mensaje);
+            if (a==1) {
                 activarPaso(4);
                 return true;
             } else if (mensaje.equals("Error") && (GestionUsuarios_Controller.pasoRegistro + 1) == 3) {
