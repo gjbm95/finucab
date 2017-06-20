@@ -11,6 +11,14 @@ public class Tarjeta_Credito {
     private String numero;
     private float saldo;
 
+    public Tarjeta_Credito(int idTDC, String tipotdc, String fechaven, float saldo, String numero) {
+        this.idTDC = idTDC;
+        this.tipotdc = tipotdc;
+        this.fechaven = fechaven;
+        this.saldo = saldo;
+        this.numero = numero;
+    }
+
     public float getSaldo() {
         return saldo;
     }

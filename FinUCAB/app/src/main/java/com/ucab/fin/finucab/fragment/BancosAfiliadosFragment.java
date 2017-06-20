@@ -113,7 +113,8 @@ public class BancosAfiliadosFragment extends Fragment implements ResponseWebServ
         LinearLayoutManager myLayoutManager = new LinearLayoutManager(getActivity());
         myLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recycleList.setLayoutManager(myLayoutManager);
-        recycleList.addOnItemTouchListener(new BancosAfiliadosFragment.RecyclerTouchListener(getActivity(), recycleList, new BancosAfiliadosFragment.ClickListener() {
+        recycleList.addOnItemTouchListener(new BancosAfiliadosFragment.RecyclerTouchListener
+                (getActivity(), recycleList, new BancosAfiliadosFragment.ClickListener() {
 
             @Override
             public void onClick(View view, final int position) {
@@ -138,16 +139,16 @@ public class BancosAfiliadosFragment extends Fragment implements ResponseWebServ
 
 
    private void llenadoPrueba(){
-       ArrayList<Cuenta_Bancaria>listaBancos = new ArrayList<Cuenta_Bancaria>();
-       listaBancos.add(new Cuenta_Bancaria(1,"Mercantil","934658973433489",200000,"Corriente"));
-       listaBancos.add(new Cuenta_Bancaria(2,"Banesco","934658973433489",200000,"Ahorro"));
-       listaBancos.add(new Cuenta_Bancaria(3,"Banco de Venezuela","934658973433489",200000,"Corriente"));
-       listaBancos.add(new Cuenta_Bancaria(4,"Exterior","934658973433489",200000,"Ahorro"));
-       //Banco_Controller.setListaBancos(listaBancos);
-       recycleList.setAdapter(new BancoAdapter(listaBancos));
+        ArrayList<Cuenta_Bancaria>listaBancos = new ArrayList<Cuenta_Bancaria>();
+        listaBancos.add(new Cuenta_Bancaria(1,"Mercantil","934658973433489",200000,"Corriente"));
+        listaBancos.add(new Cuenta_Bancaria(2,"Banesco","934658973433489",200000,"Ahorro"));
+        listaBancos.add(new Cuenta_Bancaria(3,"Banco de Venezuela","934658973433489",200000,"Corriente"));
+        listaBancos.add(new Cuenta_Bancaria(4,"Exterior","934658973433489",200000,"Ahorro"));
+        //Banco_Controller.setListaBancos(listaBancos);
+        recycleList.setAdapter(new BancoAdapter(listaBancos));
 
 
-   }
+    }
 
     /**
      *Creando menu de longpress llamada al menu
