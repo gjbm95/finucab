@@ -1,95 +1,46 @@
 package com.ucab.fin.finucab.controllers;
 
-
 import android.support.v4.app.Fragment;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.ucab.fin.finucab.domain.Cuenta_Bancaria;
 import com.ucab.fin.finucab.domain.Manejador_Banco;
-import com.ucab.fin.finucab.domain.Manejador_Categoria;
 import com.ucab.fin.finucab.exceptions.CampoVacio_Exception;
-import com.ucab.fin.finucab.exceptions.ContrasenasDiferentes_Exception;
 import com.ucab.fin.finucab.exceptions.ErrorSpinner_Exception;
 import com.ucab.fin.finucab.exceptions.Longitud_Exception;
 import com.ucab.fin.finucab.fragment.AgregarBancoFragment;
+import com.ucab.fin.finucab.fragment.AgregarTarjetaCFragment;
 import com.ucab.fin.finucab.fragment.ModificarBancoFragment;
-
-import java.util.ArrayList;
+import com.ucab.fin.finucab.fragment.ModificarTarjetaCFragment;
 
 /**
- * Created by Junior on 14/06/2017.
+ * Created by Junior on 21/06/2017.
  */
 
-public class Banco_Controller {
+public class Tarjeta_Controller {
 
     private static Manejador_Banco manejador;
     public static int  casoRequest = -1;
-    public static EditText nombrebanco;  // EditText que contiene el nombre del banco
-    public static EditText numerocuenta;// EditText que contiene el numero de cuenta
-    public static EditText saldoinicial; // EditText que contiene el saldo inicial de la cuenta
-    public static Spinner tipocuenta; // Spinner que contiene el tipo de cuenta seleccionado
+    public static EditText tipotarjeta;  // EditText que contiene el tipo de la tarjeta.
+    public static EditText numerotarjeta;// EditText que contiene el numero de la tajeta.
+    public static EditText fechaven; // EditText que contiene la fecha de vencimiento de la tarjeta.
+    public static Spinner cuentaafiliada; // Spinner que contiene la cuenta a la que esta afilida.
 
-    /**
-     * Colocar actual lista de categoria en el manejador
-     * @param bancos
-     */
-    public static void setListaBancos(ArrayList<Cuenta_Bancaria> bancos){
-
-        manejador.setUltimosBancosObtenidos(bancos);
-    }
-
-    /**
-     * Colocar actual lista de categoria en el manejador
-     * @return Lista de categoria cargada
-     */
-    public static ArrayList<Cuenta_Bancaria> getListaBancos(){
-
-        return manejador.getUltimosBancosObtenidos();
-    }
-
-    /**
-     * Resetea el caso del request al WebService
-     */
-    public static void resetCasoRequest(){
-        casoRequest = -1;
-    }
-
-    /**
-     * Obtener caso del request que se esta realizando
-     * @return
-     */
-    public static int getCasoRequest(){
-        return casoRequest;
-    }
-
-    /**
-     * Metodo encargado de llamar a obtener las bancos
-     *
-     * @param showStatus Mostrar o no el dialog de Cargando
-     */
-    public static void obtenerTodosBancos(boolean showStatus){
-
-        casoRequest = 0;
-        manejador.obtenerTodosBancos(showStatus);
-
-    }
     /**
      *  Metodo encargado de validar los datos suministrados en el registro de cuentas bancarias.
      *
      * @return retorna 0 si no hay ningun error y retorna 1 si lo hay
      */
-    public static int validacionBancos(Fragment fragment)
+    public static int validacionTarjetas(Fragment fragment)
     {
         try{
-            verificoVacio(nombrebanco);
-            verificoLongitud(nombrebanco,255,"string");
-            verificoVacio(numerocuenta);
-            verificoLongitud(numerocuenta,21,"int");
-            verificoVacio(saldoinicial);
-            verificoLongitud(saldoinicial,10,"int");
-            verificoTipoCuenta(tipocuenta);
+            verificoVacio(tipotarjeta);
+            verificoLongitud(tipotarjeta,255,"string");
+            verificoVacio(numerotarjeta);
+            verificoLongitud(numerotarjeta,21,"int");
+            verificoVacio(fechaven);
+            verificoCuentaAfiliada(cuentaafiliada);
         } catch (CampoVacio_Exception e){
             e.getCampo().setError(e.getMessage());
             return 1;
@@ -98,14 +49,14 @@ public class Banco_Controller {
             return 1;
         } catch (ErrorSpinner_Exception e) {
 
-            if (fragment instanceof AgregarBancoFragment){
-                AgregarBancoFragment frag = (AgregarBancoFragment)fragment;
+            if (fragment instanceof AgregarTarjetaCFragment){
+                AgregarTarjetaCFragment frag = (AgregarTarjetaCFragment)fragment;
                 Toast.makeText(fragment.getActivity(),"Debe seleccionar un tipo de cuenta",
                         Toast.LENGTH_SHORT).show();
 
             }
-            if (fragment instanceof ModificarBancoFragment){
-                ModificarBancoFragment frag = (ModificarBancoFragment)fragment;
+            if (fragment instanceof ModificarTarjetaCFragment){
+                ModificarTarjetaCFragment frag = (ModificarTarjetaCFragment)fragment;
                 Toast.makeText(fragment.getActivity(),"Debe seleccionar un tipo de cuenta",
                         Toast.LENGTH_SHORT).show();
 
@@ -120,15 +71,15 @@ public class Banco_Controller {
      * Metodo encargado de validar el tipo de cuenta bancaria seleccionado en el spinner
      *
      */
-    public static void verificoTipoCuenta(Spinner tipocuenta) throws ErrorSpinner_Exception {
-         String text = tipocuenta.getSelectedItem().toString();
-         if (text.equals("Seleccione")) {
-             ErrorSpinner_Exception debetipo = new ErrorSpinner_Exception("Debe seleccionar un " +
-                     "tipo de cuenta");
-             debetipo.setSeleccion(tipocuenta);
-             throw debetipo;
-         }
-     }
+    public static void verificoCuentaAfiliada(Spinner tipocuenta) throws ErrorSpinner_Exception {
+        String text = tipocuenta.getSelectedItem().toString();
+        if (text.equals("Seleccione")) {
+            ErrorSpinner_Exception debetipo = new ErrorSpinner_Exception("Debe seleccionar una " +
+                    "cuenta");
+            debetipo.setSeleccion(tipocuenta);
+            throw debetipo;
+        }
+    }
 
 
     /**
@@ -192,6 +143,8 @@ public class Banco_Controller {
         }
 
     }
+
+
 
 
 }

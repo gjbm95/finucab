@@ -7,8 +7,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextMenu;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -193,6 +196,50 @@ public class TarjetasCreditoFragment extends Fragment  implements ResponseWebSer
     }
 
     /**
+     *Creando menu de longpress llamada al menu
+     * @param menu
+     * @param v
+     * @param menuInfo
+     */
+    @Override
+
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
+    {
+
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.tarjeta_menu, menu);
+
+    }
+
+    /**
+     * Opciones del longPress Editar y eliminar
+     * @param item
+     * @return
+     */
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+
+            case R.id.deleteTarjetaOption:
+
+
+                return true;
+
+            case R.id.editarTarjetaOption:
+                parentActivity.changeFragment(new ModificarTarjetaCFragment(), false);
+                parentActivity.closeDrawerLayout();
+                return true;
+
+            default:
+                return super.onContextItemSelected(item);
+
+        }
+
+    }
+
+    /**
      * Response WebService
      * se llena la lista con las consultas provenientes del WebService con la BD
      * @param response
@@ -238,7 +285,7 @@ public class TarjetasCreditoFragment extends Fragment  implements ResponseWebSer
                     case 3:
 
                         Toast.makeText(parentActivity, Parametros.getRespuesta(), Toast.LENGTH_SHORT).show();
-                        Banco_Controller.obtenerTodasCategorias(false);
+                        //Banco_Controller.obtenerTodasCategorias(false);
 
                         break;
 

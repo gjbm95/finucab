@@ -11,7 +11,7 @@
 
     <TextView
 
-        android:id="@+id/nombreBancoTextView"
+        android:id="@+id/tipoTarjetaTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="#fff"
@@ -35,7 +35,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="11dp"
-        android:layout_below="@+id/nombreBancoTextView"
+        android:layout_below="@+id/tipoTarjetaTextView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -123,7 +123,7 @@
         android:layout_marginTop="13dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:id="@+id/saldoinicialEditText"
+        android:id="@+id/fechavenEditText"
         android:layout_below="@+id/textView22"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -136,9 +136,9 @@
         android:layout_marginEnd="26dp"
         android:layout_marginTop="33dp"
         android:id="@+id/agregarBancoButton"
-        android:layout_below="@+id/saldoinicialEditText"
-        android:layout_alignRight="@+id/saldoinicialEditText"
-        android:layout_alignEnd="@+id/saldoinicialEditText" />
+        android:layout_below="@+id/fechavenEditText"
+        android:layout_alignRight="@+id/fechavenEditText"
+        android:layout_alignEnd="@+id/fechavenEditText" />
 
 
 </RelativeLayout>

@@ -192,19 +192,21 @@
         android:layout_below="@+id/radioGrpPlanificacion"
         >
 
-    <EditText
-        android:id="@+id/fechaPaEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/caja"
-        android:focusable="false"
-        android:ems="10"
-        android:textAlignment="center"
-        android:inputType="none"
-        android:maxLines="1"
-        android:padding="12dp"
-        android:textColor="@color/black"
-        />
+        <EditText
+            android:id="@+id/fechaPaEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/caja"
+            android:focusable="false"
+            android:ems="10"
+            android:textAlignment="center"
+            android:inputType="none"
+            android:maxLines="1"
+            android:padding="12dp"
+            android:textColor="@color/black"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
     </RelativeLayout>
 

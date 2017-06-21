@@ -1,6 +1,5 @@
 package com.ucab.fin.finucab.fragment;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -76,7 +75,7 @@ public class ModificarBancoFragment extends Fragment {
         EditText nombrebanco = (EditText)view.findViewById(R.id.AddnombreBancoEditText);
         EditText numerocuenta = (EditText)view.findViewById(R.id.numerocuentaEditText);
         Spinner tipocuenta = (Spinner) view.findViewById(R.id.tipocuentaSpinner);
-        EditText saldoinicial = (EditText)view.findViewById(R.id.saldoinicialEditText);
+        EditText saldoinicial = (EditText)view.findViewById(R.id.fechavenEditText);
         Banco_Controller.nombrebanco = nombrebanco;
         Banco_Controller.numerocuenta = numerocuenta;
         Banco_Controller.saldoinicial = saldoinicial;

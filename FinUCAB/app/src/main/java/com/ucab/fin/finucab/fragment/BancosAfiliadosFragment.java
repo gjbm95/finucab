@@ -33,14 +33,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link BancosAfiliadosFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link BancosAfiliadosFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class BancosAfiliadosFragment extends Fragment implements ResponseWebServiceInterface {
 
 
@@ -57,8 +50,6 @@ public class BancosAfiliadosFragment extends Fragment implements ResponseWebServ
     RecyclerView recycleList;
 
     private int positionLongPress = -1; //posicion del menu longpress
-
-    private OnFragmentInteractionListener mListener;
 
     public BancosAfiliadosFragment() {
         // Required empty public constructor
@@ -170,7 +161,7 @@ public class BancosAfiliadosFragment extends Fragment implements ResponseWebServ
 
 
     /**
-     * Opciones del longPress Exportar y eliminar
+     * Opciones del longPress Editar y eliminar
      * @param item
      * @return
      */
@@ -207,7 +198,8 @@ public class BancosAfiliadosFragment extends Fragment implements ResponseWebServ
         private BancosAfiliadosFragment.ClickListener clicklistener;
         private GestureDetector gestureDetector;
 
-        public RecyclerTouchListener(Context context, final RecyclerView recycleView, final BancosAfiliadosFragment.ClickListener clicklistener){
+        public RecyclerTouchListener(Context context, final RecyclerView recycleView, final
+        BancosAfiliadosFragment.ClickListener clicklistener){
 
             this.clicklistener=clicklistener;
 
@@ -255,28 +247,6 @@ public class BancosAfiliadosFragment extends Fragment implements ResponseWebServ
     }
 
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-  
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 
 
     /**
@@ -325,7 +295,7 @@ public class BancosAfiliadosFragment extends Fragment implements ResponseWebServ
                     case 3:
 
                         Toast.makeText(parentActivity, Parametros.getRespuesta(), Toast.LENGTH_SHORT).show();
-                        Banco_Controller.obtenerTodasCategorias(false);
+                        Banco_Controller.obtenerTodosBancos(false);
 
                         break;
 
