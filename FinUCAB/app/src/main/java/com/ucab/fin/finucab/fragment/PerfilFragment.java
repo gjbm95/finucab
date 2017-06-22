@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.ucab.fin.finucab.R;
@@ -34,6 +36,7 @@ public class PerfilFragment extends Fragment {
     private TextView apellido;
     private TextView correo;
     private TextView usuario;
+    private ImageButton editarPerfil;
 
     private OnFragmentInteractionListener mListener;
 
@@ -83,7 +86,15 @@ public class PerfilFragment extends Fragment {
         correo.setText("Correo: " + ControlDatos.getUsuario().getCorreo());
         usuario = (TextView)view.findViewById(R.id.usuarioPerfil);
         usuario.setText("Usuario: " + ControlDatos.getUsuario().getUsuario());
-
+        //Configurando boton para editar perfil:
+        editarPerfil = (ImageButton)view.findViewById(R.id.botoneditarperfil);
+        editarPerfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                parentActivity.changeFragment(new ModificarCuentaFragment(), false);
+                parentActivity.closeDrawerLayout();
+            }
+        });
 
         return view;
     }

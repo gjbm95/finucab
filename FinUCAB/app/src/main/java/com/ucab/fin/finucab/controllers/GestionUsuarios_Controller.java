@@ -119,6 +119,43 @@ public class GestionUsuarios_Controller {
 
 
     /**
+     *  Se encarga de validar que no se encuentre vacio los campos nombre, apellido, correo y usuairio
+     *  tambien se valida si el formato del correo electronico es correcto.
+     *  @return retorna 0 si no hay ningun error y retorna 1 si los hay.
+     */
+    public static int validacionModificacionDatos(){
+
+        try{
+            verificoVacio(nombre);
+            verificoLongitud(nombre,50,"string");
+            verificoVacio(apellido);
+            verificoLongitud(apellido,50,"string");
+            verificoVacio(correo);
+            verificoLongitud(correo,100,"string");
+            verificoCorreo(correo);
+            verificoVacio(usuario);
+            verificoLongitud(usuario,50,"string");
+        }catch (CampoVacio_Exception e){
+            e.getCampo().setError(e.getMessage());
+            return 1;
+        } catch (CorreoInvalido_Exception e){
+            e.getCampo().setError(e.getMessage());
+            return 1;
+        }catch (Longitud_Exception e){
+            e.getCampo().setError(e.getMessage());
+            return 1;
+        }
+
+        //Estadarizamos mayusculas y minusculas:
+        nombre.setText(GestionUsuarios_Controller.formatearCadena(nombre.getText().toString()));
+        apellido.setText(GestionUsuarios_Controller.formatearCadena(apellido.getText().toString()));
+        return 0;
+    }
+
+
+
+
+    /**
      *  Metodo encargado de validar los datos suministrados en la etapa de registro de datos de la cuenta.
      *
      * @return retorna 0 si no hay ningun error y retorna 1 si lo hay

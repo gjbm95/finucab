@@ -72,7 +72,7 @@ public class ModificarBancoFragment extends Fragment {
         View view = inflater.inflate(R.layout.modificar_banco_fragment, container, false);
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Modificar Banco");
-        EditText nombrebanco = (EditText)view.findViewById(R.id.AddnombreBancoEditText);
+        EditText nombrebanco = (EditText)view.findViewById(R.id.nombreEditText);
         EditText numerocuenta = (EditText)view.findViewById(R.id.numerocuentaEditText);
         Spinner tipocuenta = (Spinner) view.findViewById(R.id.tipocuentaSpinner);
         EditText saldoinicial = (EditText)view.findViewById(R.id.fechavenEditText);

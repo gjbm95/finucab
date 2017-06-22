@@ -8,7 +8,7 @@
 
     <TextView
 
-        android:id="@+id/tipoTarjetaTextView"
+        android:id="@+id/nombreTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="#fff"
@@ -23,7 +23,7 @@
 
     <EditText
 
-        android:id="@+id/AddnombreBancoEditText"
+        android:id="@+id/nombreEditText"
         android:layout_width="match_parent"
         android:layout_height="47dp"
         android:hint="@string/indicacionNombre"
@@ -32,7 +32,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="11dp"
-        android:layout_below="@+id/tipoTarjetaTextView"
+        android:layout_below="@+id/nombreTextView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -46,9 +46,9 @@
         android:text="@string/numeroCuenta"
         android:layout_marginTop="14dp"
         app:layout_constraintHorizontal_bias="0.0"
-        android:layout_below="@+id/AddnombreBancoEditText"
-        android:layout_alignLeft="@+id/AddnombreBancoEditText"
-        android:layout_alignStart="@+id/AddnombreBancoEditText" />
+        android:layout_below="@+id/nombreEditText"
+        android:layout_alignLeft="@+id/nombreEditText"
+        android:layout_alignStart="@+id/nombreEditText" />
 
     <EditText
         android:layout_width="match_parent"
