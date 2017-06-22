@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorBackground"
-    tools:context="com.ucab.fin.finucab.fragment.AgregarTarjetaCFragment">
+    tools:context="com.ucab.fin.finucab.fragment.ModificarCuentaFragment">
 
     <TextView
 
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:textColor="#fff"
         android:textSize="20sp"
-        android:text="@string/tipoTarjeta"
+        android:text="@string/nombre"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="16dp"
         app:layout_constraintHorizontal_bias="0.0"
@@ -23,10 +23,10 @@
 
     <EditText
 
-        android:id="@+id/AddtipoTarjetaEditText"
+        android:id="@+id/nombreEditText"
         android:layout_width="match_parent"
         android:layout_height="47dp"
-        android:hint="@string/indicacionTipoTarjeta"
+        android:digits="qwertzuiopasdfghjklyxcvbnñmQWERTYUIOPASDFGHJKLÑZXCVBNM"
         android:background="@drawable/rounded_white_border"
         android:textSize="14sp"
         android:layout_marginLeft="10dp"
@@ -35,96 +35,88 @@
         android:layout_below="@+id/nombreTextView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
-
     <TextView
 
-        android:id="@+id/numeroCuentaTextView"
+        android:id="@+id/apellidoTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="#fff"
         android:textSize="20sp"
-        android:text="@string/numeroTarjeta"
-        android:layout_marginTop="14dp"
+        android:text="@string/apellido"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/nombreEditText"
         app:layout_constraintHorizontal_bias="0.0"
-        android:layout_below="@+id/AddtipoTarjetaEditText"
-        android:layout_alignLeft="@+id/AddtipoTarjetaEditText"
-        android:layout_alignStart="@+id/AddtipoTarjetaEditText" />
+        />
 
     <EditText
+
+        android:id="@+id/apellidoEditText"
         android:layout_width="match_parent"
-        android:inputType="number"
-        android:ems="10"
-        android:textColor="#000"
-        android:textSize="14sp"
-        android:background="@drawable/rounded_white_border"
-        android:layout_marginTop="12dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:layout_height="47dp"
-        android:hint="@string/indicacionCuenta"
-        android:id="@+id/numerotarjetaEditText"
-        android:layout_below="@+id/numeroCuentaTextView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
+        android:digits="qwertzuiopasdfghjklyxcvbnñmQWERTYUIOPASDFGHJKLÑZXCVBNM"
+        android:background="@drawable/rounded_white_border"
+        android:textSize="14sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="11dp"
+        android:layout_below="@+id/apellidoTextView"
+     />
     <TextView
 
-        android:id="@+id/tipoCuentaTextView"
+        android:id="@+id/correoTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="#fff"
         android:textSize="20sp"
-        android:text="@string/tituloCuentaAfiliada"
+        android:text="@string/correo"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/apellidoEditText"
         app:layout_constraintHorizontal_bias="0.0"
-        android:layout_below="@+id/numerotarjetaEditText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:id="@+id/cuentaafiliadaSpinner"
-        android:background="@drawable/spinner"
-        android:entries="@array/cuentaAfiliadaArray"
-        android:layout_below="@+id/tipoCuentaTextView"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:text="@string/fechaven"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#fff"
-        android:textSize="20sp"
-        android:id="@+id/textView22"
-        android:layout_marginTop="41dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_below="@+id/cuentaafiliadaSpinner"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        />
 
     <EditText
+
+        android:id="@+id/correoEditText"
         android:layout_width="match_parent"
         android:layout_height="47dp"
-        android:inputType="number"
-        android:ems="10"
-        android:hint="Presione para colocar la fecha "
-        android:textColor="#000"
-        android:textSize="14sp"
-        android:focusable="false"
         android:background="@drawable/rounded_white_border"
-        android:layout_marginTop="13dp"
+        android:textSize="14sp"
+        android:singleLine="true"
+        android:inputType="textEmailAddress"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:id="@+id/fechavenEditText"
-        android:layout_below="@+id/textView22"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_marginTop="11dp"
+        android:layout_below="@+id/correoTextView"
+        />
+
+    <TextView
+
+        android:id="@+id/usuarioTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:text="@string/usuario"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/correoEditText"
+        app:layout_constraintHorizontal_bias="0.0"
+        />
+
+    <EditText
+
+        android:id="@+id/usuarioEditText"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:background="@drawable/rounded_white_border"
+        android:textSize="14sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="11dp"
+        android:layout_below="@+id/usuarioTextView"
+        />
 
     <Button
         android:text="Aceptar"
@@ -133,8 +125,8 @@
         android:layout_marginRight="26dp"
         android:layout_marginEnd="26dp"
         android:layout_marginTop="33dp"
-        android:id="@+id/agregarTarjetaButton"
-        android:layout_below="@+id/fechavenEditText"
-        android:layout_alignRight="@+id/fechavenEditText"
-        android:layout_alignEnd="@+id/fechavenEditText" />
+        android:id="@+id/modificarPerfilButton"
+        android:layout_below="@+id/usuarioEditText"
+        android:layout_alignRight="@+id/usuarioEditText"
+        android:layout_alignEnd="@+id/usuarioEditText" />
 </RelativeLayout>

@@ -14,14 +14,7 @@ import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
 import com.ucab.fin.finucab.controllers.Banco_Controller;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link AgregarBancoFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link AgregarBancoFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class AgregarBancoFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -73,7 +66,7 @@ public class AgregarBancoFragment extends Fragment {
         View view = inflater.inflate(R.layout.agregar_banco_fragment, container, false);
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Registrar Banco");
-        EditText nombrebanco = (EditText)view.findViewById(R.id.AddnombreBancoEditText);
+        EditText nombrebanco = (EditText)view.findViewById(R.id.nombreEditText);
         EditText numerocuenta = (EditText)view.findViewById(R.id.numerocuentaEditText);
         Spinner tipocuenta = (Spinner) view.findViewById(R.id.tipocuentaSpinner);
         EditText saldoinicial = (EditText)view.findViewById(R.id.fechavenEditText);

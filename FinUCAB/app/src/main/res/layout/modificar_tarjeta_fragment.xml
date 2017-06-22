@@ -8,7 +8,7 @@
 
     <TextView
 
-        android:id="@+id/tipoTarjetaTextView"
+        android:id="@+id/nombreTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="#fff"
@@ -32,7 +32,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="11dp"
-        android:layout_below="@+id/tipoTarjetaTextView"
+        android:layout_below="@+id/nombreTextView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
