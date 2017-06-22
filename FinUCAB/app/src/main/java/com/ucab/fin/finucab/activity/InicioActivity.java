@@ -159,10 +159,10 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
                 mensajeError(getString(R.string.conexion));
                 GestionUsuarios_Controller.resetarVariables();
                 Parametros.reset();
-            } else if (Parametros.getRespuesta().equals("No Disponible")) {
+            } else if (Parametros.getRespuesta().equals("4")) {
                 GestionUsuarios_Controller.buscarUsuario(InicioActivity.this,GestionUsuarios_Controller.nombre.getText().toString());
 
-            } else if (Parametros.getRespuesta().equals("Usuario Disponible")) {
+            } else if (Parametros.getRespuesta().equals("3")) {
 
                 mensajeError(getString(R.string.usuarionoexiste));
                 GestionUsuarios_Controller.resetarVariables();
@@ -186,7 +186,7 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
                 startActivity(i);
                 finish();
 
-            }else if (Parametros.getRespuesta().equals("DATOSMAL") ) {
+            }else if (Parametros.getRespuesta().equals("7") ) {
 
                 mensajeError(getString(R.string.datosincorrectos));
             }

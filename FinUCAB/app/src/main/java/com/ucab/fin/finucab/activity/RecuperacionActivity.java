@@ -147,7 +147,7 @@ public class RecuperacionActivity extends AppCompatActivity implements View.OnCl
     protected void onResume() {
         super.onResume();
         if(GestionUsuarios_Controller.pasoRecuperacion==2) {
-            if (Parametros.getRespuesta().equals("Clave Modificada")) {
+            if (Parametros.getRespuesta().equals("5")) {
                 GestionUsuarios_Controller.resetarVariables();
                 Intent iniciar = new Intent(RecuperacionActivity.this, InicioActivity.class);
                 startActivity(iniciar);

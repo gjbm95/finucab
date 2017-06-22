@@ -234,6 +234,7 @@ public class RegistroActivity extends AppCompatActivity {
             posicionEtapa = (ImageView) findViewById(R.id.onboardindImageView);
             posicionEtapa.setImageResource(R.mipmap.onboarding4);
             CuentaFragment fragment1 = new CuentaFragment();
+            System.out.println("HAGO REPLACE DEL FRAGMENT");
             fragmentTransaction.replace(R.id.fragment, fragment1);
             //------------Elimino los fragmentos sin uso-------------------------------
             DatosSeguridadFragment fragmentc = new DatosSeguridadFragment();
@@ -363,12 +364,12 @@ public class RegistroActivity extends AppCompatActivity {
                 GestionUsuarios_Controller.pasoRegistro = conteo-1;
                 mensajeError(getString(R.string.conexion));
                 return true;
-            }else if (mensaje.equals("No Disponible")){
+            }else if (mensaje.equals("4")){
                 activarPaso(2);
                 conteo++;
                 mensajeError(getString(R.string.usuarioenuso));
                 return true;
-            }else if (mensaje.equals("Usuario Disponible")){
+            }else if (mensaje.equals("3")){
                 if (conteo!=3)
                     conteo=3;
                 GestionUsuarios_Controller.pasoRegistroCuenta = false;
@@ -387,7 +388,8 @@ public class RegistroActivity extends AppCompatActivity {
 
     private boolean validarCuenta (String mensaje){
         if (mensaje!=null) {
-            if (mensaje.equals("Registro exitoso")) {
+            if (mensaje.equals("1")) {
+                System.out.println("DEBERIA ACCTIVAR PASO 4");
                 activarPaso(4);
                 return true;
             } else if (mensaje.equals("Error") && (GestionUsuarios_Controller.pasoRegistro + 1) == 3) {
