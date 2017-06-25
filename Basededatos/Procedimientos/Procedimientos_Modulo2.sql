@@ -24,14 +24,14 @@ DROP FUNCTION obtenerTOPPresupuestos(integer);
 -------------------------------------GESTION DE CUENTAS BANCARIAS --------------------------------------
 CREATE OR REPLACE FUNCTION agregarCuentaBancaria
  ( IN nombrebanco VARCHAR(255), tipocuenta VARCHAR(255), numerocuenta VARCHAR(255), saldo float4, usuarioid int)
- RETURNS setof record AS
+ RETURNS integer AS
 $BODY$
 begin
 
  INSERT INTO Cuenta_Bancaria (ct_nombrebanco,ct_numcuenta,ct_tipocuenta,usuariou_id) 
   VALUES (nombrebanco,numerocuenta,tipocuenta,usuarioid);
   
-return;
+return 1;
 end;
 $BODY$
 LANGUAGE 'plpgsql';
