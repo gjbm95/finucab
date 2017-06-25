@@ -28,7 +28,7 @@ CREATE OR REPLACE FUNCTION agregarCuentaBancaria
 $BODY$
 begin
 
- INSERT INTO Cuenta_Bancaria (ct_nombrebanco,ct_numcuenta,ct_tipocuenta,usuariou_id) 
+ INSERT INTO Cuenta_Bancaria (ct_nombrebanco,ct_numcuenta,ct_tipocuenta,ct_saldoactual,usuariou_id) 
   VALUES (nombrebanco,numerocuenta,tipocuenta,usuarioid);
   
 return 1;
@@ -41,7 +41,7 @@ DECLARE
  result integer;
 
 BEGIN
-	UPDATE Cuenta_Bancaria SET ct_nombrebanco = $1, ct_numcuenta = $2, ct_tipocuenta = $3,ct_saldo = $4
+	UPDATE Cuenta_Bancaria SET ct_nombrebanco = $1, ct_numcuenta = $2, ct_tipocuenta = $3,ct_saldoactual = $4
     WHERE  ct_id = $5;
 
 
