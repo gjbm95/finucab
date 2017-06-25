@@ -29,7 +29,7 @@ $BODY$
 begin
 
  INSERT INTO Cuenta_Bancaria (ct_nombrebanco,ct_numcuenta,ct_tipocuenta,ct_saldoactual,usuariou_id) 
-  VALUES (nombrebanco,numerocuenta,tipocuenta,usuarioid);
+  VALUES (nombrebanco,numerocuenta,tipocuenta,saldo,usuarioid);
   
 return 1;
 end;
