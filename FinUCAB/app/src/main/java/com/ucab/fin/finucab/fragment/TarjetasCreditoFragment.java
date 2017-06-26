@@ -257,7 +257,7 @@ public class TarjetasCreditoFragment extends Fragment  implements ResponseWebSer
             }else {
                 switch (Tarjeta_Controller.getCasoRequest()) {
 
-                    case 0:
+                    case 1:
                         ArrayList listaTarjetas = new ArrayList<Tarjeta_Credito>();
                         JSONArray mJsonArray = new JSONArray(Parametros.getRespuesta());
 
@@ -265,16 +265,17 @@ public class TarjetasCreditoFragment extends Fragment  implements ResponseWebSer
                             String strJson = mJsonArray.getString(i);
                             JSONObject jObject = new JSONObject(strJson);
 
-                            listaTarjetas.add(new Tarjeta_Credito((int) jObject.get("tc_id"),
+                            listaTarjetas.add(new Tarjeta_Credito(
+                                    Integer.parseInt((String)jObject.get("tc_id")),
                                     (String) jObject.get("tc_tipo"),
                                     (String) jObject.get("tc_fechavencimiento"),
-                                    (float) jObject.get("tc_saldo"),
+                                    Float.parseFloat((String) jObject.get("tc_saldo")),
                                     (String) jObject.get("tc_numero")));
 
                         }
 
                         Tarjeta_Controller.setListaTarjetas(listaTarjetas);
-                        recycleList.setAdapter(new BancoAdapter(listaTarjetas));
+                        recycleList.setAdapter(new TarjetaAdapter(listaTarjetas));
                         Tarjeta_Controller.resetCasoRequest();
 
                         break;

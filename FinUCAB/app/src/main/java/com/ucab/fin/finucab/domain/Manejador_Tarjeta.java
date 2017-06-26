@@ -134,7 +134,7 @@ public class Manejador_Tarjeta {
 
         int idUsuario = ControlDatos.getUsuario().getIdusuario();
         Parametros.reset();
-        Parametros.setMetodo("Modulo2/consultarTDC?datosUsuario="+ String.valueOf(idUsuario) );
+        Parametros.setMetodo("Modulo2/consultarTDC?idUsuario="+ String.valueOf(idUsuario) );
         new Recepcion(actividad,intefaz,showStatus).execute("GET");
 
     }
