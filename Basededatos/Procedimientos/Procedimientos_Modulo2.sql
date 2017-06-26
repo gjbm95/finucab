@@ -136,7 +136,7 @@ CREATE OR REPLACE FUNCTION obtenerTarjetasCredito
      OUT tc_fechavencimiento date, 
      OUT tc_numero varchar(255), 
      OUT tc_saldo float4,
-     OUT usuariou_id integer
+     OUT uusuariou_id integer
    ) RETURNS setof record AS
 $BODY$
 BEGIN
