@@ -108,7 +108,7 @@ DECLARE
 
 BEGIN
 	UPDATE Tarjeta_Credito SET tc_tipotarjeta = $1, tc_fechavencimiento = $2, tc_numero = $3, tc_saldo = $4
-    WHERE  ct_id = $5;
+    WHERE  tc_id = $5;
 
 
 	result := 1;
