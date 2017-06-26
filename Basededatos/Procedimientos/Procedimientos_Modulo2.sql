@@ -133,7 +133,7 @@ CREATE OR REPLACE FUNCTION obtenerTarjetasCredito
    ( IN PV_OPCION VARCHAR(10) default 'OBTENER', filtrousuario integer default 0,
    	 OUT tc_id integer, 
      OUT tc_tipotarjeta varchar(255), 
-     OUT tc_fechavencimiento varchar(255), 
+     OUT tc_fechavencimiento date, 
      OUT tc_numero varchar(255), 
      OUT tc_saldo float4,
      OUT usuariou_id integer
