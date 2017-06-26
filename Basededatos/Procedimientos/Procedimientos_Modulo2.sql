@@ -89,14 +89,14 @@ LANGUAGE 'plpgsql';
 -------------------------------------GESTION DE TARJETAS DE CREDITO --------------------------------------
 CREATE OR REPLACE FUNCTION agregarTarjetaCredito
  ( IN tipotarjeta VARCHAR(255), fechavencimiento date, numero VARCHAR(255), saldo float4, usuarioid int)
- RETURNS setof record AS
+ RETURNS integer AS
 $BODY$
 begin
 
  INSERT INTO Tarjeta_Credito (tc_tipo,tc_fechavencimiento,tc_numero,tc_saldo,usuariou_id) 
   VALUES (tipotarjeta,fechavencimiento,numero,saldo,usuarioid);
   
-return;
+return 1;
 end;
 $BODY$
 LANGUAGE 'plpgsql';
