@@ -107,7 +107,7 @@ DECLARE
  result integer;
 
 BEGIN
-	UPDATE Tarjeta_Credito SET tc_tipotarjeta = $1, tc_fechavencimiento = $2, tc_numero = $3, tc_saldo = $4
+	UPDATE Tarjeta_Credito SET tc_tipo = $1, tc_fechavencimiento = $2, tc_numero = $3, tc_saldo = $4
     WHERE  tc_id = $5;
 
 
