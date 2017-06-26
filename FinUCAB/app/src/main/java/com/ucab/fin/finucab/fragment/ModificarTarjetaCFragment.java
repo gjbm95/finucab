@@ -13,17 +13,20 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
 import com.ucab.fin.finucab.controllers.Banco_Controller;
 import com.ucab.fin.finucab.controllers.Tarjeta_Controller;
+import com.ucab.fin.finucab.domain.Tarjeta_Credito;
+import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
 
 import java.text.DateFormat;
 import java.util.Calendar;
 
 
-public class ModificarTarjetaCFragment extends Fragment {
+public class ModificarTarjetaCFragment extends Fragment implements ResponseWebServiceInterface {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -32,6 +35,7 @@ public class ModificarTarjetaCFragment extends Fragment {
     private ArrayAdapter spinner_adapter;
     private Calendar calendar;
     private EditText fechaven;
+
     private MainActivity parentActivity;
 
     // TODO: Rename and change types of parameters
@@ -87,20 +91,24 @@ public class ModificarTarjetaCFragment extends Fragment {
                 showDatePicker(fechaven.getId());
             }
         });
-        EditText tipotarjeta = (EditText)fragview.findViewById(R.id.AddtipoTarjetaEditText);
-        EditText numerotarjeta = (EditText)fragview.findViewById(R.id.numerotarjetaEditText);
-        Spinner cuentaafilida = (Spinner) fragview.findViewById(R.id.cuentaafiliadaSpinner);
+        final EditText tipotarjeta = (EditText)fragview.findViewById(R.id.AddtipoTarjetaEditText);
+        final EditText numerotarjeta = (EditText)fragview.findViewById(R.id.numerotarjetaEditText);
+        tipotarjeta.setText(Tarjeta_Controller.tarjeta.getTipotdc());
+        numerotarjeta.setText(Tarjeta_Controller.tarjeta.getNumero());
+        fechaven.setText(Tarjeta_Controller.tarjeta.getFechaven());
         Tarjeta_Controller.tipotarjeta = tipotarjeta;
         Tarjeta_Controller.numerotarjeta = numerotarjeta;
         Tarjeta_Controller.fechaven = fechaven;
+        Tarjeta_Controller.initManejador(parentActivity,this);
 
         Button botonaceptar = (Button)fragview.findViewById(R.id.agregarTarjetaButton);
         botonaceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (Tarjeta_Controller.validacionTarjetas(ModificarTarjetaCFragment.this)==0){
-                    parentActivity.changeFragment(new TarjetasCreditoFragment(), false);
-                    parentActivity.closeDrawerLayout();
+                    Tarjeta_Controller.modificarTarjeta(new Tarjeta_Credito(Tarjeta_Controller.tarjeta.getIdTDC(),
+                            tipotarjeta.getText().toString(),fechaven.getText().toString(),
+                            Tarjeta_Controller.tarjeta.getSaldo(), numerotarjeta.getText().toString()));
                 }
 
             }
@@ -140,5 +148,39 @@ public class ModificarTarjetaCFragment extends Fragment {
 
         }
     };
+
+
+    /**
+     * Response WebService
+     * se llena la lista con las consultas provenientes del WebService con la BD
+     * @param response Respuesta del WebService
+     */
+    @Override
+    public void obtuvoCorrectamente(Object response){
+        String recepcion  = (String)response;
+
+        if (!recepcion.equals("0"))
+        {
+            Toast.makeText(parentActivity,"Se ha modificado correctamente", Toast.LENGTH_SHORT).show();
+            if(Tarjeta_Controller.getCasoRequest() == 2 ){
+                Tarjeta_Controller.resetCasoRequest();
+                parentActivity.onBackPressed();
+            }else{
+
+                Tarjeta_Controller.resetCasoRequest();
+            }
+
+        }
+
+    }
+    /**
+     * Response WebService
+     * se llena la lista con las consultas provenientes del WebService con la BD
+     * @param response Error del WebService
+     */
+    @Override
+    public void noObtuvoCorrectamente(Object response){
+
+    }
 
 }

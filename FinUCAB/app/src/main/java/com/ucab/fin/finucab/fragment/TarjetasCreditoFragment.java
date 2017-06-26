@@ -224,11 +224,16 @@ public class TarjetasCreditoFragment extends Fragment  implements ResponseWebSer
         switch (item.getItemId()) {
 
             case R.id.deleteTarjetaOption:
-
-
+                Toast.makeText(getActivity(), "Eliminando Tarjeta...",Toast.LENGTH_LONG).show();
+                Tarjeta_Controller.borrarTarjeta(positionLongPress);
+                positionLongPress = -1;
                 return true;
 
             case R.id.editarTarjetaOption:
+                Tarjeta_Credito tar = Tarjeta_Controller.getListaTarjetas().get(positionLongPress);
+                Tarjeta_Controller.tarjeta = tar;
+                positionLongPress = -1;
+
                 parentActivity.changeFragment(new ModificarTarjetaCFragment(), false);
                 parentActivity.closeDrawerLayout();
                 return true;
@@ -264,13 +269,12 @@ public class TarjetasCreditoFragment extends Fragment  implements ResponseWebSer
                         for (int i = 0; i < mJsonArray.length(); i++) {   // iterate through jsonArray
                             String strJson = mJsonArray.getString(i);
                             JSONObject jObject = new JSONObject(strJson);
-
                             listaTarjetas.add(new Tarjeta_Credito(
                                     Integer.parseInt((String)jObject.get("tc_id")),
                                     (String) jObject.get("tc_tipo"),
                                     (String) jObject.get("tc_fechavencimiento"),
                                     Float.parseFloat((String) jObject.get("tc_saldo")),
-                                    (String) jObject.get("tc_numero")));
+                                    Tarjeta_Controller.Desencriptar((String) jObject.get("tc_numero"))));
 
                         }
 
@@ -286,8 +290,8 @@ public class TarjetasCreditoFragment extends Fragment  implements ResponseWebSer
                         break;
                     case 3:
 
-                        Toast.makeText(parentActivity, Parametros.getRespuesta(), Toast.LENGTH_SHORT).show();
-                        //Banco_Controller.obtenerTodasCategorias(false);
+                        Toast.makeText(parentActivity,"Se ha eliminado correctamente", Toast.LENGTH_SHORT).show();
+                        Tarjeta_Controller.obtenerTodasTarjetas(false);
 
                         break;
 

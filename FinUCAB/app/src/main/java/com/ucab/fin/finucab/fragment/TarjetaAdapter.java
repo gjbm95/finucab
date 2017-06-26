@@ -81,7 +81,8 @@ public class TarjetaAdapter extends RecyclerView.Adapter<TarjetaAdapter.TarjetaV
         Tarjeta_Credito pi = TarjetaList.get(i);
         TarjetaViewHolder.Tarjeta = pi;
         TarjetaViewHolder.tipotarjeta.setText("Tipo de Tarjeta: " + pi.getTipotdc());
-        TarjetaViewHolder.numeroTarjeta.setText("Nº: "+pi.getNumero());
+        TarjetaViewHolder.numeroTarjeta.setText("Nº: ************"+pi.getNumero().
+                substring(pi.getNumero().length()-3,pi.getNumero().length()));
         TarjetaViewHolder.fechavenTarjeta.setText("Fecha Ven: " +pi.getFechaven());
         TarjetaViewHolder.deudaTarjeta.setText("Deuda: " + Float.toString(pi.getSaldo()) + " Bs.");
         TarjetaViewHolder.itemView.setLongClickable(true);

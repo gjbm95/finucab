@@ -2,6 +2,7 @@ package com.ucab.fin.finucab.domain;
 
 import android.app.Activity;
 
+import com.ucab.fin.finucab.controllers.Tarjeta_Controller;
 import com.ucab.fin.finucab.webservice.ControlDatos;
 import com.ucab.fin.finucab.webservice.Parametros;
 import com.ucab.fin.finucab.webservice.Recepcion;
@@ -61,7 +62,7 @@ public class Manejador_Tarjeta {
     public void borrarTarjeta( int id) {
 
         Parametros.reset();
-        Parametros.setMetodo("Modulo2/eliminarTarjeta?datosBanco="+ String.valueOf(id));
+        Parametros.setMetodo("Modulo2/eliminarTDC?idtdc="+ String.valueOf(id));
         new Recepcion(actividad,intefaz).execute("GET");
 
     }
@@ -83,7 +84,7 @@ public class Manejador_Tarjeta {
             nuevo_tarjeta.put("tc_tipo",tarjeta.getTipotdc());
             nuevo_tarjeta.put("tc_fechavencimiento",tarjeta.getFechaven());
             nuevo_tarjeta.put("tc_saldo",Float.toString(tarjeta.getSaldo()));
-            nuevo_tarjeta.put("tc_numero",tarjeta.getNumero());
+            nuevo_tarjeta.put("tc_numero",Tarjeta_Controller.Encriptar(tarjeta.getNumero()));
             Parametros.reset();
             Parametros.setMetodo("Modulo2/agregarTDC?datosTDC="+
                     URLEncoder.encode(nuevo_tarjeta.toString()));
@@ -103,16 +104,17 @@ public class Manejador_Tarjeta {
      * @param tarjeta Tarjeta de Credito a modificar
      */
 
-    public void modificarBanco(Tarjeta_Credito tarjeta) {
+    public void modificarTarjeta(Tarjeta_Credito tarjeta) {
         try {
 
             int idUsuario = ControlDatos.getUsuario().getIdusuario();
             JSONObject nuevo_tarjeta = new JSONObject();
             nuevo_tarjeta.put("usuariou_id",Integer.toString(idUsuario));
+            nuevo_tarjeta.put("tc_id",Integer.toString(tarjeta.getIdTDC()));
             nuevo_tarjeta.put("tc_tipo",tarjeta.getTipotdc());
             nuevo_tarjeta.put("tc_fechavencimiento",tarjeta.getFechaven());
             nuevo_tarjeta.put("tc_saldo",Float.toString(tarjeta.getSaldo()));
-            nuevo_tarjeta.put("tc_numero",tarjeta.getNumero());
+            nuevo_tarjeta.put("tc_numero", Tarjeta_Controller.Encriptar(tarjeta.getNumero()));
             Parametros.reset();
             Parametros.setMetodo("Modulo2/actualizarTDC?datosTDC="+
                     URLEncoder.encode(nuevo_tarjeta.toString()));

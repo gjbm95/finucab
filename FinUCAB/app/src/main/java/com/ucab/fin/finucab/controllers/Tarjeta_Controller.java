@@ -6,6 +6,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.ucab.fin.finucab.domain.Categoria;
 import com.ucab.fin.finucab.domain.Cuenta_Bancaria;
 import com.ucab.fin.finucab.domain.Manejador_Banco;
 import com.ucab.fin.finucab.domain.Manejador_Tarjeta;
@@ -22,7 +23,15 @@ import com.ucab.fin.finucab.webservice.Parametros;
 import com.ucab.fin.finucab.webservice.Recepcion;
 import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
 
+import org.apache.commons.codec.binary.Base64;
+
+import java.security.MessageDigest;
 import java.util.ArrayList;
+import java.util.Arrays;
+
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 
 /**
  * Created by Junior on 21/06/2017.
@@ -31,23 +40,19 @@ import java.util.ArrayList;
 public class Tarjeta_Controller {
 
     private static Manejador_Tarjeta manejador;
+    public static Tarjeta_Credito tarjeta;
     public static int  casoRequest = -1;
     public static EditText tipotarjeta;  // EditText que contiene el tipo de la tarjeta.
     public static EditText numerotarjeta;// EditText que contiene el numero de la tajeta.
     public static EditText fechaven; // EditText que contiene la fecha de vencimiento de la tarjeta.
 
-
-
     public static void initManejador(Activity actividad, ResponseWebServiceInterface interfaz){
 
         if ( manejador == null ||  manejador.getIntefaz() != interfaz ) {
-
             manejador = new Manejador_Tarjeta(actividad, interfaz);
-
         }
 
     }
-
 
     /**
      * Colocar actual lista de categoria en el manejador
@@ -77,7 +82,29 @@ public class Tarjeta_Controller {
 
     }
 
+    /**
+     * Metodo encargado de llamar a modificar  la Tarjeta seleccionada
+     * @param tarjeta Tarjeta a modificar
+     */
+    public static void modificarTarjeta(Tarjeta_Credito tarjeta){
 
+        casoRequest = 2;
+        manejador.modificarTarjeta(tarjeta);
+
+    }
+
+
+    /**
+     * Metodo encargado de llamar a agregar tarjeta de credito
+     * @param posicion posicion seleccionada de la lista
+     */
+    public static void borrarTarjeta(int posicion){
+
+        casoRequest = 3;
+        int id = manejador.getultimasTarjetasObtenidas().get(posicion).getIdTDC();
+        manejador.borrarTarjeta(id);
+
+    }
 
     /**
      *  Metodo encargado de validar los datos suministrados en el registro de Tarjetas de Credito.
@@ -90,7 +117,7 @@ public class Tarjeta_Controller {
             verificoVacio(tipotarjeta);
             verificoLongitud(tipotarjeta,255,"string");
             verificoVacio(numerotarjeta);
-            verificoLongitud(numerotarjeta,21,"int");
+            verificoLongitudTarjeta(numerotarjeta,21,"int");
             verificoVacio(fechaven);
         } catch (CampoVacio_Exception e){
             e.getCampo().setError(e.getMessage());
@@ -138,6 +165,27 @@ public class Tarjeta_Controller {
             }
         }
     }
+
+    /**
+     * Realiza Validacion para verficar que los campos cumplan con el rango correcto
+     *
+     * @Param campo representa el EditText que contiene el texto a verificar
+     * @Param longitud representa el limite maximo que debe tener la cadena de caracteres a validad
+     * @Param tipo representa el tipo de dato del texto (String o Int)
+     **/
+    public static void verificoLongitudTarjeta(EditText campo, int longitud, String tipo)throws Longitud_Exception {
+        if (campo.getText().toString().length() >= longitud) {
+                Longitud_Exception campolargo = new Longitud_Exception("El numero es muy alto");
+                campolargo.setCampo(campo);
+                throw campolargo;
+        }
+        if (campo.getText().toString().length() <8) {
+            Longitud_Exception campolargo = new Longitud_Exception("El numero esta incompleto");
+            campolargo.setCampo(campo);
+            throw campolargo;
+        }
+    }
+
 
 
     /**
@@ -204,6 +252,75 @@ public class Tarjeta_Controller {
         casoRequest = 1;
         manejador.obtenerTodasTarjetas(showStatus);
 
+    }
+
+    /** Carga los datos para ser modificados.
+     *
+     * @param tarjeta Objeto de tipo tarjeta a ser modificado
+     */
+    public static void cargarModificarTarjeta(Tarjeta_Credito tarjeta)  {
+       numerotarjeta.setText(tarjeta.getNumero());
+       fechaven.setText(tarjeta.getFechaven());
+       tipotarjeta.setText(tarjeta.getTipotdc());
+
+    }
+
+
+    /** Metodo encargado de la seguridad de las tarjetas de credito.
+     *  Encripta los datos de la tarjeta de credito.
+     * @param texto Numero de la tarjeta de credito.
+     */
+    public static String Encriptar(String texto) {
+
+        String secretKey = "qualityinfosolutions"; //llave para encriptar datos
+        String base64EncryptedString = "";
+
+        try {
+
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] digestOfPassword = md.digest(secretKey.getBytes("utf-8"));
+            byte[] keyBytes = Arrays.copyOf(digestOfPassword, 24);
+
+            SecretKey key = new SecretKeySpec(keyBytes, "DESede");
+            Cipher cipher = Cipher.getInstance("DESede");
+            cipher.init(Cipher.ENCRYPT_MODE, key);
+
+            byte[] plainTextBytes = texto.getBytes("utf-8");
+            byte[] buf = cipher.doFinal(plainTextBytes);
+            byte[] base64Bytes = Base64.encodeBase64(buf);
+            base64EncryptedString = new String(base64Bytes);
+
+        } catch (Exception ex) {
+        }
+        return base64EncryptedString;
+    }
+
+    /** Metodo encargado de la seguridad de las tarjetas de credito.
+     *  Encripta los datos de la tarjeta de credito.
+     * @param textoEncriptado Numero de la tarjeta de credito.
+     */
+    public static String Desencriptar(String textoEncriptado){
+
+        String secretKey = "qualityinfosolutions"; //llave para desenciptar datos
+        String base64EncryptedString = "";
+
+        try {
+            byte[] message = Base64.decodeBase64(textoEncriptado.getBytes("utf-8"));
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] digestOfPassword = md.digest(secretKey.getBytes("utf-8"));
+            byte[] keyBytes = Arrays.copyOf(digestOfPassword, 24);
+            SecretKey key = new SecretKeySpec(keyBytes, "DESede");
+
+            Cipher decipher = Cipher.getInstance("DESede");
+            decipher.init(Cipher.DECRYPT_MODE, key);
+
+            byte[] plainText = decipher.doFinal(message);
+
+            base64EncryptedString = new String(plainText, "UTF-8");
+
+        } catch (Exception ex) {
+        }
+        return base64EncryptedString;
     }
 
 }
