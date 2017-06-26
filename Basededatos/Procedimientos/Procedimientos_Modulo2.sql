@@ -152,6 +152,21 @@ $BODY$
 LANGUAGE 'plpgsql';
 
 ------------------------------------- GESTION DE USUARIOS  --------------------------------------
+CREATE OR REPLACE FUNCTION update_usuario(id INT,usuario VARCHAR(50),nombre VARCHAR(50),apellido VARCHAR(50),correo VARCHAR(100),pregunta VARCHAR(1000),respuesta VARCHAR(1000),contrasena VARCHAR(1000)) 
+    RETURNS void AS $$
+    BEGIN
+      UPDATE usuario SET
+	u_usuario = $2,
+	u_nombre = nombre,
+	u_apellido = apellido,
+	u_correo = correo,
+	u_pregunta = pregunta,
+	u_respuesta = respuesta
+      WHERE u_id = $1;	
+      
+    END;
+    $$ LANGUAGE plpgsql;
+
 
 CREATE OR REPLACE FUNCTION modificarCuentaUsuario(varchar(255), varchar(255), varchar(255), varchar(255),varchar(255), varchar(255), varchar(255),int) RETURNS integer AS $$
 DECLARE
