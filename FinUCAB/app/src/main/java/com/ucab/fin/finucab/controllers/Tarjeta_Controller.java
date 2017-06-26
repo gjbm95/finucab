@@ -1,11 +1,15 @@
 package com.ucab.fin.finucab.controllers;
 
+import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.ucab.fin.finucab.domain.Cuenta_Bancaria;
 import com.ucab.fin.finucab.domain.Manejador_Banco;
+import com.ucab.fin.finucab.domain.Manejador_Tarjeta;
+import com.ucab.fin.finucab.domain.Tarjeta_Credito;
 import com.ucab.fin.finucab.exceptions.CampoVacio_Exception;
 import com.ucab.fin.finucab.exceptions.ErrorSpinner_Exception;
 import com.ucab.fin.finucab.exceptions.Longitud_Exception;
@@ -13,6 +17,12 @@ import com.ucab.fin.finucab.fragment.AgregarBancoFragment;
 import com.ucab.fin.finucab.fragment.AgregarTarjetaCFragment;
 import com.ucab.fin.finucab.fragment.ModificarBancoFragment;
 import com.ucab.fin.finucab.fragment.ModificarTarjetaCFragment;
+import com.ucab.fin.finucab.webservice.ControlDatos;
+import com.ucab.fin.finucab.webservice.Parametros;
+import com.ucab.fin.finucab.webservice.Recepcion;
+import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
+
+import java.util.ArrayList;
 
 /**
  * Created by Junior on 21/06/2017.
@@ -20,15 +30,57 @@ import com.ucab.fin.finucab.fragment.ModificarTarjetaCFragment;
 
 public class Tarjeta_Controller {
 
-    private static Manejador_Banco manejador;
+    private static Manejador_Tarjeta manejador;
     public static int  casoRequest = -1;
     public static EditText tipotarjeta;  // EditText que contiene el tipo de la tarjeta.
     public static EditText numerotarjeta;// EditText que contiene el numero de la tajeta.
     public static EditText fechaven; // EditText que contiene la fecha de vencimiento de la tarjeta.
-    public static Spinner cuentaafiliada; // Spinner que contiene la cuenta a la que esta afilida.
+
+
+
+    public static void initManejador(Activity actividad, ResponseWebServiceInterface interfaz){
+
+        if ( manejador == null ||  manejador.getIntefaz() != interfaz ) {
+
+            manejador = new Manejador_Tarjeta(actividad, interfaz);
+
+        }
+
+    }
+
 
     /**
-     *  Metodo encargado de validar los datos suministrados en el registro de cuentas bancarias.
+     * Colocar actual lista de categoria en el manejador
+     * @param tarjetas
+     */
+    public static void setListaTarjetas(ArrayList<Tarjeta_Credito> tarjetas){
+
+        manejador.setUltimasTarjetasObtenidas(tarjetas);
+    }
+
+    /**
+     * Colocar actual lista de categoria en el manejador
+     * @return Lista de categoria cargada
+     */
+    public static ArrayList<Tarjeta_Credito> getListaTarjetas(){
+
+        return manejador.getultimasTarjetasObtenidas();
+    }
+    /**
+     *  Metodo encargado de llamar a agregar Tarjeta
+     * @param tarjeta Tarjeta de Creditoa registrar
+     */
+    public static void registrarTarjeta(Tarjeta_Credito tarjeta){
+
+        casoRequest = 1;
+        manejador.agregarTarjeta(tarjeta);
+
+    }
+
+
+
+    /**
+     *  Metodo encargado de validar los datos suministrados en el registro de Tarjetas de Credito.
      *
      * @return retorna 0 si no hay ningun error y retorna 1 si lo hay
      */
@@ -40,28 +92,11 @@ public class Tarjeta_Controller {
             verificoVacio(numerotarjeta);
             verificoLongitud(numerotarjeta,21,"int");
             verificoVacio(fechaven);
-            verificoCuentaAfiliada(cuentaafiliada);
         } catch (CampoVacio_Exception e){
             e.getCampo().setError(e.getMessage());
             return 1;
         } catch (Longitud_Exception e){
             e.getCampo().setError(e.getMessage());
-            return 1;
-        } catch (ErrorSpinner_Exception e) {
-
-            if (fragment instanceof AgregarTarjetaCFragment){
-                AgregarTarjetaCFragment frag = (AgregarTarjetaCFragment)fragment;
-                Toast.makeText(fragment.getActivity(),"Debe seleccionar un tipo de cuenta",
-                        Toast.LENGTH_SHORT).show();
-
-            }
-            if (fragment instanceof ModificarTarjetaCFragment){
-                ModificarTarjetaCFragment frag = (ModificarTarjetaCFragment)fragment;
-                Toast.makeText(fragment.getActivity(),"Debe seleccionar un tipo de cuenta",
-                        Toast.LENGTH_SHORT).show();
-
-            }
-
             return 1;
         }
         return 0;
@@ -144,7 +179,31 @@ public class Tarjeta_Controller {
 
     }
 
+    /**
+     * Resetea el caso del request al WebService
+     */
+    public static void resetCasoRequest(){
+        casoRequest = -1;
+    }
 
+    /**
+     * Obtener caso del request que se esta realizando
+     * @return
+     */
+    public static int getCasoRequest(){
+        return casoRequest;
+    }
 
+    /**
+     * Metodo encargado de llamar a obtener las categorias
+     *
+     * @param showStatus Mostrar o no el dialog de Cargando
+     */
+    public static void obtenerTodasTarjetas(boolean showStatus){
+
+        casoRequest = 1;
+        manejador.obtenerTodasTarjetas(showStatus);
+
+    }
 
 }

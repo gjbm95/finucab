@@ -37,9 +37,6 @@ public class Manejador_Banco {
         this.intefaz = null;
     }
 
-
-
-
     public ResponseWebServiceInterface getIntefaz() {
         return intefaz;
     }
@@ -72,19 +69,20 @@ public class Manejador_Banco {
      *
      * @param banco Banco a registrar
      */
-    public void Banco(Cuenta_Bancaria banco) {
+    public void agregarBanco(Cuenta_Bancaria banco) {
 
         try {
 
             int idUsuario = ControlDatos.getUsuario().getIdusuario();
             JSONObject nuevo_banco = new JSONObject();
-            nuevo_banco.put("NombreBanco",banco.getNombreBanco());
-            nuevo_banco.put("NumCuenta",banco.getNumcuenta());
-            nuevo_banco.put("saldoActual",banco.getSaldoActual());
-            nuevo_banco.put("tipoCuenta",banco.getTipoCuenta());
-
+            nuevo_banco.put("usuariou_id",Integer.toString(idUsuario));
+            nuevo_banco.put("ct_nombrebanco",banco.getNombreBanco());
+            nuevo_banco.put("ct_numcuenta",banco.getNumcuenta());
+            nuevo_banco.put("ct_saldoactual",Float.toString(banco.getSaldoActual()));
+            nuevo_banco.put("ct_tipocuenta",banco.getTipoCuenta());
             Parametros.reset();
-            Parametros.setMetodo("Modulo2/registrarBanco?datosBanco="+ URLEncoder.encode(nuevo_banco.toString()));
+            Parametros.setMetodo("Modulo2/agregarCuentaBancaria?datosCuenta="+
+                    URLEncoder.encode(nuevo_banco.toString()));
             new Recepcion(actividad,intefaz).execute("GET");
 
         } catch (JSONException e) {
@@ -92,10 +90,6 @@ public class Manejador_Banco {
         }
 
     }
-
-
-
-
 
     /**
      * Creacion del metodo modificar Banco
@@ -109,13 +103,15 @@ public class Manejador_Banco {
 
             int idUsuario = ControlDatos.getUsuario().getIdusuario();
             JSONObject nuevo_banco = new JSONObject();
-            nuevo_banco.put("NombreBanco",banco.getNombreBanco());
-            nuevo_banco.put("NumCuenta",banco.getNumcuenta());
-            nuevo_banco.put("saldoActual",banco.getSaldoActual());
-            nuevo_banco.put("tipoCuenta",banco.getTipoCuenta());
+            nuevo_banco.put("usuariou_id",idUsuario);
+            nuevo_banco.put("ct_nombrebanco",banco.getNombreBanco());
+            nuevo_banco.put("ct_numcuenta",banco.getNumcuenta());
+            nuevo_banco.put("ct_saldoactual",banco.getSaldoActual());
+            nuevo_banco.put("ct_tipocuenta",banco.getTipoCuenta());
 
             Parametros.reset();
-            Parametros.setMetodo("Modulo4/modificarCategoria?datosCategoria="+ URLEncoder.encode(nuevo_banco.toString()));
+            Parametros.setMetodo("Modulo4/modificarCategoria?datosCategoria="+
+                    URLEncoder.encode(nuevo_banco.toString()));
             new Recepcion(actividad,intefaz).execute("GET");
 
         } catch (JSONException e) {

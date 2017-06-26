@@ -93,7 +93,6 @@ public class ModificarTarjetaCFragment extends Fragment {
         Tarjeta_Controller.tipotarjeta = tipotarjeta;
         Tarjeta_Controller.numerotarjeta = numerotarjeta;
         Tarjeta_Controller.fechaven = fechaven;
-        Tarjeta_Controller.cuentaafiliada = cuentaafilida;
 
         Button botonaceptar = (Button)fragview.findViewById(R.id.agregarTarjetaButton);
         botonaceptar.setOnClickListener(new View.OnClickListener() {

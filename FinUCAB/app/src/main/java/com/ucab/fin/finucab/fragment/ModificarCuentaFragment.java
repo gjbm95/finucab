@@ -9,13 +9,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
+import com.ucab.fin.finucab.controllers.Categoria_Controller;
 import com.ucab.fin.finucab.controllers.GestionUsuarios_Controller;
 import com.ucab.fin.finucab.webservice.ControlDatos;
+import com.ucab.fin.finucab.webservice.Parametros;
+import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
 
-public class ModificarCuentaFragment extends Fragment {
+public class ModificarCuentaFragment extends Fragment  implements ResponseWebServiceInterface {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -88,13 +92,45 @@ public class ModificarCuentaFragment extends Fragment {
             public void onClick(View v) {
                 if (GestionUsuarios_Controller.validacionModificacionDatos()==0)
                 {
-                    parentActivity.changeFragment(new PerfilFragment(), false);
-                    parentActivity.closeDrawerLayout();
+                    GestionUsuarios_Controller.actualizarUsuario(parentActivity);
+                    GestionUsuarios_Controller.resetarVariables();
                 }
             }
         });
 
         return fragview;
+
+    }
+
+
+    /**
+     * Response WebService
+     * se llena la lista con las consultas provenientes del WebService con la BD
+     * @param response Respuesta del WebService
+     */
+    @Override
+    public void obtuvoCorrectamente(Object response){
+
+        Toast.makeText(parentActivity, Parametros.getRespuesta(), Toast.LENGTH_SHORT).show();
+
+        if(GestionUsuarios_Controller.getCasoRequest() == 1 ){
+            GestionUsuarios_Controller.resetCasoRequest();
+            GestionUsuarios_Controller.resetarVariables();
+            parentActivity.onBackPressed();
+        }else{
+
+            GestionUsuarios_Controller.resetCasoRequest();
+        }
+
+
+    }
+    /**
+     * Response WebService
+     * se llena la lista con las consultas provenientes del WebService con la BD
+     * @param response Error del WebService
+     */
+    @Override
+    public void noObtuvoCorrectamente(Object response){
 
     }
 

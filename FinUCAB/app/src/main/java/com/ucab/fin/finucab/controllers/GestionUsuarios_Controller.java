@@ -34,6 +34,7 @@ import static org.apache.commons.codec.binary.Base64.encodeBase64;
 
 public class GestionUsuarios_Controller {
     //Recursos:
+    public static int  casoRequest = -1;
     public static EditText nombre;  // EditText que contiene el nombre del usuario
     public static EditText apellido;// EditText que contiene el apellido del usuario
     public static EditText correo; // EditText que contiene el correo del usuario
@@ -437,6 +438,37 @@ public class GestionUsuarios_Controller {
 
     }
 
+    public static void actualizarUsuario(Activity actividad) {
+        casoRequest = 1;
+        ControlDatos.getUsuario().setUsuario(GestionUsuarios_Controller.usuario.getText().toString());
+        ControlDatos.getUsuario().setNombre(GestionUsuarios_Controller.nombre.getText().toString());
+        ControlDatos.getUsuario().setApellido(GestionUsuarios_Controller.apellido.getText().toString());
+        ControlDatos.getUsuario().setCorreo(GestionUsuarios_Controller.correo.getText().toString());
+        JSONObject nuevo_usuario = new JSONObject();
+        try {
+            nuevo_usuario.put("u_id",Integer.toString(ControlDatos.getUsuario().getIdusuario()));
+            nuevo_usuario.put("u_usuario",ControlDatos.getUsuario().getUsuario());
+            nuevo_usuario.put("u_nombre",ControlDatos.getUsuario().getNombre());
+            nuevo_usuario.put("u_apellido",ControlDatos.getUsuario().getApellido());
+            nuevo_usuario.put("u_correo",ControlDatos.getUsuario().getCorreo());
+            nuevo_usuario.put("u_pregunta",ControlDatos.getUsuario().getPregunta());
+            nuevo_usuario.put("u_respuesta",ControlDatos.getUsuario().getRespuesta());
+            nuevo_usuario.put("u_password",ControlDatos.getUsuario().getContrasena());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Parametros.reset();
+        Parametros.setMetodo("Modulo2/actualizarDatosUsuario?datosUsuario="+
+                URLEncoder.encode(nuevo_usuario.toString()));
+        new Recepcion(actividad).execute("GET");
+
+    }
+
+
+
+
+
     /**
      * Función de tipo entero que devuelve el codigo hash del la constrasena suministrada
      *
@@ -479,6 +511,23 @@ public class GestionUsuarios_Controller {
 
 
     }
+
+
+    /**
+     * Resetea el caso del request al WebService
+     */
+    public static void resetCasoRequest(){
+        casoRequest = -1;
+    }
+
+    /**
+     * Obtener caso del request que se esta realizando
+     * @return
+     */
+    public static int getCasoRequest(){
+        return casoRequest;
+    }
+
 
     /**Inicializo nuevamente las variables
      *

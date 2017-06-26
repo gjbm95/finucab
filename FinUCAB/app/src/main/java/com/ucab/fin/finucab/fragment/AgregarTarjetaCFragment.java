@@ -13,17 +13,21 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
 import com.ucab.fin.finucab.controllers.Banco_Controller;
 import com.ucab.fin.finucab.controllers.Tarjeta_Controller;
+import com.ucab.fin.finucab.domain.Cuenta_Bancaria;
+import com.ucab.fin.finucab.domain.Tarjeta_Credito;
+import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
 
 import java.text.DateFormat;
 import java.util.Calendar;
 
 
-public class AgregarTarjetaCFragment extends Fragment {
+public class AgregarTarjetaCFragment extends Fragment  implements ResponseWebServiceInterface {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -87,21 +91,21 @@ public class AgregarTarjetaCFragment extends Fragment {
                 showDatePicker(fechaven.getId());
             }
         });
-        EditText tipotarjeta = (EditText)fragview.findViewById(R.id.AddtipoTarjetaEditText);
-        EditText numerotarjeta = (EditText)fragview.findViewById(R.id.numerotarjetaEditText);
-        Spinner cuentaafilida = (Spinner) fragview.findViewById(R.id.cuentaafiliadaSpinner);
+        final EditText tipotarjeta = (EditText)fragview.findViewById(R.id.AddtipoTarjetaEditText);
+        final EditText numerotarjeta = (EditText)fragview.findViewById(R.id.numerotarjetaEditText);
         Tarjeta_Controller.tipotarjeta = tipotarjeta;
         Tarjeta_Controller.numerotarjeta = numerotarjeta;
         Tarjeta_Controller.fechaven = fechaven;
-        Tarjeta_Controller.cuentaafiliada = cuentaafilida;
+        Tarjeta_Controller.initManejador(parentActivity,this);
 
         Button botonaceptar = (Button)fragview.findViewById(R.id.agregarTarjetaButton);
         botonaceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (Tarjeta_Controller.validacionTarjetas(AgregarTarjetaCFragment.this)==0){
-                    parentActivity.changeFragment(new TarjetasCreditoFragment(), false);
-                    parentActivity.closeDrawerLayout();
+                    Tarjeta_Controller.registrarTarjeta(new Tarjeta_Credito(0,
+                            tipotarjeta.getText().toString(),fechaven.getText().toString(),
+                            0, numerotarjeta.getText().toString()));
                 }
 
             }
@@ -141,5 +145,40 @@ public class AgregarTarjetaCFragment extends Fragment {
 
         }
     };
+
+
+    /**
+     * Response WebService
+     * se llena la lista con las consultas provenientes del WebService con la BD
+     * @param response Respuesta del WebService
+     */
+    @Override
+    public void obtuvoCorrectamente(Object response){
+        String recepcion  = (String)response;
+        Toast.makeText(parentActivity,"Se ha agregado correctamente", Toast.LENGTH_SHORT).show();
+        if (!recepcion.equals("0"))
+        {
+
+            if(Tarjeta_Controller.getCasoRequest() == 1 ){
+                Tarjeta_Controller.resetCasoRequest();
+                parentActivity.onBackPressed();
+            }else{
+
+                Tarjeta_Controller.resetCasoRequest();
+            }
+
+        }
+
+    }
+    /**
+     * Response WebService
+     * se llena la lista con las consultas provenientes del WebService con la BD
+     * @param response Error del WebService
+     */
+    @Override
+    public void noObtuvoCorrectamente(Object response){
+
+    }
+
 
 }

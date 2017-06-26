@@ -21,6 +21,7 @@ import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
 import com.ucab.fin.finucab.controllers.Banco_Controller;
 import com.ucab.fin.finucab.controllers.Categoria_Controller;
+import com.ucab.fin.finucab.controllers.Tarjeta_Controller;
 import com.ucab.fin.finucab.domain.Cuenta_Bancaria;
 import com.ucab.fin.finucab.domain.Tarjeta_Credito;
 import com.ucab.fin.finucab.webservice.Parametros;
@@ -87,7 +88,7 @@ public class TarjetasCreditoFragment extends Fragment  implements ResponseWebSer
         View fragview = inflater.inflate(R.layout.tarjetas_credito_fragment, container, false);
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Tarjetas de Credito");
-
+        Tarjeta_Controller.initManejador(parentActivity,this);
         // Configuracion inicial del boton flotante
         fab = (FloatingActionButton) fragview.findViewById(R.id.addFloatingBtnTarjetas);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -119,7 +120,7 @@ public class TarjetasCreditoFragment extends Fragment  implements ResponseWebSer
 
         }));
 
-        llenadoPrueba();
+        Tarjeta_Controller.obtenerTodasTarjetas(true);
 
 
         return fragview;
@@ -254,27 +255,27 @@ public class TarjetasCreditoFragment extends Fragment  implements ResponseWebSer
                 Toast.makeText(parentActivity, "Ups, ha ocurrido un error", Toast.LENGTH_SHORT).show();
 
             }else {
-                switch (Categoria_Controller.getCasoRequest()) {
+                switch (Tarjeta_Controller.getCasoRequest()) {
 
                     case 0:
-                        ArrayList listaBancos = new ArrayList<Cuenta_Bancaria>();
+                        ArrayList listaTarjetas = new ArrayList<Tarjeta_Credito>();
                         JSONArray mJsonArray = new JSONArray(Parametros.getRespuesta());
 
                         for (int i = 0; i < mJsonArray.length(); i++) {   // iterate through jsonArray
                             String strJson = mJsonArray.getString(i);
                             JSONObject jObject = new JSONObject(strJson);
 
-                            listaBancos.add(new Cuenta_Bancaria((int) jObject.get("Id"),
-                                    (String) jObject.get("NombreBanco"),
-                                    (String) jObject.get("NumCuenta"),
-                                    (float) jObject.get("saldoActual"),
-                                    (String) jObject.get("tipoCuenta")));
+                            listaTarjetas.add(new Tarjeta_Credito((int) jObject.get("tc_id"),
+                                    (String) jObject.get("tc_tipo"),
+                                    (String) jObject.get("tc_fechavencimiento"),
+                                    (float) jObject.get("tc_saldo"),
+                                    (String) jObject.get("tc_numero")));
 
                         }
 
-                        Banco_Controller.setListaBancos(listaBancos);
-                        recycleList.setAdapter(new BancoAdapter(listaBancos));
-                        Banco_Controller.resetCasoRequest();
+                        Tarjeta_Controller.setListaTarjetas(listaTarjetas);
+                        recycleList.setAdapter(new BancoAdapter(listaTarjetas));
+                        Tarjeta_Controller.resetCasoRequest();
 
                         break;
 

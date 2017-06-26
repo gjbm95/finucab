@@ -1,11 +1,13 @@
 package com.ucab.fin.finucab.controllers;
 
 
+import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.ucab.fin.finucab.domain.Categoria;
 import com.ucab.fin.finucab.domain.Cuenta_Bancaria;
 import com.ucab.fin.finucab.domain.Manejador_Banco;
 import com.ucab.fin.finucab.domain.Manejador_Categoria;
@@ -15,6 +17,7 @@ import com.ucab.fin.finucab.exceptions.ErrorSpinner_Exception;
 import com.ucab.fin.finucab.exceptions.Longitud_Exception;
 import com.ucab.fin.finucab.fragment.AgregarBancoFragment;
 import com.ucab.fin.finucab.fragment.ModificarBancoFragment;
+import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
 
 import java.util.ArrayList;
 
@@ -30,6 +33,19 @@ public class Banco_Controller {
     public static EditText numerocuenta;// EditText que contiene el numero de cuenta
     public static EditText saldoinicial; // EditText que contiene el saldo inicial de la cuenta
     public static Spinner tipocuenta; // Spinner que contiene el tipo de cuenta seleccionado
+
+
+    public static void initManejador(Activity actividad, ResponseWebServiceInterface interfaz){
+
+        if ( manejador == null ||  manejador.getIntefaz() != interfaz ) {
+
+            manejador = new Manejador_Banco(actividad, interfaz);
+
+        }
+
+    }
+
+
 
     /**
      * Colocar actual lista de categoria en el manejador
@@ -63,6 +79,22 @@ public class Banco_Controller {
     public static int getCasoRequest(){
         return casoRequest;
     }
+
+
+    /**
+     *  Metodo encargado de llamar a agregar categoria
+     * @param banco Cuenta bancaria a registrar
+     */
+    public static void registrarBanco(Cuenta_Bancaria banco){
+
+        casoRequest = 1;
+        manejador.agregarBanco(banco);
+
+    }
+
+
+
+
 
     /**
      * Metodo encargado de llamar a obtener las bancos
