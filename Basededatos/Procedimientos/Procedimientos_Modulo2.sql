@@ -64,7 +64,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION obtenerCuentasBancarias
-   ( IN PV_OPCION VARCHAR(10) default 'OBTENER', filtrousuario integer default 0,
+   ( IN PV_OPCION VARCHAR(50), filtrousuario integer,
    	 OUT ct_id integer, 
      OUT ct_nombrebanco varchar(255), 
      OUT ct_numcuenta varchar(255), 
