@@ -9,20 +9,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
 import com.ucab.fin.finucab.controllers.Banco_Controller;
+import com.ucab.fin.finucab.controllers.Tarjeta_Controller;
+import com.ucab.fin.finucab.domain.Cuenta_Bancaria;
+import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ModificarBancoFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ModificarBancoFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class ModificarBancoFragment extends Fragment {
+public class ModificarBancoFragment extends Fragment  implements ResponseWebServiceInterface {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -32,7 +28,6 @@ public class ModificarBancoFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     MainActivity parentActivity;
-    private OnFragmentInteractionListener mListener;
 
     public ModificarBancoFragment() {
         // Required empty public constructor
@@ -72,22 +67,32 @@ public class ModificarBancoFragment extends Fragment {
         View view = inflater.inflate(R.layout.modificar_banco_fragment, container, false);
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Modificar Banco");
-        EditText nombrebanco = (EditText)view.findViewById(R.id.nombreEditText);
-        EditText numerocuenta = (EditText)view.findViewById(R.id.numerocuentaEditText);
-        Spinner tipocuenta = (Spinner) view.findViewById(R.id.tipocuentaSpinner);
-        EditText saldoinicial = (EditText)view.findViewById(R.id.fechavenEditText);
+        final EditText nombrebanco = (EditText)view.findViewById(R.id.nombreEditText);
+        final EditText numerocuenta = (EditText)view.findViewById(R.id.numerocuentaEditText);
+        final Spinner tipocuenta = (Spinner) view.findViewById(R.id.tipocuentaSpinner);
+        final EditText saldoinicial = (EditText)view.findViewById(R.id.fechavenEditText);
+        nombrebanco.setText(Banco_Controller.banco.getNombreBanco());
+        numerocuenta.setText(Banco_Controller.banco.getNumcuenta());
+        saldoinicial.setText(Float.toString(Banco_Controller.banco.getSaldoActual()));
+        if (Banco_Controller.banco.getTipoCuenta().equals("Cuenta Corriente"))
+        tipocuenta.setSelection(1);
+        if (Banco_Controller.banco.getTipoCuenta().equals("Cuenta de Ahorro"))
+        tipocuenta.setSelection(2);
         Banco_Controller.nombrebanco = nombrebanco;
         Banco_Controller.numerocuenta = numerocuenta;
         Banco_Controller.saldoinicial = saldoinicial;
         Banco_Controller.tipocuenta = tipocuenta;
+        Banco_Controller.initManejador(parentActivity,this);
 
         Button botonaceptar = (Button)view.findViewById(R.id.agregarBancoButton);
         botonaceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (Banco_Controller.validacionBancos(ModificarBancoFragment.this)==0){
-                    parentActivity.changeFragment(new BancosAfiliadosFragment(), false);
-                    parentActivity.closeDrawerLayout();
+                    Banco_Controller.modificarBanco(new Cuenta_Bancaria(Banco_Controller.banco.getIdCuenta(),
+                            nombrebanco.getText().toString(),numerocuenta.getText().toString(),
+                            Float.parseFloat(saldoinicial.getText().toString()),
+                            tipocuenta.getSelectedItem().toString()));
                 }
 
             }
@@ -97,25 +102,39 @@ public class ModificarBancoFragment extends Fragment {
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+    /**
+     * Response WebService
+     * se llena la lista con las consultas provenientes del WebService con la BD
+     * @param response Respuesta del WebService
+     */
+    @Override
+    public void obtuvoCorrectamente(Object response){
+        String recepcion  = (String)response;
+
+        if (!recepcion.equals("0"))
+        {
+            System.out.println("Paseeeeee");
+            Toast.makeText(parentActivity,"Se ha modificado correctamente", Toast.LENGTH_SHORT).show();
+            if(Banco_Controller.getCasoRequest() == 2 ){
+                Banco_Controller.resetCasoRequest();
+                parentActivity.onBackPressed();
+            }else{
+
+                Banco_Controller.resetCasoRequest();
+            }
+
         }
+
+    }
+    /**
+     * Response WebService
+     * se llena la lista con las consultas provenientes del WebService con la BD
+     * @param response Error del WebService
+     */
+    @Override
+    public void noObtuvoCorrectamente(Object response){
+
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
+
 }

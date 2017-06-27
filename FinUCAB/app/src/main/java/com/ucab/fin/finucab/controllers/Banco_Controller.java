@@ -11,6 +11,7 @@ import com.ucab.fin.finucab.domain.Categoria;
 import com.ucab.fin.finucab.domain.Cuenta_Bancaria;
 import com.ucab.fin.finucab.domain.Manejador_Banco;
 import com.ucab.fin.finucab.domain.Manejador_Categoria;
+import com.ucab.fin.finucab.domain.Tarjeta_Credito;
 import com.ucab.fin.finucab.exceptions.CampoVacio_Exception;
 import com.ucab.fin.finucab.exceptions.ContrasenasDiferentes_Exception;
 import com.ucab.fin.finucab.exceptions.ErrorSpinner_Exception;
@@ -28,6 +29,7 @@ import java.util.ArrayList;
 public class Banco_Controller {
 
     private static Manejador_Banco manejador;
+    public static Cuenta_Bancaria banco;
     public static int  casoRequest = -1;
     public static EditText nombrebanco;  // EditText que contiene el nombre del banco
     public static EditText numerocuenta;// EditText que contiene el numero de cuenta
@@ -45,6 +47,29 @@ public class Banco_Controller {
 
     }
 
+
+    /**
+     * Metodo encargado de llamar a modificar  la Tarjeta seleccionada
+     * @param banco  a modificar
+     */
+    public static void modificarBanco(Cuenta_Bancaria banco){
+
+        casoRequest = 2;
+        manejador.modificarBanco(banco);
+
+    }
+
+    /**
+     * Metodo encargado de llamar a eliminar Cuenta bancaria
+     * @param posicion posicion seleccionada de la lista
+     */
+    public static void borrarBanco(int posicion){
+
+        casoRequest = 3;
+        int id = manejador.getUltimosBancosObtenidos().get(posicion).getIdCuenta();
+        manejador.borrarBanco(id);
+
+    }
 
 
     /**

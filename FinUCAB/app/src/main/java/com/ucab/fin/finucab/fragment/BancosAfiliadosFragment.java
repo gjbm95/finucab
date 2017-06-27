@@ -21,8 +21,10 @@ import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
 import com.ucab.fin.finucab.controllers.Banco_Controller;
 import com.ucab.fin.finucab.controllers.Categoria_Controller;
+import com.ucab.fin.finucab.controllers.Tarjeta_Controller;
 import com.ucab.fin.finucab.domain.Categoria;
 import com.ucab.fin.finucab.domain.Cuenta_Bancaria;
+import com.ucab.fin.finucab.domain.Tarjeta_Credito;
 import com.ucab.fin.finucab.webservice.Parametros;
 import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
 
@@ -89,7 +91,7 @@ public class BancosAfiliadosFragment extends Fragment implements ResponseWebServ
         View fragview = inflater.inflate(R.layout.bancos_afiliados_fragment, container, false);
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Bancos Afiliados");
-
+        Banco_Controller.initManejador(parentActivity,this);
         // Configuracion inicial del boton flotante
         fab = (FloatingActionButton) fragview.findViewById(R.id.addFloatingBtnBancos);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -121,7 +123,7 @@ public class BancosAfiliadosFragment extends Fragment implements ResponseWebServ
 
         }));
 
-        llenadoPrueba();
+        Banco_Controller.obtenerTodosBancos(true);
 
         return fragview;
     }
@@ -171,11 +173,16 @@ public class BancosAfiliadosFragment extends Fragment implements ResponseWebServ
         switch (item.getItemId()) {
 
             case R.id.deleteBancoOption:
-
+                Toast.makeText(getActivity(), "Eliminando Cuenta...",Toast.LENGTH_LONG).show();
+                Banco_Controller.borrarBanco(positionLongPress);
+                positionLongPress = -1;
 
                 return true;
 
             case R.id.editarBancoOption:
+                Cuenta_Bancaria ban = Banco_Controller.getListaBancos().get(positionLongPress);
+                Banco_Controller.banco = ban;
+                positionLongPress = -1;
                 parentActivity.changeFragment(new ModificarBancoFragment(), false);
                 parentActivity.closeDrawerLayout();
                 return true;
@@ -264,7 +271,7 @@ public class BancosAfiliadosFragment extends Fragment implements ResponseWebServ
                 Toast.makeText(parentActivity, "Ups, ha ocurrido un error", Toast.LENGTH_SHORT).show();
 
             }else {
-                switch (Categoria_Controller.getCasoRequest()) {
+                switch (Banco_Controller.getCasoRequest()) {
 
                     case 0:
                         ArrayList listaBancos = new ArrayList<Cuenta_Bancaria>();
@@ -274,11 +281,13 @@ public class BancosAfiliadosFragment extends Fragment implements ResponseWebServ
                             String strJson = mJsonArray.getString(i);
                             JSONObject jObject = new JSONObject(strJson);
 
-                            listaBancos.add(new Cuenta_Bancaria((int) jObject.get("Id"),
-                                    (String) jObject.get("NombreBanco"),
-                                    (String) jObject.get("NumCuenta"),
-                                    (float) jObject.get("saldoActual"),
-                                    (String) jObject.get("tipoCuenta")));
+                            listaBancos.add(new Cuenta_Bancaria(
+                                    Integer.parseInt((String) jObject.get("ct_id")),
+                                    (String) jObject.get("ct_nombrebanco"),
+                                    (String) jObject.get("ct_numerocuenta"),
+                                    Float.parseFloat((String) jObject.get("ct_saldoactual")),
+                                    (String) jObject.get("ct_tipo")
+                            ));
 
                         }
 
@@ -294,7 +303,7 @@ public class BancosAfiliadosFragment extends Fragment implements ResponseWebServ
                         break;
                     case 3:
 
-                        Toast.makeText(parentActivity, Parametros.getRespuesta(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(parentActivity,"Se ha eliminado correctamente", Toast.LENGTH_SHORT).show();
                         Banco_Controller.obtenerTodosBancos(false);
 
                         break;

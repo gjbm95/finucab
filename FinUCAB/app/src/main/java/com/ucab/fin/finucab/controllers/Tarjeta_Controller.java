@@ -95,7 +95,7 @@ public class Tarjeta_Controller {
 
 
     /**
-     * Metodo encargado de llamar a agregar tarjeta de credito
+     * Metodo encargado de llamar a eliminar tarjeta de credito
      * @param posicion posicion seleccionada de la lista
      */
     public static void borrarTarjeta(int posicion){
