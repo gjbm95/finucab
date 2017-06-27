@@ -70,7 +70,7 @@ CREATE OR REPLACE FUNCTION obtenerCuentasBancarias
      OUT ct_numcuenta varchar(255), 
      OUT ct_tipocuenta varchar(255), 
      OUT ct_saldo float4,
-     OUT usuariou_id integer
+     OUT uusuariou_id integer
    ) RETURNS setof record AS
 $BODY$
 BEGIN
