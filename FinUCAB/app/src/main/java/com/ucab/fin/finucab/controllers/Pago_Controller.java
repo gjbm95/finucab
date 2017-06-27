@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.ucab.fin.finucab.domain.Categoria;
+import com.ucab.fin.finucab.domain.CategoriaSpinner;
 import com.ucab.fin.finucab.domain.Manejador_Categoria;
 import com.ucab.fin.finucab.domain.Manejador_Pago;
 import com.ucab.fin.finucab.domain.Pago;
@@ -18,6 +19,7 @@ import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
 import java.net.URLEncoder;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  *Modulo 5 - Modulo de  Gestion de Pagos
@@ -41,6 +43,8 @@ public class Pago_Controller {
     private static int  casoRequest = -1;
     public static Object fragment; //Fragment que se esta controlando
 
+    public static Manejador_Categoria categoriaC;
+    public static LinkedList<CategoriaSpinner> categorias;
     /**
      * Inicializar de ser necesario el manejador de data
      * @param actividad requerida para devolver la data (deprecated)
@@ -52,7 +56,8 @@ public class Pago_Controller {
         if ( manejador == null ||  manejador.getIntefaz() != interfaz ) {
 
             manejador = new Manejador_Pago(actividad, interfaz);
-
+            categoriaC = new Manejador_Categoria(actividad, interfaz);
+            categorias = new LinkedList();
         }
 
     }
@@ -146,7 +151,10 @@ public class Pago_Controller {
         return manejador.obtenerPago(id);
     }
 
-
+    public static void listaCategoriasPa() {
+        casoRequest = 5;
+        categoriaC.obtenerTodasCategorias(true);
+    }
 
     /**
      * Resetea el caso del request al WebService

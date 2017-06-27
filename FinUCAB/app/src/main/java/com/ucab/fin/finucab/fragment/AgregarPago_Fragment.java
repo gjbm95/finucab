@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -18,11 +19,17 @@ import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
 import com.ucab.fin.finucab.controllers.Categoria_Controller;
 import com.ucab.fin.finucab.controllers.Pago_Controller;
+import com.ucab.fin.finucab.domain.CategoriaSpinner;
 import com.ucab.fin.finucab.domain.Pago;
 import com.ucab.fin.finucab.webservice.Parametros;
 import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.net.URLEncoder;
+import java.util.LinkedList;
 
 
 public class AgregarPago_Fragment extends Fragment implements ResponseWebServiceInterface {
@@ -53,6 +60,7 @@ public class AgregarPago_Fragment extends Fragment implements ResponseWebService
         Pago_Controller.descripcionPago=descripcionEditText;
 
 
+        Pago_Controller.listaCategoriasPa();
 
 
         agregarButton = (Button) rootView.findViewById(R.id.acceptButtonAPago);
@@ -89,7 +97,33 @@ public class AgregarPago_Fragment extends Fragment implements ResponseWebService
         if(Pago_Controller.getCasoRequest() == 1 ){
             Pago_Controller.resetCasoRequest();
             parentActivity.onBackPressed();
-        }else{
+        }else if(Pago_Controller.getCasoRequest() == 5 ){
+
+            try {
+                JSONArray mJsonArray = new JSONArray(Parametros.getRespuesta());
+                LinkedList category = new LinkedList();
+
+
+                for (int i = 0; i < mJsonArray.length(); i++) {
+                    String strJson = mJsonArray.getString(i);
+                    JSONObject jsonObject = new JSONObject(strJson);
+
+                    category.add(new CategoriaSpinner(jsonObject.getInt("Id"), jsonObject.getString("Nombre")));
+
+                }
+                ArrayAdapter spinner_adapter = new ArrayAdapter(parentActivity, android.R.layout
+                        .simple_spinner_item, category);
+                spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                categoriaSpinner.setAdapter(spinner_adapter);
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+        else{
 
             Categoria_Controller.resetCasoRequest();
         }
