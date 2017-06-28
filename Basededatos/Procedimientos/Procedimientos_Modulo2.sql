@@ -279,8 +279,8 @@ $$ LANGUAGE 'plpgsql';
 
 CREATE OR REPLACE FUNCTION obtenerUltimosPagos
    ( IN idusuario integer,
-   	 OUT pg_fecha varchar(255), 
-     OUT pg_descripcion varchar(255)
+   	 OUT pg_sfecha varchar(255), 
+     OUT pg_sdescripcion varchar(255)
    ) RETURNS setof record AS
 $BODY$
 BEGIN
