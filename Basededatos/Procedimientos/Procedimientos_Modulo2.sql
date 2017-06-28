@@ -279,13 +279,13 @@ $$ LANGUAGE 'plpgsql';
 
 CREATE OR REPLACE FUNCTION obtenerUltimosPagos
    ( IN idusuario integer,
-   	 OUT pg_sfecha varchar(255), 
-     OUT pg_sdescripcion varchar(255)
+   	 OUT pg_fecha text, 
+     OUT pg_descripcion varchar(255)
    ) RETURNS setof record AS
 $BODY$
 BEGIN
 
-   return query SELECT to_char(pg_fecha,'DD-MM-YYYY') pg_fecha, pg_descripcion FROM pago where usuariou_ui = idusuario order by pg_fecha desc LIMIT 3;
+   return query SELECT to_char(pa.pg_fecha,'DD-MM-YYYY') pg_fecha, pa.pg_descripcion FROM pago pa where usuariou_id = idusuario order by pa.pg_fecha desc LIMIT 3;
 
 return;
 END;
@@ -295,13 +295,13 @@ LANGUAGE 'plpgsql';
 
 CREATE OR REPLACE FUNCTION obtenerUltimosPlanificaciones
    ( IN idusuario integer,
-   	 OUT pa_fecha varchar(255), 
+   	 OUT pa_fecha text, 
      OUT pa_nombre varchar(255)
    ) RETURNS setof record AS
 $BODY$
 BEGIN
 
-   return query SELECT to_char(pa_fechainicio,'DD-MM-YYYY') pa_fecha, pa_nombre FROM planificacion where usuariou_ui = idusuario order by pa_fechainicio desc LIMIT 3;
+   return query SELECT to_char(pl.pa_fechainicio,'DD-MM-YYYY') pa_fecha, pl.pa_nombre FROM planificacion pl where pl.usuariou_id = idusuario order by pl.pa_fechainicio desc LIMIT 3;
 
 return;
 END;
@@ -332,15 +332,16 @@ LANGUAGE 'plpgsql';
 
 
 
+
 CREATE OR REPLACE FUNCTION obtenerUltimosPresupuestos
    ( IN idusuario integer,
-   	 OUT pr_fecha varchar(255), 
+   	 OUT pr_fecha text, 
      OUT pr_nombre varchar(255)
    ) RETURNS setof record AS
 $BODY$
 BEGIN
 
-   return query SELECT to_char(pr_fechainicio,'DD-MM-YYYY') pr_fecha, pr_nombre FROM presupuesto where usuariou_ui = idusuario order by pr_fecha desc LIMIT 3;
+   return query SELECT to_char(pr.pr_fecha,'DD-MM-YYYY') pr_fecha, pr.pr_nombre FROM presupuesto pr where pr.usuariou_id = idusuario order by pr.pr_fecha desc LIMIT 3;
 
 return;
 END;
