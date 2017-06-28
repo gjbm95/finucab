@@ -19,6 +19,12 @@ DROP FUNCTION obtenerBalanceEconomico(integer);
 DROP FUNCTION obtenertoppagos(integer);
 DROP FUNCTION obtenerTOPProximosPagos(integer);
 DROP FUNCTION obtenerTOPPresupuestos(integer);
+DROP FUNCTION obtenerUltimosPresupuestos(integer);
+DROP FUNCTION obtenerBalance(integer);
+DROP FUNCTION obtenerUltimosPlanificaciones(integer);
+DROP FUNCTION getSaldoTarjetas(integer);
+DROP FUNCTION getSaldoCuentas(integer);
+DROP FUNCTION obtenerUltimosPagos(integer);
 
 
 -------------------------------------GESTION DE CUENTAS BANCARIAS --------------------------------------
