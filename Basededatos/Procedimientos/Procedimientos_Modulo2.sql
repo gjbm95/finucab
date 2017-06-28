@@ -252,5 +252,98 @@ END;
 $BODY$
 LANGUAGE 'plpgsql';
 
+CREATE OR REPLACE FUNCTION getSaldoCuentas( IN idusuario int)
+ RETURNS int AS $$
+ DECLARE  total int ;
+begin
 
+  SELECT sum(ct_saldoactual) INTO total FROM cuenta_bancaria WHERE usuariou_id = idusuario;
+ return total;
+end;
+$$ LANGUAGE 'plpgsql';
+
+
+
+
+CREATE OR REPLACE FUNCTION getSaldoTarjetas( IN idusuario int)
+ RETURNS int AS $$
+ DECLARE  total int ;
+begin
+
+  SELECT sum(tc_saldo) INTO total FROM tarjeta_credito WHERE usuariou_id = idusuario;
+ return total;
+end;
+$$ LANGUAGE 'plpgsql';
+
+
+
+CREATE OR REPLACE FUNCTION obtenerUltimosPagos
+   ( IN idusuario integer,
+   	 OUT pg_fecha varchar(255), 
+     OUT pg_descripcion varchar(255)
+   ) RETURNS setof record AS
+$BODY$
+BEGIN
+
+   return query SELECT to_char(pg_fecha,'DD-MM-YYYY') pg_fecha, pg_descripcion FROM pago where usuariou_ui = idusuario order by pg_fecha desc LIMIT 3;
+
+return;
+END;
+$BODY$
+LANGUAGE 'plpgsql';
+
+
+CREATE OR REPLACE FUNCTION obtenerUltimosPlanificaciones
+   ( IN idusuario integer,
+   	 OUT pa_fecha varchar(255), 
+     OUT pa_nombre varchar(255)
+   ) RETURNS setof record AS
+$BODY$
+BEGIN
+
+   return query SELECT to_char(pa_fechainicio,'DD-MM-YYYY') pa_fecha, pa_nombre FROM planificacion where usuariou_ui = idusuario order by pa_fechainicio desc LIMIT 3;
+
+return;
+END;
+$BODY$
+LANGUAGE 'plpgsql';
+
+
+
+CREATE OR REPLACE FUNCTION obtenerBalance
+   ( IN idusuario integer,
+   	 OUT ingreso float4, 
+     OUT egreso float4
+   ) RETURNS setof record AS
+$BODY$
+BEGIN
+
+   return query SELECT 
+	(SELECT SUM(pg_monto) FROM Pago as Ingresos WHERE Ingresos.usuariou_id =u_id AND Ingresos.pg_tipotransaccion = 'ingreso') as ingreso,
+        (SELECT SUM(pg_monto) FROM Pago as Egresos WHERE Egresos.usuariou_id =u_id AND Egresos.pg_tipotransaccion = 'egreso') as egreso 
+                FROM Usuario WHERE u_id = filtrousuario;
+
+return;
+END;
+$BODY$
+LANGUAGE 'plpgsql';
+
+
+
+
+
+CREATE OR REPLACE FUNCTION obtenerUltimosPresupuestos
+   ( IN idusuario integer,
+   	 OUT pr_fecha varchar(255), 
+     OUT pr_nombre varchar(255)
+   ) RETURNS setof record AS
+$BODY$
+BEGIN
+
+   return query SELECT to_char(pr_fechainicio,'DD-MM-YYYY') pr_fecha, pr_nombre FROM presupuesto where usuariou_ui = idusuario order by pr_fecha desc LIMIT 3;
+
+return;
+END;
+$BODY$
+LANGUAGE 'plpgsql';
 
