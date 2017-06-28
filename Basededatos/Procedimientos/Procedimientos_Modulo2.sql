@@ -321,7 +321,7 @@ BEGIN
    return query SELECT 
 	(SELECT SUM(pg_monto) FROM Pago as Ingresos WHERE Ingresos.usuariou_id =u_id AND Ingresos.pg_tipotransaccion = 'ingreso') as ingreso,
         (SELECT SUM(pg_monto) FROM Pago as Egresos WHERE Egresos.usuariou_id =u_id AND Egresos.pg_tipotransaccion = 'egreso') as egreso 
-                FROM Usuario WHERE u_id = filtrousuario;
+                FROM Usuario WHERE u_id = idusuario;
 
 return;
 END;
