@@ -1,6 +1,7 @@
 package com.ucab.fin.finucab.fragment;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -21,9 +22,11 @@ import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
 import com.ucab.fin.finucab.controllers.Banco_Controller;
 import com.ucab.fin.finucab.controllers.Categoria_Controller;
+import com.ucab.fin.finucab.controllers.GestionUsuarios_Controller;
 import com.ucab.fin.finucab.controllers.Tarjeta_Controller;
 import com.ucab.fin.finucab.domain.Cuenta_Bancaria;
 import com.ucab.fin.finucab.domain.Tarjeta_Credito;
+import com.ucab.fin.finucab.webservice.ControlDatos;
 import com.ucab.fin.finucab.webservice.Parametros;
 import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
 
@@ -121,8 +124,15 @@ public class TarjetasCreditoFragment extends Fragment  implements ResponseWebSer
         }));
 
         Tarjeta_Controller.obtenerTodasTarjetas(true);
+        /*
+        try{
+            refrescarDatos();
+            llenarDatos();
 
+        }catch (Exception e){
 
+        }
+       */
         return fragview;
     }
 
@@ -252,8 +262,29 @@ public class TarjetasCreditoFragment extends Fragment  implements ResponseWebSer
      */
     @Override
     public void obtuvoCorrectamente(Object response){
-        try {
+        try{
+            refrescarDatos();
+            llenarDatos();
 
+        }catch (Exception e){
+
+        }
+    }
+
+    @Override
+    public void noObtuvoCorrectamente(Object response){
+
+    }
+    public void llenarDatos(){
+        Tarjeta_Controller.setListaTarjetas(ControlDatos.getUsuario().getTarjetas());
+        recycleList.setAdapter(new TarjetaAdapter(ControlDatos.getUsuario().getTarjetas()));
+        Tarjeta_Controller.resetCasoRequest();
+    }
+
+    public void refrescarDatos(){
+        try {
+            SharedPreferences pref = this.getContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+            SharedPreferences.Editor editor = pref.edit();
 
             if (Parametros.getRespuesta().equals("Error")||Parametros.getRespuesta().equals("ERROR") ) {
 
@@ -263,24 +294,10 @@ public class TarjetasCreditoFragment extends Fragment  implements ResponseWebSer
                 switch (Tarjeta_Controller.getCasoRequest()) {
 
                     case 1:
-                        ArrayList listaTarjetas = new ArrayList<Tarjeta_Credito>();
-                        JSONArray mJsonArray = new JSONArray(Parametros.getRespuesta());
-
-                        for (int i = 0; i < mJsonArray.length(); i++) {   // iterate through jsonArray
-                            String strJson = mJsonArray.getString(i);
-                            JSONObject jObject = new JSONObject(strJson);
-                            listaTarjetas.add(new Tarjeta_Credito(
-                                    Integer.parseInt((String)jObject.get("tc_id")),
-                                    (String) jObject.get("tc_tipo"),
-                                    (String) jObject.get("tc_fechavencimiento"),
-                                    Float.parseFloat((String) jObject.get("tc_saldo")),
-                                    Tarjeta_Controller.Desencriptar((String) jObject.get("tc_numero"))));
-
-                        }
-
-                        Tarjeta_Controller.setListaTarjetas(listaTarjetas);
-                        recycleList.setAdapter(new TarjetaAdapter(listaTarjetas));
-                        Tarjeta_Controller.resetCasoRequest();
+                        String datos =Parametros.getRespuesta();
+                        editor.putString("cookieTarjetas",datos);
+                        editor.commit();
+                        GestionUsuarios_Controller.descomponerTarjetas(datos);
 
                         break;
 
@@ -289,28 +306,25 @@ public class TarjetasCreditoFragment extends Fragment  implements ResponseWebSer
 
                         break;
                     case 3:
-
                         Toast.makeText(parentActivity,"Se ha eliminado correctamente", Toast.LENGTH_SHORT).show();
                         Tarjeta_Controller.obtenerTodasTarjetas(false);
-
+                        parentActivity.changeFragment(new TarjetasCreditoFragment(), false);
                         break;
 
                     default:
+                        String tarjetas = pref.getString("cookieTarjetas","vacio");
+                        if(tarjetas.equals("vacio")){
+                        }else{
+                            GestionUsuarios_Controller.descomponerTarjetas(tarjetas);
+                        }
                         break;
                 }
             }
 
 
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-    @Override
-    public void noObtuvoCorrectamente(Object response){
-
-    }
-
-
 
 }

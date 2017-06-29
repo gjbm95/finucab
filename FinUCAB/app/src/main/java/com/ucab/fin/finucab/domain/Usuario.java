@@ -20,9 +20,17 @@ public class    Usuario {
     private String contrasena;
     private String pregunta;
     private String respuesta;
+    private float  saldoCuenta;
+    private float  saldoTarjeta;
+    private int    ingresosPorc;
+    private int    egresosPorc;
     private ArrayList<Cuenta_Bancaria> cuentas = new ArrayList<Cuenta_Bancaria>();
+    private ArrayList<Tarjeta_Credito> tarjetas = new ArrayList<Tarjeta_Credito>();
     private ArrayList<Planificacion_Pago> planes = new ArrayList<Planificacion_Pago>();
     private ArrayList<Presupuesto> presupuestos = new ArrayList<Presupuesto>();
+    private ArrayList<Top> topPagosR = new ArrayList<Top>();
+    private ArrayList<Top> topPagosP = new ArrayList<Top>();
+    private ArrayList<Top> topPres = new ArrayList<Top>();
 
    //Contructor por defecto:
     public Usuario()
@@ -122,5 +130,69 @@ public class    Usuario {
 
     public void setCuentas(ArrayList<Cuenta_Bancaria> cuentas) {
         this.cuentas = cuentas;
+    }
+
+    public float getSaldoCuenta() {
+        return saldoCuenta;
+    }
+
+    public float getSaldoTarjeta() {
+        return saldoTarjeta;
+    }
+
+    public void setSaldoCuenta(float saldoCuenta) {
+        this.saldoCuenta = saldoCuenta;
+    }
+
+    public void setSaldoTarjeta(float saldoTarjeta) {
+        this.saldoTarjeta = saldoTarjeta;
+    }
+
+    public int getIngresosPorc() {
+        return ingresosPorc;
+    }
+
+    public void setIngresosPorc(int ingresosPorc) {
+        this.ingresosPorc = ingresosPorc;
+    }
+
+    public int getEgresosPorc() {
+        return egresosPorc;
+    }
+
+    public void setEgresosPorc(int egresosPorc) {
+        this.egresosPorc = egresosPorc;
+    }
+
+    public ArrayList<Top> getTopPagosR() {
+        return topPagosR;
+    }
+
+    public void setTopPagosR(ArrayList<Top> topPagosR) {
+        this.topPagosR = topPagosR;
+    }
+
+    public ArrayList<Top> getTopPagosP() {
+        return topPagosP;
+    }
+
+    public void setTopPagosP(ArrayList<Top> topPagosP) {
+        this.topPagosP = topPagosP;
+    }
+
+    public ArrayList<Top> getTopPres() {
+        return topPres;
+    }
+
+    public void setTopPres(ArrayList<Top> topPres) {
+        this.topPres = topPres;
+    }
+
+    public ArrayList<Tarjeta_Credito> getTarjetas() {
+        return tarjetas;
+    }
+
+    public void setTarjetas(ArrayList<Tarjeta_Credito> tarjetas) {
+        this.tarjetas = tarjetas;
     }
 }
