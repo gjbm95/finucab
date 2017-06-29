@@ -66,22 +66,23 @@ public class PresentacionActivity extends AppCompatActivity {
             );
         }else{
             Registro.estado = true;
+            GestionUsuarios_Controller.descomponerUsuario(datos);
             if(estadisticas.equals("vacio")){
 
             }else{
-                //GestionUsuarios_Controller.descomponerEstadisticas(estadisticas);
+                GestionUsuarios_Controller.descomponerEstadisticas(estadisticas);
             }
             if(bancos.equals("vacio")){
 
             }else{
-               // GestionUsuarios_Controller.descomponerBancos(bancos);
+                GestionUsuarios_Controller.descomponerBancos(bancos);
             }
             if(tarjetas.equals("vacio")){
 
             }else{
-               // GestionUsuarios_Controller.descomponerBancos(bancos);
+                GestionUsuarios_Controller.descomponerBancos(bancos);
             }
-            GestionUsuarios_Controller.descomponerUsuario(datos);
+
             Intent inicio = new Intent(PresentacionActivity.this, MainActivity.class);
             startActivity(inicio);
 

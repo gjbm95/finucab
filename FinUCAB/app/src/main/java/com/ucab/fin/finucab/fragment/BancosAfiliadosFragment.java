@@ -306,7 +306,7 @@ public class BancosAfiliadosFragment extends Fragment implements ResponseWebServ
 
             if (Parametros.getRespuesta().equals("Error")||Parametros.getRespuesta().equals("ERROR") ) {
 
-                Toast.makeText(parentActivity, "Ups, ha ocurrido un error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(parentActivity, "Error de conexion con servidor", Toast.LENGTH_SHORT).show();
 
             }else {
                 switch (Banco_Controller.getCasoRequest()) {

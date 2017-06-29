@@ -6,7 +6,7 @@
     <color name="colorPrimaryLight">#02a9e4</color>
     <color name="colorAccent">#ffffff</color>
     <color name="black">#000</color>
-    <color name="green">#13D80D</color>
-    <color name="red">#FF0000</color>
+    <color name="green">#13d80d</color>
+    <color name="red">#ff0000</color>
     <color name="gray">#ededed</color>
 </resources>
