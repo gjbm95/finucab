@@ -228,8 +228,8 @@ public class ExportarPresupuesto_Controller extends AsyncTask<String ,String, St
                 jObject = mJsonArray.getJSONObject(i);
                 Presupuesto pre = new Presupuesto();
                 pre.set_nombre((String) jObject.get("Nombre"));
-                pre.set_categoria((String) jObject.get("Categoria"));
-                pre.set_monto(Float.parseFloat((String) jObject.get("Monto")));
+                pre.set_categoria( jObject.getInt("Categoria"));
+                pre.set_monto(Double.parseDouble( jObject.getString("Monto")));
                 pre.set_clasificacion((String) jObject.get("Clasificacion"));
                 pre.set_duracion(Integer.parseInt((String) jObject.get("Duracion")));
                 if((jObject.get("Tipo")).equals("t")){
