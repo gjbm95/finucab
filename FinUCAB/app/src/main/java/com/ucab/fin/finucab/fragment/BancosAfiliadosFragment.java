@@ -1,6 +1,7 @@
 package com.ucab.fin.finucab.fragment;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -21,10 +22,12 @@ import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.MainActivity;
 import com.ucab.fin.finucab.controllers.Banco_Controller;
 import com.ucab.fin.finucab.controllers.Categoria_Controller;
+import com.ucab.fin.finucab.controllers.GestionUsuarios_Controller;
 import com.ucab.fin.finucab.controllers.Tarjeta_Controller;
 import com.ucab.fin.finucab.domain.Categoria;
 import com.ucab.fin.finucab.domain.Cuenta_Bancaria;
 import com.ucab.fin.finucab.domain.Tarjeta_Credito;
+import com.ucab.fin.finucab.webservice.ControlDatos;
 import com.ucab.fin.finucab.webservice.Parametros;
 import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
 
@@ -92,6 +95,7 @@ public class BancosAfiliadosFragment extends Fragment implements ResponseWebServ
         parentActivity = (MainActivity) getActivity();
         parentActivity.getSupportActionBar().setTitle("Bancos Afiliados");
         Banco_Controller.initManejador(parentActivity,this);
+
         // Configuracion inicial del boton flotante
         fab = (FloatingActionButton) fragview.findViewById(R.id.addFloatingBtnBancos);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -125,6 +129,15 @@ public class BancosAfiliadosFragment extends Fragment implements ResponseWebServ
 
         Banco_Controller.obtenerTodosBancos(true);
 
+        /*
+        try {
+            refrescarDatos();
+            llenarDatos();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        */
         return fragview;
     }
 
@@ -264,7 +277,32 @@ public class BancosAfiliadosFragment extends Fragment implements ResponseWebServ
     @Override
     public void obtuvoCorrectamente(Object response){
         try {
+            refrescarDatos();
+            llenarDatos();
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void noObtuvoCorrectamente(Object response){
+
+    }
+
+    public void llenarDatos(){
+
+        Banco_Controller.setListaBancos(ControlDatos.getUsuario().getCuentas());
+        recycleList.setAdapter(new BancoAdapter(ControlDatos.getUsuario().getCuentas()));
+        Banco_Controller.resetCasoRequest();
+
+    }
+
+    public void refrescarDatos(){
+        try {
+            SharedPreferences pref = this.getContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+            SharedPreferences.Editor editor = pref.edit();
 
             if (Parametros.getRespuesta().equals("Error")||Parametros.getRespuesta().equals("ERROR") ) {
 
@@ -274,26 +312,11 @@ public class BancosAfiliadosFragment extends Fragment implements ResponseWebServ
                 switch (Banco_Controller.getCasoRequest()) {
 
                     case 0:
-                        ArrayList listaBancos = new ArrayList<Cuenta_Bancaria>();
-                        JSONArray mJsonArray = new JSONArray(Parametros.getRespuesta());
+                        String datos =Parametros.getRespuesta();
+                        editor.putString("cookieBancos",datos);
+                        editor.commit();
+                        GestionUsuarios_Controller.descomponerBancos(datos);
 
-                        for (int i = 0; i < mJsonArray.length(); i++) {   // iterate through jsonArray
-                            String strJson = mJsonArray.getString(i);
-                            JSONObject jObject = new JSONObject(strJson);
-
-                            listaBancos.add(new Cuenta_Bancaria(
-                                    Integer.parseInt((String) jObject.get("ct_id")),
-                                    (String) jObject.get("ct_nombrebanco"),
-                                    (String) jObject.get("ct_numerocuenta"),
-                                    Float.parseFloat((String) jObject.get("ct_saldoactual")),
-                                    (String) jObject.get("ct_tipo")
-                            ));
-
-                        }
-
-                        Banco_Controller.setListaBancos(listaBancos);
-                        recycleList.setAdapter(new BancoAdapter(listaBancos));
-                        Banco_Controller.resetCasoRequest();
 
                         break;
 
@@ -305,23 +328,23 @@ public class BancosAfiliadosFragment extends Fragment implements ResponseWebServ
 
                         Toast.makeText(parentActivity,"Se ha eliminado correctamente", Toast.LENGTH_SHORT).show();
                         Banco_Controller.obtenerTodosBancos(false);
-
+                        parentActivity.changeFragment(new BancosAfiliadosFragment(), false);
                         break;
 
                     default:
+                        String bancos = pref.getString("cookieBancos","vacio");
+                        if(bancos.equals("vacio")){
+                        }else{
+                            GestionUsuarios_Controller.descomponerBancos(bancos);
+                        }
                         break;
                 }
             }
 
 
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void noObtuvoCorrectamente(Object response){
-
     }
 
 }

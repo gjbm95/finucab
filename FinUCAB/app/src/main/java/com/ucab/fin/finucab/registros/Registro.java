@@ -15,5 +15,6 @@ public class Registro {
     public static String server ="http://192.168.1.109";// Almacena la direccion IP o Dominio del
     // servidor donde se aloja el WebService
     public static String puerto ="8080"; // Almacena el puerto
+    public static boolean estado;
 
 }
