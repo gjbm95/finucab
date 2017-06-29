@@ -80,7 +80,7 @@ public class PresentacionActivity extends AppCompatActivity {
             if(tarjetas.equals("vacio")){
 
             }else{
-                GestionUsuarios_Controller.descomponerBancos(bancos);
+                GestionUsuarios_Controller.descomponerTarjetas(tarjetas);
             }
 
             Intent inicio = new Intent(PresentacionActivity.this, MainActivity.class);
