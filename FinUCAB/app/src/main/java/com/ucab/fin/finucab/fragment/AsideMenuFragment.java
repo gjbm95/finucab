@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.activity.InicioActivity;
 import com.ucab.fin.finucab.activity.MainActivity;
+import com.ucab.fin.finucab.registros.Registro;
 import com.ucab.fin.finucab.webservice.ControlDatos;
 
 public class AsideMenuFragment extends Fragment implements View.OnClickListener{
@@ -86,6 +87,11 @@ public class AsideMenuFragment extends Fragment implements View.OnClickListener{
                 SharedPreferences.Editor editor = pref.edit();
                 editor.remove("cookie");
                 editor.commit();
+                editor.putString("cookieEstadisticas","vacio");
+                editor.putString("cookieTarjetas","vacio");
+                editor.putString("cookieBancos","vacio");
+
+                Registro.estado = true;
                 ControlDatos.setUsuario(null);
                 Intent inicio = new Intent (parentActivity, InicioActivity.class);
                 startActivity(inicio);

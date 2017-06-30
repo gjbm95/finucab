@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.controllers.GestionUsuarios_Controller;
+import com.ucab.fin.finucab.registros.Registro;
 import com.ucab.fin.finucab.webservice.Parametros;
 /**
  *Modulo 1 - Modulo de  Inicio de Sesion y registro de usuario
@@ -39,10 +40,14 @@ public class PresentacionActivity extends AppCompatActivity {
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
         SharedPreferences.Editor editor = pref.edit();
         String datos = pref.getString("cookie","vacio");
+        String estadisticas = pref.getString("cookieEstadisticas","vacio");
+        String tarjetas = pref.getString("cookieTarjetas","vacio");
+        String bancos = pref.getString("cookieBancos","vacio");
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         if(datos.equals("vacio")) {
             //-------------------------------------------------------
+            Registro.estado = false;
             logo = (ImageView) findViewById(R.id.logoPresentacion); //Asigno las imagenes
             ucab = (ImageView) findViewById(R.id.ucabPresentacion); // Asino las imagenes
             Animation animation = new TranslateAnimation(0, 0, Animation.RELATIVE_TO_SELF, 150);  //Desplazo la imagen hacia abajo
@@ -60,9 +65,27 @@ public class PresentacionActivity extends AppCompatActivity {
                                      }
             );
         }else{
+            Registro.estado = true;
             GestionUsuarios_Controller.descomponerUsuario(datos);
+            if(estadisticas.equals("vacio")){
+
+            }else{
+                GestionUsuarios_Controller.descomponerEstadisticas(estadisticas);
+            }
+            if(bancos.equals("vacio")){
+
+            }else{
+                GestionUsuarios_Controller.descomponerBancos(bancos);
+            }
+            if(tarjetas.equals("vacio")){
+
+            }else{
+                GestionUsuarios_Controller.descomponerTarjetas(tarjetas);
+            }
+
             Intent inicio = new Intent(PresentacionActivity.this, MainActivity.class);
             startActivity(inicio);
+
         }
 
     }
