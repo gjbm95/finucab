@@ -149,19 +149,21 @@ public class ModificarPresupuestoFragment extends Fragment implements CompoundBu
                     Presupuesto_Controller.presupuesto = new Presupuesto();
                     try {
                         JSONObject json = new JSONObject(Parametros.getRespuesta());
-                        Presupuesto_Controller.presupuesto.set_categoria(json.getInt("IdCategoria"));
-                        Presupuesto_Controller.presupuesto.set_nombre((String) json.get("Nombre"));
+                        Presupuesto_Controller.presupuesto.set_id(json.getInt("Id"));
+                        Presupuesto_Controller.presupuesto.set_categoria(json.getString("IdCategoria"));
+                        Presupuesto_Controller.presupuesto.set_nombre(json.getString("Nombre"));
                         Presupuesto_Controller.presupuesto.set_monto(Double.parseDouble(json.getString
                                 ("Monto")));
-                        Presupuesto_Controller.presupuesto.set_clasificacion((String) json.get("Clasificacion"));
-                        Presupuesto_Controller.presupuesto.set_duracion(Integer.parseInt((String) json.get("Duracion")));
-                        Presupuesto_Controller.presupuesto.set_tipo(((String) json.get("Tipo")));
+                        Presupuesto_Controller.presupuesto.set_clasificacion(json.getString("Clasificacion"));
+                        Presupuesto_Controller.presupuesto.set_duracion(json.getInt("Duracion"));
+                        Presupuesto_Controller.presupuesto.set_tipo(json.getString("Tipo"));
                         caso =1;
                         Presupuesto_Controller.asignarValores();
                         Presupuesto_Controller.obtenerSpinner(parentActivity);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+
                 }
             }else if(caso == 1){
 
