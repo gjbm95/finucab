@@ -29,7 +29,7 @@ public class AsideMenuFragment extends Fragment implements View.OnClickListener{
         parentActivity = (MainActivity) getActivity();
         //Nombre de usuario:
         TextView nombredeusuario = (TextView)parentView.findViewById(R.id.usuario);
-        nombredeusuario.setText("Usuario: " + ControlDatos.getUsuario().getUsuario());
+        nombredeusuario.setText("Usuario: " + "Augusto");
 //          BIND VIEWS
         homeBtn = (LinearLayout)parentView.findViewById(R.id.HomeBtn);
         myProfileBtn = (LinearLayout) parentView.findViewById(R.id.myProfileBtn);

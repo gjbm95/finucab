@@ -54,7 +54,7 @@ public class PresentacionActivity extends AppCompatActivity {
             touch.setOnClickListener(new View.OnClickListener() {
                                          @Override
                                          public void onClick(View v) {
-                                             Intent inicio = new Intent(PresentacionActivity.this, InicioActivity.class);
+                                             Intent inicio = new Intent(PresentacionActivity.this, MainActivity.class);
                                              startActivity(inicio); // Inicio la ventana de inicio de sesion.
                                          }
                                      }

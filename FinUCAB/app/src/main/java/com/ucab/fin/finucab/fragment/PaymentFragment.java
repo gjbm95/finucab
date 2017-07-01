@@ -252,6 +252,7 @@ public class PaymentFragment extends Fragment implements ResponseWebServiceInter
                             listaPago.add(new Pago(
                                     (int) jObject.get("pg_id"),
                                     (int) jObject.get("pg_categoria"),
+                                    (String) jObject.get("pg_nombre_categoria"),
                                     (String) jObject.get("pg_descripcion"),
                                     (float) Float.valueOf(jObject.get("pg_monto").toString()),
                                     (String) jObject.get("pg_tipoTransaccion")));

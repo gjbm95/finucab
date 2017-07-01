@@ -118,7 +118,7 @@ public class Manejador_Pago {
      */
     public void obtenerTodosPagos(boolean showStatus) {
 
-        int idUsuario = ControlDatos.getUsuario().getIdusuario();;
+        int idUsuario = 1212;
         Parametros.reset();
         Parametros.setMetodo("Modulo5/visualizarPago?datosPago="+String.valueOf(idUsuario) );
         new Recepcion(actividad,intefaz,showStatus).execute("GET");

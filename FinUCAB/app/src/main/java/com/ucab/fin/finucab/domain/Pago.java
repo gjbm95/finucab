@@ -63,7 +63,14 @@ public class Pago {
         this.total = total;
         this.tipo = tipo;
     }
-
+    public Pago(int idPago, int idCategoria, String nombreCategoria, String descripcion, float total, String tipo) {
+        this.idPago = idPago;
+        this.idCategoria = idCategoria;
+        this.descripcion = descripcion;
+        this.total = total;
+        this.tipo = tipo;
+        this.categoria = nombreCategoria;
+    }
     public Pago(){
 
     }
