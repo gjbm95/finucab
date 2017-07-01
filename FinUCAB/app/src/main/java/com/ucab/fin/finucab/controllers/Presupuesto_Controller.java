@@ -55,7 +55,7 @@ public class Presupuesto_Controller {
     public static Spinner categoriaPresupuesto;
     public static TextView recurrenciaTextView;
     public static TextView totalTextView, gananciaTextView, gastoTextView;
-    public static Float ganancias, gastos, total;
+    public static Double ganancias, gastos, total;
     public static Integer posicionLista;
     public static RecyclerView recyclerList;
     public static ArrayList<Presupuesto> listaGanancias = new ArrayList<>();
@@ -70,7 +70,7 @@ public class Presupuesto_Controller {
      */
     public static void obtenerSpinner(Activity actividad) {
         System.out.println(Parametros.getRespuesta());
-        Parametros.setMetodo("Modulo3/ObtenerSpinnerCategoria?usuarioid="+ControlDatos.getUsuario().getUsuario());
+        Parametros.setMetodo("Modulo3/ObtenerSpinnerCategoria?usuarioid="+ControlDatos.getUsuario().getIdusuario());
         new Recepcion(actividad,interfaz).execute("GET");
 
     }
@@ -99,6 +99,7 @@ public class Presupuesto_Controller {
                 Toast.makeText(actividad,"Debe agregar Categorias primero",Toast.LENGTH_LONG).show();
             }
             categoriaPresupuesto.setAdapter(adapter);
+
             Parametros.reset();
         } catch (JSONException e) {
             e.printStackTrace();
@@ -168,22 +169,24 @@ public class Presupuesto_Controller {
             nuevo_presupuesto.put("pr_nombre", nombrePresupuesto.getText());
             nuevo_presupuesto.put("pr_monto", montoPresupuesto.getText().toString());
             if (unicoButton.isChecked()) {
-                nuevo_presupuesto.put("pr_duracion", "0");
+                nuevo_presupuesto.put("pr_duracion", 0);
                 nuevo_presupuesto.put("pr_clasificacion", "Unico");
             }
             if (recurrenciaButton.isChecked()) {
-                nuevo_presupuesto.put("pr_duracion", recurrenciaPresupuesto.getText().toString());
+                nuevo_presupuesto.put("pr_duracion", Integer.parseInt(recurrenciaPresupuesto.getText().toString()));
                 nuevo_presupuesto.put("pr_clasificacion", "Recurrente");
             }
             String categoria = categoriaPresupuesto.getSelectedItem().toString();
             String [] categoriaSplit = categoria.split("-");
-            Integer categoriaid = Integer.parseInt(categoriaSplit[0]);
-            nuevo_presupuesto.put("categoriaca_id",categoriaid.toString());
-            nuevo_presupuesto.put("pr_usuarioid",ControlDatos.getUsuario().getUsuario());
+            String categoriaid = categoriaSplit[0];
+            nuevo_presupuesto.put("categoriaca_id",categoriaid);
+            nuevo_presupuesto.put("pr_usuarioid",ControlDatos.getUsuario().getIdusuario());
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Parametros.setMetodo("Modulo3/registrarPresupuesto?usuarioid="+ControlDatos.getUsuario().getUsuario()+"&datosPresupuesto=" + URLEncoder.encode(nuevo_presupuesto.toString()));
+        Parametros.setMetodo("Modulo3/registrarPresupuesto?usuarioid="+ControlDatos.getUsuario().getIdusuario()
+                +"&datosPresupuesto=" + URLEncoder.encode
+                (nuevo_presupuesto.toString()));
         new Recepcion(actividad,interfaz).execute("GET");
         return Parametros.getRespuesta();
     }
@@ -240,20 +243,18 @@ public class Presupuesto_Controller {
      */
     public static void obtenerPresupuesto(Activity actividad) {
 
-        String nombrePresupuesto = "";
+        int idPresupuesto = 0;
         System.out.println("POSICION: " + posicionLista);
-        JSONObject json = null;
-        if (tipoPresupuesto) {
-            nombrePresupuesto = listaGanancias.get(posicionLista).get_nombre();
-        } else {
-            nombrePresupuesto = listaGastos.get(posicionLista).get_nombre();
-        }
-        nombrePresupuesto = nombrePresupuesto.replace(' ', '_');
-        System.out.println(Parametros.getRespuesta());
-        Parametros.setMetodo("Modulo3/ObtenerPresupuesto?nombrePresupuesto=" + nombrePresupuesto);
-        //Parametros.setMetodo("Modulo3/ModificarPresupuesto?nombrePresupuesto="+nombrePresupuesto+"&idUsuario="+ControlDatos.getUsuario().getUsuario());
 
+        if (tipoPresupuesto) {
+            idPresupuesto = listaGanancias.get(posicionLista).get_id();
+        } else {
+            idPresupuesto = listaGanancias.get(posicionLista).get_id();
+        }
+        System.out.println(Parametros.getRespuesta());
+        Parametros.setMetodo("Modulo3/ObtenerPresupuesto?idPresupuesto=" + idPresupuesto);
         new Recepcion(actividad,interfaz).execute("GET");
+
 
     }
 
@@ -264,7 +265,7 @@ public class Presupuesto_Controller {
     public static void asignarValores() {
 
         nombrePresupuesto.setText(presupuesto.get_nombre());
-        montoPresupuesto.setText(presupuesto.get_monto().toString());
+        montoPresupuesto.setText(String.format("%.2f", presupuesto.get_monto()));
         if (presupuesto.get_clasificacion().equals("Unico")) {
 
             unicoButton.setChecked(true);
@@ -286,26 +287,29 @@ public class Presupuesto_Controller {
     public static void modificarPresupuesto(Activity actividad){
         JSONObject nuevo_presupuesto = new JSONObject();
         try {
+            nuevo_presupuesto.put("pr_id", presupuesto.get_id());
             nuevo_presupuesto.put("pr_nombre", nombrePresupuesto.getText());
             nuevo_presupuesto.put("pr_monto", montoPresupuesto.getText().toString());
             if (unicoButton.isChecked()) {
-                nuevo_presupuesto.put("pr_duracion", "0");
+                nuevo_presupuesto.put("pr_duracion", 0);
                 nuevo_presupuesto.put("pr_clasificacion", "Unico");
             }
             if (recurrenciaButton.isChecked()) {
-                nuevo_presupuesto.put("pr_duracion", recurrenciaPresupuesto.getText().toString());
+                nuevo_presupuesto.put("pr_duracion", Integer.parseInt(recurrenciaPresupuesto.getText().toString()));
                 nuevo_presupuesto.put("pr_clasificacion", "Recurrente");
             }
             String categoria = categoriaPresupuesto.getSelectedItem().toString();
             String [] categoriaSplit = categoria.split("-");
-            Integer categoriaid = Integer.parseInt(categoriaSplit[0]);
+            String categoriaid = categoriaSplit[0];
             System.out.println("La categoria es: "+categoriaid);
-            nuevo_presupuesto.put("categoriaca_id",categoriaid.toString());
-            nuevo_presupuesto.put("pr_usuarioid",ControlDatos.getUsuario().getUsuario());
+            nuevo_presupuesto.put("categoriaca_id",categoriaid);
+            nuevo_presupuesto.put("pr_usuarioid",ControlDatos.getUsuario().getIdusuario());
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Parametros.setMetodo("Modulo3/ModificarPresupuesto?nombrePresupuesto="+presupuesto.get_nombre().replace(' ','_')+"&usuarioid="+ControlDatos.getUsuario().getUsuario()+"&datosPresupuesto=" + URLEncoder.encode(nuevo_presupuesto.toString()));
+        Parametros.setMetodo("Modulo3/ModificarPresupuesto?nombrePresupuesto="+presupuesto.get_nombre().replace(' ',
+                '_')+"&usuarioid="+ControlDatos.getUsuario().getIdusuario()+"&datosPresupuesto=" + URLEncoder.encode
+                (nuevo_presupuesto.toString()));
         new Recepcion(actividad,interfaz).execute("GET");
 
 
@@ -337,7 +341,7 @@ public class Presupuesto_Controller {
         asignarRecyclerView(recyclerList, tipo);
         asignarTotales();
         Parametros.setMetodo("Modulo3/EliminarPresupuesto?nombrePresupuesto="+nombrePresupuesto+
-                          "&idUsuario="+ ControlDatos.getUsuario().getUsuario());
+                "&idUsuario="+ ControlDatos.getUsuario().getIdusuario());
         new Recepcion(actividad,interfaz).execute("GET");
     }
 
@@ -368,8 +372,8 @@ public class Presupuesto_Controller {
      */
     public static void obtenerListaPresupuestos(Activity actividad) {
         listaGanancias = new ArrayList<>(); listaGastos = new ArrayList<>();
-        ganancias = 0.0F; gastos = 0.0F; total = 0.0F;
-        Parametros.setMetodo("Modulo3/ListaPresupuesto?idUsuario="+ ControlDatos.getUsuario().getUsuario());
+        ganancias = Double.valueOf(0); gastos = Double.valueOf(0); total = Double.valueOf(0);
+        Parametros.setMetodo("Modulo3/ListaPresupuesto?idUsuario="+ControlDatos.getUsuario().getIdusuario());
         new Recepcion(actividad,interfaz).execute("GET");
     }
 
@@ -388,12 +392,13 @@ public class Presupuesto_Controller {
             for (int i = 0; i < count; i++) {   // iterate through jsonArray
                 jObject = mJsonArray.getJSONObject(i);  // get jsonObject @ i position
                 Presupuesto pre = new Presupuesto();
-                pre.set_duracion(Integer.parseInt((String) jObject.get("Duracion")));
+                pre.set_id(jObject.getInt("Id"));
+                pre.set_duracion(jObject.getInt("Duracion"));
                 pre.set_clasificacion((String) jObject.get("Clasificacion"));
-                pre.set_monto(Float.parseFloat((String) jObject.get("Monto")));
+                pre.set_monto(Double.parseDouble(jObject.getString("Monto")));
                 pre.set_categoria((String) jObject.get("Categoria"));
                 pre.set_nombre((String) jObject.get("Nombre"));
-                if ((jObject.get("Tipo")).equals("t")) {
+                if ((jObject.get("Tipo")).equals("true")) {
                     Presupuesto_Controller.listaGanancias.add(pre);
                     Presupuesto_Controller.ganancias = Presupuesto_Controller.ganancias + pre.get_monto();
                 } else {
@@ -413,9 +418,9 @@ public class Presupuesto_Controller {
      * Se encarga de asignar la suma de los presupuestos para el fragment de Total
      */
     public static void asignarTotales() {
-        gananciaTextView.setText(ganancias.toString());
-        gastoTextView.setText(gastos.toString());
-        totalTextView.setText(total.toString());
+        gananciaTextView.setText(String.format("%.2f",ganancias));
+        gastoTextView.setText(String.format("%.2f",gastos));
+        totalTextView.setText(String.format("%.2f",total));
     }
 
     /**

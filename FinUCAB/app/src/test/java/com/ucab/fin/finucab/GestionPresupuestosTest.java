@@ -41,9 +41,9 @@ public class GestionPresupuestosTest {
      */
     @Test
     public void visualizarPresupuestoTest() throws JSONException {
-        Presupuesto_Controller.total = 0.0F;
-        Presupuesto_Controller.ganancias = 0.0F;
-        Presupuesto_Controller.gastos = 0.0F;
+        Presupuesto_Controller.total = Double.valueOf(0);
+        Presupuesto_Controller.ganancias = Double.valueOf(0);
+        Presupuesto_Controller.gastos = Double.valueOf(0);
         JSONArray array = new JSONArray();
         JSONObject object = new JSONObject();
         //Creo el objeto Json!
@@ -63,7 +63,7 @@ public class GestionPresupuestosTest {
         object.put("Tipo","t");
         array.put(object);
 
-        Parametros.respuesta = array.toString();
+        Parametros.setRespuesta(array.toString());
 
         Presupuesto_Controller.visualizarPresupuesto();
         assertNotNull(Presupuesto_Controller.listaGanancias);
@@ -97,7 +97,7 @@ public class GestionPresupuestosTest {
         object.put("Tipo","t");
         array.put(object);
 
-        Parametros.respuesta = array.toString();
+        Parametros.setRespuesta(array.toString());
 
         ExportarPresupuesto_Controller.utilizarPresupuesto();
         assertNotNull(ExportarPresupuesto_Controller.listaPresupuestos);
@@ -115,8 +115,8 @@ public class GestionPresupuestosTest {
 
         try {
             presupuesto.set_nombre("MiPresupuesto");
-            presupuesto.set_categoria("Restaurant");
-            presupuesto.set_monto((float) 1500);
+            presupuesto.set_categoria("1");
+            presupuesto.set_monto((double) 1500);
             presupuesto.set_clasificacion("Unico");
             presupuesto.set_duracion(0);
             presupuesto.set_tipo("Gastos");
@@ -142,8 +142,8 @@ public class GestionPresupuestosTest {
 
         try {
             presupuesto.set_nombre("MiPresupuesto");
-            presupuesto.set_categoria("Restaurant");
-            presupuesto.set_monto((float) 1500);
+            presupuesto.set_categoria("1");
+            presupuesto.set_monto((double) 1500);
             presupuesto.set_clasificacion("Unico");
             presupuesto.set_duracion(0);
             presupuesto.set_tipo("Gastos");
@@ -189,7 +189,7 @@ public class GestionPresupuestosTest {
 
         EditText campo = null;
         boolean aceptado = true;
-        Parametros.respuesta="Repetido";
+        Parametros.setRespuesta("repetido");
         try {
             Presupuesto_Controller.DevolverValidacion(campo,aceptado);
 

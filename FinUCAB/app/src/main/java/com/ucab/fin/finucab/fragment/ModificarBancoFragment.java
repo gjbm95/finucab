@@ -113,7 +113,7 @@ public class ModificarBancoFragment extends Fragment  implements ResponseWebServ
 
         if (!recepcion.equals("0"))
         {
-            System.out.println("Paseeeeee");
+
             Toast.makeText(parentActivity,"Se ha modificado correctamente", Toast.LENGTH_SHORT).show();
             if(Banco_Controller.getCasoRequest() == 2 ){
                 Banco_Controller.resetCasoRequest();
