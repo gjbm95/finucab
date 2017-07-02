@@ -72,10 +72,15 @@ public class Pago_Controller {
 
     public static void asignarValores() {
 
+        categoriaPago.setSelection(pago.getIdCategoria());
         descripcionPago.setText(pago.getDescripcion());
         montoPago.setText(Float.toString(pago.getTotal()));
 
-
+        int posTipo = 1;
+        if(pago.getTipo() == "ingreso"){
+            posTipo = 0;
+        }
+        tipoTransaccion.setSelection(posTipo);
 
     }
 
@@ -91,7 +96,7 @@ public class Pago_Controller {
             montoPago.setError("Debe colocar un Monto");
             x = 0;
         }
-
+/*
         //SPINNER
         if (categoriaPago.getSelectedItemPosition() == 0) {
             TextView errorText = (TextView) categoriaPago.getSelectedView();
@@ -105,7 +110,7 @@ public class Pago_Controller {
             errorText.setError("Debe colocar un Tipo de Transaccion");
             x = 0;
         }
-
+*/
         return x;
     }
 

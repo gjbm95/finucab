@@ -243,9 +243,9 @@ public class PaymentFragment extends Fragment implements ResponseWebServiceInter
                 switch (Pago_Controller.getCasoRequest()) {
 
                     case 0:
+                        System.out.println(Parametros.getRespuesta());
                         ArrayList listaPago = new ArrayList<Pago>();
                         JSONArray mJsonArray = new JSONArray(Parametros.getRespuesta());
-                        System.out.println(Parametros.getRespuesta());
                         for (int i = 0; i < mJsonArray.length(); i++) {   // iterate through jsonArray
                             String strJson = mJsonArray.getString(i);
                             JSONObject jObject = new JSONObject(strJson);
@@ -283,7 +283,10 @@ public class PaymentFragment extends Fragment implements ResponseWebServiceInter
 
 
         } catch (JSONException e) {
-            e.printStackTrace();
+
+
+            Toast.makeText(parentActivity, Parametros.getRespuesta(), Toast.LENGTH_SHORT).show();
+            //e.printStackTrace();
         }
     }
 

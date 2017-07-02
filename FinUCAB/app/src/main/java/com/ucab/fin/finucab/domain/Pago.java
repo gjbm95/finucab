@@ -56,6 +56,10 @@ public class Pago {
         this.tipo = tipo;
     }
 
+    public void setIdCategoria(int idCategoriao) {
+        this.idCategoria = idCategoriao;
+    }
+
     public Pago(int idPago, int idCategoria, String descripcion, float total, String tipo) {
         this.idPago = idPago;
         this.idCategoria = idCategoria;

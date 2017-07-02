@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,11 +70,20 @@ public class AgregarPago_Fragment extends Fragment implements ResponseWebService
             public void onClick(View v) {
                 Resp = Pago_Controller.validacionPagoVacio();
                 if (Resp == 1) {
+
+                    String nombreCategoria = "Canto"; //Pago_Controller.categoriaPago.getSelectedItem().toString()
+                    int idCategoria = 1;
                     Pago pago = new Pago();
-                    pago.setCategoria(Pago_Controller.categoriaPago.getSelectedItem().toString());
+                    pago.setIdCategoria(idCategoria);
+                    pago.setCategoria(nombreCategoria);
                     pago.setDescripcion(Pago_Controller.descripcionPago.getText().toString());
                     pago.setTotal(Float.valueOf(Pago_Controller.montoPago.getText().toString()));
-                    pago.setTipo(Pago_Controller.tipoTransaccion.getSelectedItem().toString());
+
+                    String tipo = "ingreso";
+                    if (Pago_Controller.tipoTransaccion.getSelectedItemPosition() == 1){
+                        tipo = "egreso";
+                    }
+                    pago.setTipo(tipo);
                     Pago_Controller.registrarPago(pago);
                     parentActivity.changeFragment(new PaymentFragment(), false);
                 }
@@ -92,7 +102,7 @@ public class AgregarPago_Fragment extends Fragment implements ResponseWebService
     @Override
     public void obtuvoCorrectamente(Object response){
 
-        Toast.makeText(parentActivity, Parametros.getRespuesta(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(parentActivity, Parametros.getRespuesta(), Toast.LENGTH_SHORT).show();
 
         if(Pago_Controller.getCasoRequest() == 1 ){
             Pago_Controller.resetCasoRequest();
@@ -100,22 +110,24 @@ public class AgregarPago_Fragment extends Fragment implements ResponseWebService
         }else if(Pago_Controller.getCasoRequest() == 5 ){
 
             try {
-                JSONArray mJsonArray = new JSONArray(Parametros.getRespuesta());
-                LinkedList category = new LinkedList();
 
+                System.out.println(Parametros.getRespuesta());
+                if (Parametros.getRespuesta().length() > 0 ) {
+                    JSONArray mJsonArray = new JSONArray(Parametros.getRespuesta());
+                    LinkedList category = new LinkedList();
 
-                for (int i = 0; i < mJsonArray.length(); i++) {
-                    String strJson = mJsonArray.getString(i);
-                    JSONObject jsonObject = new JSONObject(strJson);
+                    for (int i = 0; i < mJsonArray.length(); i++) {
+                        String strJson = mJsonArray.getString(i);
+                        JSONObject jsonObject = new JSONObject(strJson);
 
-                    category.add(new CategoriaSpinner(jsonObject.getInt("Id"), jsonObject.getString("Nombre")));
+                        category.add(new CategoriaSpinner(jsonObject.getInt("Id"), jsonObject.getString("Nombre")));
 
+                    }
+                    ArrayAdapter spinner_adapter = new ArrayAdapter(parentActivity, android.R.layout
+                            .simple_spinner_item, category);
+                    spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    categoriaSpinner.setAdapter(spinner_adapter);
                 }
-                ArrayAdapter spinner_adapter = new ArrayAdapter(parentActivity, android.R.layout
-                        .simple_spinner_item, category);
-                spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                categoriaSpinner.setAdapter(spinner_adapter);
-
 
             } catch (JSONException e) {
                 e.printStackTrace();
