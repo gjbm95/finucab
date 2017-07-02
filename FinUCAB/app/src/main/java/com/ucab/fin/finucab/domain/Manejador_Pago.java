@@ -102,6 +102,7 @@ public class Manejador_Pago {
             nuevo_pago.put("pg_monto",pago.getTotal());
             nuevo_pago.put("pg_tipoTransaccion",pago.getTipo());
             nuevo_pago.put("pg_categoria",pago.getIdCategoria());
+            nuevo_pago.put("pg_nombre_categoria",pago.getCategoria());
             nuevo_pago.put("pg_descripcion",pago.getDescripcion());
             Parametros.reset();
             Parametros.setMetodo("Modulo5/modificarPago?datosPago="+URLEncoder.encode(nuevo_pago.toString()));

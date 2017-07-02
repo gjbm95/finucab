@@ -60,10 +60,6 @@ public class AgregarPago_Fragment extends Fragment implements ResponseWebService
         Pago_Controller.tipoTransaccion=tipoSpinner;
         Pago_Controller.descripcionPago=descripcionEditText;
 
-
-        Pago_Controller.listaCategoriasPa();
-
-
         agregarButton = (Button) rootView.findViewById(R.id.acceptButtonAPago);
         agregarButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,15 +81,24 @@ public class AgregarPago_Fragment extends Fragment implements ResponseWebService
                     }
                     pago.setTipo(tipo);
                     Pago_Controller.registrarPago(pago);
-                    parentActivity.changeFragment(new PaymentFragment(), false);
+                    //parentActivity.changeFragment(new PaymentFragment(), false);
                 }
             }
         });
+
+        Pago_Controller.initManejador(parentActivity,this);
+            Pago_Controller.listaCategoriasPa();
 
 
         return rootView;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        Pago_Controller.initManejador(parentActivity,this);
+    }
     /**
      * Response WebService
      * se llena la lista con las consultas provenientes del WebService con la BD
@@ -104,7 +109,7 @@ public class AgregarPago_Fragment extends Fragment implements ResponseWebService
 
         //Toast.makeText(parentActivity, Parametros.getRespuesta(), Toast.LENGTH_SHORT).show();
 
-        if(Pago_Controller.getCasoRequest() == 1 ){
+        if(Pago_Controller.getCasoRequest() == 10 ){
             Pago_Controller.resetCasoRequest();
             parentActivity.onBackPressed();
         }else if(Pago_Controller.getCasoRequest() == 5 ){
@@ -130,14 +135,15 @@ public class AgregarPago_Fragment extends Fragment implements ResponseWebService
                 }
 
             } catch (JSONException e) {
-                e.printStackTrace();
+
+                Toast.makeText(parentActivity, Parametros.getRespuesta(), Toast.LENGTH_SHORT).show();
             }
 
 
         }
         else{
 
-            Categoria_Controller.resetCasoRequest();
+            Pago_Controller.resetCasoRequest();
         }
 
 

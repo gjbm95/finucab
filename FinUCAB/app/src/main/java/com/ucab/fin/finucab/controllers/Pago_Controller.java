@@ -75,9 +75,8 @@ public class Pago_Controller {
         categoriaPago.setSelection(pago.getIdCategoria());
         descripcionPago.setText(pago.getDescripcion());
         montoPago.setText(Float.toString(pago.getTotal()));
-
         int posTipo = 1;
-        if(pago.getTipo() == "ingreso"){
+        if(pago.getTipo().equals("ingreso")){
             posTipo = 0;
         }
         tipoTransaccion.setSelection(posTipo);
@@ -119,6 +118,8 @@ public class Pago_Controller {
      * @param pago Pago a registrar
      */
     public static void registrarPago(Pago pago){
+
+        casoRequest = 10;
         manejador.agregarPago(pago);
 
     }
