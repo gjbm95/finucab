@@ -63,9 +63,9 @@ public class ModificarPago_Fragment extends Fragment implements ResponseWebServi
                 Resp = Pago_Controller.validacionPagoVacio();
                 if (Resp == 1) {
                     Pago pago = new Pago();
-
-                    String nombreCategoria = "Canto"; //Pago_Controller.categoriaPago.getSelectedItem().toString()
-                    int idCategoria = 1;
+                    CategoriaSpinner sp = (CategoriaSpinner) categoriaSpinner.getSelectedItem();
+                    String nombreCategoria = sp.toString();
+                    int idCategoria = sp.getId();
                     pago.setIdCategoria(idCategoria);
                     pago.setCategoria(nombreCategoria);
                     pago.setDescripcion(Pago_Controller.descripcionPago.getText().toString());
@@ -121,7 +121,7 @@ public class ModificarPago_Fragment extends Fragment implements ResponseWebServi
                         String strJson = mJsonArray.getString(i);
                         JSONObject jsonObject = new JSONObject(strJson);
 
-                        category.add(new CategoriaSpinner(jsonObject.getInt("Id"), jsonObject.getString("Nombre")));
+                        category.add(new CategoriaSpinner(jsonObject.getInt("ca_id"), jsonObject.getString("ca_nombre")));
 
                     }
                     ArrayAdapter spinner_adapter = new ArrayAdapter(parentActivity, android.R.layout
