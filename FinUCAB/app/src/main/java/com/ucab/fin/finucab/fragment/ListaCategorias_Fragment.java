@@ -314,11 +314,11 @@ public class ListaCategorias_Fragment extends Fragment implements ResponseWebSer
                             String strJson = mJsonArray.getString(i);
                             JSONObject jObject = new JSONObject(strJson);
 
-                            listaCategoria.add(new Categoria((int) jObject.get("Id"),
-                                    (String) jObject.get("Nombre"),
-                                    (String) jObject.get("Descripcion"),
-                                    (Boolean) jObject.get("esHabilitado"),
-                                    (Boolean) jObject.get("esIngreso")));
+                            listaCategoria.add(new Categoria((int) jObject.get("ca_id"),
+                                    (String) jObject.get("ca_nombre"),
+                                    (String) jObject.get("ca_descripcion"),
+                                    (Boolean) jObject.get("ca_eshabilitado"),
+                                    (Boolean) jObject.get("ca_esingreso")));
 
                         }
 
