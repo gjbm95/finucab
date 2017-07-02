@@ -15,7 +15,7 @@ import com.ucab.fin.finucab.controllers.GestionUsuarios_Controller;
 /**
  *Modulo 1 - Modulo de  Inicio de Sesion y registro de usuario
  *Desarrolladores:
- *@author Garry Jr. Bruno / Erbin Rodriguez / Alejandro Negrin
+ *@author Mariángel Pérez / Oswaldo López / Aquiles Pulido
  *Descripción de la clase:
  * Esta clase presenta un formulario para el registro de datos de seguridad durante el registro de +
  * usuarios.
@@ -30,12 +30,11 @@ import com.ucab.fin.finucab.controllers.GestionUsuarios_Controller;
  * create an instance of this fragment.
  */
 public class DatosSeguridadFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
+
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 

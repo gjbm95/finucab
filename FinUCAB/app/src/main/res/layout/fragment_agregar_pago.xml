@@ -30,7 +30,6 @@
 
         android:background="@drawable/spinner"
 
-        android:entries="@array/categoryArray"
 
         android:prompt="@string/categoria_prompt"
 

@@ -1,7 +1,9 @@
 package com.ucab.fin.finucab.domain;
 
 import android.app.Activity;
+import android.util.Log;
 
+import com.ucab.fin.finucab.webservice.ControlDatos;
 import com.ucab.fin.finucab.webservice.Parametros;
 import com.ucab.fin.finucab.webservice.Recepcion;
 import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
@@ -72,7 +74,8 @@ public class Manejador_Pago {
             JSONObject nuevo_pago = new JSONObject();
             nuevo_pago.put("pg_monto",pago.getTotal());
             nuevo_pago.put("pg_tipoTransaccion",pago.getTipo());
-            nuevo_pago.put("pg_categoria",1);
+            nuevo_pago.put("pg_categoria",pago.getIdCategoria());
+            nuevo_pago.put("pg_nombre_categoria",pago.getCategoria());
             nuevo_pago.put("pg_descripcion",pago.getDescripcion());
             Parametros.reset();
             Parametros.setMetodo("Modulo5/registrarPago?datosPago="+URLEncoder.encode(nuevo_pago.toString()));
@@ -98,7 +101,8 @@ public class Manejador_Pago {
             nuevo_pago.put("pg_id",pago.getIdPago());
             nuevo_pago.put("pg_monto",pago.getTotal());
             nuevo_pago.put("pg_tipoTransaccion",pago.getTipo());
-            nuevo_pago.put("pg_categoria",1);
+            nuevo_pago.put("pg_categoria",pago.getIdCategoria());
+            nuevo_pago.put("pg_nombre_categoria",pago.getCategoria());
             nuevo_pago.put("pg_descripcion",pago.getDescripcion());
             Parametros.reset();
             Parametros.setMetodo("Modulo5/modificarPago?datosPago="+URLEncoder.encode(nuevo_pago.toString()));
@@ -117,9 +121,9 @@ public class Manejador_Pago {
      */
     public void obtenerTodosPagos(boolean showStatus) {
 
-        int idUsuario = 3;
+        int idUsuario = ControlDatos.getUsuario().getIdusuario();
         Parametros.reset();
-        Parametros.setMetodo("Modulo5/visualizarPago?datosPago="+idUsuario);
+        Parametros.setMetodo("Modulo5/visualizarPago?datosPago="+String.valueOf(idUsuario) );
         new Recepcion(actividad,intefaz,showStatus).execute("GET");
     }
 
