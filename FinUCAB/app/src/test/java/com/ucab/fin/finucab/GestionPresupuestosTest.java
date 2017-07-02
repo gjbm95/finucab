@@ -115,7 +115,7 @@ public class GestionPresupuestosTest {
 
         try {
             presupuesto.set_nombre("MiPresupuesto");
-            presupuesto.set_categoria(1);
+            presupuesto.set_categoria("1");
             presupuesto.set_monto((double) 1500);
             presupuesto.set_clasificacion("Unico");
             presupuesto.set_duracion(0);
@@ -142,7 +142,7 @@ public class GestionPresupuestosTest {
 
         try {
             presupuesto.set_nombre("MiPresupuesto");
-            presupuesto.set_categoria(1);
+            presupuesto.set_categoria("1");
             presupuesto.set_monto((double) 1500);
             presupuesto.set_clasificacion("Unico");
             presupuesto.set_duracion(0);
