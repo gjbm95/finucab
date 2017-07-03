@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.ucab.fin.finucab.domain.Categoria;
+import com.ucab.fin.finucab.domain.CategoriaSpinner;
 import com.ucab.fin.finucab.domain.Manejador_Categoria;
 import com.ucab.fin.finucab.domain.Manejador_Pago;
 import com.ucab.fin.finucab.domain.Pago;
@@ -18,6 +19,7 @@ import com.ucab.fin.finucab.webservice.ResponseWebServiceInterface;
 import java.net.URLEncoder;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  *Modulo 5 - Modulo de  Gestion de Pagos
@@ -41,6 +43,8 @@ public class Pago_Controller {
     private static int  casoRequest = -1;
     public static Object fragment; //Fragment que se esta controlando
 
+    public static Manejador_Categoria categoriaC;
+    public static LinkedList<CategoriaSpinner> categorias;
     /**
      * Inicializar de ser necesario el manejador de data
      * @param actividad requerida para devolver la data (deprecated)
@@ -52,7 +56,8 @@ public class Pago_Controller {
         if ( manejador == null ||  manejador.getIntefaz() != interfaz ) {
 
             manejador = new Manejador_Pago(actividad, interfaz);
-
+            categoriaC = new Manejador_Categoria(actividad, interfaz);
+            categorias = new LinkedList();
         }
 
     }
@@ -67,10 +72,14 @@ public class Pago_Controller {
 
     public static void asignarValores() {
 
+        categoriaPago.setSelection(pago.getIdCategoria());
         descripcionPago.setText(pago.getDescripcion());
         montoPago.setText(Float.toString(pago.getTotal()));
-
-
+        int posTipo = 1;
+        if(pago.getTipo().equals("ingreso")){
+            posTipo = 0;
+        }
+        tipoTransaccion.setSelection(posTipo);
 
     }
 
@@ -86,7 +95,7 @@ public class Pago_Controller {
             montoPago.setError("Debe colocar un Monto");
             x = 0;
         }
-
+/*
         //SPINNER
         if (categoriaPago.getSelectedItemPosition() == 0) {
             TextView errorText = (TextView) categoriaPago.getSelectedView();
@@ -100,7 +109,7 @@ public class Pago_Controller {
             errorText.setError("Debe colocar un Tipo de Transaccion");
             x = 0;
         }
-
+*/
         return x;
     }
 
@@ -109,6 +118,8 @@ public class Pago_Controller {
      * @param pago Pago a registrar
      */
     public static void registrarPago(Pago pago){
+
+        casoRequest = 10;
         manejador.agregarPago(pago);
 
     }
@@ -146,7 +157,10 @@ public class Pago_Controller {
         return manejador.obtenerPago(id);
     }
 
-
+    public static void listaCategoriasPa() {
+        casoRequest = 5;
+        categoriaC.obtenerTodasCategorias(true);
+    }
 
     /**
      * Resetea el caso del request al WebService

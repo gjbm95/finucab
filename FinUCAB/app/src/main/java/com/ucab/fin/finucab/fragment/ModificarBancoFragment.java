@@ -123,7 +123,10 @@ public class ModificarBancoFragment extends Fragment  implements ResponseWebServ
                 Banco_Controller.resetCasoRequest();
             }
 
+        }else {
+            Toast.makeText(parentActivity,"El numero de cuenta esta repetido", Toast.LENGTH_SHORT).show();
         }
+
 
     }
     /**

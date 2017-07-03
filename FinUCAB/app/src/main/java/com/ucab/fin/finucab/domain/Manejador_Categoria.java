@@ -136,7 +136,7 @@ public class Manejador_Categoria {
      */
     public void obtenerTodasCategorias(boolean showStatus) {
 
-        int idUsuario = ControlDatos.getUsuario().getIdusuario();;
+        int idUsuario = ControlDatos.getUsuario().getIdusuario();
         Parametros.reset();
         Parametros.setMetodo("Modulo4/visualizarCategoria?datosCategoria="+ String.valueOf(idUsuario) );
         new Recepcion(actividad,intefaz,showStatus).execute("GET");

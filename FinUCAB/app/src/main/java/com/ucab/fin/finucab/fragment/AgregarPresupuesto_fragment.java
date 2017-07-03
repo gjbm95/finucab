@@ -145,7 +145,7 @@ public class AgregarPresupuesto_fragment extends Fragment implements CompoundBut
                 Presupuesto_Controller.registrarPresupuesto(parentActivity);
 
             } catch (NombrePresupuesto_Exception e) {
-                e.getCampo().setError(e.getMessage());;
+                e.getCampo().setError(e.getMessage());
             }
         }else if (caso == 2) {
             if(Parametros.getRespuesta().equals("Error")){

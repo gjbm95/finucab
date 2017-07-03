@@ -15,7 +15,7 @@ import com.ucab.fin.finucab.controllers.GestionUsuarios_Controller;
 /**
  *Modulo 1 - Modulo de  Inicio de Sesion y registro de usuario
  *Desarrolladores:
- *@author Garry Jr. Bruno / Erbin Rodriguez / Alejandro Negrin
+ *@author Mariángel Pérez / Oswaldo López / Aquiles Pulido
  *Descripción de la clase:
  * Esta clase presenta un formulario para el registro de datos personales  durante el registro de +
  * usuarios.
