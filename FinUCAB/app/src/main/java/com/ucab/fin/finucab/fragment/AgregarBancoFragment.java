@@ -108,10 +108,10 @@ public class AgregarBancoFragment extends Fragment  implements ResponseWebServic
     @Override
     public void obtuvoCorrectamente(Object response){
          String recepcion  = (String)response;
-        Toast.makeText(parentActivity,"Se ha agregado correctamente", Toast.LENGTH_SHORT).show();
+
          if (!recepcion.equals("0"))
          {
-
+             Toast.makeText(parentActivity,"Se ha agregado correctamente", Toast.LENGTH_SHORT).show();
              if(Banco_Controller.getCasoRequest() == 1 ){
                  Banco_Controller.resetCasoRequest();
                  parentActivity.onBackPressed();
@@ -120,6 +120,8 @@ public class AgregarBancoFragment extends Fragment  implements ResponseWebServic
                  Banco_Controller.resetCasoRequest();
              }
 
+         }else {
+             Toast.makeText(parentActivity,"El numero de cuenta esta repetido", Toast.LENGTH_SHORT).show();
          }
 
     }

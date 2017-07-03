@@ -155,10 +155,9 @@ public class AgregarTarjetaCFragment extends Fragment  implements ResponseWebSer
     @Override
     public void obtuvoCorrectamente(Object response){
         String recepcion  = (String)response;
-        Toast.makeText(parentActivity,"Se ha agregado correctamente", Toast.LENGTH_SHORT).show();
         if (!recepcion.equals("0"))
         {
-
+            Toast.makeText(parentActivity,"Se ha agregado correctamente", Toast.LENGTH_SHORT).show();
             if(Tarjeta_Controller.getCasoRequest() == 1 ){
                 Tarjeta_Controller.resetCasoRequest();
                 parentActivity.onBackPressed();
@@ -167,7 +166,10 @@ public class AgregarTarjetaCFragment extends Fragment  implements ResponseWebSer
                 Tarjeta_Controller.resetCasoRequest();
             }
 
+        }else {
+            Toast.makeText(parentActivity,"El numero de tarjeta esta repetido", Toast.LENGTH_SHORT).show();
         }
+
 
     }
     /**

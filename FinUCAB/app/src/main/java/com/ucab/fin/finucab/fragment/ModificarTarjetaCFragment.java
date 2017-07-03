@@ -170,6 +170,8 @@ public class ModificarTarjetaCFragment extends Fragment implements ResponseWebSe
                 Tarjeta_Controller.resetCasoRequest();
             }
 
+        }else {
+            Toast.makeText(parentActivity,"El numero de tarjeta esta repetido", Toast.LENGTH_SHORT).show();
         }
 
     }
