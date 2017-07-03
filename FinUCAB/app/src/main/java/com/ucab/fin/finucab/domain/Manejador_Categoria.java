@@ -99,6 +99,7 @@ public class Manejador_Categoria {
 
             JSONObject nueva_categoria = new JSONObject();
             nueva_categoria.put("c_id",categoria.getIdcategoria());
+            nueva_categoria.put("c_usuario",ControlDatos.getUsuario().getIdusuario());
             nueva_categoria.put("c_nombre",categoria.getNombre());
             nueva_categoria.put("c_descripcion",categoria.getDescripcion());
             nueva_categoria.put("c_estado",categoria.isEstaHabilitado());

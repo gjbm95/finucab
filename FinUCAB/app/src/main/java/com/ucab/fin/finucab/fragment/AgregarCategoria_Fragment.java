@@ -204,8 +204,9 @@ public class AgregarCategoria_Fragment extends Fragment implements View.OnClickL
             Categoria_Controller.resetCasoRequest();
             parentActivity.onBackPressed();
         }else{
-
             Categoria_Controller.resetCasoRequest();
+            parentActivity.onBackPressed();
+
         }
 
 
