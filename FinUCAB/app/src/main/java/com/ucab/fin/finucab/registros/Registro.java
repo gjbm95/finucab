@@ -5,7 +5,6 @@ import android.util.Log;
 import com.ucab.fin.finucab.webservice.Parametros;
 
 import org.json.JSONObject;
-
 /**
  * Created by Junior on 14/06/2017.
  */
