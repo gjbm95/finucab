@@ -177,6 +177,7 @@ public class ExportarPresupuesto_Controller extends AsyncTask<String ,String, St
         SimpleDateFormat s = new SimpleDateFormat("ddMMyyyyhhmmss");
         String format = s.format(new Date());
         File fileCSV = new File(exportDir, "CSVPresupuesto"+format+".csv");
+        Log.i("directorio ", exportDir.toString() + " o "+ exportDir.getAbsolutePath());
 
         try {
             fileCSV.createNewFile();
@@ -209,7 +210,7 @@ public class ExportarPresupuesto_Controller extends AsyncTask<String ,String, St
      */
     public static void obtenerPresupuestos ( Activity actividad ) {
 
-        Parametros.setMetodo("Modulo3/ListaPresupuestoExportar?idUsuario="+ ControlDatos.getUsuario().getUsuario());
+        Parametros.setMetodo("Modulo3/ListaPresupuestoExportar?idUsuario="+ ControlDatos.getUsuario().getIdusuario());
         new Recepcion(actividad,interfaz).execute("GET");
 
     }
