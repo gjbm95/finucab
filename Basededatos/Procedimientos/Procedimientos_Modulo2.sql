@@ -291,7 +291,8 @@ CREATE OR REPLACE FUNCTION obtenerUltimosPagos
 $BODY$
 BEGIN
 
-   return query SELECT to_char(pa.pg_fecha,'DD-MM-YYYY') pg_fecha, pa.pg_descripcion FROM pago pa where usuariou_id = idusuario order by pa.pg_fecha desc LIMIT 3;
+   return query SELECT to_char(pa.pg_fecha,'DD-MM-YYYY') pg_fecha, pa.pg_descripcion FROM pago pa, Categoria c
+where (pa.categoriaca_id = c.ca_id and c.usuariou_id =idusuario) order by pa.pg_fecha desc LIMIT 3;
 
 return;
 END;
@@ -325,8 +326,8 @@ $BODY$
 BEGIN
 
    return query SELECT 
-	(SELECT SUM(pg_monto) FROM Pago as Ingresos WHERE Ingresos.usuariou_id =u_id AND Ingresos.pg_tipotransaccion = 'ingreso') as ingreso,
-        (SELECT SUM(pg_monto) FROM Pago as Egresos WHERE Egresos.usuariou_id =u_id AND Egresos.pg_tipotransaccion = 'egreso') as egreso 
+	(SELECT SUM(pg_monto) FROM Pago as Ingresos,Categoria c where (Ingresos.categoriaca_id = c.ca_id and c.usuariou_id =u_id and Ingresos.pg_tipotransaccion = 'ingreso')) as ingreso,
+        (SELECT SUM(pg_monto) FROM Pago as Egresos, Categoria c where (Egresos.categoriaca_id = c.ca_id and c.usuariou_id =u_id and  Egresos.pg_tipotransaccion = 'egreso')) as egreso 
                 FROM Usuario WHERE u_id = idusuario;
 
 return;
@@ -353,4 +354,3 @@ return;
 END;
 $BODY$
 LANGUAGE 'plpgsql';
-
