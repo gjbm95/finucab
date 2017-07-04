@@ -232,7 +232,7 @@ public class ExportarPresupuesto_Controller extends AsyncTask<String ,String, St
                 pre.set_categoria((String) jObject.get("Categoria"));
                 pre.set_monto(Double.parseDouble( jObject.getString("Monto")));
                 pre.set_clasificacion((String) jObject.get("Clasificacion"));
-                pre.set_duracion(Integer.parseInt((String) jObject.get("Duracion")));
+                pre.set_duracion(jObject.getInt("Duracion"));
                 if((jObject.get("Tipo")).equals("t")){
                     pre.set_tipo("Ganancia");
                 }else{
