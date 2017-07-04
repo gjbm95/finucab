@@ -2,7 +2,12 @@ package com.ucab.fin.finucab.controllers;
 
 import android.app.Activity;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.ucab.fin.finucab.domain.Cuenta_Bancaria;
+import com.ucab.fin.finucab.domain.Planificacion_Pago;
+import com.ucab.fin.finucab.domain.Tarjeta_Credito;
+import com.ucab.fin.finucab.domain.Top;
 import com.ucab.fin.finucab.domain.Usuario;
 import com.ucab.fin.finucab.exceptions.CampoVacio_Exception;
 import com.ucab.fin.finucab.exceptions.ContrasenaInvalida_Exception;
@@ -11,21 +16,24 @@ import com.ucab.fin.finucab.exceptions.CorreoInvalido_Exception;
 import com.ucab.fin.finucab.exceptions.Longitud_Exception;
 import com.ucab.fin.finucab.exceptions.RespuestaInvalida_Exception;
 import com.ucab.fin.finucab.exceptions.UsuarioInvalido_Exception;
+import com.ucab.fin.finucab.fragment.BancoAdapter;
 import com.ucab.fin.finucab.webservice.ControlDatos;
 import com.ucab.fin.finucab.webservice.Parametros;
 import com.ucab.fin.finucab.webservice.Recepcion;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 import static org.apache.commons.codec.binary.Base64.encodeBase64;
 
 /**
  *Modulo 1 - Modulo de  Inicio de Sesion y registro de usuario
  *Desarrolladores:
- *@author Garry Jr. Bruno / Erbin Rodriguez / Alejandro Negrin
+ *@author Mariángel Pérez / Oswaldo López / Aquiles Pulido
  *Descripción de la clase:
  * Esta clase se encarga de gestionar los datos entrantes y salientes de la aplicacion que va
  * relacionado con los usuarios del sistema.
@@ -34,6 +42,7 @@ import static org.apache.commons.codec.binary.Base64.encodeBase64;
 
 public class GestionUsuarios_Controller {
     //Recursos:
+    public static int  casoRequest = -1;
     public static EditText nombre;  // EditText que contiene el nombre del usuario
     public static EditText apellido;// EditText que contiene el apellido del usuario
     public static EditText correo; // EditText que contiene el correo del usuario
@@ -116,6 +125,43 @@ public class GestionUsuarios_Controller {
         apellido.setText(GestionUsuarios_Controller.formatearCadena(apellido.getText().toString()));
         return 0;
     }
+
+
+    /**
+     *  Se encarga de validar que no se encuentre vacio los campos nombre, apellido, correo y usuairio
+     *  tambien se valida si el formato del correo electronico es correcto.
+     *  @return retorna 0 si no hay ningun error y retorna 1 si los hay.
+     */
+    public static int validacionModificacionDatos(){
+
+        try{
+            verificoVacio(nombre);
+            verificoLongitud(nombre,50,"string");
+            verificoVacio(apellido);
+            verificoLongitud(apellido,50,"string");
+            verificoVacio(correo);
+            verificoLongitud(correo,100,"string");
+            verificoCorreo(correo);
+            verificoVacio(usuario);
+            verificoLongitud(usuario,50,"string");
+        }catch (CampoVacio_Exception e){
+            e.getCampo().setError(e.getMessage());
+            return 1;
+        } catch (CorreoInvalido_Exception e){
+            e.getCampo().setError(e.getMessage());
+            return 1;
+        }catch (Longitud_Exception e){
+            e.getCampo().setError(e.getMessage());
+            return 1;
+        }
+
+        //Estadarizamos mayusculas y minusculas:
+        nombre.setText(GestionUsuarios_Controller.formatearCadena(nombre.getText().toString()));
+        apellido.setText(GestionUsuarios_Controller.formatearCadena(apellido.getText().toString()));
+        return 0;
+    }
+
+
 
 
     /**
@@ -400,6 +446,37 @@ public class GestionUsuarios_Controller {
 
     }
 
+    public static void actualizarUsuario(Activity actividad) {
+        casoRequest = 1;
+        ControlDatos.getUsuario().setUsuario(GestionUsuarios_Controller.usuario.getText().toString());
+        ControlDatos.getUsuario().setNombre(GestionUsuarios_Controller.nombre.getText().toString());
+        ControlDatos.getUsuario().setApellido(GestionUsuarios_Controller.apellido.getText().toString());
+        ControlDatos.getUsuario().setCorreo(GestionUsuarios_Controller.correo.getText().toString());
+        JSONObject nuevo_usuario = new JSONObject();
+        try {
+            nuevo_usuario.put("u_id",Integer.toString(ControlDatos.getUsuario().getIdusuario()));
+            nuevo_usuario.put("u_usuario",ControlDatos.getUsuario().getUsuario());
+            nuevo_usuario.put("u_nombre",ControlDatos.getUsuario().getNombre());
+            nuevo_usuario.put("u_apellido",ControlDatos.getUsuario().getApellido());
+            nuevo_usuario.put("u_correo",ControlDatos.getUsuario().getCorreo());
+            nuevo_usuario.put("u_pregunta",ControlDatos.getUsuario().getPregunta());
+            nuevo_usuario.put("u_respuesta",ControlDatos.getUsuario().getRespuesta());
+            nuevo_usuario.put("u_password",ControlDatos.getUsuario().getContrasena());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Parametros.reset();
+        Parametros.setMetodo("Modulo2/actualizarDatosUsuario?datosUsuario="+
+                URLEncoder.encode(nuevo_usuario.toString()));
+        new Recepcion(actividad).execute("GET");
+
+    }
+
+
+
+
+
     /**
      * Función de tipo entero que devuelve el codigo hash del la constrasena suministrada
      *
@@ -435,13 +512,181 @@ public class GestionUsuarios_Controller {
             JSONObject usuario = new JSONObject(datos);
             ControlDatos.setUsuario(new Usuario(usuario.getInt("u_id"), usuario.getString("u_nombre"),
             usuario.getString("u_apellido"), usuario.getString("u_correo"), usuario.getString("u_usuario"),
-            usuario.getString("u_password"),usuario.getString("u_pregunta"), usuario.getString("u_respuesta"), null, null));
+            usuario.getString("u_password"),usuario.getString("u_pregunta"), usuario.getString("u_respuesta"),
+                    new ArrayList<Cuenta_Bancaria>(),new ArrayList<Planificacion_Pago>()));
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
 
     }
+
+    public static void descomponerTarjetas(String datos){
+    try{
+        ControlDatos.getUsuario().getTarjetas().clear();
+            JSONArray mJsonArray = new JSONArray(datos);
+
+            for (int i = 0; i < mJsonArray.length(); i++) {   // iterate through jsonArray
+                String strJson = mJsonArray.getString(i);
+                JSONObject jObject = new JSONObject(strJson);
+                ControlDatos.getUsuario().getTarjetas().add(new Tarjeta_Credito(
+                        Integer.parseInt((String) jObject.get("tc_id")),
+                        (String) jObject.get("tc_tipo"),
+                        (String) jObject.get("tc_fechavencimiento"),
+                        Float.parseFloat((String) jObject.get("tc_saldo")),
+                        Tarjeta_Controller.Desencriptar((String) jObject.get("tc_numero"))));
+
+            }
+
+
+    } catch (JSONException e) {
+        e.printStackTrace();
+    }
+
+    }
+
+    public static void descomponerBancos(String datos){
+        try{
+            ControlDatos.getUsuario().getCuentas().clear();
+            JSONArray mJsonArray = new JSONArray(datos);
+
+            for (int i = 0; i < mJsonArray.length(); i++) {   // iterate through jsonArray
+                String strJson = mJsonArray.getString(i);
+                JSONObject jObject = new JSONObject(strJson);
+
+                ControlDatos.getUsuario().getCuentas().add(new Cuenta_Bancaria(
+                        Integer.parseInt((String) jObject.get("ct_id")),
+                        (String) jObject.get("ct_nombrebanco"),
+                        (String) jObject.get("ct_numerocuenta"),
+                        Float.parseFloat((String) jObject.get("ct_saldoactual")),
+                        (String) jObject.get("ct_tipo")
+                ));
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void descomponerEstadisticas(String datos){
+
+        try {
+                ControlDatos.getUsuario().getTopPagosP().clear();
+                ControlDatos.getUsuario().getTopPagosR().clear();
+                ControlDatos.getUsuario().getTopPres().clear();
+            JSONArray mJsonArray = new JSONArray(datos);
+
+            for (int i = 0; i < mJsonArray.length(); i++) { // iterate through jsonArray
+
+
+                if (i ==0){
+                    String strJson = mJsonArray.getString(i);
+                    JSONObject jObject = new JSONObject(strJson);
+                    ControlDatos.getUsuario().setSaldoCuenta(Float.parseFloat(jObject.get("est_saldocuenta").toString()));
+                    ControlDatos.getUsuario().setSaldoTarjeta(Float.parseFloat(jObject.get("est_saldotarjeta").toString()));
+
+                }
+                if (i ==1){
+                    String strJson = mJsonArray.getString(i);
+                    JSONObject jObject = new JSONObject(strJson);
+                    float valor1 = Float.parseFloat(jObject.get("est_egreso").toString());
+                    float valor2 = Float.parseFloat(jObject.get("est_ingreso").toString());
+                    ControlDatos.getUsuario().setEgresosPorc(Math.round(valor1));
+                    ControlDatos.getUsuario().setIngresosPorc(Math.round(valor2));
+
+                }
+                if (i ==2){
+                    String strJson2 = mJsonArray.getString(i);
+                    JSONArray mJsonArray2 = new JSONArray(strJson2);
+                    for (int j = 0; j < mJsonArray2.length(); j++) {
+                        String strJson3 = mJsonArray2.getString(j);
+                        JSONObject jObject3 = new JSONObject(strJson3);
+
+                        if (jObject3.get("est_id").toString().equals("3.1")){
+                            Top Pagos = new Top(jObject3.get("est_fecha").toString(),jObject3.get("est_transaccion").toString());
+                            ControlDatos.getUsuario().getTopPagosP().add(Pagos);
+                        }
+                        if (jObject3.get("est_id").toString().equals("3.2")){
+                            Top Pagos = new Top(jObject3.get("est_fecha").toString(),jObject3.get("est_transaccion").toString());
+                            ControlDatos.getUsuario().getTopPagosP().add(Pagos);
+                        }
+                        if (jObject3.get("est_id").toString().equals("3.3")){
+                            Top Pagos = new Top(jObject3.get("est_fecha").toString(),jObject3.get("est_transaccion").toString());
+                            ControlDatos.getUsuario().getTopPagosP().add(Pagos);
+                        }
+                    }
+
+                }
+                if (i ==3){
+                    String strJson2 = mJsonArray.getString(i);
+                    JSONArray mJsonArray2 = new JSONArray(strJson2);
+                    for (int j = 0; j < mJsonArray2.length(); j++) {
+                        String strJson3 = mJsonArray2.getString(j);
+                        JSONObject jObject3 = new JSONObject(strJson3);
+
+                        if (jObject3.get("est_id").toString().equals("4.1")){
+                            Top Pagos = new Top(jObject3.get("est_fecha").toString(),jObject3.get("est_transaccion").toString());
+                            ControlDatos.getUsuario().getTopPagosR().add(Pagos);
+                        }
+                        if (jObject3.get("est_id").toString().equals("4.2")){
+                            Top Pagos = new Top(jObject3.get("est_fecha").toString(),jObject3.get("est_transaccion").toString());
+                            ControlDatos.getUsuario().getTopPagosR().add(Pagos);
+                        }
+                        if (jObject3.get("est_id").toString().equals("4.3")){
+                            Top Pagos = new Top(jObject3.get("est_fecha").toString(),jObject3.get("est_transaccion").toString());
+                            ControlDatos.getUsuario().getTopPagosR().add(Pagos);
+                        }
+                    }
+
+                }
+                if (i ==4){
+                    String strJson2 = mJsonArray.getString(i);
+                    JSONArray mJsonArray2 = new JSONArray(strJson2);
+                    for (int j = 0; j < mJsonArray2.length(); j++) {
+                        String strJson3 = mJsonArray2.getString(j);
+                        JSONObject jObject3 = new JSONObject(strJson3);
+
+                        if (jObject3.get("est_id").toString().equals("5.1")){
+                            Top Pagos = new Top(jObject3.get("est_fecha").toString(),jObject3.get("est_transaccion").toString());
+                            ControlDatos.getUsuario().getTopPres().add(Pagos);
+                        }
+                        if (jObject3.get("est_id").toString().equals("5.2")){
+                            Top Pagos = new Top(jObject3.get("est_fecha").toString(),jObject3.get("est_transaccion").toString());
+                            ControlDatos.getUsuario().getTopPres().add(Pagos);
+                        }
+                        if (jObject3.get("est_id").toString().equals("5.3")){
+                            Top Pagos = new Top(jObject3.get("est_fecha").toString(),jObject3.get("est_transaccion").toString());
+                            ControlDatos.getUsuario().getTopPres().add(Pagos);
+                        }
+                    }
+
+                }
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+    /**
+     * Resetea el caso del request al WebService
+     */
+    public static void resetCasoRequest(){
+        casoRequest = -1;
+    }
+
+    /**
+     * Obtener caso del request que se esta realizando
+     * @return
+     */
+    public static int getCasoRequest(){
+        return casoRequest;
+    }
+
 
     /**Inicializo nuevamente las variables
      *

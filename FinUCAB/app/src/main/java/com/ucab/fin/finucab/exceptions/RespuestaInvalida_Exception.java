@@ -5,7 +5,7 @@ import android.widget.EditText;
 /**
  *Modulo 1 - Modulo de  Inicio de Sesion y registro de usuario
  *Desarrolladores:
- *@author Garry Jr. Bruno / Erbin Rodriguez / Alejandro Negrin
+ *@author Mariángel Pérez / Oswaldo López / Aquiles Pulido
  *Descripción de la clase:
  * Esta clase es una excepcion que se dispara al haber una respuesta incorrecta a la pregunta planteada
  * por el usuario para la recuperacion de contraseñas.

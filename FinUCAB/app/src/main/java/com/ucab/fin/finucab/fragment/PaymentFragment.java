@@ -95,6 +95,14 @@ public class PaymentFragment extends Fragment implements ResponseWebServiceInter
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        Pago_Controller.initManejador(parentActivity,this);
+        Pago_Controller.obtenerTodosPagos(true);
+
+    }
 
     @Override
 
@@ -243,22 +251,20 @@ public class PaymentFragment extends Fragment implements ResponseWebServiceInter
                 switch (Pago_Controller.getCasoRequest()) {
 
                     case 0:
+                        //System.out.println(Parametros.getRespuesta());
                         ArrayList listaPago = new ArrayList<Pago>();
                         JSONArray mJsonArray = new JSONArray(Parametros.getRespuesta());
-                        System.out.println(Parametros.getRespuesta());
                         for (int i = 0; i < mJsonArray.length(); i++) {   // iterate through jsonArray
                             String strJson = mJsonArray.getString(i);
                             JSONObject jObject = new JSONObject(strJson);
                             listaPago.add(new Pago(
                                     (int) jObject.get("pg_id"),
-                                    //(String) jObject.get("pg_categoria"),
-                                    "Sueldo",
+                                    (int) jObject.get("pg_categoria"),
+                                    (String) jObject.get("pg_nombre_categoria"),
                                     (String) jObject.get("pg_descripcion"),
                                     (float) Float.valueOf(jObject.get("pg_monto").toString()),
-                                    (String) jObject.get("pg_tipoTransaccion")));
-
+                                    (String) jObject.get("pg_tipoTransaccion").toString()));
                         }
-
                         Pago_Controller.setListaPagos(listaPago);
                         recycleList.setAdapter(new PagoAdapter(listaPago));
                         Pago_Controller.resetCasoRequest();
@@ -283,7 +289,10 @@ public class PaymentFragment extends Fragment implements ResponseWebServiceInter
 
 
         } catch (JSONException e) {
-            e.printStackTrace();
+
+
+            Toast.makeText(parentActivity, Parametros.getRespuesta(), Toast.LENGTH_SHORT).show();
+            //e.printStackTrace();
         }
     }
 

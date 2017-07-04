@@ -74,7 +74,7 @@ public class AgregarCategoria_Fragment extends Fragment implements View.OnClickL
         statusTextView = (TextView) rootView.findViewById(R.id.estadoTextView);
         tipoTextView = (TextView) rootView.findViewById(R.id.TipoTextView);
         AgregarcategoriaEditText =(EditText) rootView.findViewById(R.id.AgregarcategoriaEditText);
-        AddDescripcionEditText =(EditText) rootView.findViewById(R.id.AddDescripcionEditText);
+        AddDescripcionEditText =(EditText) rootView.findViewById(R.id.nombreEditText);
 
 //        SET LISTENERS (Se le asigna la actividad en el cual funcionaran)
 
@@ -204,8 +204,9 @@ public class AgregarCategoria_Fragment extends Fragment implements View.OnClickL
             Categoria_Controller.resetCasoRequest();
             parentActivity.onBackPressed();
         }else{
-
             Categoria_Controller.resetCasoRequest();
+            parentActivity.onBackPressed();
+
         }
 
 

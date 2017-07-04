@@ -177,6 +177,7 @@ public class ExportarPresupuesto_Controller extends AsyncTask<String ,String, St
         SimpleDateFormat s = new SimpleDateFormat("ddMMyyyyhhmmss");
         String format = s.format(new Date());
         File fileCSV = new File(exportDir, "CSVPresupuesto"+format+".csv");
+        Log.i("directorio ", exportDir.toString() + " o "+ exportDir.getAbsolutePath());
 
         try {
             fileCSV.createNewFile();
@@ -209,7 +210,7 @@ public class ExportarPresupuesto_Controller extends AsyncTask<String ,String, St
      */
     public static void obtenerPresupuestos ( Activity actividad ) {
 
-        Parametros.setMetodo("Modulo3/ListaPresupuestoExportar?idUsuario="+ ControlDatos.getUsuario().getUsuario());
+        Parametros.setMetodo("Modulo3/ListaPresupuestoExportar?idUsuario="+ ControlDatos.getUsuario().getIdusuario());
         new Recepcion(actividad,interfaz).execute("GET");
 
     }
@@ -221,7 +222,7 @@ public class ExportarPresupuesto_Controller extends AsyncTask<String ,String, St
     public static ArrayList<Presupuesto> utilizarPresupuesto(){
         JSONObject jObject = null;
         try {
-            JSONArray mJsonArray = new JSONArray(Parametros.respuesta);
+            JSONArray mJsonArray = new JSONArray(Parametros.getRespuesta());
             int count = mJsonArray.length();
         /*----------------------------Iterando para llenar el ArrayList---------------------------*/
             for (int i = 0; i < count; i++) {
@@ -229,9 +230,9 @@ public class ExportarPresupuesto_Controller extends AsyncTask<String ,String, St
                 Presupuesto pre = new Presupuesto();
                 pre.set_nombre((String) jObject.get("Nombre"));
                 pre.set_categoria((String) jObject.get("Categoria"));
-                pre.set_monto(Float.parseFloat((String) jObject.get("Monto")));
+                pre.set_monto(Double.parseDouble( jObject.getString("Monto")));
                 pre.set_clasificacion((String) jObject.get("Clasificacion"));
-                pre.set_duracion(Integer.parseInt((String) jObject.get("Duracion")));
+                pre.set_duracion(jObject.getInt("Duracion"));
                 if((jObject.get("Tipo")).equals("t")){
                     pre.set_tipo("Ganancia");
                 }else{

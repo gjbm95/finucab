@@ -18,6 +18,7 @@
         <activity android:name=".activity.InicioActivity" />
         <activity
             android:name=".activity.MainActivity"
+            android:windowSoftInputMode="adjustPan"
             android:icon="@mipmap/indicador" />
         <activity android:name=".activity.RegistroActivity" />
         <activity

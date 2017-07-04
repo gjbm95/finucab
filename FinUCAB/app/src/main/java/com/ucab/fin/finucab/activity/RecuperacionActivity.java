@@ -22,7 +22,7 @@ import com.ucab.fin.finucab.webservice.Parametros;
 /**
  *Modulo 1 - Modulo de  Inicio de Sesion y registro de usuario
  *Desarrolladores:
- *@author Garry Jr. Bruno / Erbin Rodriguez / Alejandro Negrin
+ *@author Mariángel Pérez / Oswaldo López / Aquiles Pulido
  *Descripción de la clase:
  * Esta clase se encarga de gestionar la actividad de recuperacion de cuenta de usuario.
  *
@@ -147,7 +147,7 @@ public class RecuperacionActivity extends AppCompatActivity implements View.OnCl
     protected void onResume() {
         super.onResume();
         if(GestionUsuarios_Controller.pasoRecuperacion==2) {
-            if (Parametros.getRespuesta().equals("Clave Modificada")) {
+            if (Parametros.getRespuesta().equals("5")) {
                 GestionUsuarios_Controller.resetarVariables();
                 Intent iniciar = new Intent(RecuperacionActivity.this, InicioActivity.class);
                 startActivity(iniciar);

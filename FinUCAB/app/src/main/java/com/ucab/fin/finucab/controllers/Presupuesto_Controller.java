@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebResourceRequest;
 import android.widget.ArrayAdapter;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import com.ucab.fin.finucab.R;
 import com.ucab.fin.finucab.domain.Categoria;
+import com.ucab.fin.finucab.domain.CategoriaSpinner;
 import com.ucab.fin.finucab.domain.Manejador_Categoria;
 import com.ucab.fin.finucab.domain.Presupuesto;
 import com.ucab.fin.finucab.exceptions.CampoVacio_Exception;
@@ -36,6 +38,7 @@ import org.json.JSONObject;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import static java.security.AccessController.getContext;
 
@@ -55,7 +58,7 @@ public class Presupuesto_Controller {
     public static Spinner categoriaPresupuesto;
     public static TextView recurrenciaTextView;
     public static TextView totalTextView, gananciaTextView, gastoTextView;
-    public static Float ganancias, gastos, total;
+    public static Double ganancias, gastos, total;
     public static Integer posicionLista;
     public static RecyclerView recyclerList;
     public static ArrayList<Presupuesto> listaGanancias = new ArrayList<>();
@@ -63,15 +66,16 @@ public class Presupuesto_Controller {
     public static boolean tipoPresupuesto;
     public static ResponseWebServiceInterface interfaz;
     public static Button agregarButton;
+    public static LinkedList<CategoriaSpinner> categorias;
 
     /**
      * Método que se encarga de obtener en el web service las categorías asociadas a un usuario
      * @param actividad
      */
     public static void obtenerSpinner(Activity actividad) {
-        System.out.println(Parametros.respuesta);
-        Parametros.setMetodo("Modulo3/ObtenerSpinnerCategoria?usuarioid="+ControlDatos.getUsuario().getUsuario());
-        new Recepcion(actividad,interfaz).execute("GET");
+
+        Manejador_Categoria manejador_categoria = new Manejador_Categoria(actividad,interfaz);
+        manejador_categoria.obtenerTodasCategorias(true);
 
     }
 
@@ -80,30 +84,31 @@ public class Presupuesto_Controller {
      * @param actividad
      */
     public static void asignarSpinner(Activity actividad) {
-        JSONObject jObject = null;
         try {
-            JSONArray mJsonArray = new JSONArray(Parametros.respuesta);
-            int count = mJsonArray.length();
-            String[] valores = new String[count];
-            for (int i = 0; i < count; i++) {   // iterate through jsonArray
+            JSONArray mJsonArray = new JSONArray(Parametros.getRespuesta());
+            LinkedList category = new LinkedList();
 
-                jObject = mJsonArray.getJSONObject(i);  // get jsonObject @ i position
-                String categoria = ((String) jObject.get("Nombre"));
-                valores[i] = categoria;
+
+            for (int i = 0; i < mJsonArray.length(); i++) {
+                String strJson = mJsonArray.getString(i);
+                JSONObject jsonObject = new JSONObject(strJson);
+
+                category.add(new CategoriaSpinner(jsonObject.getInt("ca_id"), jsonObject.getString("ca_nombre")));
+
             }
-            ArrayAdapter adapter = new ArrayAdapter<String>(actividad,
-                    android.R.layout.simple_spinner_dropdown_item, valores);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            if(count == 0){
+            ArrayAdapter spinner_adapter = new ArrayAdapter(actividad, android.R.layout
+                    .simple_spinner_dropdown_item, category);
+            spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            if(category.isEmpty()) {
                 agregarButton.setEnabled(false);
-                Toast.makeText(actividad,"Debe agregar Categorias primero",Toast.LENGTH_LONG).show();
+                Toast.makeText(actividad, "Debe agregar Categorias primero", Toast.LENGTH_LONG).show();
             }
-            categoriaPresupuesto.setAdapter(adapter);
+            categoriaPresupuesto.setAdapter(spinner_adapter);
             Parametros.reset();
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
 
     }
 
@@ -132,9 +137,9 @@ public class Presupuesto_Controller {
 
     public static boolean DevolverValidacion(EditText campo,boolean esAgregar) throws NombrePresupuesto_Exception {
         String nombre="";
-        nombre= Parametros.respuesta;
+        nombre= Parametros.getRespuesta();
         if (esAgregar) {
-            if (nombre.equals("Repetido"))
+            if (nombre.equals("1"))
             {
                 NombrePresupuesto_Exception repetido = new NombrePresupuesto_Exception("Nombre del presupuesto repetido");
                 repetido.setCampo(campo);
@@ -143,7 +148,7 @@ public class Presupuesto_Controller {
         }
         if(!esAgregar){
             if((!presupuesto.get_nombre().equals(campo.getText().toString()))){
-                if (nombre.equals("Repetido"))
+                if (nombre.equals("1"))
                 {
                     NombrePresupuesto_Exception repetido = new NombrePresupuesto_Exception("Nombre del presupuesto repetido");
                     repetido.setCampo(campo);
@@ -168,22 +173,23 @@ public class Presupuesto_Controller {
             nuevo_presupuesto.put("pr_nombre", nombrePresupuesto.getText());
             nuevo_presupuesto.put("pr_monto", montoPresupuesto.getText().toString());
             if (unicoButton.isChecked()) {
-                nuevo_presupuesto.put("pr_duracion", "0");
+                nuevo_presupuesto.put("pr_duracion", 0);
                 nuevo_presupuesto.put("pr_clasificacion", "Unico");
             }
             if (recurrenciaButton.isChecked()) {
-                nuevo_presupuesto.put("pr_duracion", recurrenciaPresupuesto.getText().toString());
+                nuevo_presupuesto.put("pr_duracion", Integer.parseInt(recurrenciaPresupuesto.getText().toString()));
                 nuevo_presupuesto.put("pr_clasificacion", "Recurrente");
             }
-            String categoria = categoriaPresupuesto.getSelectedItem().toString();
-            String [] categoriaSplit = categoria.split("-");
-            Integer categoriaid = Integer.parseInt(categoriaSplit[0]);
-            nuevo_presupuesto.put("categoriaca_id",categoriaid.toString());
-            nuevo_presupuesto.put("pr_usuarioid",ControlDatos.getUsuario().getUsuario());
+            CategoriaSpinner categoria = (CategoriaSpinner) categoriaPresupuesto.getSelectedItem();
+            //String [] categoriaSplit = categoria.split("-");
+            String categoriaid = String.valueOf(categoria.getId());
+            nuevo_presupuesto.put("categoriaca_id",categoriaid+"-"+categoria.toString());
+            nuevo_presupuesto.put("pr_usuarioid",ControlDatos.getUsuario().getIdusuario());
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Parametros.setMetodo("Modulo3/registrarPresupuesto?usuarioid="+ControlDatos.getUsuario().getUsuario()+"&datosPresupuesto=" + URLEncoder.encode(nuevo_presupuesto.toString()));
+        Parametros.setMetodo("Modulo3/registrarPresupuesto?datosPresupuesto=" + URLEncoder.encode
+                (nuevo_presupuesto.toString()));
         new Recepcion(actividad,interfaz).execute("GET");
         return Parametros.getRespuesta();
     }
@@ -240,20 +246,18 @@ public class Presupuesto_Controller {
      */
     public static void obtenerPresupuesto(Activity actividad) {
 
-        String nombrePresupuesto = "";
+        int idPresupuesto = 0;
         System.out.println("POSICION: " + posicionLista);
-        JSONObject json = null;
-        if (tipoPresupuesto) {
-            nombrePresupuesto = listaGanancias.get(posicionLista).get_nombre();
-        } else {
-            nombrePresupuesto = listaGastos.get(posicionLista).get_nombre();
-        }
-        nombrePresupuesto = nombrePresupuesto.replace(' ', '_');
-        System.out.println(Parametros.respuesta);
-        Parametros.setMetodo("Modulo3/ObtenerPresupuesto?nombrePresupuesto=" + nombrePresupuesto);
-        //Parametros.setMetodo("Modulo3/ModificarPresupuesto?nombrePresupuesto="+nombrePresupuesto+"&idUsuario="+ControlDatos.getUsuario().getUsuario());
 
+        if (tipoPresupuesto) {
+            idPresupuesto = listaGanancias.get(posicionLista).get_id();
+        } else {
+            idPresupuesto = listaGanancias.get(posicionLista).get_id();
+        }
+        System.out.println(Parametros.getRespuesta());
+        Parametros.setMetodo("Modulo3/ObtenerPresupuesto?idPresupuesto=" + idPresupuesto);
         new Recepcion(actividad,interfaz).execute("GET");
+
 
     }
 
@@ -264,7 +268,7 @@ public class Presupuesto_Controller {
     public static void asignarValores() {
 
         nombrePresupuesto.setText(presupuesto.get_nombre());
-        montoPresupuesto.setText(presupuesto.get_monto().toString());
+        montoPresupuesto.setText(String.format("%.2f", presupuesto.get_monto()));
         if (presupuesto.get_clasificacion().equals("Unico")) {
 
             unicoButton.setChecked(true);
@@ -286,26 +290,29 @@ public class Presupuesto_Controller {
     public static void modificarPresupuesto(Activity actividad){
         JSONObject nuevo_presupuesto = new JSONObject();
         try {
+            nuevo_presupuesto.put("pr_id", presupuesto.get_id());
             nuevo_presupuesto.put("pr_nombre", nombrePresupuesto.getText());
             nuevo_presupuesto.put("pr_monto", montoPresupuesto.getText().toString());
             if (unicoButton.isChecked()) {
-                nuevo_presupuesto.put("pr_duracion", "0");
+                nuevo_presupuesto.put("pr_duracion", 0);
                 nuevo_presupuesto.put("pr_clasificacion", "Unico");
             }
             if (recurrenciaButton.isChecked()) {
-                nuevo_presupuesto.put("pr_duracion", recurrenciaPresupuesto.getText().toString());
+                nuevo_presupuesto.put("pr_duracion", Integer.parseInt(recurrenciaPresupuesto.getText().toString()));
                 nuevo_presupuesto.put("pr_clasificacion", "Recurrente");
             }
-            String categoria = categoriaPresupuesto.getSelectedItem().toString();
-            String [] categoriaSplit = categoria.split("-");
-            Integer categoriaid = Integer.parseInt(categoriaSplit[0]);
+            CategoriaSpinner categoria = (CategoriaSpinner) categoriaPresupuesto.getSelectedItem();
+            /*String categoria = categoriaPresupuesto.getSelectedItem().toString();
+            String [] categoriaSplit = categoria.split("-");*/
+            String categoriaid = String.valueOf(categoria.getId());
             System.out.println("La categoria es: "+categoriaid);
-            nuevo_presupuesto.put("categoriaca_id",categoriaid.toString());
-            nuevo_presupuesto.put("pr_usuarioid",ControlDatos.getUsuario().getUsuario());
+            nuevo_presupuesto.put("categoriaca_id",categoriaid+"-"+categoria.toString());
+            nuevo_presupuesto.put("pr_usuarioid",ControlDatos.getUsuario().getIdusuario());
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Parametros.setMetodo("Modulo3/ModificarPresupuesto?nombrePresupuesto="+presupuesto.get_nombre().replace(' ','_')+"&usuarioid="+ControlDatos.getUsuario().getUsuario()+"&datosPresupuesto=" + URLEncoder.encode(nuevo_presupuesto.toString()));
+        Parametros.setMetodo("Modulo3/ModificarPresupuesto?datosPresupuesto=" + URLEncoder.encode
+                (nuevo_presupuesto.toString()));
         new Recepcion(actividad,interfaz).execute("GET");
 
 
@@ -319,25 +326,23 @@ public class Presupuesto_Controller {
      */
     public static void eliminarPresupuestos(Activity actividad, boolean tipo) {
         Parametros.reset();
-        String nombrePresupuesto = "";
+        int idPresupuesto = 0;
         System.out.println("POSICION: " + posicionLista);
         if (tipo) {
-            nombrePresupuesto = listaGanancias.get(posicionLista).get_nombre();
+            idPresupuesto = listaGanancias.get(posicionLista).get_id();
             ganancias = ganancias - listaGanancias.get(posicionLista).get_monto();
             total = ganancias - gastos;
             listaGanancias.remove(listaGanancias.get(posicionLista));
         } else {
-            nombrePresupuesto = listaGastos.get(posicionLista).get_nombre();
+            idPresupuesto = listaGastos.get(posicionLista).get_id();
             gastos = gastos - listaGastos.get(posicionLista).get_monto();
             total = ganancias - gastos;
             listaGastos.remove(listaGastos.get(posicionLista));
         }
 
-        nombrePresupuesto = nombrePresupuesto.replace(' ', '_');
         asignarRecyclerView(recyclerList, tipo);
         asignarTotales();
-        Parametros.setMetodo("Modulo3/EliminarPresupuesto?nombrePresupuesto="+nombrePresupuesto+
-                          "&idUsuario="+ ControlDatos.getUsuario().getUsuario());
+        Parametros.setMetodo("Modulo3/EliminarPresupuesto?idPresupuesto="+ idPresupuesto);
         new Recepcion(actividad,interfaz).execute("GET");
     }
 
@@ -368,8 +373,8 @@ public class Presupuesto_Controller {
      */
     public static void obtenerListaPresupuestos(Activity actividad) {
         listaGanancias = new ArrayList<>(); listaGastos = new ArrayList<>();
-        ganancias = 0.0F; gastos = 0.0F; total = 0.0F;
-        Parametros.setMetodo("Modulo3/ListaPresupuesto?idUsuario="+ ControlDatos.getUsuario().getUsuario());
+        ganancias = Double.valueOf(0); gastos = Double.valueOf(0); total = Double.valueOf(0);
+        Parametros.setMetodo("Modulo3/ListaPresupuesto?idUsuario="+ControlDatos.getUsuario().getIdusuario());
         new Recepcion(actividad,interfaz).execute("GET");
     }
 
@@ -388,12 +393,13 @@ public class Presupuesto_Controller {
             for (int i = 0; i < count; i++) {   // iterate through jsonArray
                 jObject = mJsonArray.getJSONObject(i);  // get jsonObject @ i position
                 Presupuesto pre = new Presupuesto();
-                pre.set_duracion(Integer.parseInt((String) jObject.get("Duracion")));
+                pre.set_id(jObject.getInt("Id"));
+                pre.set_duracion(jObject.getInt("Duracion"));
                 pre.set_clasificacion((String) jObject.get("Clasificacion"));
-                pre.set_monto(Float.parseFloat((String) jObject.get("Monto")));
+                pre.set_monto(Double.parseDouble(jObject.getString("Monto")));
                 pre.set_categoria((String) jObject.get("Categoria"));
                 pre.set_nombre((String) jObject.get("Nombre"));
-                if ((jObject.get("Tipo")).equals("t")) {
+                if ((jObject.get("Tipo")).equals("true")) {
                     Presupuesto_Controller.listaGanancias.add(pre);
                     Presupuesto_Controller.ganancias = Presupuesto_Controller.ganancias + pre.get_monto();
                 } else {
@@ -413,9 +419,9 @@ public class Presupuesto_Controller {
      * Se encarga de asignar la suma de los presupuestos para el fragment de Total
      */
     public static void asignarTotales() {
-        gananciaTextView.setText(ganancias.toString());
-        gastoTextView.setText(gastos.toString());
-        totalTextView.setText(total.toString());
+        gananciaTextView.setText(String.format("%.2f",ganancias));
+        gastoTextView.setText(String.format("%.2f",gastos));
+        totalTextView.setText(String.format("%.2f",total));
     }
 
     /**

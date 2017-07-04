@@ -1,0 +1,114 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorBackground"
+    tools:context="com.ucab.fin.finucab.fragment.ModificarTarjetaCFragment">
+
+
+    <TextView
+
+        android:id="@+id/nombreTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:text="@string/tipoTarjeta"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+
+        android:id="@+id/AddtipoTarjetaEditText"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:hint="@string/indicacionTipoTarjeta"
+        android:background="@drawable/rounded_white_border"
+        android:textSize="14sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="11dp"
+        android:layout_below="@+id/nombreTextView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+
+        android:id="@+id/numeroCuentaTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:text="@string/numeroTarjeta"
+        android:layout_marginTop="14dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_below="@+id/AddtipoTarjetaEditText"
+        android:layout_alignLeft="@+id/AddtipoTarjetaEditText"
+        android:layout_alignStart="@+id/AddtipoTarjetaEditText" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:inputType="number"
+        android:ems="10"
+        android:textColor="#000"
+        android:textSize="14sp"
+        android:background="@drawable/rounded_white_border"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_height="47dp"
+        android:hint="@string/indicacionCuenta"
+        android:id="@+id/numerotarjetaEditText"
+        android:layout_below="@+id/numeroCuentaTextView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="@string/fechaven"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:id="@+id/textView22"
+        android:layout_marginTop="41dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@+id/numerotarjetaEditText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:inputType="number"
+        android:ems="10"
+        android:hint="Presione para colocar la fecha "
+        android:textColor="#000"
+        android:textSize="14sp"
+        android:focusable="false"
+        android:background="@drawable/rounded_white_border"
+        android:layout_marginTop="13dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/fechavenEditText"
+        android:layout_below="@+id/textView22"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Aceptar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="26dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginTop="33dp"
+        android:id="@+id/agregarTarjetaButton"
+        android:layout_below="@+id/fechavenEditText"
+        android:layout_alignRight="@+id/fechavenEditText"
+        android:layout_alignEnd="@+id/fechavenEditText" />
+</RelativeLayout>

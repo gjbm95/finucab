@@ -169,7 +169,7 @@
     <EditText
 
         android:id="@+id/budgetNameEditText"
-
+        android:inputType="text"
         android:layout_width="0dp"
 
         android:layout_height="47dp"
@@ -205,7 +205,7 @@
         android:layout_width="0dp"
 
         android:layout_height="45dp"
-
+        android:inputType="numberDecimal"
         android:hint="@string/indiqueMonto"
 
         android:layout_marginLeft="16dp"
@@ -237,7 +237,7 @@
         android:layout_width="0dp"
 
         android:layout_height="45dp"
-
+        android:inputType="numberDecimal"
         android:hint="@string/indiqueMeses"
 
         android:layout_marginLeft="16dp"
